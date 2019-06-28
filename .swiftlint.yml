@@ -1,0 +1,76 @@
+disabled_rules:
+  - file_length
+  - function_body_length
+  - function_parameter_count
+  - identifier_name
+  - switch_case_alignment
+  - todo
+  - type_body_length
+  - type_name
+  - force_cast
+  - trailing_whitespace
+
+opt_in_rules:
+  - closing_brace
+  - opening_brace
+  - return_arrow_whitespace
+  - trailing_semicolon
+  - statement_position
+  - explicit_init
+  - shorthand_operator
+  - file_header
+  - deployment_target
+  - duplicate_imports
+  - empty_string
+  - overridden_super_call
+  - prohibited_interface_builder
+  - prohibited_super_call
+  - protocol_property_accessors_order
+  - redundant_objc_attribute
+  - redundant_type_annotation
+  - unused_import
+  - missing_docs
+  - closure_spacing
+  - implicit_return
+  - closure_end_indentation
+  - first_where
+  - empty_count
+  - implicitly_unwrapped_optional
+  - fatal_error_message
+
+excluded:
+  - Pods
+
+trailing_semicolon: error
+empty_count: error
+closing_brace: error
+opening_brace: error
+return_arrow_whitespace: error
+statement_position: error
+colon: error
+comma: error
+force_try: warning
+force_cast: warning
+
+colon:
+  flexible_right_spacing: false
+  apply_to_dictionaries: true
+
+cyclomatic_complexity:
+  warning: 10
+  error: 20
+  ignores_case_statements: false
+
+function_parameter_count:
+  warning: 5
+  error: 8
+
+implicitly_unwrapped_optional:
+  mode: allExceptIBOutlets
+
+line_length:
+  warning: 120
+  error: 200
+  ignores_urls: true
+  ignores_function_declarations: true
+  ignores_comments: true

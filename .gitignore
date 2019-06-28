@@ -1,0 +1,8 @@
+# settings
+xcuserdata/
+
+# dependencies
+Pods/
+
+# os
+.DS_Store

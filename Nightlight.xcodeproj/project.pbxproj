@@ -1,0 +1,600 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233615922C643F5002B7BBA /* AppDelegate.swift */; };
+		9233615E22C643F5002B7BBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233615D22C643F5002B7BBA /* ViewController.swift */; };
+		9233616322C643F7002B7BBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9233616222C643F7002B7BBA /* Assets.xcassets */; };
+		9233616622C643F7002B7BBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9233616422C643F7002B7BBA /* LaunchScreen.storyboard */; };
+		9233617122C643F7002B7BBA /* NightlightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233617022C643F7002B7BBA /* NightlightTests.swift */; };
+		9233617C22C643F7002B7BBA /* NightlightUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233617B22C643F7002B7BBA /* NightlightUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9233616D22C643F7002B7BBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9233614E22C643F5002B7BBA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9233615522C643F5002B7BBA;
+			remoteInfo = Nightlight;
+		};
+		9233617822C643F7002B7BBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9233614E22C643F5002B7BBA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9233615522C643F5002B7BBA;
+			remoteInfo = Nightlight;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9233615622C643F5002B7BBA /* Nightlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9233615922C643F5002B7BBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9233615D22C643F5002B7BBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9233616222C643F7002B7BBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9233616522C643F7002B7BBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9233616722C643F7002B7BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9233616C22C643F7002B7BBA /* NightlightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NightlightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9233617022C643F7002B7BBA /* NightlightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightlightTests.swift; sourceTree = "<group>"; };
+		9233617222C643F7002B7BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9233617722C643F7002B7BBA /* NightlightUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NightlightUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9233617B22C643F7002B7BBA /* NightlightUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightlightUITests.swift; sourceTree = "<group>"; };
+		9233617D22C643F7002B7BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9233615322C643F5002B7BBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9233616922C643F7002B7BBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9233617422C643F7002B7BBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9233614D22C643F5002B7BBA = {
+			isa = PBXGroup;
+			children = (
+				9233615822C643F5002B7BBA /* Nightlight */,
+				9233616F22C643F7002B7BBA /* NightlightTests */,
+				9233617A22C643F7002B7BBA /* NightlightUITests */,
+				9233615722C643F5002B7BBA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9233615722C643F5002B7BBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9233615622C643F5002B7BBA /* Nightlight.app */,
+				9233616C22C643F7002B7BBA /* NightlightTests.xctest */,
+				9233617722C643F7002B7BBA /* NightlightUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9233615822C643F5002B7BBA /* Nightlight */ = {
+			isa = PBXGroup;
+			children = (
+				9233615922C643F5002B7BBA /* AppDelegate.swift */,
+				9233615D22C643F5002B7BBA /* ViewController.swift */,
+				9233616222C643F7002B7BBA /* Assets.xcassets */,
+				9233616422C643F7002B7BBA /* LaunchScreen.storyboard */,
+				9233616722C643F7002B7BBA /* Info.plist */,
+			);
+			path = Nightlight;
+			sourceTree = "<group>";
+		};
+		9233616F22C643F7002B7BBA /* NightlightTests */ = {
+			isa = PBXGroup;
+			children = (
+				9233617022C643F7002B7BBA /* NightlightTests.swift */,
+				9233617222C643F7002B7BBA /* Info.plist */,
+			);
+			path = NightlightTests;
+			sourceTree = "<group>";
+		};
+		9233617A22C643F7002B7BBA /* NightlightUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9233617B22C643F7002B7BBA /* NightlightUITests.swift */,
+				9233617D22C643F7002B7BBA /* Info.plist */,
+			);
+			path = NightlightUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9233615522C643F5002B7BBA /* Nightlight */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9233618022C643F7002B7BBA /* Build configuration list for PBXNativeTarget "Nightlight" */;
+			buildPhases = (
+				9233615222C643F5002B7BBA /* Sources */,
+				9233615322C643F5002B7BBA /* Frameworks */,
+				9233615422C643F5002B7BBA /* Resources */,
+				9233618922C64C2C002B7BBA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nightlight;
+			productName = Nightlight;
+			productReference = 9233615622C643F5002B7BBA /* Nightlight.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9233616B22C643F7002B7BBA /* NightlightTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9233618322C643F7002B7BBA /* Build configuration list for PBXNativeTarget "NightlightTests" */;
+			buildPhases = (
+				9233616822C643F7002B7BBA /* Sources */,
+				9233616922C643F7002B7BBA /* Frameworks */,
+				9233616A22C643F7002B7BBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9233616E22C643F7002B7BBA /* PBXTargetDependency */,
+			);
+			name = NightlightTests;
+			productName = NightlightTests;
+			productReference = 9233616C22C643F7002B7BBA /* NightlightTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9233617622C643F7002B7BBA /* NightlightUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9233618622C643F7002B7BBA /* Build configuration list for PBXNativeTarget "NightlightUITests" */;
+			buildPhases = (
+				9233617322C643F7002B7BBA /* Sources */,
+				9233617422C643F7002B7BBA /* Frameworks */,
+				9233617522C643F7002B7BBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9233617922C643F7002B7BBA /* PBXTargetDependency */,
+			);
+			name = NightlightUITests;
+			productName = NightlightUITests;
+			productReference = 9233617722C643F7002B7BBA /* NightlightUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9233614E22C643F5002B7BBA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = Electriapp;
+				TargetAttributes = {
+					9233615522C643F5002B7BBA = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					9233616B22C643F7002B7BBA = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = 9233615522C643F5002B7BBA;
+					};
+					9233617622C643F7002B7BBA = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = 9233615522C643F5002B7BBA;
+					};
+				};
+			};
+			buildConfigurationList = 9233615122C643F5002B7BBA /* Build configuration list for PBXProject "Nightlight" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9233614D22C643F5002B7BBA;
+			productRefGroup = 9233615722C643F5002B7BBA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9233615522C643F5002B7BBA /* Nightlight */,
+				9233616B22C643F7002B7BBA /* NightlightTests */,
+				9233617622C643F7002B7BBA /* NightlightUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9233615422C643F5002B7BBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9233616622C643F7002B7BBA /* LaunchScreen.storyboard in Resources */,
+				9233616322C643F7002B7BBA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9233616A22C643F7002B7BBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9233617522C643F7002B7BBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9233618922C64C2C002B7BBA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9233615222C643F5002B7BBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9233615E22C643F5002B7BBA /* ViewController.swift in Sources */,
+				9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9233616822C643F7002B7BBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9233617122C643F7002B7BBA /* NightlightTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9233617322C643F7002B7BBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9233617C22C643F7002B7BBA /* NightlightUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9233616E22C643F7002B7BBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9233615522C643F5002B7BBA /* Nightlight */;
+			targetProxy = 9233616D22C643F7002B7BBA /* PBXContainerItemProxy */;
+		};
+		9233617922C643F7002B7BBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9233615522C643F5002B7BBA /* Nightlight */;
+			targetProxy = 9233617822C643F7002B7BBA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9233616422C643F7002B7BBA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9233616522C643F7002B7BBA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9233617E22C643F7002B7BBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9233617F22C643F7002B7BBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9233618122C643F7002B7BBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = Nightlight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.Nightlight;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9233618222C643F7002B7BBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = Nightlight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.Nightlight;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9233618422C643F7002B7BBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = NightlightTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.NightlightTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nightlight.app/Nightlight";
+			};
+			name = Debug;
+		};
+		9233618522C643F7002B7BBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = NightlightTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.NightlightTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nightlight.app/Nightlight";
+			};
+			name = Release;
+		};
+		9233618722C643F7002B7BBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = NightlightUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.NightlightUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Nightlight;
+			};
+			name = Debug;
+		};
+		9233618822C643F7002B7BBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = NightlightUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.NightlightUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Nightlight;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9233615122C643F5002B7BBA /* Build configuration list for PBXProject "Nightlight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9233617E22C643F7002B7BBA /* Debug */,
+				9233617F22C643F7002B7BBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9233618022C643F7002B7BBA /* Build configuration list for PBXNativeTarget "Nightlight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9233618122C643F7002B7BBA /* Debug */,
+				9233618222C643F7002B7BBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9233618322C643F7002B7BBA /* Build configuration list for PBXNativeTarget "NightlightTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9233618422C643F7002B7BBA /* Debug */,
+				9233618522C643F7002B7BBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9233618622C643F7002B7BBA /* Build configuration list for PBXNativeTarget "NightlightUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9233618722C643F7002B7BBA /* Debug */,
+				9233618822C643F7002B7BBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9233614E22C643F5002B7BBA /* Project object */;
+}
