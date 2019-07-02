@@ -69,7 +69,7 @@ implicitly_unwrapped_optional:
   mode: allExceptIBOutlets
 
 line_length:
-  warning: 120
+  warning: 150
   error: 200
   ignores_urls: true
   ignores_function_declarations: true
