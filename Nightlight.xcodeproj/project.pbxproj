@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9229482122CCC3ED0080B328 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229482022CCC3ED0080B328 /* TextField.swift */; };
 		9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233615922C643F5002B7BBA /* AppDelegate.swift */; };
 		9233616322C643F7002B7BBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9233616222C643F7002B7BBA /* Assets.xcassets */; };
 		9233616622C643F7002B7BBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9233616422C643F7002B7BBA /* LaunchScreen.storyboard */; };
@@ -35,6 +36,13 @@
 		925763D222CABFBB0031D616 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763D122CABFBB0031D616 /* BaseButton.swift */; };
 		925763D422CAC9C00031D616 /* OnboardViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763D322CAC9C00031D616 /* OnboardViewControllerDelegate.swift */; };
 		925763D622CAD0160031D616 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763D522CAD0160031D616 /* PageControl.swift */; };
+		925763DF22CB768D0031D616 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763DE22CB768D0031D616 /* SignInViewController.swift */; };
+		925763E122CB76E80031D616 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763E022CB76E80031D616 /* SignInView.swift */; };
+		925763E322CB7BE00031D616 /* AuthViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763E222CB7BE00031D616 /* AuthViewBackground.swift */; };
+		925763E722CB95900031D616 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763E622CB95900031D616 /* AuthView.swift */; };
+		925763E922CBA7850031D616 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763E822CBA7850031D616 /* SignUpViewController.swift */; };
+		925763EB22CBA7E50031D616 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763EA22CBA7E50031D616 /* SignUpView.swift */; };
+		925763ED22CBB4F80031D616 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763EC22CBB4F80031D616 /* FormTextField.swift */; };
 		928A75CF22C92E7600BC607A /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */; };
 		928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A75D022C967BE00BC607A /* OnboardViewController.swift */; };
 		928E53CF22C81E1A00260C8D /* OnboardPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E53CE22C81E1A00260C8D /* OnboardPageViewController.swift */; };
@@ -59,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9229482022CCC3ED0080B328 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		9233615622C643F5002B7BBA /* Nightlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9233615922C643F5002B7BBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9233616222C643F7002B7BBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,6 +102,13 @@
 		925763D122CABFBB0031D616 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		925763D322CAC9C00031D616 /* OnboardViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewControllerDelegate.swift; sourceTree = "<group>"; };
 		925763D522CAD0160031D616 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		925763DE22CB768D0031D616 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		925763E022CB76E80031D616 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		925763E222CB7BE00031D616 /* AuthViewBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewBackground.swift; sourceTree = "<group>"; };
+		925763E622CB95900031D616 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		925763E822CBA7850031D616 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		925763EA22CBA7E50031D616 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		925763EC22CBB4F80031D616 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		928A75D022C967BE00BC607A /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
 		928E53CE22C81E1A00260C8D /* OnboardPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardPageViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +140,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9229482222CCE09C0080B328 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				925763E822CBA7850031D616 /* SignUpViewController.swift */,
+				925763EA22CBA7E50031D616 /* SignUpView.swift */,
+				925763DE22CB768D0031D616 /* SignInViewController.swift */,
+				925763E022CB76E80031D616 /* SignInView.swift */,
+				925763E622CB95900031D616 /* AuthView.swift */,
+				925763E222CB7BE00031D616 /* AuthViewBackground.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		9229482322CCE0BD0080B328 /* Text Input */ = {
+			isa = PBXGroup;
+			children = (
+				925763EC22CBB4F80031D616 /* FormTextField.swift */,
+				9229482022CCC3ED0080B328 /* TextField.swift */,
+			);
+			path = "Text Input";
+			sourceTree = "<group>";
+		};
 		9233614D22C643F5002B7BBA = {
 			isa = PBXGroup;
 			children = (
@@ -201,9 +239,11 @@
 		925763D822CAD6630031D616 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9229482222CCE09C0080B328 /* Auth */,
 				925763DC22CAD7760031D616 /* Onboarding */,
-				925763D522CAD0160031D616 /* PageControl.swift */,
 				925763D922CAD6AB0031D616 /* Buttons */,
+				9229482322CCE0BD0080B328 /* Text Input */,
+				925763D522CAD0160031D616 /* PageControl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -418,6 +458,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925763E322CB7BE00031D616 /* AuthViewBackground.swift in Sources */,
 				925763D022CABF6A0031D616 /* TextButton.swift in Sources */,
 				928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */,
 				9233618D22C664C4002B7BBA /* Coordinator.swift in Sources */,
@@ -428,18 +469,25 @@
 				9237A1D922CA7DFE00FC9331 /* UIColor+Colors.swift in Sources */,
 				9237A1DB22CA7EFB00FC9331 /* Themeable.swift in Sources */,
 				925763D222CABFBB0031D616 /* BaseButton.swift in Sources */,
+				925763ED22CBB4F80031D616 /* FormTextField.swift in Sources */,
+				9229482122CCC3ED0080B328 /* TextField.swift in Sources */,
 				9237A1E122CA890D00FC9331 /* UIViewController+ThemeObserving.swift in Sources */,
 				9237A1DF22CA859600FC9331 /* NLNotification.swift in Sources */,
 				92D398A522C906A500AAC887 /* UIView+Extension.swift in Sources */,
 				925763D422CAC9C00031D616 /* OnboardViewControllerDelegate.swift in Sources */,
 				9237A1E322CA8D8C00FC9331 /* StyleManager.swift in Sources */,
+				925763EB22CBA7E50031D616 /* SignUpView.swift in Sources */,
 				928A75CF22C92E7600BC607A /* UIStackView+Extension.swift in Sources */,
 				9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */,
 				9237A1D722CA7D7200FC9331 /* Theme.swift in Sources */,
+				925763E122CB76E80031D616 /* SignInView.swift in Sources */,
+				925763DF22CB768D0031D616 /* SignInViewController.swift in Sources */,
 				9237A1E922CA970000FC9331 /* CircularStdFont.swift in Sources */,
 				9237A1E522CA91BE00FC9331 /* DependencyContainer.swift in Sources */,
 				925763D622CAD0160031D616 /* PageControl.swift in Sources */,
+				925763E922CBA7850031D616 /* SignUpViewController.swift in Sources */,
 				9237A1D322CA559500FC9331 /* UIViewController+Extension.swift in Sources */,
+				925763E722CB95900031D616 /* AuthView.swift in Sources */,
 				9237A1E722CA95DF00FC9331 /* UIFont+Fonts.swift in Sources */,
 				928E53CF22C81E1A00260C8D /* OnboardPageViewController.swift in Sources */,
 				9237A1DD22CA829700FC9331 /* ThemeObserving.swift in Sources */,

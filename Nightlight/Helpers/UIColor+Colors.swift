@@ -11,7 +11,9 @@ extension UIColor {
     /**
      Handles the color for the background of standard content.
      
-     - parameter theme: the theme to determine the the background color.
+     - parameter theme: the theme to determine the background color.
+     
+     - returns: the palette color for the background of standard content.
      */
     public class func background(for theme: Theme) -> UIColor {
         switch theme {
@@ -24,9 +26,29 @@ extension UIColor {
     }
     
     /**
-     Handles the the color for black and white elements.
+     Handles the color for the background of elements to be visible on
+     the background color of standard content.
+     
+     - parameter theme: the theme to determine the element background color.
+     
+     - returns: the palette color for an element background.
+     */
+    public class func elementBackground(for theme: Theme) -> UIColor {
+        switch theme {
+        case .light:
+            return Palette.lightGrey
+        case .dark:
+            return Palette.darkGrey
+            
+        }
+    }
+    
+    /**
+     Handles the color for black and white elements.
      
      - parameter theme: the theme to determine the grayscale color.
+     
+     - returns: the palette color for black and white elements.
      */
     public class func primaryGrayScale(for theme: Theme) -> UIColor {
         switch theme {
@@ -41,6 +63,8 @@ extension UIColor {
      Handles the color for subtle accent colors.
      
      - parameter theme: the theme to determine the accent color.
+     
+     - returns: the palette color for subtle accent colors.
      */
     public class func accent(for theme: Theme) -> UIColor {
         switch theme {
@@ -52,11 +76,13 @@ extension UIColor {
     }
     
     /**
-     Handles the primary text color for content.
+     Handles the primary text color.
      
      - parameter theme: the theme to determine the primary text color.
+     
+     - returns: the palette color for primary text.
      */
-    public class func primaryTextColor(for theme: Theme) -> UIColor {
+    public class func primaryText(for theme: Theme) -> UIColor {
         switch theme {
         case .light:
             return Palette.black
@@ -65,9 +91,30 @@ extension UIColor {
         }
     }
     
+    /**
+     Handles the inverted primary text color for content.
+     
+     - parameter theme: the theme to determine the inverted primary text color.
+     
+     - returns the palette color for inverted primary text.
+     */
+    public class func invertedPrimaryText(for theme: Theme) -> UIColor {
+        switch theme {
+        case .light:
+            return Palette.white
+        case .dark:
+            return Palette.black
+        }
+    }
+    
     /// Secondary text color for all backgrounds.
-    public class var secondaryTextColor: UIColor {
+    public class var secondaryText: UIColor {
         return Palette.darkAccent
+    }
+    
+    /// Represents color for hinting an urgent or erroneous occurence.
+    public class var urgent: UIColor {
+        return Palette.urgent
     }
 }
 

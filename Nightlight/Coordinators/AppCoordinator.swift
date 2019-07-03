@@ -19,7 +19,7 @@ public class AppCoordinator: Coordinator {
         
         // if user is not signed in already, show login
         
-        window.rootViewController = OnboardViewController(dependencies: DependencyContainer())
+        window.rootViewController = SignInViewController(dependencies: DependencyContainer())
         
         window.makeKeyAndVisible()
     }
