@@ -29,7 +29,6 @@ opt_in_rules:
   - redundant_objc_attribute
   - redundant_type_annotation
   - unused_import
-  - missing_docs
   - closure_spacing
   - implicit_return
   - closure_end_indentation

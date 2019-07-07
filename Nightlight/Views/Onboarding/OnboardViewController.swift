@@ -76,10 +76,18 @@ public class OnboardViewController: UIViewController, Themeable {
         pageViewController.dataSource = self
         pageViewController.delegate = self
         
-        getStartedButton.addTarget(delegate, action: #selector(delegate?.onboardViewControllerDidProceedAsNewUser), for: .touchUpInside)
-        signInButton.addTarget(delegate, action: #selector(delegate?.onboardViewControllerDidProceedAsExistingUser(_:)), for: .touchUpInside)
+        getStartedButton.addTarget(self, action: #selector(getStartedTapped), for: .touchUpInside)
+        signInButton.addTarget(self, action: #selector(signInTapped), for: .touchUpInside)
         
         prepareSubviews()
+    }
+    
+    @objc private func getStartedTapped() {
+        delegate?.onboardViewControllerDidProceedAsNewUser(self)
+    }
+    
+    @objc private func signInTapped() {
+        delegate?.onboardViewControllerDidProceedAsExistingUser(self)
     }
 
     private func prepareSubviews() {

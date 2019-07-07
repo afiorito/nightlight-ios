@@ -11,4 +11,17 @@ extension UIViewController {
         view.addSubviews(child.view)
         child.didMove(toParent: self)
     }
+    
+    /**
+     Removes the  view controller from its parent.
+     */
+    public func remove() {
+        guard parent != nil else {
+            return
+        }
+        
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
 }

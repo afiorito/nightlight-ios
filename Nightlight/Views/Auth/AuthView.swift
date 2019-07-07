@@ -6,8 +6,8 @@ public class AuthView: UIView {
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "logo")
+        imageView.contentMode = .left
+        imageView.image = UIImage(named: "logo_full")
         return imageView
     }()
     
@@ -17,6 +17,14 @@ public class AuthView: UIView {
         label.font = .primary42ptBold
         
         return label
+    }()
+    
+    private let headerContainer: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillProportionally
+        return stackView
     }()
     
     private let bottomContainer: UIStackView = {
@@ -65,20 +73,20 @@ public class AuthView: UIView {
     }
     
     internal func prepareSubviews() {
+        headerContainer.addArrangedSubviews([logoImageView, headerTitleLabel])
         bottomContainer.addArrangedSubviews([accountStatusLabel, actionButton])
-        addSubviews([headerBackground, logoImageView, headerTitleLabel, bottomContainer])
+        addSubviews([headerBackground, headerContainer, bottomContainer])
+        
+        headerContainer.sizeToFit()
         
         NSLayoutConstraint.activate([
             headerBackground.topAnchor.constraint(equalTo: topAnchor),
             headerBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
             headerBackground.trailingAnchor.constraint(equalTo: trailingAnchor),
             headerBackground.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1.0 / 3.0),
-            logoImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
-            logoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            logoImageView.heightAnchor.constraint(equalToConstant: 20),
-            logoImageView.widthAnchor.constraint(equalToConstant: (20 / logoImageView.image!.size.height) * logoImageView.image!.size.width),
-            headerTitleLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 30),
-            headerTitleLabel.leftAnchor.constraint(equalTo: logoImageView.leftAnchor),
+            headerContainer.topAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.topAnchor, constant: 30),
+            headerContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            headerContainer.bottomAnchor.constraint(equalTo: headerBackground.bottomAnchor, constant: -30),
             bottomContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
             bottomContainer.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])

@@ -38,6 +38,13 @@ public class SignInView: AuthView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
+        usernameField.input.addTarget(passwordField.input,
+                                      action: #selector(passwordField.input.becomeFirstResponder),
+                                      for: UIControl.Event.primaryActionTriggered)
+        passwordField.input.addTarget(passwordField.input,
+                                      action: #selector(passwordField.input.resignFirstResponder),
+                                      for: UIControl.Event.primaryActionTriggered)
+        
         prepareSubviews()
     }
     

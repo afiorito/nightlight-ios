@@ -9,6 +9,8 @@ public class SignInViewController: UIViewController, Themeable {
         return view as! SignInView
     }
     
+    public weak var delegate: SignInViewControllerDelegate?
+    
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
         
@@ -28,11 +30,17 @@ public class SignInViewController: UIViewController, Themeable {
 
         addDidChangeThemeObserver()
         
+        signInView.actionButton.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
+        
         updateColors(for: dependencies.styleManager.theme)
     }
     
     public override func loadView() {
         view = SignInView()
+    }
+    
+    @objc private func signUpTapped() {
+        delegate?.signInViewControllerDidTapSignUp(self)
     }
     
     public func updateColors(for theme: Theme) {

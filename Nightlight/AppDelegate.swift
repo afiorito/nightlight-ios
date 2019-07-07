@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-        coordinator = AppCoordinator()
+        coordinator = AppCoordinator(dependencies: DependencyContainer())
         coordinator?.start()
 
         return true

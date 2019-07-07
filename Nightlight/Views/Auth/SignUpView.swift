@@ -8,6 +8,7 @@ public class SignUpView: AuthView {
         textField.input.placeholder = "username"
         textField.input.autocapitalizationType = .none
         textField.input.autocorrectionType = .no
+        
         return textField
     }()
     
@@ -46,6 +47,16 @@ public class SignUpView: AuthView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        usernameField.input.addTarget(emailField.input,
+                                      action: #selector(emailField.input.becomeFirstResponder),
+                                      for: UIControl.Event.primaryActionTriggered)
+        emailField.input.addTarget(passwordField.input,
+                                   action: #selector(passwordField.input.becomeFirstResponder),
+                                   for: UIControl.Event.primaryActionTriggered)
+        passwordField.input.addTarget(passwordField.input,
+                                      action: #selector(passwordField.input.resignFirstResponder),
+                                      for: UIControl.Event.primaryActionTriggered)
         
         prepareSubviews()
     }
