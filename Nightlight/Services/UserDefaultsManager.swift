@@ -6,19 +6,14 @@ public protocol UserDefaultsManaging {
     var userDefaultsManager: UserDefaultsManager { get }
 }
 
-/// Handles operations around UserDefaults
+/// Handles operations around UserDefaults.
 public class UserDefaultsManager {
-    
-    private enum Key: String {
-        case hasOnboarded
-    }
-    
     private let userDefaults: UserDefaults
     
     /**
-     Initialize the UserDefaults manager with an instance of UserDefaults
+     Initialize the UserDefaults manager with an instance of UserDefaults.
      
-     - parameter userDefaults: The UserDefaults instance used as a backing store
+     - parameter userDefaults: The UserDefaults instance used as a backing store.
      */
     public init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults

@@ -2,16 +2,6 @@ import UIKit
 
 public class SignUpView: AuthView {
     
-    public let usernameField: FormTextField = {
-        let textField = FormTextField()
-        textField.input.icon = UIImage(named: "icon_person")
-        textField.input.placeholder = "username"
-        textField.input.autocapitalizationType = .none
-        textField.input.autocorrectionType = .no
-        
-        return textField
-    }()
-    
     public let emailField: FormTextField = {
         let textField = FormTextField()
         textField.input.icon = UIImage(named: "icon_mail")
@@ -21,32 +11,18 @@ public class SignUpView: AuthView {
         return textField
     }()
     
-    public let passwordField: FormTextField = {
-        let textField = FormTextField()
-        textField.input.icon = UIImage(named: "icon_lock")
-        textField.input.placeholder = "password"
-        textField.input.isSecureTextEntry = true
-        textField.input.autocapitalizationType = .none
-        textField.input.autocorrectionType = .no
-        return textField
-    }()
+    public var email: String {
+        return emailField.input.text ?? ""
+    }
     
-    public let signUpButton: ContainedButton = {
-        let button = ContainedButton()
-        button.setTitle("Sign up", for: .normal)
-        return button
-    }()
-    
-    private let fieldContainer: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 15
-        
-        return stackView
-    }()
+    public override var isAuthButtonEnabled: Bool {
+        return super.isAuthButtonEnabled && !email.isEmpty
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+
+        emailField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         
         usernameField.input.addTarget(emailField.input,
                                       action: #selector(emailField.input.becomeFirstResponder),
@@ -65,6 +41,18 @@ public class SignUpView: AuthView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public override func showFieldErrors(reasons: [ErrorReason]) {
+        super.showFieldErrors(reasons: reasons)
+        
+        if let emailReason = reasons.first(where: { $0.property == "email" }) {
+            if emailReason.constraints[ValidationConstraint.userExists.rawValue] != nil {
+                emailField.error = "A user with that email already exists."
+            } else {
+                emailField.error = "The email is invalid."
+            }
+        }
+    }
+    
     internal override func prepareSubviews() {
         super.prepareSubviews()
         
@@ -72,19 +60,9 @@ public class SignUpView: AuthView {
         headerText = "Get\nStarted"
         accountStatusLabel.text = "Already have an account?"
         actionButton.setTitle("Log in", for: .normal)
+        authButton.setTitle("Sign Up", for: .normal)
         
         fieldContainer.addArrangedSubviews([usernameField, emailField, passwordField])
-        addSubviews([fieldContainer, signUpButton])
-        
-        NSLayoutConstraint.activate([
-            fieldContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            fieldContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-            fieldContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            fieldContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            signUpButton.topAnchor.constraint(equalTo: fieldContainer.bottomAnchor, constant: 30),
-            signUpButton.widthAnchor.constraint(equalTo: fieldContainer.widthAnchor),
-            signUpButton.centerXAnchor.constraint(equalTo: fieldContainer.centerXAnchor)
-        ])
     }
     
     public override func updateColors(for theme: Theme) {

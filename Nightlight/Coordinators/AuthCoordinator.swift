@@ -1,31 +1,40 @@
 import UIKit
 
+/// A coordinator for authentication flow.
 public class AuthCoordinator: Coordinator {
+    public typealias Dependencies = UserDefaultsManaging
+
+    /// A value representing the method of authentication of a user.
     public enum AuthMethod {
         case signUp, signIn
     }
-    public typealias Dependencies = UserDefaultsManaging
 
     public weak var parent: Coordinator?
-    
     public var children = [Coordinator]()
+
+    /// The required dependencies.
+    private let dependencies: Dependencies
     
+    /// The root view controller of the application.
     private let rootViewController: UIViewController
     
-    lazy var signInViewController: SignInViewController = {
+    /// The view controller used to sign in a user.
+    private var signInViewController: SignInViewController {
         let signInViewController = SignInViewController(dependencies: dependencies as! SignInViewController.Dependencies)
         signInViewController.delegate = self
+        
         return signInViewController
-    }()
+    }
     
-    lazy var signUpViewController: SignUpViewController = {
-        let signUpViewController = SignUpViewController(dependencies: dependencies as! SignUpViewController.Dependencies)
+    /// The view controller used to sign up a user.
+    private var signUpViewController: SignUpViewController {
+        let viewModel = SignUpViewModel(dependencies: dependencies as! SignUpViewModel.Dependencies)
+        let signUpViewController = SignUpViewController(viewModel: viewModel)
         signUpViewController.delegate = self
         
         return signUpViewController
-    }()
+    }
     
-    private let dependencies: Dependencies
     
     public let authMethod: AuthMethod
     
@@ -74,6 +83,10 @@ public class AuthCoordinator: Coordinator {
 }
 
 extension AuthCoordinator: SignUpViewControllerDelegate, SignInViewControllerDelegate {
+    public func signUpViewControllerDidSignUp(_ signUpViewController: SignUpViewController) {
+        print("Signup")
+    }
+    
     public func signInViewControllerDidTapSignUp(_ signInViewController: SignInViewController) {
         showOtherViewController(currentViewController: signInViewController)
     }

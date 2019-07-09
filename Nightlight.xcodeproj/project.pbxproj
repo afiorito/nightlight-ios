@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9229482122CCC3ED0080B328 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229482022CCC3ED0080B328 /* TextField.swift */; };
+		9229DFA222D2BDF200827A03 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229DFA122D2BDF200827A03 /* AuthService.swift */; };
 		9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233615922C643F5002B7BBA /* AppDelegate.swift */; };
 		9233616322C643F7002B7BBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9233616222C643F7002B7BBA /* Assets.xcassets */; };
 		9233616622C643F7002B7BBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9233616422C643F7002B7BBA /* LaunchScreen.storyboard */; };
@@ -43,10 +44,28 @@
 		925763E922CBA7850031D616 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763E822CBA7850031D616 /* SignUpViewController.swift */; };
 		925763EB22CBA7E50031D616 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763EA22CBA7E50031D616 /* SignUpView.swift */; };
 		925763ED22CBB4F80031D616 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763EC22CBB4F80031D616 /* FormTextField.swift */; };
+		9276314122D3F547000D4B8F /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276314022D3F547000D4B8F /* AuthResponse.swift */; };
+		9276314322D3F673000D4B8F /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276314222D3F673000D4B8F /* AuthToken.swift */; };
+		9276314722D4AEC4000D4B8F /* ValidationErrorDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276314622D4AEC4000D4B8F /* ValidationErrorDescription.swift */; };
+		9276314922D4B07B000D4B8F /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276314822D4B07B000D4B8F /* Data+Extension.swift */; };
+		9276314B22D4B41E000D4B8F /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276314A22D4B41E000D4B8F /* KeychainManager.swift */; };
+		9276314D22D4C6FA000D4B8F /* KeychainAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276314C22D4C6FA000D4B8F /* KeychainAccessibility.swift */; };
+		9276314F22D4DDAE000D4B8F /* KeychainKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276314E22D4DDAE000D4B8F /* KeychainKey.swift */; };
 		9282180B22D20CB50007FF9B /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282180A22D20CB50007FF9B /* KeyboardManager.swift */; };
+		928A10A622D3CDF000FF78FB /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A10A522D3CDF000FF78FB /* URLSession+Extension.swift */; };
+		928A10A822D3CFBF00FF78FB /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A10A722D3CFBF00FF78FB /* NetworkError.swift */; };
+		928A10AA22D3D19200FF78FB /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A10A922D3D19200FF78FB /* HttpError.swift */; };
+		928A10B122D3E3EA00FF78FB /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A10B022D3E3EA00FF78FB /* SignUpViewModel.swift */; };
+		928A10B322D3EBF400FF78FB /* SignUpCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A10B222D3EBF400FF78FB /* SignUpCredentials.swift */; };
+		928A10B522D3F3A800FF78FB /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A10B422D3F3A800FF78FB /* AuthError.swift */; };
 		928A75CF22C92E7600BC607A /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */; };
 		928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A75D022C967BE00BC607A /* OnboardViewController.swift */; };
 		928E53CF22C81E1A00260C8D /* OnboardPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E53CE22C81E1A00260C8D /* OnboardPageViewController.swift */; };
+		92931C2122D2D4FB00C54EB8 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92931C2022D2D4FB00C54EB8 /* HttpClient.swift */; };
+		92931C2522D35C8000C54EB8 /* AuthorizedHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92931C2422D35C8000C54EB8 /* AuthorizedHttpClient.swift */; };
+		92931C2722D3907E00C54EB8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92931C2622D3907E00C54EB8 /* Endpoint.swift */; };
+		92931C3122D399B000C54EB8 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 92931C3022D399B000C54EB8 /* Development.xcconfig */; };
+		92931C3622D3A09600C54EB8 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92931C3422D39C7300C54EB8 /* Env.swift */; };
 		92AE911122CD68DD002C75B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AE911022CD68DD002C75B6 /* UserDefaultsManager.swift */; };
 		92B9008822CD8720009E619B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B9008722CD8720009E619B /* AuthCoordinator.swift */; };
 		92B9008A22CE94A7009E619B /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B9008922CE94A7009E619B /* SplashScreenViewController.swift */; };
@@ -54,6 +73,7 @@
 		92D8EBC922CFA8BA0083D6C4 /* AnimatedLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBC822CFA8BA0083D6C4 /* AnimatedLogoView.swift */; };
 		92D8EBCB22CFD83D0083D6C4 /* SignUpViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBCA22CFD83C0083D6C4 /* SignUpViewControllerDelegate.swift */; };
 		92D8EBCD22CFE0120083D6C4 /* SignInViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBCC22CFE0120083D6C4 /* SignInViewControllerDelegate.swift */; };
+		92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,11 +95,12 @@
 
 /* Begin PBXFileReference section */
 		9229482022CCC3ED0080B328 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		9229DFA122D2BDF200827A03 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		9233615622C643F5002B7BBA /* Nightlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9233615922C643F5002B7BBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9233616222C643F7002B7BBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9233616522C643F7002B7BBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9233616722C643F7002B7BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9233616722C643F7002B7BBA /* Development.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Development.plist; sourceTree = "<group>"; };
 		9233616C22C643F7002B7BBA /* NightlightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NightlightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9233617022C643F7002B7BBA /* NightlightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightlightTests.swift; sourceTree = "<group>"; };
 		9233617222C643F7002B7BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -116,10 +137,29 @@
 		925763E822CBA7850031D616 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		925763EA22CBA7E50031D616 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		925763EC22CBB4F80031D616 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
+		9276314022D3F547000D4B8F /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		9276314222D3F673000D4B8F /* AuthToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthToken.swift; sourceTree = "<group>"; };
+		9276314622D4AEC4000D4B8F /* ValidationErrorDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationErrorDescription.swift; sourceTree = "<group>"; };
+		9276314822D4B07B000D4B8F /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
+		9276314A22D4B41E000D4B8F /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		9276314C22D4C6FA000D4B8F /* KeychainAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccessibility.swift; sourceTree = "<group>"; };
+		9276314E22D4DDAE000D4B8F /* KeychainKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainKey.swift; sourceTree = "<group>"; };
 		9282180A22D20CB50007FF9B /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
+		928A10A522D3CDF000FF78FB /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
+		928A10A722D3CFBF00FF78FB /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		928A10A922D3D19200FF78FB /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
+		928A10B022D3E3EA00FF78FB /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		928A10B222D3EBF400FF78FB /* SignUpCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCredentials.swift; sourceTree = "<group>"; };
+		928A10B422D3F3A800FF78FB /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		928A75D022C967BE00BC607A /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
 		928E53CE22C81E1A00260C8D /* OnboardPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardPageViewController.swift; sourceTree = "<group>"; };
+		92931C2022D2D4FB00C54EB8 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		92931C2422D35C8000C54EB8 /* AuthorizedHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedHttpClient.swift; sourceTree = "<group>"; };
+		92931C2622D3907E00C54EB8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		92931C3022D399B000C54EB8 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		92931C3322D39B5800C54EB8 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
+		92931C3422D39C7300C54EB8 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
 		92AE911022CD68DD002C75B6 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		92B9008722CD8720009E619B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		92B9008922CE94A7009E619B /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +167,8 @@
 		92D8EBC822CFA8BA0083D6C4 /* AnimatedLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedLogoView.swift; sourceTree = "<group>"; };
 		92D8EBCA22CFD83C0083D6C4 /* SignUpViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerDelegate.swift; sourceTree = "<group>"; };
 		92D8EBCC22CFE0120083D6C4 /* SignInViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerDelegate.swift; sourceTree = "<group>"; };
+		92DA4F9D22D3C61500511C80 /* Production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Production.plist; sourceTree = "<group>"; };
+		92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,19 +243,22 @@
 		9233615822C643F5002B7BBA /* Nightlight */ = {
 			isa = PBXGroup;
 			children = (
-				92B9008722CD8720009E619B /* AuthCoordinator.swift */,
-				92B9008922CE94A7009E619B /* SplashScreenViewController.swift */,
-				925763DD22CAD7BD0031D616 /* Services */,
 				925763D722CAD62B0031D616 /* Coordinators */,
+				925763DD22CAD7BD0031D616 /* Services */,
+				928A10AF22D3E3A800FF78FB /* View Models */,
 				925763D822CAD6630031D616 /* Views */,
+				928A10AB22D3E2DA00FF78FB /* Errors */,
+				928A10AC22D3E2EE00FF78FB /* Constants */,
 				925763DB22CAD72C0031D616 /* Helpers */,
 				925763DA22CAD6E30031D616 /* Extensions */,
+				9237A1EA22CA980B00FC9331 /* Fonts */,
 				9233615922C643F5002B7BBA /* AppDelegate.swift */,
 				9233616222C643F7002B7BBA /* Assets.xcassets */,
 				9233616422C643F7002B7BBA /* LaunchScreen.storyboard */,
-				9233616722C643F7002B7BBA /* Info.plist */,
-				9237A1EA22CA980B00FC9331 /* Fonts */,
-				92D8EBC822CFA8BA0083D6C4 /* AnimatedLogoView.swift */,
+				92931C3022D399B000C54EB8 /* Development.xcconfig */,
+				92931C3322D39B5800C54EB8 /* Production.xcconfig */,
+				9233616722C643F7002B7BBA /* Development.plist */,
+				92DA4F9D22D3C61500511C80 /* Production.plist */,
 			);
 			path = Nightlight;
 			sourceTree = "<group>";
@@ -251,6 +296,7 @@
 			children = (
 				9233618C22C664C4002B7BBA /* Coordinator.swift */,
 				9233618A22C664A2002B7BBA /* AppCoordinator.swift */,
+				92B9008722CD8720009E619B /* AuthCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -259,8 +305,9 @@
 			isa = PBXGroup;
 			children = (
 				9229482222CCE09C0080B328 /* Auth */,
-				925763DC22CAD7760031D616 /* Onboarding */,
 				925763D922CAD6AB0031D616 /* Buttons */,
+				925763DC22CAD7760031D616 /* Onboarding */,
+				928A10AD22D3E35200FF78FB /* Splash Screen */,
 				9229482322CCE0BD0080B328 /* Text Input */,
 				925763D522CAD0160031D616 /* PageControl.swift */,
 			);
@@ -284,6 +331,8 @@
 				9237A1D422CA74E100FC9331 /* UIColor+Extension.swift */,
 				92D398A422C906A400AAC887 /* UIView+Extension.swift */,
 				9237A1D222CA559500FC9331 /* UIViewController+Extension.swift */,
+				928A10A522D3CDF000FF78FB /* URLSession+Extension.swift */,
+				9276314822D4B07B000D4B8F /* Data+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -291,15 +340,22 @@
 		925763DB22CAD72C0031D616 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9237A1E822CA970000FC9331 /* CircularStdFont.swift */,
+				9276314022D3F547000D4B8F /* AuthResponse.swift */,
+				9276314222D3F673000D4B8F /* AuthToken.swift */,
+				92931C2622D3907E00C54EB8 /* Endpoint.swift */,
+				92931C3422D39C7300C54EB8 /* Env.swift */,
+				9276314C22D4C6FA000D4B8F /* KeychainAccessibility.swift */,
+				9276314E22D4DDAE000D4B8F /* KeychainKey.swift */,
 				9237A1DE22CA859600FC9331 /* NLNotification.swift */,
+				928A10B222D3EBF400FF78FB /* SignUpCredentials.swift */,
 				9237A1DA22CA7EFB00FC9331 /* Themeable.swift */,
 				9237A1D622CA7D7200FC9331 /* Theme.swift */,
 				9237A1DC22CA829700FC9331 /* ThemeObserving.swift */,
 				9237A1E022CA890D00FC9331 /* UIViewController+ThemeObserving.swift */,
-				9237A1EE22CA99E000FC9331 /* Strings.swift */,
 				9237A1E622CA95DF00FC9331 /* UIFont+Fonts.swift */,
 				9237A1D822CA7DFE00FC9331 /* UIColor+Colors.swift */,
+				9276314622D4AEC4000D4B8F /* ValidationErrorDescription.swift */,
+				92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -321,8 +377,48 @@
 				9237A1E222CA8D8C00FC9331 /* StyleManager.swift */,
 				92AE911022CD68DD002C75B6 /* UserDefaultsManager.swift */,
 				9282180A22D20CB50007FF9B /* KeyboardManager.swift */,
+				9276314A22D4B41E000D4B8F /* KeychainManager.swift */,
+				9229DFA122D2BDF200827A03 /* AuthService.swift */,
+				92931C2022D2D4FB00C54EB8 /* HttpClient.swift */,
+				92931C2422D35C8000C54EB8 /* AuthorizedHttpClient.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		928A10AB22D3E2DA00FF78FB /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				928A10B422D3F3A800FF78FB /* AuthError.swift */,
+				928A10A922D3D19200FF78FB /* HttpError.swift */,
+				928A10A722D3CFBF00FF78FB /* NetworkError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		928A10AC22D3E2EE00FF78FB /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				9237A1E822CA970000FC9331 /* CircularStdFont.swift */,
+				9237A1EE22CA99E000FC9331 /* Strings.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		928A10AD22D3E35200FF78FB /* Splash Screen */ = {
+			isa = PBXGroup;
+			children = (
+				92D8EBC822CFA8BA0083D6C4 /* AnimatedLogoView.swift */,
+				92B9008922CE94A7009E619B /* SplashScreenViewController.swift */,
+			);
+			path = "Splash Screen";
+			sourceTree = "<group>";
+		};
+		928A10AF22D3E3A800FF78FB /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				928A10B022D3E3EA00FF78FB /* SignUpViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +526,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92931C3122D399B000C54EB8 /* Development.xcconfig in Resources */,
 				9237A1F222CA9E9000FC9331 /* CircularStd-Medium.otf in Resources */,
 				9233616622C643F7002B7BBA /* LaunchScreen.storyboard in Resources */,
 				9237A1F022CA9E8A00FC9331 /* CircularStd-Bold.otf in Resources */,
@@ -482,13 +579,17 @@
 				925763E322CB7BE00031D616 /* AuthViewBackground.swift in Sources */,
 				925763D022CABF6A0031D616 /* TextButton.swift in Sources */,
 				92AE911122CD68DD002C75B6 /* UserDefaultsManager.swift in Sources */,
+				9276314322D3F673000D4B8F /* AuthToken.swift in Sources */,
 				928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */,
+				928A10AA22D3D19200FF78FB /* HttpError.swift in Sources */,
+				92931C2122D2D4FB00C54EB8 /* HttpClient.swift in Sources */,
 				9233618D22C664C4002B7BBA /* Coordinator.swift in Sources */,
 				9237A1EF22CA99E000FC9331 /* Strings.swift in Sources */,
 				9237A1F422CAA79500FC9331 /* ContainedButton.swift in Sources */,
 				9233618B22C664A2002B7BBA /* AppCoordinator.swift in Sources */,
 				9237A1D522CA74E100FC9331 /* UIColor+Extension.swift in Sources */,
 				9237A1D922CA7DFE00FC9331 /* UIColor+Colors.swift in Sources */,
+				9276314F22D4DDAE000D4B8F /* KeychainKey.swift in Sources */,
 				9237A1DB22CA7EFB00FC9331 /* Themeable.swift in Sources */,
 				925763D222CABFBB0031D616 /* BaseButton.swift in Sources */,
 				9282180B22D20CB50007FF9B /* KeyboardManager.swift in Sources */,
@@ -497,16 +598,26 @@
 				9237A1E122CA890D00FC9331 /* UIViewController+ThemeObserving.swift in Sources */,
 				9237A1DF22CA859600FC9331 /* NLNotification.swift in Sources */,
 				92D398A522C906A500AAC887 /* UIView+Extension.swift in Sources */,
+				92931C2522D35C8000C54EB8 /* AuthorizedHttpClient.swift in Sources */,
 				925763D422CAC9C00031D616 /* OnboardViewControllerDelegate.swift in Sources */,
+				9276314B22D4B41E000D4B8F /* KeychainManager.swift in Sources */,
+				928A10B322D3EBF400FF78FB /* SignUpCredentials.swift in Sources */,
 				9237A1E322CA8D8C00FC9331 /* StyleManager.swift in Sources */,
 				925763EB22CBA7E50031D616 /* SignUpView.swift in Sources */,
 				928A75CF22C92E7600BC607A /* UIStackView+Extension.swift in Sources */,
+				9276314122D3F547000D4B8F /* AuthResponse.swift in Sources */,
+				9276314722D4AEC4000D4B8F /* ValidationErrorDescription.swift in Sources */,
 				9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */,
 				9237A1D722CA7D7200FC9331 /* Theme.swift in Sources */,
 				92D8EBCB22CFD83D0083D6C4 /* SignUpViewControllerDelegate.swift in Sources */,
 				92D8EBCD22CFE0120083D6C4 /* SignInViewControllerDelegate.swift in Sources */,
+				928A10A622D3CDF000FF78FB /* URLSession+Extension.swift in Sources */,
 				92B9008A22CE94A7009E619B /* SplashScreenViewController.swift in Sources */,
 				925763E122CB76E80031D616 /* SignInView.swift in Sources */,
+				928A10B522D3F3A800FF78FB /* AuthError.swift in Sources */,
+				9276314D22D4C6FA000D4B8F /* KeychainAccessibility.swift in Sources */,
+				92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */,
+				92931C3622D3A09600C54EB8 /* Env.swift in Sources */,
 				925763DF22CB768D0031D616 /* SignInViewController.swift in Sources */,
 				92B9008822CD8720009E619B /* AuthCoordinator.swift in Sources */,
 				9237A1E922CA970000FC9331 /* CircularStdFont.swift in Sources */,
@@ -515,9 +626,14 @@
 				925763E922CBA7850031D616 /* SignUpViewController.swift in Sources */,
 				9237A1D322CA559500FC9331 /* UIViewController+Extension.swift in Sources */,
 				925763E722CB95900031D616 /* AuthView.swift in Sources */,
+				9229DFA222D2BDF200827A03 /* AuthService.swift in Sources */,
 				9237A1E722CA95DF00FC9331 /* UIFont+Fonts.swift in Sources */,
 				928E53CF22C81E1A00260C8D /* OnboardPageViewController.swift in Sources */,
+				928A10A822D3CFBF00FF78FB /* NetworkError.swift in Sources */,
+				928A10B122D3E3EA00FF78FB /* SignUpViewModel.swift in Sources */,
 				9237A1DD22CA829700FC9331 /* ThemeObserving.swift in Sources */,
+				9276314922D4B07B000D4B8F /* Data+Extension.swift in Sources */,
+				92931C2722D3907E00C54EB8 /* Endpoint.swift in Sources */,
 				92D8EBC922CFA8BA0083D6C4 /* AnimatedLogoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -565,8 +681,9 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		9233617E22C643F7002B7BBA /* Debug */ = {
+		9233617E22C643F7002B7BBA /* Debug (Dev) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92931C3022D399B000C54EB8 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -623,10 +740,11 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = "Debug (Dev)";
 		};
-		9233617F22C643F7002B7BBA /* Release */ = {
+		9233617F22C643F7002B7BBA /* Release (Dev) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92931C3022D399B000C54EB8 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -677,15 +795,16 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = "Release (Dev)";
 		};
-		9233618122C643F7002B7BBA /* Debug */ = {
+		9233618122C643F7002B7BBA /* Debug (Dev) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92931C3022D399B000C54EB8 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QXLVEU7SE4;
-				INFOPLIST_FILE = Nightlight/Info.plist;
+				INFOPLIST_FILE = Nightlight/Development.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -696,15 +815,16 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = Debug;
+			name = "Debug (Dev)";
 		};
-		9233618222C643F7002B7BBA /* Release */ = {
+		9233618222C643F7002B7BBA /* Release (Dev) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92931C3022D399B000C54EB8 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QXLVEU7SE4;
-				INFOPLIST_FILE = Nightlight/Info.plist;
+				INFOPLIST_FILE = Nightlight/Development.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -715,9 +835,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = Release;
+			name = "Release (Dev)";
 		};
-		9233618422C643F7002B7BBA /* Debug */ = {
+		9233618422C643F7002B7BBA /* Debug (Dev) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -736,9 +856,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nightlight.app/Nightlight";
 			};
-			name = Debug;
+			name = "Debug (Dev)";
 		};
-		9233618522C643F7002B7BBA /* Release */ = {
+		9233618522C643F7002B7BBA /* Release (Dev) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -757,9 +877,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nightlight.app/Nightlight";
 			};
-			name = Release;
+			name = "Release (Dev)";
 		};
-		9233618722C643F7002B7BBA /* Debug */ = {
+		9233618722C643F7002B7BBA /* Debug (Dev) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -777,9 +897,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Nightlight;
 			};
-			name = Debug;
+			name = "Debug (Dev)";
 		};
-		9233618822C643F7002B7BBA /* Release */ = {
+		9233618822C643F7002B7BBA /* Release (Dev) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -797,7 +917,245 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Nightlight;
 			};
-			name = Release;
+			name = "Release (Dev)";
+		};
+		92931C2822D396B000C54EB8 /* Debug (Prod) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92931C3322D39B5800C54EB8 /* Production.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug (Prod)";
+		};
+		92931C2922D396B000C54EB8 /* Debug (Prod) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92931C3322D39B5800C54EB8 /* Production.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = Nightlight/Production.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.Nightlight;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Debug (Prod)";
+		};
+		92931C2A22D396B000C54EB8 /* Debug (Prod) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = NightlightTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.NightlightTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nightlight.app/Nightlight";
+			};
+			name = "Debug (Prod)";
+		};
+		92931C2B22D396B000C54EB8 /* Debug (Prod) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = NightlightUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.NightlightUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Nightlight;
+			};
+			name = "Debug (Prod)";
+		};
+		92931C2C22D396BE00C54EB8 /* Release (Prod) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92931C3322D39B5800C54EB8 /* Production.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release (Prod)";
+		};
+		92931C2D22D396BE00C54EB8 /* Release (Prod) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92931C3322D39B5800C54EB8 /* Production.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = Nightlight/Production.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.Nightlight;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Release (Prod)";
+		};
+		92931C2E22D396BE00C54EB8 /* Release (Prod) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = NightlightTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.NightlightTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nightlight.app/Nightlight";
+			};
+			name = "Release (Prod)";
+		};
+		92931C2F22D396BE00C54EB8 /* Release (Prod) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QXLVEU7SE4;
+				INFOPLIST_FILE = NightlightUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.NightlightUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Nightlight;
+			};
+			name = "Release (Prod)";
 		};
 /* End XCBuildConfiguration section */
 
@@ -805,38 +1163,46 @@
 		9233615122C643F5002B7BBA /* Build configuration list for PBXProject "Nightlight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9233617E22C643F7002B7BBA /* Debug */,
-				9233617F22C643F7002B7BBA /* Release */,
+				9233617E22C643F7002B7BBA /* Debug (Dev) */,
+				92931C2822D396B000C54EB8 /* Debug (Prod) */,
+				9233617F22C643F7002B7BBA /* Release (Dev) */,
+				92931C2C22D396BE00C54EB8 /* Release (Prod) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release (Dev)";
 		};
 		9233618022C643F7002B7BBA /* Build configuration list for PBXNativeTarget "Nightlight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9233618122C643F7002B7BBA /* Debug */,
-				9233618222C643F7002B7BBA /* Release */,
+				9233618122C643F7002B7BBA /* Debug (Dev) */,
+				92931C2922D396B000C54EB8 /* Debug (Prod) */,
+				9233618222C643F7002B7BBA /* Release (Dev) */,
+				92931C2D22D396BE00C54EB8 /* Release (Prod) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release (Dev)";
 		};
 		9233618322C643F7002B7BBA /* Build configuration list for PBXNativeTarget "NightlightTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9233618422C643F7002B7BBA /* Debug */,
-				9233618522C643F7002B7BBA /* Release */,
+				9233618422C643F7002B7BBA /* Debug (Dev) */,
+				92931C2A22D396B000C54EB8 /* Debug (Prod) */,
+				9233618522C643F7002B7BBA /* Release (Dev) */,
+				92931C2E22D396BE00C54EB8 /* Release (Prod) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release (Dev)";
 		};
 		9233618622C643F7002B7BBA /* Build configuration list for PBXNativeTarget "NightlightUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9233618722C643F7002B7BBA /* Debug */,
-				9233618822C643F7002B7BBA /* Release */,
+				9233618722C643F7002B7BBA /* Debug (Dev) */,
+				92931C2B22D396B000C54EB8 /* Debug (Prod) */,
+				9233618822C643F7002B7BBA /* Release (Dev) */,
+				92931C2F22D396BE00C54EB8 /* Release (Prod) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release (Dev)";
 		};
 /* End XCConfigurationList section */
 	};

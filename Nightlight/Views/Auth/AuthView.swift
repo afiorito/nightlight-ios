@@ -36,6 +36,41 @@ public class AuthView: UIView {
         return stackView
     }()
     
+    public let usernameField: FormTextField = {
+        let textField = FormTextField()
+        textField.input.icon = UIImage(named: "icon_person")
+        textField.input.placeholder = "username"
+        textField.input.autocapitalizationType = .none
+        textField.input.autocorrectionType = .no
+        
+        return textField
+    }()
+    
+    public let passwordField: FormTextField = {
+        let textField = FormTextField()
+        textField.input.icon = UIImage(named: "icon_lock")
+        textField.input.placeholder = "password"
+        textField.input.isSecureTextEntry = true
+        textField.input.autocapitalizationType = .none
+        textField.input.autocorrectionType = .no
+        return textField
+    }()
+    
+    internal let fieldContainer: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        
+        return stackView
+    }()
+    
+    public let authButton: ContainedButton = {
+        let button = ContainedButton()
+        button.isEnabled = false
+        
+        return button
+    }()
+    
     internal let accountStatusLabel: UILabel = {
         let label = UILabel()
         label.font = .primary16ptNormal
@@ -62,8 +97,23 @@ public class AuthView: UIView {
         }
     }
     
+    public var username: String {
+        return usernameField.input.text ?? ""
+    }
+    
+    public var password: String {
+        return passwordField.input.text ?? ""
+    }
+    
+    public var isAuthButtonEnabled: Bool {
+        return !username.isEmpty && !password.isEmpty
+    }
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        usernameField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        passwordField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         
         prepareSubviews()
     }
@@ -72,12 +122,26 @@ public class AuthView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func showFieldErrors(reasons: [ErrorReason]) {
+        if let usernameReason = reasons.first(where: { $0.property == "username" }) {
+            if usernameReason.constraints[ValidationConstraint.userExists.rawValue] != nil {
+                usernameField.error = "The username already exists."
+            } else {
+                usernameField.error = "The username is invalid."
+            }
+        }
+        
+        if let passwordReason = reasons.first(where: { $0.property == "password" }) {
+            if passwordReason.constraints[ValidationConstraint.weakPassword.rawValue] != nil {
+                passwordField.error = "The password is too weak."
+            }
+        }
+    }
+    
     internal func prepareSubviews() {
         headerContainer.addArrangedSubviews([logoImageView, headerTitleLabel])
         bottomContainer.addArrangedSubviews([accountStatusLabel, actionButton])
-        addSubviews([headerBackground, headerContainer, bottomContainer])
-        
-        headerContainer.sizeToFit()
+        addSubviews([headerBackground, headerContainer, fieldContainer, authButton, bottomContainer])
         
         NSLayoutConstraint.activate([
             headerBackground.topAnchor.constraint(equalTo: topAnchor),
@@ -87,9 +151,20 @@ public class AuthView: UIView {
             headerContainer.topAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.topAnchor, constant: 30),
             headerContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             headerContainer.bottomAnchor.constraint(equalTo: headerBackground.bottomAnchor, constant: -30),
+            fieldContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
+            fieldContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+            fieldContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            fieldContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            authButton.topAnchor.constraint(equalTo: fieldContainer.bottomAnchor, constant: 30),
+            authButton.widthAnchor.constraint(equalTo: fieldContainer.widthAnchor),
+            authButton.centerXAnchor.constraint(equalTo: fieldContainer.centerXAnchor),
             bottomContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
             bottomContainer.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
+    }
+    
+    @objc internal func textFieldDidChange() {
+        authButton.isEnabled = isAuthButtonEnabled
     }
     
     public func updateColors(for theme: Theme) {
@@ -98,5 +173,15 @@ public class AuthView: UIView {
         headerTitleLabel.textColor = .invertedPrimaryText(for: theme)
         accountStatusLabel.textColor = .primaryText(for: theme)
         actionButton.updateColors(for: theme)
+    }
+}
+
+extension AuthView: UITextFieldDelegate {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard let formTextField = textField.superview(ofType: FormTextField.self) else {
+            return
+        }
+        
+        formTextField.error = nil
     }
 }

@@ -10,6 +10,12 @@ public class ContainedButton: BaseButton {
         backgroundColor = .brand
     }
     
+    public override var isEnabled: Bool {
+        didSet {
+            alpha = isEnabled ? 1.0 : 0.75
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

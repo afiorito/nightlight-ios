@@ -25,4 +25,13 @@ extension UIView {
     public func addSubviews(_ views: UIView..., shouldTranslateAutoresizeMask: Bool = true) {
         self.addSubviews(views, shouldTranslateAutoresizeMask: shouldTranslateAutoresizeMask)
     }
+    
+    public func superview<T>(ofType type: T.Type) -> T? {
+        var superview = self.superview
+        while superview != nil && (superview as? T) == nil {
+            superview = superview?.superview
+        }
+        
+        return superview as? T
+    }
 }

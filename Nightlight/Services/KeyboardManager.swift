@@ -1,27 +1,37 @@
 import UIKit
 
+/// a protocol for being able to access KeyboardManager.
 public protocol KeyboardManaging {
     var keyboardManager: KeyboardManager { get set }
 }
 
-/// Responsible for managing iOS keyboard
+/// Responsible for managing iOS keyboard.
 public class KeyboardManager {
+    /// The mechanism for listening to keyboard and input changes.
     private let notificationCenter: NotificationCenter
 
+    /// The currently active input view.
     private weak var inputView: UIView?
 
+    /// The frame of the top view in the hierarchy.
     private var topViewBeginRect = CGRect.zero
     
+    /// Returns true if keyboard is showing, false if not.
     private var isKeyboardShowing: Bool = false
     
+    /// The last recorded frame of the keyboard.
     private var kbFrame = CGRect.zero
     
+    /// The animation duration of the keyboard.
     private var animationDuration: TimeInterval = 0.25
+    
+    /// The animation curve of the keyboard.
     private var animationCurve: UIView.AnimationOptions = .curveEaseOut
     
-    /// Value for margin between the input view and keyboard
+    /// A value for margin between the input view and keyboard.
     public var keyboardDistanceFromInputView: CGFloat = 10.0
     
+    /// A gesture for resigning first responder when tapping outside current input view.
     private lazy var resignFirstResponderGesture: UITapGestureRecognizer = {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapRecognized(_:)))
         tapGesture.cancelsTouchesInView = false
@@ -29,6 +39,7 @@ public class KeyboardManager {
         return tapGesture
     }()
     
+    /// Return Tte current top-most view controller.
     private var topViewController: UIViewController? {
         guard var topViewController = keyWindow?.rootViewController else {
             return nil
@@ -56,14 +67,24 @@ public class KeyboardManager {
         unregisterAllNotifications()
     }
     
+    /// The key window of the application.
     private var keyWindow: UIWindow? {
         return inputView?.window ?? UIApplication.shared.keyWindow
     }
     
+    /**
+     Notifies the active input view that it has been asked to relinquish its status as first responder in its window.
+     
+     - returns: The default implementation returns true, resigning first responder status.
+     */
+    @discardableResult
     private func resignFirstResponder() -> Bool {
         return inputView?.resignFirstResponder() ?? false
     }
     
+    /**
+     Adjust the frame of the top-most view controller so that the input view is within margin distances.
+     */
     private func adjustFrame() {
         guard let inputView = inputView,
             let window = keyWindow,
@@ -95,6 +116,9 @@ public class KeyboardManager {
     
     // MARK: - Notification Management
     
+    /**
+     Registers all notifications necessary for responding to input view and keyboard changes.
+     */
     private func registerAllNotifications() {
         notificationCenter.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
@@ -106,6 +130,9 @@ public class KeyboardManager {
                                didEndEditingNotification: UITextField.textDidEndEditingNotification)
     }
     
+    /**
+     Stop observing input view and keyboard changes.
+     */
     private func unregisterAllNotifications() {
         notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
@@ -154,6 +181,9 @@ public class KeyboardManager {
     @objc private func inputViewDidEndEditing(_ notification: Notification) {
         inputView?.window?.removeGestureRecognizer(resignFirstResponderGesture)
         
+        // needed to prevent textfield text from jumping
+        inputView?.layoutIfNeeded()
+        
         inputView = nil
     }
     
@@ -194,14 +224,13 @@ public class KeyboardManager {
 
     }
     
-    @objc private func keyboardDidHide(_ notification: Notification?) {
-    }
+    @objc private func keyboardDidHide(_ notification: Notification?) {}
     
     // MARK: - Gesture Recognizers
     
     @objc private func tapRecognized(_ gesture: UITapGestureRecognizer) {
         if gesture.state == .ended {
-            _ = resignFirstResponder()
+            resignFirstResponder()
         }
     }
 }
