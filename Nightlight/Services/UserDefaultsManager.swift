@@ -21,7 +21,7 @@ public class UserDefaultsManager {
     
     /// A Boolean value that determines whether the onboarding screen have displayed.
     public var hasOnboarded: Bool {
-        get { return userDefaults.bool(forKey: Key.hasOnboarded.rawValue) }
-        set { userDefaults.set(newValue, forKey: Key.hasOnboarded.rawValue) }
+        get { return userDefaults.bool(forKey: UserDefaultsKey.hasOnboarded.rawValue) }
+        set { userDefaults.set(newValue, forKey: UserDefaultsKey.hasOnboarded.rawValue) }
     }
 }

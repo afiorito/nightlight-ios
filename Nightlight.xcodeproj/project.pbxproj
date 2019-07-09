@@ -74,6 +74,7 @@
 		92D8EBCB22CFD83D0083D6C4 /* SignUpViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBCA22CFD83C0083D6C4 /* SignUpViewControllerDelegate.swift */; };
 		92D8EBCD22CFE0120083D6C4 /* SignInViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBCC22CFE0120083D6C4 /* SignInViewControllerDelegate.swift */; };
 		92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */; };
+		92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2622D52B9A00207D4D /* ToastView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,7 @@
 		92D8EBCC22CFE0120083D6C4 /* SignInViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerDelegate.swift; sourceTree = "<group>"; };
 		92DA4F9D22D3C61500511C80 /* Production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Production.plist; sourceTree = "<group>"; };
 		92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		92DF5D2622D52B9A00207D4D /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +312,7 @@
 				928A10AD22D3E35200FF78FB /* Splash Screen */,
 				9229482322CCE0BD0080B328 /* Text Input */,
 				925763D522CAD0160031D616 /* PageControl.swift */,
+				92DF5D2622D52B9A00207D4D /* ToastView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				925763D022CABF6A0031D616 /* TextButton.swift in Sources */,
 				92AE911122CD68DD002C75B6 /* UserDefaultsManager.swift in Sources */,
 				9276314322D3F673000D4B8F /* AuthToken.swift in Sources */,
+				92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */,
 				928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */,
 				928A10AA22D3D19200FF78FB /* HttpError.swift in Sources */,
 				92931C2122D2D4FB00C54EB8 /* HttpClient.swift in Sources */,

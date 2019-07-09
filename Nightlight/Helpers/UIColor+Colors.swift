@@ -64,7 +64,7 @@ extension UIColor {
      
      - parameter theme: the theme to determine the accent color.
      
-     - returns: the palette color for subtle accent colors.
+     - returns: the palette color for subtle accents.
      */
     public class func accent(for theme: Theme) -> UIColor {
         switch theme {
@@ -72,6 +72,22 @@ extension UIColor {
             return Palette.lightAccent
         case .dark:
             return Palette.darkAccent
+        }
+    }
+    
+    /**
+     Handles the color for drop shadows.
+     
+     - parameter theme: the theme to determine the shadow color.
+     
+     - returns: the palette color for drop shadows.
+     */
+    public class func shadow(for theme: Theme) -> UIColor {
+        switch theme {
+        case .light:
+            return Palette.lightShadow
+        case .dark:
+            return Palette.darkShadow
         }
     }
     
@@ -115,6 +131,11 @@ extension UIColor {
     /// Represents color for hinting an urgent or erroneous occurence.
     public class var urgent: UIColor {
         return Palette.urgent
+    }
+    
+    /// Represents color for hinting a neutral occurence.
+    public class var neutral: UIColor {
+        return Palette.darkAccent
     }
 }
 

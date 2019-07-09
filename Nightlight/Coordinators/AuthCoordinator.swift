@@ -34,8 +34,7 @@ public class AuthCoordinator: Coordinator {
         
         return signUpViewController
     }
-    
-    
+
     public let authMethod: AuthMethod
     
     public init(rootViewController: UIViewController, dependencies: Dependencies, authMethod: AuthMethod) {
@@ -74,7 +73,7 @@ public class AuthCoordinator: Coordinator {
         }
         
         // Avoid continously presenting more view controllers if going between sign in and sign up
-        if currentViewController === otherViewController {
+        if type(of: currentViewController) === type(of: otherViewController) {
             currentViewController.dismiss(animated: true)
         } else {
             currentViewController.present(otherViewController, animated: true)

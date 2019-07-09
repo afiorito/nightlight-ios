@@ -151,13 +151,13 @@ public class AuthView: UIView {
             headerContainer.topAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.topAnchor, constant: 30),
             headerContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             headerContainer.bottomAnchor.constraint(equalTo: headerBackground.bottomAnchor, constant: -30),
-            fieldContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
             fieldContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
             fieldContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             fieldContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             authButton.topAnchor.constraint(equalTo: fieldContainer.bottomAnchor, constant: 30),
-            authButton.widthAnchor.constraint(equalTo: fieldContainer.widthAnchor),
-            authButton.centerXAnchor.constraint(equalTo: fieldContainer.centerXAnchor),
+            authButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            authButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            authButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             bottomContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
             bottomContainer.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])

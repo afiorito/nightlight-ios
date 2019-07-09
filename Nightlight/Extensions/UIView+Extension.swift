@@ -34,4 +34,13 @@ extension UIView {
         
         return superview as? T
     }
+    
+    public func addShadow(forTheme theme: Theme) {
+        layer.shadowColor = UIColor.shadow(for: theme).cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 5.0
+        layer.shadowOpacity = 1.0
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
+        
+    }
 }

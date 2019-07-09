@@ -35,4 +35,9 @@ extension UIFont {
     public class var secondary16ptNormal: UIFont? {
         return UIFont.systemFont(ofSize: 16.0)
     }
+    
+    /// Secondary font with size 14pt and normal weight.
+    public class var secondary14ptNormal: UIFont? {
+        return UIFont.systemFont(ofSize: 14.0)
+    }
 }

@@ -61,8 +61,8 @@ public class SignUpViewController: UIViewController {
                 case .validation(let reasons):
                     self.signUpView.showFieldErrors(reasons: reasons)
                 default:
-                    // show toast
-                    print("Unknown error")
+                    let toast = self.showToast("Something went wrong.", severity: .urgent)
+                    toast.updateColors(for: self.viewModel.theme)
                 }
             }
         }
