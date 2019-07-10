@@ -112,6 +112,8 @@ public class AuthView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
+        usernameField.input.delegate = self
+        passwordField.input.delegate = self
         usernameField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         passwordField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         

@@ -15,9 +15,15 @@ public class AuthService {
     }
     
     public func signUp(with credentials: SignUpCredentials, result: @escaping (Result<Bool, AuthError>) -> Void) {
-        let body = try? JSONEncoder().encode(credentials)
-        
-        httpClient.post(endpoint: Endpoint.signup, body: body) { networkResult in
+        authenticate(endpoint: Endpoint.signUp, body: Data.encodeJSON(value: credentials), result: result)
+    }
+    
+    public func signIn(with credentials: SignInCredentials, result: @escaping (Result<Bool, AuthError>) -> Void) {
+        authenticate(endpoint: Endpoint.signIn, body: Data.encodeJSON(value: credentials), result: result)
+    }
+    
+    private func authenticate(endpoint: Endpoint, body: Data?, result: @escaping (Result<Bool, AuthError>) -> Void) {
+        httpClient.post(endpoint: endpoint, body: body) { networkResult in
             switch networkResult {
             case .success(_, let data):
                 guard let authResponse: AuthResponse = data.decodeJSON() else {

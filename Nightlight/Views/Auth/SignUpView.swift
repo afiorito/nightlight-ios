@@ -22,6 +22,7 @@ public class SignUpView: AuthView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
 
+        emailField.input.delegate = self
         emailField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         
         usernameField.input.addTarget(emailField.input,

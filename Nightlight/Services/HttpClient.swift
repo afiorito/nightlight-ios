@@ -1,7 +1,7 @@
 import Foundation
 
 public class HttpClient {
-    public typealias RequestResult = (Result<(URLResponse, Data), Error>) -> Void
+    public typealias RequestResult = Result<(URLResponse, Data), Error>
 
     private let urlSession: URLSession
     
@@ -16,7 +16,7 @@ public class HttpClient {
     }
     
     @discardableResult
-    public func request(urlRequest: URLRequest, result: @escaping RequestResult) -> URLSessionDataTask {
+    public func request(urlRequest: URLRequest, result: @escaping (RequestResult) -> Void) -> URLSessionDataTask {
         let task = urlSession.dataTask(with: urlRequest) { taskResult in
             switch taskResult {
             case .success(let response, let data):
@@ -41,13 +41,13 @@ public class HttpClient {
         return task
     }
     
-    public func get(endpoint: Endpoint, result: @escaping RequestResult) {
+    public func get(endpoint: Endpoint, result: @escaping (RequestResult) -> Void) {
         guard let url = endpoint.url else { return result(.failure(NetworkError.badURL)) }
         
         request(urlRequest: urlRequest(for: url, method: .get), result: result)
     }
     
-    public func post(endpoint: Endpoint, body: Data?, result: @escaping RequestResult) {
+    public func post(endpoint: Endpoint, body: Data?, result: @escaping (RequestResult) -> Void) {
         guard let url = endpoint.url else { return result(.failure(NetworkError.badURL)) }
         
         var urlRequest = self.urlRequest(for: url, method: .post)
@@ -57,7 +57,7 @@ public class HttpClient {
         request(urlRequest: urlRequest, result: result)
     }
     
-    public func put(endpoint: Endpoint, body: Data?, result: @escaping RequestResult) {
+    public func put(endpoint: Endpoint, body: Data?, result: @escaping (RequestResult) -> Void) {
         guard let url = endpoint.url else { return result(.failure(NetworkError.badURL)) }
         
         var urlRequest = self.urlRequest(for: url, method: .put)
@@ -67,7 +67,7 @@ public class HttpClient {
         request(urlRequest: urlRequest, result: result)
     }
     
-    public func delete(endpoint: Endpoint, result: @escaping RequestResult) {
+    public func delete(endpoint: Endpoint, result: @escaping (RequestResult) -> Void) {
         guard let url = endpoint.url else { return result(.failure(NetworkError.badURL)) }
         
         request(urlRequest: urlRequest(for: url, method: .delete), result: result)

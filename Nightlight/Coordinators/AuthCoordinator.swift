@@ -20,7 +20,8 @@ public class AuthCoordinator: Coordinator {
     
     /// The view controller used to sign in a user.
     private var signInViewController: SignInViewController {
-        let signInViewController = SignInViewController(dependencies: dependencies as! SignInViewController.Dependencies)
+        let viewModel = SignInViewModel(dependencies: dependencies as! SignInViewModel.Dependencies)
+        let signInViewController = SignInViewController(viewModel: viewModel)
         signInViewController.delegate = self
         
         return signInViewController
@@ -82,6 +83,10 @@ public class AuthCoordinator: Coordinator {
 }
 
 extension AuthCoordinator: SignUpViewControllerDelegate, SignInViewControllerDelegate {
+    public func signInViewControllerDidSignIn(_ signInViewController: SignInViewController) {
+        print("Signin")
+    }
+    
     public func signUpViewControllerDidSignUp(_ signUpViewController: SignUpViewController) {
         print("Signup")
     }

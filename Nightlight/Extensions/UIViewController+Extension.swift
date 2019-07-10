@@ -25,6 +25,7 @@ extension UIViewController {
         removeFromParent()
     }
     
+    @discardableResult
     public func showToast(_ message: String, severity: ToastView.Severity, duration: TimeInterval = 6.0) -> ToastView {
         let toastView = ToastView()
         toastView.severity = severity

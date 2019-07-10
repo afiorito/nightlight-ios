@@ -30,6 +30,11 @@ public class SignInView: AuthView {
         fieldContainer.addArrangedSubviews([usernameField, passwordField])
     }
     
+    public override func showFieldErrors(reasons: [ErrorReason]) {
+        usernameField.error = ""
+        passwordField.error = ""
+    }
+    
     public override func updateColors(for theme: Theme) {
         super.updateColors(for: theme)
         

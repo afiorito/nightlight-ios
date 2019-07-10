@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9213184722D571BF00C91D90 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213184622D571BF00C91D90 /* SignInViewModel.swift */; };
+		9213184922D5728F00C91D90 /* SignInCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213184822D5728F00C91D90 /* SignInCredentials.swift */; };
 		9229482122CCC3ED0080B328 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229482022CCC3ED0080B328 /* TextField.swift */; };
 		9229DFA222D2BDF200827A03 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229DFA122D2BDF200827A03 /* AuthService.swift */; };
 		9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233615922C643F5002B7BBA /* AppDelegate.swift */; };
@@ -95,6 +97,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9213184622D571BF00C91D90 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		9213184822D5728F00C91D90 /* SignInCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCredentials.swift; sourceTree = "<group>"; };
 		9229482022CCC3ED0080B328 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		9229DFA122D2BDF200827A03 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		9233615622C643F5002B7BBA /* Nightlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,6 +354,7 @@
 				9276314C22D4C6FA000D4B8F /* KeychainAccessibility.swift */,
 				9276314E22D4DDAE000D4B8F /* KeychainKey.swift */,
 				9237A1DE22CA859600FC9331 /* NLNotification.swift */,
+				9213184822D5728F00C91D90 /* SignInCredentials.swift */,
 				928A10B222D3EBF400FF78FB /* SignUpCredentials.swift */,
 				9237A1DA22CA7EFB00FC9331 /* Themeable.swift */,
 				9237A1D622CA7D7200FC9331 /* Theme.swift */,
@@ -420,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				928A10B022D3E3EA00FF78FB /* SignUpViewModel.swift */,
+				9213184622D571BF00C91D90 /* SignInViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -579,6 +585,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9213184922D5728F00C91D90 /* SignInCredentials.swift in Sources */,
 				925763E322CB7BE00031D616 /* AuthViewBackground.swift in Sources */,
 				925763D022CABF6A0031D616 /* TextButton.swift in Sources */,
 				92AE911122CD68DD002C75B6 /* UserDefaultsManager.swift in Sources */,
@@ -614,6 +621,7 @@
 				9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */,
 				9237A1D722CA7D7200FC9331 /* Theme.swift in Sources */,
 				92D8EBCB22CFD83D0083D6C4 /* SignUpViewControllerDelegate.swift in Sources */,
+				9213184722D571BF00C91D90 /* SignInViewModel.swift in Sources */,
 				92D8EBCD22CFE0120083D6C4 /* SignInViewControllerDelegate.swift in Sources */,
 				928A10A622D3CDF000FF78FB /* URLSession+Extension.swift in Sources */,
 				92B9008A22CE94A7009E619B /* SplashScreenViewController.swift in Sources */,

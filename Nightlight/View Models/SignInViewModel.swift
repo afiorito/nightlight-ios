@@ -1,6 +1,6 @@
 import Foundation
 
-public class SignUpViewModel {
+public class SignInViewModel {
     
     public typealias Dependencies = StyleManaging & AuthServiced
     
@@ -14,10 +14,10 @@ public class SignUpViewModel {
         self.dependencies = dependencies
     }
     
-    public func signUp(with credentials: SignUpCredentials, result: @escaping (Result<Bool, AuthError>) -> Void) {
-        dependencies.authService.signUp(with: credentials) { signUpResult in
+    public func signIn(with credentials: SignInCredentials, result: @escaping (Result<Bool, AuthError>) -> Void) {
+        dependencies.authService.signIn(with: credentials) { signInResult in
             DispatchQueue.main.async {
-                result(signUpResult)
+                result(signInResult)
             }
         }
     }

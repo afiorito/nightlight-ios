@@ -27,7 +27,12 @@ public struct Endpoint {
 
 extension Endpoint {
     /// An endpoint for signing up a user
-    static var signup: Endpoint {
+    static var signUp: Endpoint {
         return Endpoint(path: "/signup", queryItems: nil)
+    }
+    
+    /// An endpoint for signing in a user
+    static var signIn: Endpoint {
+        return Endpoint(path: "/signin", queryItems: nil)
     }
 }

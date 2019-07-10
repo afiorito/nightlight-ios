@@ -49,9 +49,11 @@ public class SignUpViewController: UIViewController {
         )
         
         signUpView.authButton.isLoading = true
+        signUpView.authButton.isEnabled = false
         
-        viewModel.signup(with: credentials) { [unowned self] (result) in
+        viewModel.signUp(with: credentials) { [unowned self] (result) in
             self.signUpView.authButton.isLoading = false
+            self.signUpView.authButton.isEnabled = true
             
             switch result {
             case .success:
