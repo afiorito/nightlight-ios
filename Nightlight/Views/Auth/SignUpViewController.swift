@@ -1,6 +1,6 @@
 import UIKit
 
-public class SignUpViewController: UIViewController {
+public class SignUpViewController: UIViewController, Themeable {
     public typealias Dependencies = StyleManaging
     
     private let viewModel: SignUpViewModel

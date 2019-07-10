@@ -1,5 +1,5 @@
 import Foundation
 
-class AuthorizedHttpClient: HttpClient {
+public class AuthorizedHttpClient: HttpClient {
     
 }

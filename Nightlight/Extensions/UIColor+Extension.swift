@@ -88,5 +88,17 @@ extension UIColor {
         
         return self
     }
+    
+    public func asImage(with size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
+        UIGraphicsBeginImageContext(size)
+        let ctx = UIGraphicsGetCurrentContext()
+        self.setFill()
+        ctx?.fill(CGRect(origin: .zero, size: size))
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
 
 }

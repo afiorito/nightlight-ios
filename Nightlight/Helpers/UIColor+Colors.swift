@@ -26,6 +26,23 @@ extension UIColor {
     }
     
     /**
+     Handles the color for the alternate background color of elements.
+     
+     - parameter theme: the theme to determine the alternate background color.
+     
+     - returns: the palette color for the alternate background color of elements.
+     */
+    public class func alternateBackground(for theme: Theme) -> UIColor {
+        switch theme {
+        case .light:
+            return Palette.alternateWhite
+        case .dark:
+            return Palette.alternateBlack
+            
+        }
+    }
+    
+    /**
      Handles the color for the background of elements to be visible on
      the background color of standard content.
      
@@ -88,6 +105,22 @@ extension UIColor {
             return Palette.lightShadow
         case .dark:
             return Palette.darkShadow
+        }
+    }
+    
+    /**
+     Handles the color for borders.
+     
+     - parameter theme: the theme to determine the border color.
+     
+     - returns: the palette color for borders.
+     */
+    public class func border(for theme: Theme) -> UIColor {
+        switch theme {
+        case .light:
+            return Palette.lightBorder
+        case .dark:
+            return Palette.darkBorder
         }
     }
     

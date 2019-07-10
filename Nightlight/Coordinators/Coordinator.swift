@@ -23,10 +23,19 @@ public protocol Coordinator: class {
      Adds the specified coordinator as a child of the current coordinator.
      */
     func addChild(_ child: Coordinator)
+    
+    /**
+     Remove the specified coordinator from the current coordinator.
+     */
+    func removeChild(_ child: Coordinator)
 }
 
 public extension Coordinator {
     func childDidFinish(_ child: Coordinator) {
+        removeChild(child)
+    }
+    
+    func removeChild(_ child: Coordinator) {
         children.removeAll { $0 === child }
     }
     
@@ -34,4 +43,8 @@ public extension Coordinator {
         child.parent = self
         children.append(child)
     }
+}
+
+public protocol TabBarCoordinator: Coordinator {
+    var rootViewController: UIViewController { get }
 }

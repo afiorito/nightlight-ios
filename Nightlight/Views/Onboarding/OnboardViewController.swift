@@ -132,6 +132,19 @@ public class OnboardViewController: UIViewController, Themeable {
         pageControl.updateColors(for: theme)
         
     }
+    
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
+        switch dependencies.styleManager.theme {
+        case .light:
+            if #available(iOS 13.0, *) {
+                return .darkContent
+            } else {
+                return .default
+            }
+        case .dark:
+            return .lightContent
+        }
+    }
 }
 
 // MARK: - UIPageViewController Datasource

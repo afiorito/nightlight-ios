@@ -43,7 +43,7 @@ public class AuthCoordinator: Coordinator {
         self.dependencies = dependencies
         self.authMethod = authMethod
     }
-    
+
     public func start() {
         let authViewController: UIViewController
         
@@ -56,7 +56,6 @@ public class AuthCoordinator: Coordinator {
         
         if let splashScreenViewController = rootViewController as? SplashScreenViewController {
             splashScreenViewController.initialViewController = authViewController
-            splashScreenViewController.showInitialViewController()
         } else {
             authViewController.modalPresentationStyle = .fullScreen
             rootViewController.show(authViewController, sender: rootViewController)
@@ -84,11 +83,11 @@ public class AuthCoordinator: Coordinator {
 
 extension AuthCoordinator: SignUpViewControllerDelegate, SignInViewControllerDelegate {
     public func signInViewControllerDidSignIn(_ signInViewController: SignInViewController) {
-        print("Signin")
+        parent?.childDidFinish(self)
     }
     
     public func signUpViewControllerDidSignUp(_ signUpViewController: SignUpViewController) {
-        print("Signup")
+        parent?.childDidFinish(self)
     }
     
     public func signInViewControllerDidTapSignUp(_ signInViewController: SignInViewController) {

@@ -45,4 +45,8 @@ public class SplashScreenViewController: UIViewController {
             animatedLogoView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    public override var childForStatusBarStyle: UIViewController? {
+        return initialViewController
+    }
 }
