@@ -15,8 +15,6 @@ public class MessagesView: UIView, Themeable {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
-        tableView.showEmptyView(description: EmptyViewDescription(title: "Welcome", subtitle: "You're cool", imageName: "empty_message"))
-        
         prepareSubviews()
     }
     

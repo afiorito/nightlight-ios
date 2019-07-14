@@ -8,6 +8,18 @@ public class MessagesViewController: UIViewController, Themeable {
         return view as! MessagesView
     }
     
+    private let refreshControl = UIRefreshControl()
+    
+    public var emptyViewDescription: EmptyViewDescription? {
+        get {
+            return dataSource.emptyViewDescription
+        }
+        
+        set {
+            dataSource.emptyViewDescription = newValue
+        }
+    }
+    
     private let dataSource: TableViewArrayPaginatedDataSource<MessageTableViewCell>
     
     init(viewModel: MessagesViewModel) {
@@ -28,6 +40,8 @@ public class MessagesViewController: UIViewController, Themeable {
         
         messagesView.tableView.dataSource = dataSource
         messagesView.tableView.prefetchDataSource = dataSource
+        messagesView.tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         dataSource.prefetchCallback = { [weak self] in
             self?.loadMoreMessages()
@@ -37,12 +51,22 @@ public class MessagesViewController: UIViewController, Themeable {
     }
     
     private func loadMoreMessages(fromStart: Bool = false) {
+        if fromStart { viewModel.resetPaging() }
+        
         viewModel.getMessages { [weak self] result in
             guard let self = self else { return }
-
+            
+            self.refreshControl.endRefreshing()
+            
+            if let description = self.emptyViewDescription {
+                self.messagesView.tableView.showEmptyViewIfNeeded(emptyViewDescription: description)
+                self.messagesView.updateColors(for: self.viewModel.theme)
+            }
+            
             switch result {
             case .success(let messages):
                 self.dataSource.totalCount = self.viewModel.totalCount
+                
                 if fromStart {
                     self.dataSource.data = messages
                     self.messagesView.tableView.reloadData()
@@ -56,6 +80,10 @@ public class MessagesViewController: UIViewController, Themeable {
                 toast.updateColors(for: self.viewModel.theme)
             }
         }
+    }
+    
+    @objc private func refresh() {
+        loadMoreMessages(fromStart: true)
     }
     
     public override func loadView() {

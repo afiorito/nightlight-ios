@@ -1,13 +1,14 @@
 import Foundation
 
 /// A dependency container to inject into other objects.
-public struct DependencyContainer: StyleManaging, UserDefaultsManaging, KeychainManaging, KeyboardManaging, AuthServiced, MessageServiced {
+public struct DependencyContainer: StyleManaging, UserDefaultsManaging, KeychainManaging, KeyboardManaging, AuthServiced, MessageServiced, NotificationObserving {
     public var styleManager = StyleManager()
     public var userDefaultsManager = UserDefaultsManager()
     public var keychainManager = KeychainManager()
     public var keyboardManager = KeyboardManager()
     public var authService: AuthService
     public var messageService: MessageService
+    public var notificationCenter: NotificationCenter = .default
     
     init() {
         let httpClient = HttpClient()

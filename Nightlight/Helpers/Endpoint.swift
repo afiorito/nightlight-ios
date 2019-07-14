@@ -53,10 +53,18 @@ extension Endpoint {
         return Endpoint(path: "/signin", queryItems: .none, isAuthorized: false)
     }
     
+    static func refresh(token: String) -> Endpoint {
+        let queryItems = [URLQueryItem(name: "refresh_token", value: token)]
+        
+        return Endpoint(path: "/refresh", queryItems: queryItems, isAuthorized: false)
+    }
+}
+
+// MARK: - Message Endpoints
+
+extension Endpoint {
     static func message(type: MessageType, start: String?, end: String?) -> Endpoint {
-        var queryItems = [
-            URLQueryItem(name: "type", value: type.rawValue)
-        ]
+        var queryItems = [URLQueryItem(name: "type", value: type.rawValue)]
         
         if let start = start {
             queryItems.append(URLQueryItem(name: "start", value: start))

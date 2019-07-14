@@ -20,6 +20,19 @@ public class AppCoordinator: Coordinator {
     public init(dependencies: DependencyContainer) {
         self.dependencies = dependencies
         window = UIWindow(frame: UIScreen.main.bounds)
+        
+        dependencies
+            .notificationCenter
+            .addObserver(self,
+                         selector: #selector(handleUnauthorized),
+                         name: Notification.Name(rawValue: NLNotification.unauthorized.rawValue),
+                         object: nil)
+    }
+    
+    deinit {
+        dependencies
+            .notificationCenter
+            .removeObserver(self, name: Notification.Name(rawValue: NLNotification.unauthorized.rawValue), object: nil)
     }
     
     public func start() {
@@ -48,6 +61,20 @@ public class AppCoordinator: Coordinator {
         splashScreenViewController.showInitialViewController()
         
         window.makeKeyAndVisible()
+    }
+    
+    @objc private func handleUnauthorized(_ notification: Notification) {
+        try? dependencies.keychainManager.remove(key: KeychainKey.refreshToken.rawValue)
+        try? dependencies.keychainManager.remove(key: KeychainKey.accessToken.rawValue)
+        
+        let authCoordinator = AuthCoordinator(rootViewController: window.rootViewController, dependencies: dependencies, authMethod: .signIn)
+        addChild(authCoordinator)
+        
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: { 
+            UIView.setAnimationsEnabled(false)
+            authCoordinator.start()
+            UIView.setAnimationsEnabled(true)
+        })
     }
     
     private func prepareMainApplication() -> UIViewController {

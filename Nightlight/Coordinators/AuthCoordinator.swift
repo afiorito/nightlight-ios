@@ -12,11 +12,13 @@ public class AuthCoordinator: Coordinator {
     public weak var parent: Coordinator?
     public var children = [Coordinator]()
 
+    public var isRoot: Bool = false
+    
     /// The required dependencies.
     private let dependencies: Dependencies
     
     /// The root view controller of the application.
-    private let rootViewController: UIViewController
+    private var rootViewController: UIViewController?
     
     /// The view controller used to sign in a user.
     private var signInViewController: SignInViewController {
@@ -38,7 +40,7 @@ public class AuthCoordinator: Coordinator {
 
     public let authMethod: AuthMethod
     
-    public init(rootViewController: UIViewController, dependencies: Dependencies, authMethod: AuthMethod) {
+    public init(rootViewController: UIViewController?, dependencies: Dependencies, authMethod: AuthMethod) {
         self.rootViewController = rootViewController
         self.dependencies = dependencies
         self.authMethod = authMethod
@@ -54,11 +56,13 @@ public class AuthCoordinator: Coordinator {
             authViewController = signUpViewController
         }
         
-        if let splashScreenViewController = rootViewController as? SplashScreenViewController {
+        if isRoot {
+            rootViewController = authViewController
+        } else if let splashScreenViewController = rootViewController as? SplashScreenViewController {
             splashScreenViewController.initialViewController = authViewController
         } else {
             authViewController.modalPresentationStyle = .fullScreen
-            rootViewController.show(authViewController, sender: rootViewController)
+            rootViewController?.show(authViewController, sender: rootViewController)
         }
     }
     

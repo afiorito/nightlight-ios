@@ -1,7 +1,7 @@
 import Foundation
 
 public class HttpClient {
-    public typealias RequestResult = Result<(URLResponse, Data), Error>
+    public typealias RequestResult = Result<(HTTPURLResponse, Data), Error>
 
     private let urlSession: URLSession
     

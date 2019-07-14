@@ -7,12 +7,13 @@ public class TableViewArrayDataSource<Cell: Configurable>: NSObject, UITableView
     
     public weak var cellDelegate: Cell.Delegate?
     
+    public var emptyViewDescription: EmptyViewDescription?
+    
     public init(reuseIdentifier: String) {
         self.reuseIdentifier = reuseIdentifier
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return data.count
     }
     

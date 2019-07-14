@@ -15,10 +15,9 @@ public class MessagesViewModel {
     private var startPage: String?
     private var endPage: String?
     
-    private(set) var totalCount: Int = 18
+    private(set) var totalCount: Int = 0
     
     private var isFetchInProgress = false
-    private var fetchFromBeginning = true
     
     public init(dependencies: Dependencies, type: MessageType) {
         self.dependencies = dependencies
@@ -26,11 +25,10 @@ public class MessagesViewModel {
     }
     
     public func getMessages(result: @escaping (Result<[MessageViewModel], MessageError>) -> Void) {
-        guard !isFetchInProgress && (endPage != nil || fetchFromBeginning) else {
+        guard !isFetchInProgress && (endPage != nil || startPage == nil) else {
             return
         }
-        
-        fetchFromBeginning = false
+
         isFetchInProgress = true
         
         dependencies.messageService.getMessages(type: self.type, start: startPage, end: endPage) { [unowned self] messageResult in
@@ -53,4 +51,10 @@ public class MessagesViewModel {
             }
         }
     }
+ 
+    public func resetPaging() {
+        startPage = nil
+        endPage = nil
+    }
+    
 }

@@ -13,4 +13,12 @@ extension UITableView {
     public func removeEmptyView() {
         backgroundView = nil
     }
+    
+    public func showEmptyViewIfNeeded(emptyViewDescription: EmptyViewDescription) {
+        if self.visibleCells.isEmpty {
+            showEmptyView(description: emptyViewDescription)
+        } else {
+            removeEmptyView()
+        }
+    }
 }

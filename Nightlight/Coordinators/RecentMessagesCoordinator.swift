@@ -20,6 +20,8 @@ public class RecentMessagesCoordinator: TabBarCoordinator {
         let recentMessagesViewController = MessagesViewController(viewModel: viewModel)
         recentMessagesViewController.title = "Recent Messages"
         recentMessagesViewController.tabBarItem = UITabBarItem(title: "Recent", image: UIImage(named: "tb_recent"), tag: 0)
+        let description = EmptyViewDescription(title: "No Recent Messages", subtitle: "Tap the + to send one", imageName: "empty_message")
+        recentMessagesViewController.emptyViewDescription = description
         rootViewController.show(recentMessagesViewController, sender: rootViewController)
     }
     
