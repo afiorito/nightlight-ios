@@ -26,6 +26,8 @@
 	<string>${server_host}</string>
 	<key>server_scheme</key>
 	<string>${server_scheme}</string>
+	<key>api_version</key>
+	<string>${api_version}</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

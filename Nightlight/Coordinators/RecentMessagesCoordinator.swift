@@ -16,8 +16,8 @@ public class RecentMessagesCoordinator: TabBarCoordinator {
     }
     
     public func start() {
-        let viewModel = RecentMessagesViewModel(dependencies: dependencies as RecentMessagesViewModel.Dependencies)
-        let recentMessagesViewController = RecentMessagesViewController(viewModel: viewModel)
+        let viewModel = MessagesViewModel(dependencies: dependencies as! MessagesViewModel.Dependencies, type: .recent)
+        let recentMessagesViewController = MessagesViewController(viewModel: viewModel)
         recentMessagesViewController.title = "Recent Messages"
         recentMessagesViewController.tabBarItem = UITabBarItem(title: "Recent", image: UIImage(named: "tb_recent"), tag: 0)
         rootViewController.show(recentMessagesViewController, sender: rootViewController)

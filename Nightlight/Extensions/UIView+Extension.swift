@@ -7,11 +7,9 @@ extension UIView {
      - parameter views: The views to be added. After being added, the views appear on top of other subviews.
      - parameter shouldTranslateAutoresizeMask: sets translatesAutoresizingMaskIntoConstraints to the specified value.
      */
-    public func addSubviews(_ views: [UIView], shouldTranslateAutoresizeMask: Bool = true) {
+    public func addSubviews(_ views: [UIView], shouldTranslateAutoresizeMask: Bool = false) {
         views.forEach {
-            if shouldTranslateAutoresizeMask {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-            }
+            $0.translatesAutoresizingMaskIntoConstraints = shouldTranslateAutoresizeMask
             self.addSubview($0)
         }
     }
@@ -22,7 +20,7 @@ extension UIView {
      - parameter views: The views to be added. After being added, the views appear on top of other subviews.
      - parameter shouldTranslateAutoresizeMask: sets translatesAutoresizingMaskIntoConstraints to the specified value.
      */
-    public func addSubviews(_ views: UIView..., shouldTranslateAutoresizeMask: Bool = true) {
+    public func addSubviews(_ views: UIView..., shouldTranslateAutoresizeMask: Bool = false) {
         self.addSubviews(views, shouldTranslateAutoresizeMask: shouldTranslateAutoresizeMask)
     }
     

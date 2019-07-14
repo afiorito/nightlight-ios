@@ -28,6 +28,8 @@
 	<string>${server_scheme}</string>
 	<key>server_port</key>
 	<string>${server_port}</string>
+	<key>api_version</key>
+	<string>${api_version}</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

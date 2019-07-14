@@ -16,7 +16,7 @@ public class HttpClient {
     }
     
     @discardableResult
-    public func request(urlRequest: URLRequest, result: @escaping (RequestResult) -> Void) -> URLSessionDataTask {
+    public func request(urlRequest: URLRequest, result: @escaping (RequestResult) -> Void) -> URLSessionDataTask? {
         let task = urlSession.dataTask(with: urlRequest) { taskResult in
             switch taskResult {
             case .success(let response, let data):

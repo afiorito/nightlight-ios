@@ -8,11 +8,9 @@ extension UIStackView {
      - parameter shouldTranslateAutoresizeMask: sets translatesAutoresizingMaskIntoConstraints to specified value.
      
      */
-    public func addArrangedSubviews(_ views: [UIView], shouldTranslateAutoresizeMask: Bool = true) {
+    public func addArrangedSubviews(_ views: [UIView], shouldTranslateAutoresizeMask: Bool = false) {
         views.forEach {
-            if shouldTranslateAutoresizeMask {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-            }
+            $0.translatesAutoresizingMaskIntoConstraints = shouldTranslateAutoresizeMask
             self.addArrangedSubview($0)
         }
     }

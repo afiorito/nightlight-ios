@@ -156,6 +156,23 @@ extension UIColor {
         }
     }
     
+    /**
+     Handles the color for the inverted background of standard content.
+     
+     - parameter theme: the theme to determine the inverted background color.
+     
+     - returns: the palette color for the inverted background of standard content.
+     */
+    public class func invertedBackground(for theme: Theme) -> UIColor {
+        switch theme {
+        case .light:
+            return Palette.black
+        case .dark:
+            return Palette.white
+            
+        }
+    }
+    
     /// Secondary text color for all backgrounds.
     public class var secondaryText: UIColor {
         return Palette.darkAccent

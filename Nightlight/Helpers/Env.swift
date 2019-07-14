@@ -8,6 +8,7 @@ public struct Env {
         case serverHost = "server_host"
         case serverScheme = "server_scheme"
         case serverPort = "server_port"
+        case apiVersion = "api_version"
     }
     
     /**
