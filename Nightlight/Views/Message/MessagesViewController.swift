@@ -4,6 +4,8 @@ public class MessagesViewController: UIViewController, Themeable {
 
     private let viewModel: MessagesViewModel
     
+    public weak var delegate: MessagesViewControllerDelegate?
+    
     private var messagesView: MessagesView {
         return view as! MessagesView
     }
@@ -38,6 +40,7 @@ public class MessagesViewController: UIViewController, Themeable {
         
         updateColors(for: viewModel.theme)
         
+        messagesView.tableView.delegate = self
         messagesView.tableView.dataSource = dataSource
         messagesView.tableView.prefetchDataSource = dataSource
         messagesView.tableView.refreshControl = refreshControl
@@ -47,7 +50,7 @@ public class MessagesViewController: UIViewController, Themeable {
             self?.loadMoreMessages()
         }
         
-        loadMoreMessages(fromStart: true)
+        refresh()
     }
     
     private func loadMoreMessages(fromStart: Bool = false) {
@@ -56,7 +59,9 @@ public class MessagesViewController: UIViewController, Themeable {
         viewModel.getMessages { [weak self] result in
             guard let self = self else { return }
             
-            self.refreshControl.endRefreshing()
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+            }
             
             if let description = self.emptyViewDescription {
                 self.messagesView.tableView.showEmptyViewIfNeeded(emptyViewDescription: description)
@@ -80,6 +85,16 @@ public class MessagesViewController: UIViewController, Themeable {
                 toast.updateColors(for: self.viewModel.theme)
             }
         }
+    }
+    
+    public func reloadSelectedIndexPath(with message: MessageViewModel) {
+        guard let selectedIndexPath = messagesView.tableView.indexPathForSelectedRow else {
+            return
+        }
+        
+        dataSource.data[selectedIndexPath.row] = message
+        
+        messagesView.tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
     }
     
     @objc private func refresh() {
@@ -111,7 +126,15 @@ extension MessagesViewController: MessageTableViewCellDelegate {
     }
     
     public func cellDidTapSave(_ cell: UITableViewCell) {
-        print("save")
+        guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
+            return
+        }
+        
+        let viewModel = dataSource.data[indexPath.row]
+
+        viewModel.saveMessage { [weak self] result in
+            self?.handleMessageAction(at: indexPath, result: result)
+        }
     }
     
     public func cellDidTapContext(_ cell: UITableViewCell) {
@@ -119,7 +142,33 @@ extension MessagesViewController: MessageTableViewCellDelegate {
     }
     
     public func cellDidTapLove(_ cell: UITableViewCell) {
-        print("love")
+        guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
+            return
+        }
+        
+        let viewModel = dataSource.data[indexPath.row]
+        
+        viewModel.loveMessage { [weak self] result in
+            self?.handleMessageAction(at: indexPath, result: result)
+        }
     }
     
+    private func handleMessageAction(at indexPath: IndexPath, result: Result<MessageViewModel, MessageError>) {
+        switch result {
+        case .success(let message):
+            self.dataSource.data[indexPath.row] = message
+        case .failure:
+            let toast = self.showToast("Something went wrong.", severity: .urgent)
+            toast.updateColors(for: self.viewModel.theme)
+        }
+        
+        self.messagesView.tableView.reloadRows(at: [indexPath], with: .none)
+    }
+    
+}
+
+extension MessagesViewController: UITableViewDelegate {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.messagesViewController(self, didSelect: dataSource.data[indexPath.row])
+    }
 }

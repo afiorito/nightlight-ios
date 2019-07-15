@@ -40,14 +40,11 @@ public class MessagesViewModel {
                 self.endPage = messageResponse.metadata.end
                 self.totalCount = messageResponse.metadata.total
                 
-                DispatchQueue.main.async {
-                    let messages = messageResponse.data.map { MessageViewModel(dependencies: self.dependencies, message: $0) }
-                    result(.success(messages))
-                }
+                let messages = messageResponse.data.map { MessageViewModel(dependencies: self.dependencies, message: $0) }
+                
+                DispatchQueue.main.async { result(.success(messages)) }
             case .failure(let error):
-                DispatchQueue.main.async {
-                    result(.failure(error))
-                }
+                DispatchQueue.main.async { result(.failure(error)) }
             }
         }
     }

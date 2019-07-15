@@ -5,10 +5,10 @@ public struct Message: Codable {
     let title: String
     let body: String
     let isAnonymous: Bool
-    let isLoved: Bool
+    var isLoved: Bool
     let isAppreciated: Bool
-    let isSaved: Bool
-    let loveCount: Int
+    var isSaved: Bool
+    var loveCount: Int
     let appreciationCount: Int
     let user: User
     let createdAt: Date

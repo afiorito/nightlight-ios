@@ -1,5 +1,7 @@
+import Foundation
+
 public class MessageViewModel {
-    public typealias Dependencies = StyleManaging
+    public typealias Dependencies = StyleManaging & MessageServiced
     
     private let dependencies: Dependencies
     
@@ -48,5 +50,36 @@ public class MessageViewModel {
     public init(dependencies: Dependencies, message: Message) {
         self.dependencies = dependencies
         self.message = message
+    }
+    
+    public func loveMessage(result: @escaping (Result<MessageViewModel, MessageError>) -> Void) {
+        dependencies.messageService.actionMessage(with: message.id, type: .love) { (loveResult: Result<MessageLoveResponse, MessageError>) in
+            switch loveResult {
+            case .success(let loveResponse):
+                
+                self.message.isLoved = loveResponse.isLoved
+                self.message.loveCount += loveResponse.isLoved ? 1 : -1
+                
+                DispatchQueue.main.async { result(.success(MessageViewModel(dependencies: self.dependencies, message: self.message))) }
+                
+            case .failure:
+                DispatchQueue.main.async { result(.failure(.unknown)) }
+            }
+        }
+    }
+    
+    public func saveMessage(result: @escaping (Result<MessageViewModel, MessageError>) -> Void) {
+        dependencies.messageService.actionMessage(with: message.id, type: .save) { (saveResult: Result<MessageSaveResponse, MessageError>) in
+            switch saveResult {
+            case .success(let saveResponse):
+                
+                self.message.isSaved = saveResponse.isSaved
+
+                DispatchQueue.main.async { result(.success(MessageViewModel(dependencies: self.dependencies, message: self.message))) }
+                
+            case .failure:
+                DispatchQueue.main.async { result(.failure(.unknown)) }
+            }
+        }
     }
 }

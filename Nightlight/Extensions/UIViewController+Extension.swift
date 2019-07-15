@@ -47,7 +47,7 @@ extension UIViewController {
         self.view.layoutIfNeeded()
         
         UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseOut, animations: {
-            bottomConstraint.constant = -30
+            bottomConstraint.constant = -15
             self.view.layoutIfNeeded()
             toastView.alpha = 1
         })

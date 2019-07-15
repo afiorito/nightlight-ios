@@ -114,6 +114,12 @@
 		92D8EBCD22CFE0120083D6C4 /* SignInViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBCC22CFE0120083D6C4 /* SignInViewControllerDelegate.swift */; };
 		92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */; };
 		92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2622D52B9A00207D4D /* ToastView.swift */; };
+		92F1761E22DBC232008AEB82 /* MessageActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761D22DBC232008AEB82 /* MessageActionType.swift */; };
+		92F1762022DBC42C008AEB82 /* MessageActionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */; };
+		92F1762722DBF771008AEB82 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */; };
+		92F1762922DBF7F0008AEB82 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1762822DBF7F0008AEB82 /* MessageContentView.swift */; };
+		92F1762B22DBFBFE008AEB82 /* MessagesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1762A22DBFBFE008AEB82 /* MessagesViewControllerDelegate.swift */; };
+		92F1762F22DC19E6008AEB82 /* MessageDetailViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1762E22DC19E6008AEB82 /* MessageDetailViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +255,12 @@
 		92DA4F9D22D3C61500511C80 /* Production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Production.plist; sourceTree = "<group>"; };
 		92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		92DF5D2622D52B9A00207D4D /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		92F1761D22DBC232008AEB82 /* MessageActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionType.swift; sourceTree = "<group>"; };
+		92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionResponse.swift; sourceTree = "<group>"; };
+		92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
+		92F1762822DBF7F0008AEB82 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
+		92F1762A22DBFBFE008AEB82 /* MessagesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerDelegate.swift; sourceTree = "<group>"; };
+		92F1762E22DC19E6008AEB82 /* MessageDetailViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,24 +414,19 @@
 			children = (
 				9229482222CCE09C0080B328 /* Auth */,
 				925763D922CAD6AB0031D616 /* Buttons */,
+				92F1763022DCA5E0008AEB82 /* Container */,
+				92F1763122DCA5FC008AEB82 /* Data Source */,
+				92F1762522DBF6D3008AEB82 /* Message */,
 				925763DC22CAD7760031D616 /* Onboarding */,
 				928A10AD22D3E35200FF78FB /* Splash Screen */,
 				9229482322CCE0BD0080B328 /* Text Input */,
 				925763D522CAD0160031D616 /* PageControl.swift */,
 				92DF5D2622D52B9A00207D4D /* ToastView.swift */,
-				9213184A22D6050000C91D90 /* NLTabBarController.swift */,
-				9213185022D6068200C91D90 /* MessagesViewController.swift */,
-				9228D6A922D6571C003B03DB /* MessagesView.swift */,
-				9228D6AF22D665C9003B03DB /* TableViewArrayDataSource.swift */,
-				9247606E22D910FF001EF6BE /* TableViewArrayPaginatedDataSource.swift */,
 				92CA9C8122D647BF009900E6 /* NotificationsViewController.swift */,
 				92B302F222D63B6F00CE5668 /* SearchViewController.swift */,
 				92CA9C8922D6494C009900E6 /* ProfileViewController.swift */,
 				92B302F822D6435200CE5668 /* SendMessageViewController.swift */,
-				9213185222D6142700C91D90 /* MainNavigationController.swift */,
 				9228D6AB22D65A4D003B03DB /* EmptyView.swift */,
-				9228D6B322D763A2003B03DB /* MessageTableViewCell.swift */,
-				9247606A22D8E2E4001EF6BE /* MessageTableViewCellDelegate.swift */,
 				9228D6B522D77029003B03DB /* ActionView.swift */,
 			);
 			path = Views;
@@ -461,6 +468,8 @@
 				92931C3422D39C7300C54EB8 /* Env.swift */,
 				9276314C22D4C6FA000D4B8F /* KeychainAccessibility.swift */,
 				9276314E22D4DDAE000D4B8F /* KeychainKey.swift */,
+				92F1761D22DBC232008AEB82 /* MessageActionType.swift */,
+				92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */,
 				92418D4222D7C01E001B6DFB /* MessageResponse.swift */,
 				9228D6C422D7BD02003B03DB /* MessageType.swift */,
 				9237A1DE22CA859600FC9331 /* NLNotification.swift */,
@@ -547,6 +556,39 @@
 				9228D6B922D77ED9003B03DB /* MessageViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		92F1762522DBF6D3008AEB82 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				9213185022D6068200C91D90 /* MessagesViewController.swift */,
+				92F1762A22DBFBFE008AEB82 /* MessagesViewControllerDelegate.swift */,
+				9228D6A922D6571C003B03DB /* MessagesView.swift */,
+				9228D6B322D763A2003B03DB /* MessageTableViewCell.swift */,
+				9247606A22D8E2E4001EF6BE /* MessageTableViewCellDelegate.swift */,
+				92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */,
+				92F1762E22DC19E6008AEB82 /* MessageDetailViewControllerDelegate.swift */,
+				92F1762822DBF7F0008AEB82 /* MessageContentView.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		92F1763022DCA5E0008AEB82 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				9213185222D6142700C91D90 /* MainNavigationController.swift */,
+				9213184A22D6050000C91D90 /* NLTabBarController.swift */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
+		92F1763122DCA5FC008AEB82 /* Data Source */ = {
+			isa = PBXGroup;
+			children = (
+				9228D6AF22D665C9003B03DB /* TableViewArrayDataSource.swift */,
+				9247606E22D910FF001EF6BE /* TableViewArrayPaginatedDataSource.swift */,
+			);
+			path = "Data Source";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -721,6 +763,7 @@
 				92931C2122D2D4FB00C54EB8 /* HttpClient.swift in Sources */,
 				9233618D22C664C4002B7BBA /* Coordinator.swift in Sources */,
 				9228D6C322D7A0D6003B03DB /* MessageService.swift in Sources */,
+				92F1762B22DBFBFE008AEB82 /* MessagesViewControllerDelegate.swift in Sources */,
 				9247606B22D8E2E4001EF6BE /* MessageTableViewCellDelegate.swift in Sources */,
 				9237A1EF22CA99E000FC9331 /* Strings.swift in Sources */,
 				9237A1F422CAA79500FC9331 /* ContainedButton.swift in Sources */,
@@ -757,6 +800,7 @@
 				92CA9C8422D647E5009900E6 /* NotificationsViewModel.swift in Sources */,
 				928A75CF22C92E7600BC607A /* UIStackView+Extension.swift in Sources */,
 				92B302F322D63B7000CE5668 /* SearchViewController.swift in Sources */,
+				92F1762722DBF771008AEB82 /* MessageDetailViewController.swift in Sources */,
 				92418D4922D7D422001B6DFB /* DateFormatter+Extension.swift in Sources */,
 				9276314122D3F547000D4B8F /* AuthResponse.swift in Sources */,
 				9228D6AE22D66122003B03DB /* UITableView+Extension.swift in Sources */,
@@ -776,9 +820,12 @@
 				92CA9C8822D6492C009900E6 /* ProfileViewModel.swift in Sources */,
 				92B302EF22D63AB300CE5668 /* RecentMessagesCoordinator.swift in Sources */,
 				9228D6BD22D79250003B03DB /* Message.swift in Sources */,
+				92F1762022DBC42C008AEB82 /* MessageActionResponse.swift in Sources */,
 				92B302F122D63B4F00CE5668 /* SearchViewModel.swift in Sources */,
 				9228D6BF22D79643003B03DB /* User.swift in Sources */,
+				92F1762F22DC19E6008AEB82 /* MessageDetailViewControllerDelegate.swift in Sources */,
 				9276314D22D4C6FA000D4B8F /* KeychainAccessibility.swift in Sources */,
+				92F1761E22DBC232008AEB82 /* MessageActionType.swift in Sources */,
 				92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */,
 				9228D6BA22D77ED9003B03DB /* MessageViewModel.swift in Sources */,
 				92931C3622D3A09600C54EB8 /* Env.swift in Sources */,
@@ -789,6 +836,7 @@
 				9237A1E522CA91BE00FC9331 /* DependencyContainer.swift in Sources */,
 				925763D622CAD0160031D616 /* PageControl.swift in Sources */,
 				925763E922CBA7850031D616 /* SignUpViewController.swift in Sources */,
+				92F1762922DBF7F0008AEB82 /* MessageContentView.swift in Sources */,
 				9237A1D322CA559500FC9331 /* UIViewController+Extension.swift in Sources */,
 				925763E722CB95900031D616 /* AuthView.swift in Sources */,
 				9229DFA222D2BDF200827A03 /* AuthService.swift in Sources */,

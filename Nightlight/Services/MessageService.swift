@@ -27,4 +27,20 @@ public class MessageService {
             }
         }
     }
+    
+    public func actionMessage<Action: Codable>(with id: Int, type: MessageActionType, result: @escaping (Result<Action, MessageError>) -> Void) {
+        httpClient.put(endpoint: Endpoint.messageAction(with: id, type: type), body: nil) { actionResult in
+            switch actionResult {
+            case .success(_, let data):
+                guard let actionResponse: Action = try? data.decodeJSON() else {
+                    return result(.failure(.unknown))
+                }
+                
+                result(.success(actionResponse))
+                
+            case .failure:
+                result(.failure(.unknown))
+            }
+        }
+    }
 }

@@ -1,13 +1,17 @@
 import UIKit
 
-class ActionView: UIView, Themeable {
+public class ActionView: UIView, Themeable {
     let container: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 2
         return stackView
     }()
 
-    let button = UIButton()
+    let button: UIButton = {
+        let button = UIButton()
+        
+        return button
+    }()
     
     let countLabel: UILabel = {
         let label = UILabel()
@@ -89,6 +93,8 @@ class ActionView: UIView, Themeable {
                 self.button.transform = .identity
             }
         )
+        
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         
         self.button.isSelected = !self.button.isSelected
         

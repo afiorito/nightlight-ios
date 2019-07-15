@@ -29,10 +29,15 @@ public class MainNavigationController: UINavigationController, Themeable {
 
     override public func show(_ vc: UIViewController, sender: Any?) {
         vc.navigationItem.titleView = {
-            let label = UILabel(frame: CGRect(x: 15.0, y: 0.0, width: view.frame.width - 30, height: 30.0))
+            let titleView = UIView(frame: CGRect(x: 15.0, y: 0.0, width: view.frame.width - 30, height: 30.0))
+            let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width - 30, height: 30.0))
+            label.autoresizingMask = [.flexibleTopMargin]
             label.text = vc.title
             label.font = .primary24ptBold
-            return label
+            
+            titleView.addSubview(label)
+            
+            return titleView
         }()
         
         updateNavigationItemColors(for: vc, using: dependencies.styleManager.theme)
@@ -41,8 +46,8 @@ public class MainNavigationController: UINavigationController, Themeable {
     }
     
     private func updateNavigationItemColors(for viewController: UIViewController, using theme: Theme) {
-        if let titleLabel = viewController.navigationItem.titleView as? UILabel {
-            titleLabel.textColor = .primaryText(for: theme)
+        if let titleView = viewController.navigationItem.titleView, let label = titleView.subviews.first as? UILabel {
+            label.textColor = .primaryText(for: theme)
         }
     }
     
@@ -50,6 +55,7 @@ public class MainNavigationController: UINavigationController, Themeable {
         navigationBar.isTranslucent = false
         navigationBar.barTintColor = .background(for: theme)
         navigationBar.shadowImage = UIColor.border(for: theme).asImage()
+        navigationBar.tintColor = .primaryGrayScale(for: theme)
 
         for vc in viewControllers {
             updateNavigationItemColors(for: vc, using: theme)
