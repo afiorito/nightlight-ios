@@ -1,6 +1,6 @@
 import UIKit
 
-public class ProfileViewController: UIViewController, Themeable {
+public class ProfileViewController: UIViewController {
     private let viewModel: ProfileViewModel
     
     init(viewModel: ProfileViewModel) {
@@ -14,7 +14,7 @@ public class ProfileViewController: UIViewController, Themeable {
         
         addDidChangeThemeObserver()
         
-        updateColors(for: viewModel.theme)
+        updateColors(for: theme)
     }
     
     required init?(coder: NSCoder) {
@@ -25,12 +25,8 @@ public class ProfileViewController: UIViewController, Themeable {
         removeDidChangeThemeObserver()
     }
     
-    public func updateColors(for theme: Theme) {
-        view.backgroundColor = .background(for: theme)
-    }
-    
     override public var preferredStatusBarStyle: UIStatusBarStyle {
-        switch viewModel.theme {
+        switch theme {
         case .light:
             if #available(iOS 13.0, *) {
                 return .darkContent
@@ -42,4 +38,16 @@ public class ProfileViewController: UIViewController, Themeable {
         }
     }
 
+}
+
+// MARK: - Themeable
+
+extension ProfileViewController: Themeable {
+    var theme: Theme {
+        return viewModel.theme
+    }
+    
+    public func updateColors(for theme: Theme) {
+        view.backgroundColor = .background(for: theme)
+    }
 }

@@ -173,6 +173,22 @@ extension UIColor {
         }
     }
     
+    /**
+     Handles the color for buttons with neutral backgrounds.
+     
+     - parameter theme: the theme to determine the neutral button background color.
+     
+     - returns: the palette color for a neutral button background color.
+     */
+    public class func buttonNeutral(for theme: Theme) -> UIColor {
+        switch theme {
+        case .light:
+            return Palette.alternateLightGrey
+        case .dark:
+            return Palette.alternateBlack
+        }
+    }
+    
     /// Secondary text color for all backgrounds.
     public class var secondaryText: UIColor {
         return Palette.darkAccent
@@ -181,6 +197,11 @@ extension UIColor {
     /// Represents color for hinting an urgent or erroneous occurence.
     public class var urgent: UIColor {
         return Palette.urgent
+    }
+    
+    /// Represents color for hinting a successful event.
+    public class var success: UIColor {
+        return Palette.active
     }
     
     /// Represents color for hinting a neutral occurence.
@@ -201,6 +222,7 @@ extension UIColor {
         static let urgent = UIColor(hex: "F77071")
         static let darkGrey = UIColor(hex: "363B3F")
         static let lightGrey = UIColor(hex: "F7F7F7")
+        static let alternateLightGrey = UIColor(hex: "E5EBF0")
         static let lightAccent = UIColor(hex: "C3C3C6")
         static let darkAccent = UIColor(hex: "8A939A")
         static let lightShadow = UIColor(hex: "E4EAF0")

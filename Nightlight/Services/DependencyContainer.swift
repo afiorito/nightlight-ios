@@ -9,13 +9,13 @@ public struct DependencyContainer: StyleManaging,
                                     MessageServiced,
                                     NotificationObserving {
 
-    public var styleManager = StyleManager()
+    public var styleManager = StyleManager.default
     public var userDefaultsManager = UserDefaultsManager()
     public var keychainManager = KeychainManager()
     public var keyboardManager = KeyboardManager()
     public var authService: AuthService
     public var messageService: MessageService
-    public var notificationCenter: NotificationCenter = .default
+    public var notificationCenter = NotificationCenter.default
     
     init() {
         let httpClient = HttpClient()

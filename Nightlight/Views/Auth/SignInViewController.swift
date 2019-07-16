@@ -1,6 +1,6 @@
 import UIKit
 
-public class SignInViewController: UIViewController, Themeable {
+public class SignInViewController: UIViewController {
     private let viewModel: SignInViewModel
     
     private var signInView: SignInView {
@@ -31,7 +31,7 @@ public class SignInViewController: UIViewController, Themeable {
         signInView.actionButton.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
         signInView.authButton.addTarget(self, action: #selector(signInTapped), for: .touchUpInside)
         
-        updateColors(for: viewModel.theme)
+        updateColors(for: self.theme)
     }
     
     public override func loadView() {
@@ -57,12 +57,10 @@ public class SignInViewController: UIViewController, Themeable {
             case .failure(let error):
                 switch error {
                 case .validation(let reasons):
-                    let toast = self.showToast("Username or password are incorrect.", severity: .urgent)
-                    toast.updateColors(for: self.viewModel.theme)
+                    self.showToast("Username or password are incorrect.", severity: .urgent)
                     self.signInView.showFieldErrors(reasons: reasons)
                 default:
-                    let toast = self.showToast("Something went wrong.", severity: .urgent)
-                    toast.updateColors(for: self.viewModel.theme)
+                    self.showToast("Something went wrong.", severity: .urgent)
                 }
             }
         }
@@ -71,9 +69,14 @@ public class SignInViewController: UIViewController, Themeable {
     @objc private func signUpTapped(gesture: UITapGestureRecognizer) {
         delegate?.signInViewControllerDidTapSignUp(self)
     }
-    
+}
+
+extension SignInViewController: Themeable {
+    var theme: Theme {
+        return viewModel.theme
+    }
+
     public func updateColors(for theme: Theme) {
         signInView.updateColors(for: theme)
     }
-    
 }

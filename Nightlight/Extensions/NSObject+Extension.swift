@@ -2,6 +2,6 @@ import Foundation
 
 extension NSObject {
     public class var className: String {
-        return "\(type(of: self))"
+        return String(describing: self.self)
     }
 }

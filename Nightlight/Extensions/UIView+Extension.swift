@@ -33,12 +33,21 @@ extension UIView {
         return superview as? T
     }
     
-    public func addShadow(forTheme theme: Theme) {
+    public func subview<T>(ofType type: T.Type) -> T? {
+        let view = subviews.first { (view) -> Bool in
+            view is T
+        }
+        
+        return view as? T
+    }
+    
+    public func addShadow(forTheme theme: Theme, shouldRasterize: Bool = true) {
         layer.shadowColor = UIColor.shadow(for: theme).cgColor
         layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 5.0
+        layer.shadowRadius = 4.0
         layer.shadowOpacity = 1.0
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
-        
+        layer.shouldRasterize = shouldRasterize
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }

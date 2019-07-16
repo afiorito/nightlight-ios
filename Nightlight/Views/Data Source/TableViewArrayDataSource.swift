@@ -14,6 +14,13 @@ public class TableViewArrayDataSource<Cell: Configurable>: NSObject, UITableView
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if let description = emptyViewDescription, data.isEmpty {
+            tableView.showEmptyView(description: description)
+        } else {
+            tableView.hideEmptyView()
+        }
+        
         return data.count
     }
     

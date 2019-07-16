@@ -45,7 +45,7 @@ public class AppCoordinator: Coordinator {
             // clear the keychain when the app is reinstalled and loaded for the first time.
             try? dependencies.keychainManager.removeAllKeys()
             
-            let onboardViewController = OnboardViewController(dependencies: self.dependencies)
+            let onboardViewController = OnboardViewController()
             onboardViewController.delegate = self
             splashScreenViewController.initialViewController = onboardViewController
             splashScreenViewController.showInitialViewController()
@@ -80,12 +80,12 @@ public class AppCoordinator: Coordinator {
     private func prepareMainApplication() -> UIViewController {
         let coordinators: [TabBarCoordinator] = [
             RecentMessagesCoordinator(
-                rootViewController: MainNavigationController(dependencies: self.dependencies),
+                rootViewController: MainNavigationController(),
                 dependencies: self.dependencies),
             SearchCoordinator(dependencies: self.dependencies),
             SendMessageCoordinator(dependencies: self.dependencies),
             NotificationsCoordinator(
-                rootViewController: MainNavigationController(dependencies: self.dependencies),
+                rootViewController: MainNavigationController(),
                 dependencies: self.dependencies),
             ProfileCoordinator(dependencies: self.dependencies)
         ]
@@ -95,7 +95,7 @@ public class AppCoordinator: Coordinator {
             coordinator.start()
         }
         
-        let tabBarController = NLTabBarController(dependencies: self.dependencies)
+        let tabBarController = NLTabBarController()
         tabBarController.viewControllers = coordinators.map { $0.rootViewController }
         
         return tabBarController

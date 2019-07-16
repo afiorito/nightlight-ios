@@ -1,6 +1,6 @@
 import UIKit
 
-public class FormTextField: UIView, Themeable {
+public class FormTextField: UIView {
 
     public let input: TextField = {
         let textField = TextField()
@@ -87,8 +87,10 @@ public class FormTextField: UIView, Themeable {
         }, completion: completion)
     }
     
+}
+
+extension FormTextField: Themeable {
     public func updateColors(for theme: Theme) {
         input.updateColors(for: theme)
     }
-
 }

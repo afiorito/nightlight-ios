@@ -1,6 +1,6 @@
 import UIKit
 
-public class TextField: UITextField, Themeable {
+public class TextField: UITextField {
     
     public var icon: UIImage? {
         set {
@@ -40,7 +40,12 @@ public class TextField: UITextField, Themeable {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+}
+
+// MARK: - Themeable
+
+extension TextField: Themeable {
     public func updateColors(for theme: Theme) {
         backgroundColor = .elementBackground(for: theme)
         tintColor = .accent(for: theme)

@@ -67,7 +67,7 @@ public class AuthView: UIView {
     public let authButton: ContainedButton = {
         let button = ContainedButton()
         button.isEnabled = false
-        
+        button.backgroundColor = .brand
         return button
     }()
     
@@ -169,6 +169,8 @@ public class AuthView: UIView {
         authButton.isEnabled = isAuthButtonEnabled
     }
     
+    // MARK: - Themeable
+    
     public func updateColors(for theme: Theme) {
         backgroundColor = .background(for: theme)
         logoImageView.tintColor = .invertedPrimaryText(for: theme)
@@ -177,6 +179,8 @@ public class AuthView: UIView {
         actionButton.updateColors(for: theme)
     }
 }
+
+// MARK: - UITextField Delegate
 
 extension AuthView: UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {

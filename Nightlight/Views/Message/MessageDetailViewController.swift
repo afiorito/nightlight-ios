@@ -1,16 +1,14 @@
 import UIKit
 
-public class MessageDetailViewController: UIViewController, Themeable {
+public class MessageDetailViewController: UIViewController {
 
     private let viewModel: MessageViewModel
     
     private let scrollView = UIScrollView()
-    
     private let contentView = UIView()
+    private let messageContentView = MessageContentView()
     
     public weak var delegate: MessageDetailViewControllerDelegate?
-    
-    private let messageContentView = MessageContentView()
     
     init(viewModel: MessageViewModel) {
         self.viewModel = viewModel
@@ -30,7 +28,7 @@ public class MessageDetailViewController: UIViewController, Themeable {
         
         updateView()
         
-        updateColors(for: viewModel.theme)
+        updateColors(for: theme)
         
         prepareSubviews()
     }
@@ -71,8 +69,7 @@ public class MessageDetailViewController: UIViewController, Themeable {
         switch result {
         case .success: break
         case .failure:
-            let toast = self.showToast("Something went wrong.", severity: .urgent)
-            toast.updateColors(for: self.viewModel.theme)
+            self.showToast("Something went wrong.", severity: .urgent)
         }
         
         updateView()
@@ -111,10 +108,14 @@ public class MessageDetailViewController: UIViewController, Themeable {
             messageContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
         ])
     }
-    
+
+}
+
+// MARK: - Themeable
+
+extension MessageDetailViewController: Themeable {
     public func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
         messageContentView.updateColors(for: theme)
     }
-
 }

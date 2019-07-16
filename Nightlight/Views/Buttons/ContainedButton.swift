@@ -7,7 +7,6 @@ public class ContainedButton: BaseButton {
         
         self.layer.cornerRadius = 4
         self.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        backgroundColor = .brand
     }
     
     public override var isEnabled: Bool {

@@ -1,6 +1,6 @@
 import UIKit
 
-public class MessagesView: UIView, Themeable {
+public class MessagesView: UIView {
     public let tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
@@ -33,6 +33,9 @@ public class MessagesView: UIView, Themeable {
         ])
     }
 
+}
+
+extension MessagesView: Themeable {
     public func updateColors(for theme: Theme) {
         tableView.backgroundColor = .background(for: theme)
         tableView.separatorColor = .border(for: theme)

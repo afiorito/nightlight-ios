@@ -1,6 +1,6 @@
 import UIKit
 
-public class MessagesViewController: UIViewController, Themeable {
+public class MessagesViewController: UIViewController {
 
     private let viewModel: MessagesViewModel
     
@@ -38,7 +38,7 @@ public class MessagesViewController: UIViewController, Themeable {
         
         addDidChangeThemeObserver()
         
-        updateColors(for: viewModel.theme)
+        updateColors(for: theme)
         
         messagesView.tableView.delegate = self
         messagesView.tableView.dataSource = dataSource
@@ -63,11 +63,6 @@ public class MessagesViewController: UIViewController, Themeable {
                 self.refreshControl.endRefreshing()
             }
             
-            if let description = self.emptyViewDescription {
-                self.messagesView.tableView.showEmptyViewIfNeeded(emptyViewDescription: description)
-                self.messagesView.updateColors(for: self.viewModel.theme)
-            }
-            
             switch result {
             case .success(let messages):
                 self.dataSource.totalCount = self.viewModel.totalCount
@@ -81,19 +76,16 @@ public class MessagesViewController: UIViewController, Themeable {
                 }
                 
             case .failure(let error):
-                let toast = self.showToast("\(error)", severity: .urgent)
-                toast.updateColors(for: self.viewModel.theme)
+                self.showToast("\(error)", severity: .urgent)
             }
         }
     }
     
     public func reloadSelectedIndexPath(with message: MessageViewModel) {
-        guard let selectedIndexPath = messagesView.tableView.indexPathForSelectedRow else {
-            return
-        }
+        guard let selectedIndexPath = messagesView.tableView.indexPathForSelectedRow
+            else { return }
         
         dataSource.data[selectedIndexPath.row] = message
-        
         messagesView.tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
     }
     
@@ -112,13 +104,9 @@ public class MessagesViewController: UIViewController, Themeable {
     deinit {
         removeDidChangeThemeObserver()
     }
-    
-    public func updateColors(for theme: Theme) {
-        view.backgroundColor = .background(for: theme)
-        messagesView.updateColors(for: theme)
-    }
-
 }
+
+// MARK: - MessageTableViewCell Delegate
 
 extension MessagesViewController: MessageTableViewCellDelegate {
     public func cellDidTapAppreciate(_ cell: UITableViewCell) {
@@ -138,7 +126,13 @@ extension MessagesViewController: MessageTableViewCellDelegate {
     }
     
     public func cellDidTapContext(_ cell: UITableViewCell) {
-        print("context")
+        guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
+            return
+        }
+        
+        let viewModel = dataSource.data[indexPath.row]
+
+        delegate?.messagesViewController(self, moreContextFor: viewModel)
     }
     
     public func cellDidTapLove(_ cell: UITableViewCell) {
@@ -158,8 +152,7 @@ extension MessagesViewController: MessageTableViewCellDelegate {
         case .success(let message):
             self.dataSource.data[indexPath.row] = message
         case .failure:
-            let toast = self.showToast("Something went wrong.", severity: .urgent)
-            toast.updateColors(for: self.viewModel.theme)
+            self.showToast("Something went wrong.", severity: .urgent)
         }
         
         self.messagesView.tableView.reloadRows(at: [indexPath], with: .none)
@@ -167,8 +160,32 @@ extension MessagesViewController: MessageTableViewCellDelegate {
     
 }
 
+// MARK: - UITableViewDelegate
+
 extension MessagesViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.messagesViewController(self, didSelect: dataSource.data[indexPath.row])
+    }
+}
+
+// MARK: - Themeable
+
+extension MessagesViewController: Themeable {
+    var theme: Theme {
+        return viewModel.theme
+    }
+    
+    public func updateColors(for theme: Theme) {
+        view.backgroundColor = .background(for: theme)
+        messagesView.updateColors(for: theme)
+        toastView?.updateColors(for: theme)
+        messagesView.tableView.emptyView?.updateColors(for: theme)
+        
+        switch theme {
+        case .light:
+            messagesView.tableView.emptyView?.image = UIImage(named: "empty_message_light")
+        case .dark:
+            messagesView.tableView.emptyView?.image = UIImage(named: "empty_message_dark")
+        }
     }
 }

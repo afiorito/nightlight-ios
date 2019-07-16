@@ -66,6 +66,8 @@ public class SignUpView: AuthView {
         fieldContainer.addArrangedSubviews([usernameField, emailField, passwordField])
     }
     
+    // MARK: - Themeable
+    
     public override func updateColors(for theme: Theme) {
         super.updateColors(for: theme)
         

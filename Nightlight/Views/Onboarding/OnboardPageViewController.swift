@@ -1,8 +1,6 @@
 import UIKit
 
-public class OnboardPageViewController: UIViewController, Themeable {
-    typealias Dependencies = StyleManaging
-    
+public class OnboardPageViewController: UIViewController {
     public var titleText: String?
     public var subtitleText: String?
     public var image: UIImage?
@@ -45,18 +43,6 @@ public class OnboardPageViewController: UIViewController, Themeable {
         return stackView
     }()
     
-    private let dependencies: Dependencies
-    
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     deinit {
         removeDidChangeThemeObserver()
     }
@@ -66,6 +52,8 @@ public class OnboardPageViewController: UIViewController, Themeable {
         
         addDidChangeThemeObserver()
         prepareSubviews()
+        
+        updateColors(for: theme)
     }
     
     private func prepareSubviews() {
@@ -84,13 +72,15 @@ public class OnboardPageViewController: UIViewController, Themeable {
         titleLabel.text = titleText
         subtitleLabel.text = subtitleText
         imageView.image = image
-        
-        updateColors(for: dependencies.styleManager.theme)
     }
-    
+
+}
+
+// MARK: - Themeable
+
+extension OnboardPageViewController: Themeable {
     public func updateColors(for theme: Theme) {
         titleLabel.textColor = .primaryText(for: theme)
         subtitleLabel.textColor = .secondaryText
     }
-
 }

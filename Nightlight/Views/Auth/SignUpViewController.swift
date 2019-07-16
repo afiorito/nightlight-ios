@@ -1,6 +1,6 @@
 import UIKit
 
-public class SignUpViewController: UIViewController, Themeable {
+public class SignUpViewController: UIViewController {
     public typealias Dependencies = StyleManaging
     
     private let viewModel: SignUpViewModel
@@ -33,7 +33,7 @@ public class SignUpViewController: UIViewController, Themeable {
         signUpView.actionButton.addTarget(self, action: #selector(signInTapped), for: .touchUpInside)
         signUpView.authButton.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
         
-        updateColors(for: viewModel.theme)
+        updateColors(for: theme)
     }
     
     public override func loadView() {
@@ -63,8 +63,7 @@ public class SignUpViewController: UIViewController, Themeable {
                 case .validation(let reasons):
                     self.signUpView.showFieldErrors(reasons: reasons)
                 default:
-                    let toast = self.showToast("Something went wrong.", severity: .urgent)
-                    toast.updateColors(for: self.viewModel.theme)
+                    self.showToast("Something went wrong.", severity: .urgent)
                 }
             }
         }
@@ -74,8 +73,16 @@ public class SignUpViewController: UIViewController, Themeable {
         delegate?.signUpViewControllerDidTapSignIn(self)
     }
     
+}
+
+// MARK: - Themeable
+
+extension SignUpViewController: Themeable {
+    var theme: Theme {
+        return viewModel.theme
+    }
+
     public func updateColors(for theme: Theme) {
         (view as? AuthView)?.updateColors(for: theme)
     }
-    
 }

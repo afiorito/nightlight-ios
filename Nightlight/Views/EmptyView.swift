@@ -1,12 +1,25 @@
 import UIKit
 
-public struct EmptyViewDescription {
-    var title: String
-    var subtitle: String
-    var imageName: String
-}
-
-public class EmptyView: UIView, Themeable {
+/// A placeholder view for empty content.
+public class EmptyView: UIView {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        prepareSubviews()
+    }
+    
+    convenience init(description: EmptyViewDescription) {
+        self.init(frame: .zero)
+        self.image = description.image
+        self.title = description.title
+        self.subtitle = description.subtitle
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Subviews & Layout
     
     private let container: UIStackView = {
         let stackView = UIStackView()
@@ -46,43 +59,22 @@ public class EmptyView: UIView, Themeable {
         return label
     }()
     
-    public var imageName: String?
+    /// The name of the image without light or dark suffix.
+    public var image: UIImage? {
+        get { return imageView.image }
+        set { imageView.image = newValue }
+    }
     
+    /// The title text for the empty placeholder.
     public var title: String? {
-        get {
-            return titleLabel.text
-        }
-        
-        set {
-            titleLabel.text = newValue
-        }
+        get { return titleLabel.text }
+        set { titleLabel.text = newValue }
     }
     
+    /// The subtitle text for the empty placeholder
     public var subtitle: String? {
-        get {
-            return subtitleLabel.text
-        }
-        
-        set {
-            subtitleLabel.text = newValue
-        }
-    }
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        prepareSubviews()
-    }
-    
-    convenience init(description: EmptyViewDescription) {
-        self.init(frame: .zero)
-        self.imageName = description.imageName
-        self.title = description.title
-        self.subtitle = description.subtitle
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        get { return subtitleLabel.text }
+        set { subtitleLabel.text = newValue }
     }
     
     private func prepareSubviews() {
@@ -97,16 +89,13 @@ public class EmptyView: UIView, Themeable {
             imageView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
         ])
     }
-    
+}
+
+// MARK: - Themeable
+
+extension EmptyView: Themeable {
     public func updateColors(for theme: Theme) {
         titleLabel.textColor = .primaryText(for: theme)
         subtitleLabel.textColor = .secondaryText
-        switch theme {
-        case .light:
-            imageView.image = UIImage(named: "\(imageName ?? "")_light")
-        case .dark:
-            imageView.image = UIImage(named: "\(imageName ?? "")_dark")
-        }
     }
-
 }

@@ -1,9 +1,10 @@
 import UIKit
 
-public class ToastView: UIView, Themeable {
+public class ToastView: UIView {
     public enum Severity {
         case urgent
         case neutral
+        case success
     }
 
     public var severity: Severity = .neutral {
@@ -43,8 +44,14 @@ public class ToastView: UIView, Themeable {
         super.init(frame: frame)
         
         layer.cornerRadius = 4.0
-        
         prepareSubviews()
+        updateColors(for: theme)
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        addShadow(forTheme: theme)
     }
     
     required init?(coder: NSCoder) {
@@ -54,10 +61,13 @@ public class ToastView: UIView, Themeable {
     private func updateStyle() {
         switch severity {
         case .neutral:
-            iconImageView.image = UIImage(named: "icon_urgent")
+            iconImageView.image = UIImage(named: "toast_urgent")
             colorView.backgroundColor = .neutral
+        case .success:
+            iconImageView.image = UIImage(named: "toast_success")
+            colorView.backgroundColor = .success
         case .urgent:
-            iconImageView.image = UIImage(named: "icon_urgent")
+            iconImageView.image = UIImage(named: "toast_urgent")
             colorView.backgroundColor = .urgent
         }
     }
@@ -78,18 +88,23 @@ public class ToastView: UIView, Themeable {
             toastMessageLabel.centerYAnchor.constraint(equalTo: colorView.centerYAnchor)
         ])
     }
-    
+}
+
+// MARK: - Themeable
+
+extension ToastView: Themeable {
     public func updateColors(for theme: Theme) {
         switch severity {
         case .neutral:
+            iconImageView.tintColor = .background(for: theme)
+        case .success:
             iconImageView.tintColor = .background(for: theme)
         case .urgent:
             iconImageView.tintColor = .background(for: theme)
         }
         
-        addShadow(forTheme: theme)
+        layer.shadowColor = UIColor.shadow(for: theme).cgColor
         backgroundColor = .background(for: theme)
         toastMessageLabel.textColor = .primaryText(for: theme)
     }
-
 }

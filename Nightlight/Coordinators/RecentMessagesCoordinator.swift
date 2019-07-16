@@ -19,9 +19,7 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
         viewController.title = title
         viewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: nil)
         viewController.tabBarItem = UITabBarItem(title: "Recent", image: UIImage(named: "tb_recent"), tag: 0)
-        
-        let description = EmptyViewDescription(title: "No Recent Messages", subtitle: "Tap the + to send one", imageName: "empty_message")
-        viewController.emptyViewDescription = description
+        viewController.emptyViewDescription = EmptyViewDescription.noRecentMessages
         
         return viewController
     }()
@@ -32,7 +30,6 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
     }
     
     public func start() {
-        
         rootViewController.show(recentMessagesViewController, sender: rootViewController)
     }
     
@@ -43,6 +40,22 @@ extension RecentMessagesCoordinator: MessagesViewControllerDelegate {
         let messageDetailViewController = MessageDetailViewController(viewModel: message)
         messageDetailViewController.delegate = self
         rootViewController.show(messageDetailViewController, sender: rootViewController)
+    }
+    
+    public func messagesViewController(_ messagesViewController: MessagesViewController, moreContextFor message: MessageViewModel) {
+        let contextMenuViewController = ContextMenuViewController()
+        
+        contextMenuViewController.addOption(ContextOption.reportOption({ _ in
+            messagesViewController.dismiss(animated: true) {
+                messagesViewController.showToast("The message has been reported!", severity: .success)
+            }
+        }))
+
+        contextMenuViewController.modalPresentationStyle = .custom
+        contextMenuViewController.modalPresentationCapturesStatusBarAppearance = true
+        contextMenuViewController.transitioningDelegate = BottomSheetTransitioningDelegate.default
+        
+        messagesViewController.present(contextMenuViewController, animated: true)
     }
     
 }

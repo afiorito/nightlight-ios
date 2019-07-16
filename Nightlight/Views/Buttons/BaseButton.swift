@@ -1,8 +1,7 @@
 import UIKit
 
-open class BaseButton: UIButton, Themeable {
+open class BaseButton: UIButton {
     private var originalBackgroundColor: UIColor?
-    
     private var originalTitleText: String?
     
     private let activityIndicator: UIActivityIndicatorView = {
@@ -56,7 +55,4 @@ open class BaseButton: UIButton, Themeable {
             activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
-    
-    func updateColors(for theme: Theme) {}
-
 }

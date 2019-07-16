@@ -1,6 +1,6 @@
 import UIKit
 
-public class NotificationsViewController: UIViewController, Themeable {
+public class NotificationsViewController: UIViewController {
     private let viewModel: NotificationsViewModel
     
     init(viewModel: NotificationsViewModel) {
@@ -14,7 +14,7 @@ public class NotificationsViewController: UIViewController, Themeable {
         
         addDidChangeThemeObserver()
         
-        updateColors(for: viewModel.theme)
+        updateColors(for: theme)
     }
     
     required init?(coder: NSCoder) {
@@ -24,9 +24,17 @@ public class NotificationsViewController: UIViewController, Themeable {
     deinit {
         removeDidChangeThemeObserver()
     }
-    
+
+}
+
+// MARK: - Themeable
+
+extension NotificationsViewController: Themeable {
+    var theme: Theme {
+        return viewModel.theme
+    }
+
     public func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
     }
-
 }

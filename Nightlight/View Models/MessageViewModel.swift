@@ -1,7 +1,7 @@
 import Foundation
 
 public class MessageViewModel {
-    public typealias Dependencies = StyleManaging & MessageServiced
+    public typealias Dependencies = MessageServiced
     
     private let dependencies: Dependencies
     
@@ -41,10 +41,6 @@ public class MessageViewModel {
     
     public var isSaved: Bool {
         return message.isSaved
-    }
-    
-    public var theme: Theme {
-        return dependencies.styleManager.theme
     }
     
     public init(dependencies: Dependencies, message: Message) {

@@ -1,17 +1,13 @@
 import UIKit
 
-public class ActionView: UIView, Themeable {
+public class ActionView: UIView {
     let container: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 2
         return stackView
     }()
 
-    let button: UIButton = {
-        let button = UIButton()
-        
-        return button
-    }()
+    let button: UIButton = UIButton()
     
     let countLabel: UILabel = {
         let label = UILabel()
@@ -20,29 +16,17 @@ public class ActionView: UIView, Themeable {
     }()
     
     var isCountHidden = false {
-        didSet {
-            countLabel.isHidden = isCountHidden
-        }
+        didSet { countLabel.isHidden = isCountHidden }
     }
     
     var isSelected: Bool {
-        get {
-            return button.isSelected
-        }
-        
-        set {
-            button.isSelected = newValue
-        }
+        get { return button.isSelected }
+        set { button.isSelected = newValue }
     }
     
     var count: Int {
-        get {
-            return Int(countLabel.text ?? "0") ?? 0
-        }
-        
-        set {
-            countLabel.text = "\(newValue)"
-        }
+        get { return Int(countLabel.text ?? "0") ?? 0 }
+        set { countLabel.text = "\(newValue)" }
     }
     
     public var selectOnTap = true {
@@ -97,7 +81,6 @@ public class ActionView: UIView, Themeable {
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         
         self.button.isSelected = !self.button.isSelected
-        
         self.count += self.button.isSelected ? 1 : -1
     }
     
@@ -118,7 +101,10 @@ public class ActionView: UIView, Themeable {
             button.widthAnchor.constraint(equalTo: button.heightAnchor)
         ])
     }
-    
+
+}
+
+extension ActionView: Themeable {
     public func updateColors(for theme: Theme) {
         countLabel.textColor = .secondaryText
         button.tintColor = .neutral

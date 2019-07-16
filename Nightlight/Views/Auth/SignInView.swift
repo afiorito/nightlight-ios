@@ -35,6 +35,8 @@ public class SignInView: AuthView {
         passwordField.error = ""
     }
     
+    // MARK: - Themeable
+    
     public override func updateColors(for theme: Theme) {
         super.updateColors(for: theme)
         

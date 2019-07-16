@@ -1,26 +1,11 @@
 import UIKit
 
-public class MainNavigationController: UINavigationController, Themeable {
-    public typealias Dependencies = StyleManaging
-
-    private let dependencies: Dependencies
-    
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+public class MainNavigationController: UINavigationController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         addDidChangeThemeObserver()
-        
-        updateColors(for: dependencies.styleManager.theme)
+        updateColors(for: theme)
     }
     
     deinit {
@@ -40,7 +25,7 @@ public class MainNavigationController: UINavigationController, Themeable {
             return titleView
         }()
         
-        updateNavigationItemColors(for: vc, using: dependencies.styleManager.theme)
+        updateNavigationItemColors(for: vc, using: theme)
         
         super.show(vc, sender: sender)
     }
@@ -50,20 +35,9 @@ public class MainNavigationController: UINavigationController, Themeable {
             label.textColor = .primaryText(for: theme)
         }
     }
-    
-    public func updateColors(for theme: Theme) {
-        navigationBar.isTranslucent = false
-        navigationBar.barTintColor = .background(for: theme)
-        navigationBar.shadowImage = UIColor.border(for: theme).asImage()
-        navigationBar.tintColor = .primaryGrayScale(for: theme)
-
-        for vc in viewControllers {
-            updateNavigationItemColors(for: vc, using: theme)
-        }
-    }
 
     override public var preferredStatusBarStyle: UIStatusBarStyle {
-        switch dependencies.styleManager.theme {
+        switch theme {
         case .light:
             if #available(iOS 13.0, *) {
                 return .darkContent
@@ -72,6 +46,21 @@ public class MainNavigationController: UINavigationController, Themeable {
             }
         case .dark:
             return .lightContent
+        }
+    }
+}
+
+// MARK: - Themeable
+
+extension MainNavigationController: Themeable {
+    public func updateColors(for theme: Theme) {
+        navigationBar.isTranslucent = false
+        navigationBar.barTintColor = .background(for: theme)
+        navigationBar.shadowImage = UIColor.border(for: theme).asImage()
+        navigationBar.tintColor = .primaryGrayScale(for: theme)
+        
+        for vc in viewControllers {
+            updateNavigationItemColors(for: vc, using: theme)
         }
     }
 }

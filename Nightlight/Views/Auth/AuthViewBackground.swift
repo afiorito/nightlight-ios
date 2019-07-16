@@ -53,7 +53,6 @@ public class AuthViewBackground: UIView {
         
         UIColor.brand.set()
         path.fill()
-
     }
     
 }

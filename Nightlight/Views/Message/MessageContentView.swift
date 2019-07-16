@@ -1,6 +1,6 @@
 import UIKit
 
-public class MessageContentView: UIView, Themeable {
+public class MessageContentView: UIView {
 
     private let bottomContainer: UIStackView = {
         let stackView = UIStackView()
@@ -116,10 +116,16 @@ public class MessageContentView: UIView, Themeable {
             bottomContainer.trailingAnchor.constraint(equalTo: contextButton.trailingAnchor),
             bottomContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
             contextButton.heightAnchor.constraint(equalToConstant: 24),
+            contextButton.widthAnchor.constraint(equalTo: contextButton.heightAnchor),
             bottomContainer.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
-    
+
+}
+
+// MARK: - Themeable
+
+extension MessageContentView: Themeable {
     public func updateColors(for theme: Theme) {
         titleLabel.textColor = .primaryText(for: theme)
         usernameLabel.textColor = .secondaryText
@@ -128,5 +134,4 @@ public class MessageContentView: UIView, Themeable {
         contextButton.tintColor = .neutral
         [loveAction, appreciateAction, saveAction].forEach { $0.updateColors(for: theme) }
     }
-
 }

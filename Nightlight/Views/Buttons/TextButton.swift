@@ -10,11 +10,14 @@ public class TextButton: BaseButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    public override func updateColors(for theme: Theme) {
-        super.updateColors(for: theme)
+
+}
+
+// MARK: - Themeable
+
+extension TextButton: Themeable {
+    public func updateColors(for theme: Theme) {
         setTitleColor(.primaryText(for: theme), for: .normal)
         setTitleColor(UIColor.primaryText(for: theme).darker(), for: .highlighted)
     }
-
 }

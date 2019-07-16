@@ -1,6 +1,6 @@
 import UIKit
 
-public class MessageTableViewCell: UITableViewCell, Configurable, Themeable {
+public class MessageTableViewCell: UITableViewCell, Configurable {
     public typealias Delegate = MessageTableViewCellDelegate
     public typealias ViewModel = MessageViewModel
     
@@ -37,7 +37,7 @@ public class MessageTableViewCell: UITableViewCell, Configurable, Themeable {
         messageContentView.appreciateAction.count = viewModel.appreciationCount
         messageContentView.saveAction.isSelected = viewModel.isSaved
         
-        updateColors(for: viewModel.theme)
+        updateColors(for: theme)
         
     }
     
@@ -67,7 +67,10 @@ public class MessageTableViewCell: UITableViewCell, Configurable, Themeable {
     @objc private func contextTapped() {
         delegate?.cellDidTapContext(self)
     }
-    
+
+}
+
+extension MessageTableViewCell: Themeable {
     public func updateColors(for theme: Theme) {
         backgroundColor = .background(for: theme)
         
@@ -82,5 +85,4 @@ public class MessageTableViewCell: UITableViewCell, Configurable, Themeable {
         
         messageContentView.updateColors(for: theme)
     }
-
 }

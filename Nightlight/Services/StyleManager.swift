@@ -7,13 +7,15 @@ public protocol StyleManaging {
 /// Handles application styling.
 public class StyleManager {
     
+    public static var `default`: StyleManager = StyleManager()
+    
     /// The currently active theme.
-    public var theme: Theme = .light {
+    public var theme: Theme = .dark {
         didSet {
             guard oldValue != theme else { return }
             
             NLNotification.didChangeTheme.post(userInfo: theme)
         }
     }
-    
+
 }

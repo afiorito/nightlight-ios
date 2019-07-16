@@ -1,6 +1,6 @@
 import UIKit
 
-public class SendMessageViewController: UIViewController, Themeable {
+public class SendMessageViewController: UIViewController {
 
     private let viewModel: SendMessageViewModel
     
@@ -15,7 +15,7 @@ public class SendMessageViewController: UIViewController, Themeable {
         
         addDidChangeThemeObserver()
         
-        updateColors(for: viewModel.theme)
+        updateColors(for: theme)
     }
     
     required init?(coder: NSCoder) {
@@ -25,13 +25,9 @@ public class SendMessageViewController: UIViewController, Themeable {
     deinit {
         removeDidChangeThemeObserver()
     }
-    
-    public func updateColors(for theme: Theme) {
-        view.backgroundColor = .background(for: theme)
-    }
 
     override public var preferredStatusBarStyle: UIStatusBarStyle {
-        switch viewModel.theme {
+        switch theme {
         case .light:
             if #available(iOS 13.0, *) {
                 return .darkContent
@@ -41,5 +37,17 @@ public class SendMessageViewController: UIViewController, Themeable {
         case .dark:
             return .lightContent
         }
+    }
+}
+
+// MARK: - Themeable
+
+extension SendMessageViewController: Themeable {
+    var theme: Theme {
+        return viewModel.theme
+    }
+
+    public func updateColors(for theme: Theme) {
+        view.backgroundColor = .background(for: theme)
     }
 }

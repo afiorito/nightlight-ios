@@ -1,8 +1,6 @@
 import UIKit
 
-public class OnboardViewController: UIViewController, Themeable {
-    public typealias Dependencies = StyleManaging
-    
+public class OnboardViewController: UIViewController {
     public var pages = [UIViewController]()
     
     private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
@@ -37,23 +35,7 @@ public class OnboardViewController: UIViewController, Themeable {
         return button
     }()
     
-    private let dependencies: Dependencies
-    
-    private var theme: Theme {
-        return dependencies.styleManager.theme
-    }
-    
     public weak var delegate: OnboardViewControllerDelegate?
-    
-    public init(dependencies: Dependencies) {
-        self.dependencies = dependencies
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     deinit {
         removeDidChangeThemeObserver()
@@ -65,7 +47,7 @@ public class OnboardViewController: UIViewController, Themeable {
         addDidChangeThemeObserver()
         
         for onboardData in Strings.onboard {
-            let page = OnboardPageViewController(dependencies: dependencies)
+            let page = OnboardPageViewController()
             page.titleText = onboardData.title
             page.subtitleText = onboardData.subtitle
             page.image = UIImage(named: onboardData.image)
@@ -126,15 +108,8 @@ public class OnboardViewController: UIViewController, Themeable {
         return newIndex
     }
     
-    public func updateColors(for theme: Theme) {
-        view.backgroundColor = .background(for: theme)
-        signInButton.updateColors(for: theme)
-        pageControl.updateColors(for: theme)
-        
-    }
-    
     override public var preferredStatusBarStyle: UIStatusBarStyle {
-        switch dependencies.styleManager.theme {
+        switch theme {
         case .light:
             if #available(iOS 13.0, *) {
                 return .darkContent
@@ -183,5 +158,16 @@ extension OnboardViewController: UIPageViewControllerDelegate {
         
         self.pageControl.currentPage = index
 
+    }
+}
+
+// MARK: - Themeable
+
+extension OnboardViewController: Themeable {
+    public func updateColors(for theme: Theme) {
+        view.backgroundColor = .background(for: theme)
+        signInButton.updateColors(for: theme)
+        pageControl.updateColors(for: theme)
+        
     }
 }
