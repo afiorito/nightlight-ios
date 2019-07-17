@@ -94,14 +94,7 @@ public class ToastView: UIView {
 
 extension ToastView: Themeable {
     public func updateColors(for theme: Theme) {
-        switch severity {
-        case .neutral:
-            iconImageView.tintColor = .background(for: theme)
-        case .success:
-            iconImageView.tintColor = .background(for: theme)
-        case .urgent:
-            iconImageView.tintColor = .background(for: theme)
-        }
+        iconImageView.tintColor = .alternateBackground(for: theme)
         
         layer.shadowColor = UIColor.shadow(for: theme).cgColor
         backgroundColor = .alternateBackground(for: theme)

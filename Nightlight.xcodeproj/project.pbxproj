@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		920E495022DF966C00AA1EDB /* Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E494F22DF966C00AA1EDB /* Searchable.swift */; };
+		920E495222DFA23800AA1EDB /* PaginatedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E495122DFA23800AA1EDB /* PaginatedResponse.swift */; };
 		9213184722D571BF00C91D90 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213184622D571BF00C91D90 /* SignInViewModel.swift */; };
 		9213184922D5728F00C91D90 /* SignInCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213184822D5728F00C91D90 /* SignInCredentials.swift */; };
 		9213184B22D6050000C91D90 /* NLTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213184A22D6050000C91D90 /* NLTabBarController.swift */; };
@@ -51,7 +53,6 @@
 		9237A1F122CA9E8D00FC9331 /* CircularStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9237A1EC22CA981A00FC9331 /* CircularStd-Book.otf */; };
 		9237A1F222CA9E9000FC9331 /* CircularStd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9237A1EB22CA981A00FC9331 /* CircularStd-Medium.otf */; };
 		9237A1F422CAA79500FC9331 /* ContainedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237A1F322CAA79500FC9331 /* ContainedButton.swift */; };
-		92418D4322D7C01E001B6DFB /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92418D4222D7C01E001B6DFB /* MessageResponse.swift */; };
 		92418D4522D7C048001B6DFB /* PaginationMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92418D4422D7C048001B6DFB /* PaginationMetadata.swift */; };
 		92418D4722D7C1D0001B6DFB /* MessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92418D4622D7C1D0001B6DFB /* MessageError.swift */; };
 		92418D4922D7D422001B6DFB /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92418D4822D7D422001B6DFB /* DateFormatter+Extension.swift */; };
@@ -79,7 +80,6 @@
 		925BE1D422DE855A0000BEC9 /* PersonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1D322DE855A0000BEC9 /* PersonViewModel.swift */; };
 		925BE1D622DE86CC0000BEC9 /* HelpfulPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1D522DE86CC0000BEC9 /* HelpfulPeopleViewController.swift */; };
 		925BE1D822DE87670000BEC9 /* PeopleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1D722DE87670000BEC9 /* PeopleViewModel.swift */; };
-		925BE1DA22DE88700000BEC9 /* MostHelpfulPeopleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1D922DE88700000BEC9 /* MostHelpfulPeopleViewModel.swift */; };
 		925BE1DC22DEA0C90000BEC9 /* HelpfulPeopleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1DB22DEA0C90000BEC9 /* HelpfulPeopleHeader.swift */; };
 		925DD4A722DDE49300D50A89 /* UIView+Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4A622DDE49300D50A89 /* UIView+Themeable.swift */; };
 		925DD4A922DDE5EA00D50A89 /* EmptyViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4A822DDE5EA00D50A89 /* EmptyViewable.swift */; };
@@ -121,6 +121,8 @@
 		92B302F922D6435200CE5668 /* SendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B302F822D6435200CE5668 /* SendMessageViewController.swift */; };
 		92B9008822CD8720009E619B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B9008722CD8720009E619B /* AuthCoordinator.swift */; };
 		92B9008A22CE94A7009E619B /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B9008922CE94A7009E619B /* SplashScreenViewController.swift */; };
+		92C7534622DF6A5200A84BD0 /* PersonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7534522DF6A5200A84BD0 /* PersonError.swift */; };
+		92C7534822DF6AA900A84BD0 /* PeopleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7534722DF6AA900A84BD0 /* PeopleService.swift */; };
 		92CA9C8022D6475C009900E6 /* NotificationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA9C7F22D6475C009900E6 /* NotificationsCoordinator.swift */; };
 		92CA9C8222D647C0009900E6 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA9C8122D647BF009900E6 /* NotificationsViewController.swift */; };
 		92CA9C8422D647E5009900E6 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA9C8322D647E4009900E6 /* NotificationsViewModel.swift */; };
@@ -173,6 +175,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		920E494F22DF966C00AA1EDB /* Searchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searchable.swift; sourceTree = "<group>"; };
+		920E495122DFA23800AA1EDB /* PaginatedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedResponse.swift; sourceTree = "<group>"; };
 		9213184622D571BF00C91D90 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		9213184822D5728F00C91D90 /* SignInCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCredentials.swift; sourceTree = "<group>"; };
 		9213184A22D6050000C91D90 /* NLTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NLTabBarController.swift; sourceTree = "<group>"; };
@@ -223,7 +227,6 @@
 		9237A1ED22CA981A00FC9331 /* CircularStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Bold.otf"; sourceTree = "<group>"; };
 		9237A1EE22CA99E000FC9331 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		9237A1F322CAA79500FC9331 /* ContainedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainedButton.swift; sourceTree = "<group>"; };
-		92418D4222D7C01E001B6DFB /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		92418D4422D7C048001B6DFB /* PaginationMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationMetadata.swift; sourceTree = "<group>"; };
 		92418D4622D7C1D0001B6DFB /* MessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageError.swift; sourceTree = "<group>"; };
 		92418D4822D7D422001B6DFB /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
@@ -251,7 +254,6 @@
 		925BE1D322DE855A0000BEC9 /* PersonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewModel.swift; sourceTree = "<group>"; };
 		925BE1D522DE86CC0000BEC9 /* HelpfulPeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpfulPeopleViewController.swift; sourceTree = "<group>"; };
 		925BE1D722DE87670000BEC9 /* PeopleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewModel.swift; sourceTree = "<group>"; };
-		925BE1D922DE88700000BEC9 /* MostHelpfulPeopleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostHelpfulPeopleViewModel.swift; sourceTree = "<group>"; };
 		925BE1DB22DEA0C90000BEC9 /* HelpfulPeopleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpfulPeopleHeader.swift; sourceTree = "<group>"; };
 		925DD4A622DDE49300D50A89 /* UIView+Themeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Themeable.swift"; sourceTree = "<group>"; };
 		925DD4A822DDE5EA00D50A89 /* EmptyViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewable.swift; sourceTree = "<group>"; };
@@ -294,6 +296,8 @@
 		92B302F822D6435200CE5668 /* SendMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageViewController.swift; sourceTree = "<group>"; };
 		92B9008722CD8720009E619B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		92B9008922CE94A7009E619B /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
+		92C7534522DF6A5200A84BD0 /* PersonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonError.swift; sourceTree = "<group>"; };
+		92C7534722DF6AA900A84BD0 /* PeopleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleService.swift; sourceTree = "<group>"; };
 		92CA9C7F22D6475C009900E6 /* NotificationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCoordinator.swift; sourceTree = "<group>"; };
 		92CA9C8122D647BF009900E6 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		92CA9C8322D647E4009900E6 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
@@ -541,10 +545,11 @@
 				9276314E22D4DDAE000D4B8F /* KeychainKey.swift */,
 				92F1761D22DBC232008AEB82 /* MessageActionType.swift */,
 				92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */,
-				92418D4222D7C01E001B6DFB /* MessageResponse.swift */,
+				920E495122DFA23800AA1EDB /* PaginatedResponse.swift */,
 				9228D6C422D7BD02003B03DB /* MessageType.swift */,
 				9237A1DE22CA859600FC9331 /* NLNotification.swift */,
 				92418D4422D7C048001B6DFB /* PaginationMetadata.swift */,
+				920E494F22DF966C00AA1EDB /* Searchable.swift */,
 				9213184822D5728F00C91D90 /* SignInCredentials.swift */,
 				928A10B222D3EBF400FF78FB /* SignUpCredentials.swift */,
 				925DD4AC22DDEA1800D50A89 /* Toastable.swift */,
@@ -584,6 +589,7 @@
 				92931C2022D2D4FB00C54EB8 /* HttpClient.swift */,
 				9282180A22D20CB50007FF9B /* KeyboardManager.swift */,
 				9276314A22D4B41E000D4B8F /* KeychainManager.swift */,
+				92C7534722DF6AA900A84BD0 /* PeopleService.swift */,
 				9228D6C222D7A0D6003B03DB /* MessageService.swift */,
 				9237A1E222CA8D8C00FC9331 /* StyleManager.swift */,
 				92AE911022CD68DD002C75B6 /* UserDefaultsManager.swift */,
@@ -609,6 +615,7 @@
 			isa = PBXGroup;
 			children = (
 				928A10B422D3F3A800FF78FB /* AuthError.swift */,
+				92C7534522DF6A5200A84BD0 /* PersonError.swift */,
 				92418D4622D7C1D0001B6DFB /* MessageError.swift */,
 				928A10A922D3D19200FF78FB /* HttpError.swift */,
 				928A10A722D3CFBF00FF78FB /* NetworkError.swift */,
@@ -638,7 +645,6 @@
 			isa = PBXGroup;
 			children = (
 				92B302EC22D6292C00CE5668 /* MessagesViewModel.swift */,
-				925BE1D922DE88700000BEC9 /* MostHelpfulPeopleViewModel.swift */,
 				92CA9C8322D647E4009900E6 /* NotificationsViewModel.swift */,
 				92B302F022D63B4F00CE5668 /* SearchViewModel.swift */,
 				925BE1D722DE87670000BEC9 /* PeopleViewModel.swift */,
@@ -874,7 +880,6 @@
 				925763D022CABF6A0031D616 /* TextButton.swift in Sources */,
 				92AE911122CD68DD002C75B6 /* UserDefaultsManager.swift in Sources */,
 				925DD4B322DDF02F00D50A89 /* UIViewController+Themeable.swift in Sources */,
-				92418D4322D7C01E001B6DFB /* MessageResponse.swift in Sources */,
 				9276314322D3F673000D4B8F /* AuthToken.swift in Sources */,
 				9228D6B622D77029003B03DB /* ActionView.swift in Sources */,
 				92CA9C8222D647C0009900E6 /* NotificationsViewController.swift in Sources */,
@@ -897,7 +902,6 @@
 				9237A1D922CA7DFE00FC9331 /* UIColor+Colors.swift in Sources */,
 				9276314F22D4DDAE000D4B8F /* KeychainKey.swift in Sources */,
 				9237A1DB22CA7EFB00FC9331 /* Themeable.swift in Sources */,
-				925BE1DA22DE88700000BEC9 /* MostHelpfulPeopleViewModel.swift in Sources */,
 				925763D222CABFBB0031D616 /* BaseButton.swift in Sources */,
 				9282180B22D20CB50007FF9B /* KeyboardManager.swift in Sources */,
 				925763ED22CBB4F80031D616 /* FormTextField.swift in Sources */,
@@ -910,6 +914,7 @@
 				9213185122D6068200C91D90 /* MessagesViewController.swift in Sources */,
 				9237A1E122CA890D00FC9331 /* UIViewController+ThemeObserving.swift in Sources */,
 				925BE1CE22DE796D0000BEC9 /* PersonContentView.swift in Sources */,
+				92C7534622DF6A5200A84BD0 /* PersonError.swift in Sources */,
 				92B302F922D6435200CE5668 /* SendMessageViewController.swift in Sources */,
 				9237A1DF22CA859600FC9331 /* NLNotification.swift in Sources */,
 				925BE1D022DE80A30000BEC9 /* AccoladeView.swift in Sources */,
@@ -943,6 +948,7 @@
 				92CA9C8A22D6494C009900E6 /* ProfileViewController.swift in Sources */,
 				9276314722D4AEC4000D4B8F /* ValidationErrorDescription.swift in Sources */,
 				925BE1D422DE855A0000BEC9 /* PersonViewModel.swift in Sources */,
+				920E495222DFA23800AA1EDB /* PaginatedResponse.swift in Sources */,
 				9213185322D6142700C91D90 /* MainNavigationController.swift in Sources */,
 				925DD4AD22DDEA1800D50A89 /* Toastable.swift in Sources */,
 				925DD4AF22DDEA5A00D50A89 /* UIViewController+Toastable.swift in Sources */,
@@ -952,11 +958,13 @@
 				92F1765622DD3932008AEB82 /* BottomSheetPresentable+UIViewController.swift in Sources */,
 				92B302F722D6431800CE5668 /* SendMessageViewModel.swift in Sources */,
 				92D8EBCB22CFD83D0083D6C4 /* SignUpViewControllerDelegate.swift in Sources */,
+				92C7534822DF6AA900A84BD0 /* PeopleService.swift in Sources */,
 				925DD4AB22DDE61100D50A89 /* UITableView+EmptyViewable.swift in Sources */,
 				925BE1DC22DEA0C90000BEC9 /* HelpfulPeopleHeader.swift in Sources */,
 				9213184722D571BF00C91D90 /* SignInViewModel.swift in Sources */,
 				92D8EBCD22CFE0120083D6C4 /* SignInViewControllerDelegate.swift in Sources */,
 				928A10A622D3CDF000FF78FB /* URLSession+Extension.swift in Sources */,
+				920E495022DF966C00AA1EDB /* Searchable.swift in Sources */,
 				92B9008A22CE94A7009E619B /* SplashScreenViewController.swift in Sources */,
 				925763E122CB76E80031D616 /* SignInView.swift in Sources */,
 				928A10B522D3F3A800FF78FB /* AuthError.swift in Sources */,

@@ -76,8 +76,8 @@ public class PersonContentView: UIView {
             container.bottomAnchor.constraint(equalTo: bottomAnchor),
             container.leadingAnchor.constraint(equalTo: leadingAnchor),
             container.trailingAnchor.constraint(equalTo: trailingAnchor),
-            loveAccolade.actionView.button.heightAnchor.constraint(equalToConstant: 24),
-            appreciateAccolade.actionView.button.heightAnchor.constraint(equalToConstant: 24)
+            loveAccolade.actionView.button.heightAnchor.constraint(equalToConstant: 22),
+            appreciateAccolade.actionView.button.heightAnchor.constraint(equalToConstant: 22)
         ])
     }
 

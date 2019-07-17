@@ -3,7 +3,7 @@ import Foundation
 /// A protocol for being able to access Keychain.
 public protocol KeychainManaging {
     /// The instance of Keychain manager.
-    var keychainManager: KeychainManager { get set }
+    var keychainManager: KeychainManager { get }
 }
 
 /// Handles operations around Keychain

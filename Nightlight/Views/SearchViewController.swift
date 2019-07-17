@@ -1,25 +1,30 @@
 import UIKit
 
 public class SearchViewController: UIViewController {
+    public typealias SearchResultsController = UIViewController & Searchable
 
     private let viewModel: SearchViewModel
     
-    let searchController: UISearchController = {
-        let searchController = UISearchController()
+    private var searchTask: DispatchWorkItem?
+    
+    private let baseViewController: UIViewController
+    private let searchResultsController: SearchResultsController
+    
+    lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: searchResultsController)
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.isTranslucent = false
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchResultsUpdater = self
         
         return searchController
     }()
-    
-    let baseViewController: UIViewController
-    let searchViewController: UIViewController
-    
-    init(viewModel: SearchViewModel, baseViewController: UIViewController, searchViewController: UIViewController) {
+
+    init(viewModel: SearchViewModel, baseViewController: UIViewController, searchResultsController: SearchResultsController) {
         self.viewModel = viewModel
         self.baseViewController = baseViewController
-        self.searchViewController = searchViewController
+        self.searchResultsController = searchResultsController
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -30,6 +35,7 @@ public class SearchViewController: UIViewController {
         addDidChangeThemeObserver()
         
         navigationItem.titleView = searchController.searchBar
+        definesPresentationContext = true
         
         prepareSubviews()
         updateColors(for: theme)
@@ -54,6 +60,29 @@ public class SearchViewController: UIViewController {
         ])
     }
 
+}
+
+// MARK: - UISearchController Delegate
+
+extension SearchViewController: UISearchResultsUpdating {
+    public func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        
+        let strippedString = text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
+        self.searchTask?.cancel()
+        
+        let task = DispatchWorkItem { [weak self] in
+            self?.searchResultsController.updateQuery(text: strippedString.lowercased())
+        }
+        
+        self.searchTask = task
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35, execute: task)
+    }
+    
 }
 
 // MARK: - Themeable

@@ -13,6 +13,8 @@ public class PersonTableViewCell: UITableViewCell, Configurable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        selectionStyle = .none
+        
         prepareSubviews()
         
     }
@@ -23,8 +25,10 @@ public class PersonTableViewCell: UITableViewCell, Configurable {
     
     public func configure(with viewModel: PersonViewModel) {
         
-        personContentView.usernameLabel.text = "ovoant"
-        personContentView.dateLabel.text = "Helping since December 2018"
+        personContentView.usernameLabel.text = viewModel.username
+        personContentView.dateLabel.text = viewModel.helpingSince
+        personContentView.loveAccolade.actionView.count = viewModel.totalLove
+        personContentView.appreciateAccolade.actionView.count = viewModel.totalAppreciation
         
         updateColors(for: theme)
     }

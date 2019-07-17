@@ -2,14 +2,19 @@ import UIKit
 
 public class HelpfulPeopleViewController: UIViewController {
     
+    private let viewModel: PeopleViewModel
+    
     private let dataSource: TableViewArrayDataSource<PersonTableViewCell>
+    
+    private let refreshControl = UIRefreshControl()
     
     public var peopleView: PeopleView {
         return view as! PeopleView
     }
     
     init(viewModel: PeopleViewModel) {
-        self.dataSource = TableViewArrayPaginatedDataSource(reuseIdentifier: PersonTableViewCell.className)
+        self.viewModel = viewModel
+        self.dataSource = TableViewArrayDataSource(reuseIdentifier: PersonTableViewCell.className)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -25,12 +30,12 @@ public class HelpfulPeopleViewController: UIViewController {
         
         peopleView.tableView.delegate = self
         peopleView.tableView.dataSource = dataSource
-        
-        dataSource.data = (0..<100).map { _ in PersonViewModel() }
-        
-        prepareSubviews()
+        peopleView.tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         updateColors(for: theme)
+
+        loadPeople()
     }
     
     deinit {
@@ -41,8 +46,33 @@ public class HelpfulPeopleViewController: UIViewController {
         view = PeopleView()
     }
     
-    private func prepareSubviews() {
-        
+    private func loadPeople() {
+        viewModel.getHelpfulPeople { [weak self] result in
+            guard let self = self else { return }
+            
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+            }
+            
+            switch result {
+            case .success(let people):
+                self.dataSource.emptyViewDescription = .none
+                
+                self.dataSource.data = people
+                self.peopleView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            case .failure:
+                // ensure empty view is updated properly.
+                if self.dataSource.data.isEmpty {
+                    self.dataSource.emptyViewDescription = EmptyViewDescription.noLoad
+                    self.peopleView.tableView.reloadData()
+                }
+                self.showToast("Could not connect to Nightlight.", severity: .urgent)
+            }
+        }
+    }
+    
+    @objc private func refresh() {
+        loadPeople()
     }
     
 }

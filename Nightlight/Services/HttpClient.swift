@@ -41,36 +41,52 @@ public class HttpClient {
         return task
     }
     
-    public func get(endpoint: Endpoint, result: @escaping (RequestResult) -> Void) {
-        guard let url = endpoint.url else { return result(.failure(NetworkError.badURL)) }
+    @discardableResult
+    public func get(endpoint: Endpoint, result: @escaping (RequestResult) -> Void) -> URLSessionDataTask? {
+        guard let url = endpoint.url else {
+            result(.failure(NetworkError.badURL))
+            return nil
+        }
         
-        request(urlRequest: urlRequest(for: url, method: .get), result: result)
+        return request(urlRequest: urlRequest(for: url, method: .get), result: result)
     }
     
-    public func post(endpoint: Endpoint, body: Data?, result: @escaping (RequestResult) -> Void) {
-        guard let url = endpoint.url else { return result(.failure(NetworkError.badURL)) }
+    @discardableResult
+    public func post(endpoint: Endpoint, body: Data?, result: @escaping (RequestResult) -> Void) -> URLSessionDataTask? {
+        guard let url = endpoint.url else {
+            result(.failure(NetworkError.badURL))
+            return nil
+        }
         
         var urlRequest = self.urlRequest(for: url, method: .post)
         urlRequest.httpBody = body
         urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
 
-        request(urlRequest: urlRequest, result: result)
+        return request(urlRequest: urlRequest, result: result)
     }
     
-    public func put(endpoint: Endpoint, body: Data?, result: @escaping (RequestResult) -> Void) {
-        guard let url = endpoint.url else { return result(.failure(NetworkError.badURL)) }
+    @discardableResult
+    public func put(endpoint: Endpoint, body: Data?, result: @escaping (RequestResult) -> Void) -> URLSessionDataTask? {
+        guard let url = endpoint.url else {
+            result(.failure(NetworkError.badURL))
+            return nil
+        }
         
         var urlRequest = self.urlRequest(for: url, method: .put)
         urlRequest.httpBody = body
         urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         
-        request(urlRequest: urlRequest, result: result)
+        return request(urlRequest: urlRequest, result: result)
     }
     
-    public func delete(endpoint: Endpoint, result: @escaping (RequestResult) -> Void) {
-        guard let url = endpoint.url else { return result(.failure(NetworkError.badURL)) }
+    @discardableResult
+    public func delete(endpoint: Endpoint, result: @escaping (RequestResult) -> Void) -> URLSessionDataTask? {
+        guard let url = endpoint.url else {
+            result(.failure(NetworkError.badURL))
+            return nil
+        }
         
-        request(urlRequest: urlRequest(for: url, method: .delete), result: result)
+        return request(urlRequest: urlRequest(for: url, method: .delete), result: result)
     }
     
     private func urlRequest(for url: URL, method: HttpMethod) -> URLRequest {

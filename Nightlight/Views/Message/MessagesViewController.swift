@@ -42,6 +42,7 @@ public class MessagesViewController: UIViewController {
             self?.loadMoreMessages()
         }
         
+        self.refreshControl.beginRefreshing()
         refresh()
     }
     
@@ -62,7 +63,7 @@ public class MessagesViewController: UIViewController {
                 
                 if fromStart {
                     self.dataSource.data = messages
-                    self.messagesView.tableView.reloadData()
+                    self.messagesView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
                 } else {
                     let newIndexPaths = self.dataSource.updateData(with: messages)
                     self.messagesView.tableView.insertRows(at: newIndexPaths, with: .none)

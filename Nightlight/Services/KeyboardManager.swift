@@ -2,7 +2,7 @@ import UIKit
 
 /// a protocol for being able to access KeyboardManager.
 public protocol KeyboardManaging {
-    var keyboardManager: KeyboardManager { get set }
+    var keyboardManager: KeyboardManager { get }
 }
 
 /// Responsible for managing iOS keyboard.

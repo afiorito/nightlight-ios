@@ -10,7 +10,7 @@ public struct Endpoint {
     
     let isAuthorized: Bool
     
-    init(path: String, queryItems: [URLQueryItem]?, isAuthorized: Bool = true) {
+    init(path: String, queryItems: [URLQueryItem]? = nil, isAuthorized: Bool = true) {
         self.path = path
         self.queryItems = queryItems
         self.isAuthorized = isAuthorized
@@ -25,7 +25,7 @@ public struct Endpoint {
             components.port = Int(port)
         }
         components.path = joinedPath(path)
-        components.queryItems = queryItems
+        components.queryItems = (queryItems ?? []).isEmpty ? .none : queryItems
         
         return components.url
     }
@@ -45,12 +45,12 @@ public struct Endpoint {
 extension Endpoint {
     /// An endpoint for signing up a user
     static var signUp: Endpoint {
-        return Endpoint(path: "/signup", queryItems: .none, isAuthorized: false)
+        return Endpoint(path: "/signup", isAuthorized: false)
     }
     
     /// An endpoint for signing in a user
     static var signIn: Endpoint {
-        return Endpoint(path: "/signin", queryItems: .none, isAuthorized: false)
+        return Endpoint(path: "/signin", isAuthorized: false)
     }
     
     static func refresh(token: String) -> Endpoint {
@@ -81,5 +81,32 @@ extension Endpoint {
         let queryItems = [URLQueryItem(name: "type", value: type.rawValue)]
         
         return Endpoint(path: "/message/\(id)/action", queryItems: queryItems)
+    }
+}
+
+// MARK: - User Endpoints
+
+extension Endpoint {
+    static var helpfulUsers: Endpoint {
+        return Endpoint(path: "/user/helpful")
+    }
+    
+    static func users(filter: String, start: String?, end: String?) -> Endpoint {
+        var queryItems: [URLQueryItem] = []
+        
+        if !filter.isEmpty {
+            queryItems.append(URLQueryItem(name: "filter", value: filter))
+        }
+        
+        if let start = start {
+            queryItems.append(URLQueryItem(name: "start", value: start))
+        }
+        
+        if let end = end {
+            queryItems.append(URLQueryItem(name: "end", value: end))
+        }
+        
+        return Endpoint(path: "/user", queryItems: queryItems)
+        
     }
 }

@@ -14,20 +14,16 @@ public class SearchCoordinator: TabBarCoordinator {
         let searchViewModel = SearchViewModel(dependencies: dependencies as SearchViewModel.Dependencies)
         
         let peopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
-        let mostHelpfulPeopleViewModel = MostHelpfulPeopleViewModel(dependencies: dependencies as! MostHelpfulPeopleViewModel.Dependencies)
-        let mostHelpfulPeopleViewController = HelpfulPeopleViewController(viewModel: peopleViewModel)
-        let peopleViewController = PeopleViewController()
+        let helpfulPeopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
+        
+        let helpfulPeopleViewController = HelpfulPeopleViewController(viewModel: helpfulPeopleViewModel)
+        let peopleViewController = PeopleViewController(viewModel: peopleViewModel)
         
         let viewController = SearchViewController(viewModel: searchViewModel,
-                                                  baseViewController: mostHelpfulPeopleViewController,
-                                                  searchViewController: peopleViewController)
-        
-        guard let navController = rootViewController as? UINavigationController else {
-            return viewController
-        }
+                                                  baseViewController: helpfulPeopleViewController,
+                                                  searchResultsController: peopleViewController)
         
         viewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "tb_search"), tag: 0)
-//        viewController.emptyViewDescription = EmptyViewDescription.noRecentMessages
         
         return viewController
     }()

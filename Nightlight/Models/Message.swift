@@ -10,7 +10,7 @@ public struct Message: Codable {
     var isSaved: Bool
     var loveCount: Int
     let appreciationCount: Int
-    let user: User
+    let user: Sender
     let createdAt: Date
     let updatedAt: Date
 }

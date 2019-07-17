@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol MessageServiced {
-    var messageService: MessageService { get set }
+    var messageService: MessageService { get }
 }
 
 public class MessageService {
@@ -12,11 +12,11 @@ public class MessageService {
         self.httpClient = httpClient
     }
     
-    public func getMessages(type: MessageType, start: String?, end: String?, result: @escaping (Result<MessageResponse, MessageError>) -> Void) {
+    public func getMessages(type: MessageType, start: String?, end: String?, result: @escaping (Result<PaginatedResponse<Message>, MessageError>) -> Void) {
         httpClient.get(endpoint: Endpoint.message(type: type, start: start, end: end)) { networkResult in
             switch networkResult {
             case .success(_, let data):
-                guard let messageResponse: MessageResponse = try? data.decodeJSON() else {
+                guard let messageResponse: PaginatedResponse<Message> = try? data.decodeJSON() else {
                     return result(.failure(.unknown))
                 }
                 

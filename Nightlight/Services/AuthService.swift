@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol AuthServiced {
-    var authService: AuthService { get set }
+    var authService: AuthService { get }
 }
 
 public class AuthService {
