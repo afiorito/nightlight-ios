@@ -8,18 +8,37 @@ public class SearchCoordinator: TabBarCoordinator {
     
     private let dependencies: Dependencies
     
-    public lazy var rootViewController: UIViewController = {
-        let viewModel = SearchViewModel(dependencies: dependencies as SearchViewModel.Dependencies)
-        let searchViewController = SearchViewController(viewModel: viewModel)
-        searchViewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "tb_search"), tag: 0)
+    public let rootViewController: UIViewController
+    
+    public lazy var searchViewController: SearchViewController = {
+        let searchViewModel = SearchViewModel(dependencies: dependencies as SearchViewModel.Dependencies)
         
-        return searchViewController
+        let peopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
+        let mostHelpfulPeopleViewModel = MostHelpfulPeopleViewModel(dependencies: dependencies as! MostHelpfulPeopleViewModel.Dependencies)
+        let mostHelpfulPeopleViewController = HelpfulPeopleViewController(viewModel: peopleViewModel)
+        let peopleViewController = PeopleViewController()
+        
+        let viewController = SearchViewController(viewModel: searchViewModel,
+                                                  baseViewController: mostHelpfulPeopleViewController,
+                                                  searchViewController: peopleViewController)
+        
+        guard let navController = rootViewController as? UINavigationController else {
+            return viewController
+        }
+        
+        viewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "tb_search"), tag: 0)
+//        viewController.emptyViewDescription = EmptyViewDescription.noRecentMessages
+        
+        return viewController
     }()
 
-    init(dependencies: Dependencies) {
+    init(rootViewController: UIViewController, dependencies: Dependencies) {
+        self.rootViewController = rootViewController
         self.dependencies = dependencies
     }
     
-    public func start() {}
+    public func start() {
+        rootViewController.show(searchViewController, sender: rootViewController)
+    }
     
 }

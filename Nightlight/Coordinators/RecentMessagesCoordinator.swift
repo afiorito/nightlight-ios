@@ -11,12 +11,24 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
     public let rootViewController: UIViewController
     
     lazy var recentMessagesViewController: MessagesViewController = {
-        let title = "Recent Messages"
         let viewModel = MessagesViewModel(dependencies: dependencies as! MessagesViewModel.Dependencies, type: .recent)
-        
         let viewController = MessagesViewController(viewModel: viewModel)
+
+        guard let navController = rootViewController as? UINavigationController else {
+            return viewController
+        }
+
+        let title = "Recent Messages"
+        
         viewController.delegate = self
-        viewController.title = title
+        viewController.navigationItem.titleView = {
+            let navFrame = navController.navigationBar.frame
+            let titleView = LabelTitleView(frame: CGRect(x: 15, y: 0,
+                                                         width: navController.view.frame.width - 30, height: navFrame.height))
+            titleView.title = title
+            return titleView
+        }()
+        
         viewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: nil)
         viewController.tabBarItem = UITabBarItem(title: "Recent", image: UIImage(named: "tb_recent"), tag: 0)
         viewController.emptyViewDescription = EmptyViewDescription.noRecentMessages
@@ -33,7 +45,24 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
         rootViewController.show(recentMessagesViewController, sender: rootViewController)
     }
     
+    private func handleMoreContext(for viewController: UIViewController) {
+        let contextMenuViewController = ContextMenuViewController()
+        
+        contextMenuViewController.addOption(ContextOption.reportOption({ _ in
+            viewController.dismiss(animated: true) {
+                viewController.showToast("The message has been reported!", severity: .success)
+            }
+        }))
+        
+        contextMenuViewController.modalPresentationStyle = .custom
+        contextMenuViewController.modalPresentationCapturesStatusBarAppearance = true
+        contextMenuViewController.transitioningDelegate = BottomSheetTransitioningDelegate.default
+        
+        viewController.present(contextMenuViewController, animated: true)
+    }
 }
+
+// MARK: - MessagesViewController Delegate
 
 extension RecentMessagesCoordinator: MessagesViewControllerDelegate {
     public func messagesViewController(_ messagesViewController: MessagesViewController, didSelect message: MessageViewModel) {
@@ -43,26 +72,20 @@ extension RecentMessagesCoordinator: MessagesViewControllerDelegate {
     }
     
     public func messagesViewController(_ messagesViewController: MessagesViewController, moreContextFor message: MessageViewModel) {
-        let contextMenuViewController = ContextMenuViewController()
-        
-        contextMenuViewController.addOption(ContextOption.reportOption({ _ in
-            messagesViewController.dismiss(animated: true) {
-                messagesViewController.showToast("The message has been reported!", severity: .success)
-            }
-        }))
-
-        contextMenuViewController.modalPresentationStyle = .custom
-        contextMenuViewController.modalPresentationCapturesStatusBarAppearance = true
-        contextMenuViewController.transitioningDelegate = BottomSheetTransitioningDelegate.default
-        
-        messagesViewController.present(contextMenuViewController, animated: true)
+        handleMoreContext(for: messagesViewController)
     }
     
 }
 
+// MARK: - MessageDetailViewController Delegate
+
 extension RecentMessagesCoordinator: MessageDetailViewControllerDelegate {
     public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, didUpdate message: MessageViewModel) {
         recentMessagesViewController.reloadSelectedIndexPath(with: message)
+    }
+    
+    public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, moreContextFor message: MessageViewModel) {
+        handleMoreContext(for: messageDetailViewController)
     }
     
 }

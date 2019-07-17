@@ -4,11 +4,15 @@ import UIKit
 public struct EmptyViewDescription {
     public var title: String
     public var subtitle: String
-    public var image: UIImage?
+    public var imageName: String
 }
 
 public extension EmptyViewDescription {
     static var noRecentMessages: EmptyViewDescription {
-        return EmptyViewDescription(title: "No Recent Messages", subtitle: "Tap the + to send one", image: UIImage(named: "empty_message_light"))
+        return EmptyViewDescription(title: "No Recent Messages", subtitle: "Tap the + to send one", imageName: "empty_message")
+    }
+    
+    static var noLoad: EmptyViewDescription {
+        return EmptyViewDescription(title: "No Connection", subtitle: "Failed to load.", imageName: "no_load")
     }
 }

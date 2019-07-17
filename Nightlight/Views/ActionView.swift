@@ -7,7 +7,7 @@ public class ActionView: UIView {
         return stackView
     }()
 
-    let button: UIButton = UIButton()
+    let button = UIButton()
     
     let countLabel: UILabel = {
         let label = UILabel()
@@ -106,7 +106,6 @@ public class ActionView: UIView {
 
 extension ActionView: Themeable {
     public func updateColors(for theme: Theme) {
-        countLabel.textColor = .secondaryText
         button.tintColor = .neutral
     }
 }

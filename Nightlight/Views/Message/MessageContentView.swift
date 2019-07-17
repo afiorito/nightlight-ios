@@ -133,5 +133,7 @@ extension MessageContentView: Themeable {
         bodyLabel.textColor = .primaryText(for: theme)
         contextButton.tintColor = .neutral
         [loveAction, appreciateAction, saveAction].forEach { $0.updateColors(for: theme) }
+        loveAction.countLabel.textColor = .secondaryText
+        appreciateAction.countLabel.textColor = .secondaryText
     }
 }

@@ -1,18 +1,17 @@
 import UIKit
 
 /// A placeholder view for empty content.
-public class EmptyView: UIView {
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        prepareSubviews()
-    }
-    
-    convenience init(description: EmptyViewDescription) {
-        self.init(frame: .zero)
-        self.image = description.image
+public class EmptyView: UIView {    
+    required init(description: EmptyViewDescription) {
+        self.imageName = description.imageName
+
+        super.init(frame: .zero)
         self.title = description.title
         self.subtitle = description.subtitle
+        
+        prepareSubviews()
+        updateColors(for: theme)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -25,7 +24,7 @@ public class EmptyView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.spacing = 30
+        stackView.spacing = 15
         
         return stackView
     }()
@@ -34,7 +33,7 @@ public class EmptyView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.spacing = 10
+        stackView.spacing = 5
         
         return stackView
     }()
@@ -60,6 +59,8 @@ public class EmptyView: UIView {
     }()
     
     /// The name of the image without light or dark suffix.
+    public var imageName: String
+    
     public var image: UIImage? {
         get { return imageView.image }
         set { imageView.image = newValue }
@@ -85,7 +86,7 @@ public class EmptyView: UIView {
         NSLayoutConstraint.activate([
             container.centerXAnchor.constraint(equalTo: centerXAnchor),
             container.centerYAnchor.constraint(equalTo: centerYAnchor),
-            imageView.widthAnchor.constraint(equalTo: widthAnchor),
+            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
             imageView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
         ])
     }
@@ -97,5 +98,12 @@ extension EmptyView: Themeable {
     public func updateColors(for theme: Theme) {
         titleLabel.textColor = .primaryText(for: theme)
         subtitleLabel.textColor = .secondaryText
+        
+        switch theme {
+        case.light:
+            image = UIImage(named: "\(imageName)_light")
+        case .dark:
+            image = UIImage(named: "\(imageName)_dark")
+        }
     }
 }

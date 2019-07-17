@@ -12,15 +12,7 @@ public class MessagesViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
-    public var emptyViewDescription: EmptyViewDescription? {
-        get {
-            return dataSource.emptyViewDescription
-        }
-        
-        set {
-            dataSource.emptyViewDescription = newValue
-        }
-    }
+    public var emptyViewDescription: EmptyViewDescription?
     
     private let dataSource: TableViewArrayPaginatedDataSource<MessageTableViewCell>
     
@@ -65,6 +57,7 @@ public class MessagesViewController: UIViewController {
             
             switch result {
             case .success(let messages):
+                self.dataSource.emptyViewDescription = self.emptyViewDescription
                 self.dataSource.totalCount = self.viewModel.totalCount
                 
                 if fromStart {
@@ -75,8 +68,13 @@ public class MessagesViewController: UIViewController {
                     self.messagesView.tableView.insertRows(at: newIndexPaths, with: .none)
                 }
                 
-            case .failure(let error):
-                self.showToast("\(error)", severity: .urgent)
+            case .failure:
+                // ensure empty view is updated properly.
+                if self.dataSource.data.isEmpty {
+                    self.dataSource.emptyViewDescription = EmptyViewDescription.noLoad
+                    self.messagesView.tableView.reloadData()
+                }
+                self.showToast("Could not connect to Nightlight.", severity: .urgent)
             }
         }
     }
@@ -152,7 +150,7 @@ extension MessagesViewController: MessageTableViewCellDelegate {
         case .success(let message):
             self.dataSource.data[indexPath.row] = message
         case .failure:
-            self.showToast("Something went wrong.", severity: .urgent)
+            self.showToast("Could not connect to Nightlight.", severity: .urgent)
         }
         
         self.messagesView.tableView.reloadRows(at: [indexPath], with: .none)

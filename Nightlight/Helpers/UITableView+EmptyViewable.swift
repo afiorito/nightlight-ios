@@ -6,16 +6,7 @@ extension UITableView: EmptyViewable {
     }
     
     public func showEmptyView(description: EmptyViewDescription) {
-        guard emptyView == nil else {
-            return
-        }
-        
-        let emptyView = EmptyView()
-        emptyView.title = description.title
-        emptyView.subtitle = description.subtitle
-        emptyView.image = description.image
-        
-        backgroundView = emptyView
+        backgroundView = EmptyView(description: description)
     }
     
     public func hideEmptyView() {

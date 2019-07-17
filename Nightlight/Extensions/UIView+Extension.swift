@@ -34,11 +34,17 @@ extension UIView {
     }
     
     public func subview<T>(ofType type: T.Type) -> T? {
-        let view = subviews.first { (view) -> Bool in
-            view is T
+        var match: T?
+
+        for view in subviews {
+            if let target = view as? T {
+                return target
+            }
+            
+            match = view.subview(ofType: type)
         }
         
-        return view as? T
+        return match
     }
     
     public func addShadow(forTheme theme: Theme, shouldRasterize: Bool = true) {

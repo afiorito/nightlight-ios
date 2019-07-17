@@ -60,7 +60,7 @@ public class SignInViewController: UIViewController {
                     self.showToast("Username or password are incorrect.", severity: .urgent)
                     self.signInView.showFieldErrors(reasons: reasons)
                 default:
-                    self.showToast("Something went wrong.", severity: .urgent)
+                    self.showToast("Could not connect to Nightlight.", severity: .urgent)
                 }
             }
         }

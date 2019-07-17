@@ -79,14 +79,10 @@ public class AppCoordinator: Coordinator {
     
     private func prepareMainApplication() -> UIViewController {
         let coordinators: [TabBarCoordinator] = [
-            RecentMessagesCoordinator(
-                rootViewController: MainNavigationController(),
-                dependencies: self.dependencies),
-            SearchCoordinator(dependencies: self.dependencies),
+            RecentMessagesCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
+            SearchCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
             SendMessageCoordinator(dependencies: self.dependencies),
-            NotificationsCoordinator(
-                rootViewController: MainNavigationController(),
-                dependencies: self.dependencies),
+            NotificationsCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
             ProfileCoordinator(dependencies: self.dependencies)
         ]
 

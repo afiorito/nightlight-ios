@@ -61,6 +61,23 @@ extension UIColor {
     }
     
     /**
+     Handles the color for the background of cells that stick out from the background.
+     
+     - parameter theme: the theme to determine the cell background color.
+     
+     - returns: the palette color for the cell background.
+     */
+    public class func cellBackground(for theme: Theme) -> UIColor {
+        switch theme {
+        case .light:
+            return Palette.white
+        case .dark:
+            return Palette.darkGrey
+            
+        }
+    }
+    
+    /**
      Handles the color for black and white elements.
      
      - parameter theme: the theme to determine the grayscale color.
@@ -186,6 +203,22 @@ extension UIColor {
             return Palette.alternateLightGrey
         case .dark:
             return Palette.alternateBlack
+        }
+    }
+    
+    /**
+     Handles the color for gray content.
+     
+     - parameter theme: the theme to determine the gray color.
+     
+     - returns: the palette color for gray content.
+     */
+    public class func gray(for theme: Theme) -> UIColor {
+        switch theme {
+        case .light:
+            return Palette.lightGrey
+        case .dark:
+            return Palette.darkGrey
         }
     }
     

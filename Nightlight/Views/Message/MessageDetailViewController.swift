@@ -63,13 +63,14 @@ public class MessageDetailViewController: UIViewController {
     }
     
     @objc private func contextTapped() {
+        delegate?.messageDetailViewController(self, moreContextFor: viewModel)
     }
     
     private func handleMessageAction(result: Result<MessageViewModel, MessageError>) {
         switch result {
         case .success: break
         case .failure:
-            self.showToast("Something went wrong.", severity: .urgent)
+            self.showToast("Could not connect to Nightlight.", severity: .urgent)
         }
         
         updateView()

@@ -104,7 +104,7 @@ extension ToastView: Themeable {
         }
         
         layer.shadowColor = UIColor.shadow(for: theme).cgColor
-        backgroundColor = .background(for: theme)
+        backgroundColor = .alternateBackground(for: theme)
         toastMessageLabel.textColor = .primaryText(for: theme)
     }
 }
