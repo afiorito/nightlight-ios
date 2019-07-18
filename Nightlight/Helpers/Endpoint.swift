@@ -77,6 +77,10 @@ extension Endpoint {
         return Endpoint(path: "/message", queryItems: queryItems)
     }
     
+    static var message: Endpoint {
+        return Endpoint(path: "/message")
+    }
+    
     static func messageAction(with id: Int, type: MessageActionType) -> Endpoint {
         let queryItems = [URLQueryItem(name: "type", value: type.rawValue)]
         

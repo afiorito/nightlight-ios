@@ -191,6 +191,23 @@ extension UIColor {
     }
     
     /**
+     Handles the color for dark backgrounds of standard content.
+     
+     - parameter theme: the theme to determine the dark background color.
+     
+     - returns: the palette color for dark backgrounds of standard content.
+     */
+    public class func darkBackground(for theme: Theme) -> UIColor {
+        switch theme {
+        case .light:
+            return Palette.alternateWhite
+        case .dark:
+            return Palette.black
+            
+        }
+    }
+    
+    /**
      Handles the color for buttons with neutral backgrounds.
      
      - parameter theme: the theme to determine the neutral button background color.
@@ -258,10 +275,10 @@ extension UIColor {
         static let alternateLightGrey = UIColor(hex: "E5EBF0")
         static let lightAccent = UIColor(hex: "C3C3C6")
         static let darkAccent = UIColor(hex: "8A939A")
-        static let lightShadow = UIColor(hex: "E4EAF0")
+        static let lightShadow = UIColor(hex: "DAE0E6")
         static let darkShadow = UIColor(hex: "2D3236")
         static let active = UIColor(hex: "4BC361")
-        static let darkBorder = UIColor(hex: "3D4347")
-        static let lightBorder = UIColor(hex: "F2F2F2")
+        static let darkBorder = UIColor(hex: "464A4D")
+        static let lightBorder = UIColor(hex: "D9D9D9")
     }
 }

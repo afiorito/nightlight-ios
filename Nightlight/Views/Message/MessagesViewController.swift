@@ -41,7 +41,7 @@ public class MessagesViewController: UIViewController {
         dataSource.prefetchCallback = { [weak self] in
             self?.loadMoreMessages()
         }
-        
+
         self.refreshControl.beginRefreshing()
         refresh()
     }
@@ -179,6 +179,7 @@ extension MessagesViewController: Themeable {
         messagesView.updateColors(for: theme)
         toastView?.updateColors(for: theme)
         messagesView.tableView.emptyView?.updateColors(for: theme)
+        refreshControl.tintColor = .primaryGrayScale(for: theme)
         
         switch theme {
         case .light:

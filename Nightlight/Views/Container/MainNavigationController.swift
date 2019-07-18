@@ -32,7 +32,13 @@ extension MainNavigationController: Themeable {
     public func updateColors(for theme: Theme) {
         navigationBar.isTranslucent = false
         navigationBar.barTintColor = .background(for: theme)
-        navigationBar.shadowImage = UIColor.border(for: theme).asImage()
+        switch theme {
+        case .light:
+            navigationBar.shadowImage = UIColor.border(for: theme).lighter(amount: 0.1).asImage()
+        case .dark:
+            navigationBar.shadowImage = UIColor.border(for: theme).darker(amount: 0.1).asImage()
+        }
         navigationBar.tintColor = .primaryGrayScale(for: theme)
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.primaryText(for: theme)]
     }
 }

@@ -81,7 +81,11 @@ public class HelpfulPeopleViewController: UIViewController {
 
 extension HelpfulPeopleViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return HelpfulPeopleHeader()
+        return dataSource.data.isEmpty ? nil : HelpfulPeopleHeader()
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return dataSource.data.isEmpty ? 0 : UITableView.automaticDimension
     }
 }
 
@@ -90,6 +94,7 @@ extension HelpfulPeopleViewController: UITableViewDelegate {
 extension HelpfulPeopleViewController: Themeable {
     func updateColors(for theme: Theme) {
         peopleView.updateColors(for: theme)
+        refreshControl.tintColor = .primaryGrayScale(for: theme)
         (peopleView.tableView.tableHeaderView as? Themeable)?.updateColors(for: theme)
     }
 }

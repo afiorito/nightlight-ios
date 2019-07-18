@@ -5,20 +5,40 @@ public class SendMessageCoordinator: TabBarCoordinator {
     public weak var parent: Coordinator?
     public var children = [Coordinator]()
     
-    public lazy var rootViewController: UIViewController = {
-        let viewModel = SendMessageViewModel(dependencies: dependencies as SendMessageViewModel.Dependencies)
-        let sendMessageViewController = SendMessageViewController(viewModel: viewModel)
-        sendMessageViewController.tabBarItem = UITabBarItem(title: "Post", image: UIImage(named: "tb_post"), tag: 0)
+    public var rootViewController: UIViewController
+    
+    public lazy var sendMessageViewController: SendMessageViewController = {
+        let viewModel = SendMessageViewModel(dependencies: dependencies as! SendMessageViewModel.Dependencies)
         
-        return sendMessageViewController
+        let viewController = SendMessageViewController(viewModel: viewModel)
+        viewController.delegate = self
+        viewController.title = "New Message"
+        
+        return viewController
     }()
     
     private let dependencies: Dependencies
     
-    init(dependencies: Dependencies) {
+    init(rootViewController: UIViewController, dependencies: Dependencies) {
         self.dependencies = dependencies
+        self.rootViewController = rootViewController
     }
     
-    public func start() {}
+    public func start() {
+        rootViewController.show(sendMessageViewController, sender: rootViewController)
+    }
+    
+}
+
+// MARK: - SendMessageViewController Delegate
+
+extension SendMessageCoordinator: SendMessageViewControllerDelegate {
+    public func sendMessageViewController(_ sendMessageViewController: SendMessageViewController, didSend message: MessageViewModel) {
+        sendMessageViewController.dismiss(animated: true)
+    }
+    
+    public func sendMessageViewControllerDidCancel(_ sendMessageViewController: SendMessageViewController) {
+        sendMessageViewController.dismiss(animated: true)
+    }
     
 }

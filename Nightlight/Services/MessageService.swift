@@ -28,9 +28,34 @@ public class MessageService {
         }
     }
     
+    public func sendMessage(_ message: NewMessageData, result: @escaping (Result<Message, MessageError>) -> Void) {
+        httpClient.post(endpoint: Endpoint.message, body: try? Data.encodeJSON(value: message)) { networkResult in
+            switch networkResult {
+            case .success(_, let data):
+                guard let message: Message = try? data.decodeJSON() else {
+                    return result(.failure(.unknown))
+                }
+                
+                result(.success(message))
+            case .failure(let error):
+                switch error {
+                case HttpError.badRequest(let data):
+                    guard let errorDescription: ValidationErrorDescription = try? data.decodeJSON() else {
+                        return result(.failure(.unknown))
+                    }
+                    
+                    result(.failure(MessageError.validation(errorDescription.reason)))
+                    
+                default:
+                    result(.failure(.unknown))
+                }
+            }
+        }
+    }
+    
     public func actionMessage<Action: Codable>(with id: Int, type: MessageActionType, result: @escaping (Result<Action, MessageError>) -> Void) {
-        httpClient.put(endpoint: Endpoint.messageAction(with: id, type: type), body: nil) { actionResult in
-            switch actionResult {
+        httpClient.put(endpoint: Endpoint.messageAction(with: id, type: type), body: nil) { networkResult in
+            switch networkResult {
             case .success(_, let data):
                 guard let actionResponse: Action = try? data.decodeJSON() else {
                     return result(.failure(.unknown))

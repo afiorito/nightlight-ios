@@ -31,6 +31,8 @@ public class KeyboardManager {
     /// A value for margin between the input view and keyboard.
     public var keyboardDistanceFromInputView: CGFloat = 10.0
     
+    public var disabledDistanceHandlingClasses  = [UIViewController.Type]()
+    
     /// A gesture for resigning first responder when tapping outside current input view.
     private lazy var resignFirstResponderGesture: UITapGestureRecognizer = {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapRecognized(_:)))
@@ -61,6 +63,8 @@ public class KeyboardManager {
         self.notificationCenter = notificationCenter
 
         registerAllNotifications()
+        
+        disabledDistanceHandlingClasses.append(UITableViewController.self)
     }
     
     deinit {
@@ -89,7 +93,9 @@ public class KeyboardManager {
         guard let inputView = inputView,
             let window = keyWindow,
             let rootViewController = topViewController,
-            let textFieldRect = inputView.superview?.convert(inputView.frame, to: window)
+            let textFieldRect = inputView.superview?.convert(inputView.frame, to: window),
+            let responderViewController = inputView.responderViewController,
+            !disabledDistanceHandlingClasses.contains(where: { responderViewController.isKind(of: $0) })
             else { return }
         
         isKeyboardShowing = true
@@ -128,6 +134,9 @@ public class KeyboardManager {
         registerInputViewClass(UITextField.self,
                                didBeginEditingNotification: UITextField.textDidBeginEditingNotification,
                                didEndEditingNotification: UITextField.textDidEndEditingNotification)
+        registerInputViewClass(UITextView.self,
+                                       didBeginEditingNotification: UITextView.textDidBeginEditingNotification,
+                                       didEndEditingNotification: UITextView.textDidEndEditingNotification)
     }
     
     /**
@@ -138,6 +147,13 @@ public class KeyboardManager {
         notificationCenter.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
         notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
+   
+        unregisterInputViewClass(UITextField.self,
+                                 didBeginEditingNotification: UITextView.textDidBeginEditingNotification,
+                                 didEndEditingNotification: UITextView.textDidEndEditingNotification)
+        unregisterInputViewClass(UITextView.self,
+                                 didBeginEditingNotification: UITextView.textDidBeginEditingNotification,
+                                 didEndEditingNotification: UITextView.textDidEndEditingNotification)
     }
     
     /**
@@ -232,5 +248,21 @@ public class KeyboardManager {
         if gesture.state == .ended {
             resignFirstResponder()
         }
+    }
+}
+
+private extension UIView {
+    var responderViewController: UIViewController? {
+        var nextResponder: UIResponder? = self
+              
+        while let next = nextResponder?.next {
+            nextResponder = next
+            
+            if let viewController = nextResponder as? UIViewController {
+                return viewController
+            }
+        }
+        
+        return nil
     }
 }

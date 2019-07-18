@@ -12,8 +12,8 @@ public extension EmptyViewDescription {
         return EmptyViewDescription(title: "No Recent Messages", subtitle: "Tap the + to send one", imageName: "empty_message")
     }
     
-    static var noUsersMessages: EmptyViewDescription {
-        return EmptyViewDescription(title: "No Users Found", subtitle: "Try searching for someone else", imageName: "empty_user")
+    static var noResults: EmptyViewDescription {
+        return EmptyViewDescription(title: "No Users Found", subtitle: "Try searching for someone else", imageName: "empty_results")
     }
     
     static var noLoad: EmptyViewDescription {

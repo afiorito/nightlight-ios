@@ -1,6 +1,8 @@
 public enum ValidationConstraint: String {
     case userExists
     case weakPassword
+    case minLength
+    case maxLength
 }
 
 public struct ErrorReason: Codable {

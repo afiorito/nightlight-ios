@@ -49,7 +49,7 @@ extension UIView {
     
     public func addShadow(forTheme theme: Theme, shouldRasterize: Bool = true) {
         layer.shadowColor = UIColor.shadow(for: theme).cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowOffset = CGSize(width: 0, height: 1)
         layer.shadowRadius = 4.0
         layer.shadowOpacity = 1.0
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath

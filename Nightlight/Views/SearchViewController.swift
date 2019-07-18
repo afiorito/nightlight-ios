@@ -2,8 +2,6 @@ import UIKit
 
 public class SearchViewController: UIViewController {
     public typealias SearchResultsController = UIViewController & Searchable
-
-    private let viewModel: SearchViewModel
     
     private var searchTask: DispatchWorkItem?
     
@@ -21,8 +19,7 @@ public class SearchViewController: UIViewController {
         return searchController
     }()
 
-    init(viewModel: SearchViewModel, baseViewController: UIViewController, searchResultsController: SearchResultsController) {
-        self.viewModel = viewModel
+    init(baseViewController: UIViewController, searchResultsController: SearchResultsController) {
         self.baseViewController = baseViewController
         self.searchResultsController = searchResultsController
         
@@ -88,10 +85,6 @@ extension SearchViewController: UISearchResultsUpdating {
 // MARK: - Themeable
 
 extension SearchViewController: Themeable {
-    var theme: Theme {
-        return viewModel.theme
-    }
-    
     public func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
         searchController.searchBar.updateColors(for: theme)

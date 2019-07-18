@@ -6,7 +6,8 @@ extension Date {
         dateFormatter.dateStyle = .short
         
         let fullDate = dateFormatter.string(from: self)
-        let dateComponents = Calendar.current.dateComponents([.second, .minute, .hour, .day], from: self.toLocalTime(), to: Date())
+
+        let dateComponents = Calendar.current.dateComponents([.second, .minute, .hour, .day], from: self.toLocalTime(), to: Date().toLocalTime())
         
         guard let day = dateComponents.day,
             let hour = dateComponents.hour,

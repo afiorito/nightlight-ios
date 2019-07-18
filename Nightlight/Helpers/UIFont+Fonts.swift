@@ -26,6 +26,16 @@ extension UIFont {
         return UIFont(name: CircularStdFont.medium.rawValue, size: 16.0)
     }
     
+    /// Primary font with size 16pt and bold weight.
+    public class var primary17ptNormal: UIFont? {
+        return UIFont(name: CircularStdFont.book.rawValue, size: 17.0)
+    }
+    
+    /// Primary font with size 16pt and medium weight.
+    public class var primary17ptMedium: UIFont? {
+        return UIFont(name: CircularStdFont.medium.rawValue, size: 17.0)
+    }
+    
     /// Primary font with size 16pt and normal weight.
     public class var primary16ptNormal: UIFont? {
         return UIFont(name: CircularStdFont.book.rawValue, size: 16.0)

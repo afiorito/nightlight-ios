@@ -33,8 +33,8 @@ public class MessageDetailViewController: UIViewController {
         prepareSubviews()
     }
     
-    public override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
         delegate?.messageDetailViewController(self, didUpdate: viewModel)
     }

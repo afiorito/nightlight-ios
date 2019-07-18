@@ -10,6 +10,8 @@ public class PeopleViewController: UIViewController {
         return view as! PeopleView
     }
     
+    public var emptyViewDescription: EmptyViewDescription?
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +54,7 @@ public class PeopleViewController: UIViewController {
             
             switch result {
             case .success(let people):
-                self.dataSource.emptyViewDescription = EmptyViewDescription.noUsersMessages
+                self.dataSource.emptyViewDescription = self.emptyViewDescription
                 self.dataSource.totalCount = self.viewModel.totalCount
                 
                 if fromStart {
@@ -80,6 +82,8 @@ public class PeopleViewController: UIViewController {
 extension PeopleViewController: Searchable {
     @objc public func updateQuery(text: String) {
         guard text != viewModel.filter else {
+            self.dataSource.data.removeAll()
+            self.peopleView.tableView.reloadData()
             return
         }
         

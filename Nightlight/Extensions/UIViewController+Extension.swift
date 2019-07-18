@@ -24,4 +24,14 @@ extension UIViewController {
         view.removeFromSuperview()
         removeFromParent()
     }
+    
+    public func nextParent(skipping types: [UIViewController.Type] = [UITableViewController.self]) -> UIViewController? {
+        for type in types {
+            if self.isKind(of: type) {
+                return self.parent
+            }
+        }
+        
+        return nil
+    }
 }

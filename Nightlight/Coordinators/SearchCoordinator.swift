@@ -11,17 +11,14 @@ public class SearchCoordinator: TabBarCoordinator {
     public let rootViewController: UIViewController
     
     public lazy var searchViewController: SearchViewController = {
-        let searchViewModel = SearchViewModel(dependencies: dependencies as SearchViewModel.Dependencies)
-        
         let peopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
         let helpfulPeopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
         
         let helpfulPeopleViewController = HelpfulPeopleViewController(viewModel: helpfulPeopleViewModel)
         let peopleViewController = PeopleViewController(viewModel: peopleViewModel)
+        peopleViewController.emptyViewDescription = EmptyViewDescription.noResults
         
-        let viewController = SearchViewController(viewModel: searchViewModel,
-                                                  baseViewController: helpfulPeopleViewController,
-                                                  searchResultsController: peopleViewController)
+        let viewController = SearchViewController(baseViewController: helpfulPeopleViewController, searchResultsController: peopleViewController)
         
         viewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "tb_search"), tag: 0)
         

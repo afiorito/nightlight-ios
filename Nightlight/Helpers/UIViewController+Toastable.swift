@@ -16,6 +16,8 @@ extension UIViewController: Toastable {
         toastView.message = message
         toastView.alpha = 0
         
+        let view: UIView = nextParent()?.view ?? self.view
+        
         view.addSubviews(toastView)
         
         let height: CGFloat = 35
@@ -28,17 +30,17 @@ extension UIViewController: Toastable {
             bottomConstraint
         ])
         
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
         
         UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseOut, animations: {
             bottomConstraint.constant = -15
-            self.view.layoutIfNeeded()
+            view.layoutIfNeeded()
             toastView.alpha = 1
         })
         
         UIView.animate(withDuration: 0.35, delay: duration + 0.35, options: .curveEaseIn, animations: {
             bottomConstraint.constant = height
-            self.view.layoutIfNeeded()
+            view.layoutIfNeeded()
             toastView.alpha = 0
         }, completion: { _ in
             toastView.removeFromSuperview()

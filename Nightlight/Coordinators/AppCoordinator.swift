@@ -1,7 +1,7 @@
 import UIKit
 
 /// Main application coordinator.
-public class AppCoordinator: Coordinator {
+public class AppCoordinator: NSObject, Coordinator {
     public weak var parent: Coordinator?
     public var children: [Coordinator] = []
     
@@ -20,6 +20,8 @@ public class AppCoordinator: Coordinator {
     public init(dependencies: DependencyContainer) {
         self.dependencies = dependencies
         window = UIWindow(frame: UIScreen.main.bounds)
+        
+        super.init()
         
         dependencies
             .notificationCenter
@@ -78,10 +80,12 @@ public class AppCoordinator: Coordinator {
     }
     
     private func prepareMainApplication() -> UIViewController {
+        let placeholderViewController = UIViewController()
+        placeholderViewController.tabBarItem = UITabBarItem(title: "Post", image: UIImage(named: "tb_post"), tag: 0)
+        
         let coordinators: [TabBarCoordinator] = [
             RecentMessagesCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
             SearchCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
-            SendMessageCoordinator(dependencies: self.dependencies),
             NotificationsCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
             ProfileCoordinator(dependencies: self.dependencies)
         ]
@@ -92,7 +96,14 @@ public class AppCoordinator: Coordinator {
         }
         
         let tabBarController = NLTabBarController()
-        tabBarController.viewControllers = coordinators.map { $0.rootViewController }
+        tabBarController.delegate = self
+        tabBarController.viewControllers = [
+            coordinators[0].rootViewController,
+            coordinators[1].rootViewController,
+            placeholderViewController,
+            coordinators[2].rootViewController,
+            coordinators[3].rootViewController
+        ]
         
         return tabBarController
     }
@@ -113,6 +124,27 @@ public class AppCoordinator: Coordinator {
     }
 
 }
+
+// MARK: - UITabBarController Delegate
+
+extension AppCoordinator: UITabBarControllerDelegate {
+    public func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
+        if viewController.tabBarItem.title == "Post" {
+            let coordinator = SendMessageCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies)
+            addChild(coordinator)
+            coordinator.start()
+            
+            tabBarController.present(coordinator.rootViewController, animated: true)
+            
+            return false
+        }
+        
+        return true
+    }
+}
+
+// MARK: - OnboardViewController Delegate
 
 extension AppCoordinator: OnboardViewControllerDelegate {
     public func onboardViewControllerDidProceedAsNewUser(_ onboardViewController: OnboardViewController) {
