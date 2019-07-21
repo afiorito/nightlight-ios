@@ -16,6 +16,13 @@ public extension EmptyViewDescription {
         return EmptyViewDescription(title: "No Users Found", subtitle: "Try searching for someone else", imageName: "empty_results")
     }
     
+    static var noNotifications: EmptyViewDescription {
+            return EmptyViewDescription(
+                title: "No Notifications",
+                subtitle: "You will get notified when someone engages with your content.",
+                imageName: "empty_notifications")
+        }
+    
     static var noLoad: EmptyViewDescription {
         return EmptyViewDescription(title: "No Connection", subtitle: "Failed to load.", imageName: "no_load")
     }

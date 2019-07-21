@@ -54,6 +54,7 @@ public class EmptyView: UIView {
     private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.numberOfLines = 0
         label.font = .secondary16ptNormal
         return label
     }()
@@ -84,8 +85,9 @@ public class EmptyView: UIView {
         addSubviews(container)
         
         NSLayoutConstraint.activate([
-            container.centerXAnchor.constraint(equalTo: centerXAnchor),
             container.centerYAnchor.constraint(equalTo: centerYAnchor),
+            container.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            container.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
             imageView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
         ])

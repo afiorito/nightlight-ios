@@ -3,7 +3,7 @@ import Foundation
 /// A dependency container to inject into other objects.
 public struct DependencyContainer: StyleManaging,
     UserDefaultsManaging, KeychainManaging, NotificationObserving, KeyboardManaging, AuthServiced, MessageServiced,
-    PeopleServiced {
+    PeopleServiced, UserNotificationServiced {
     public var styleManager = StyleManager.default
     public var userDefaultsManager = UserDefaultsManager()
     public var keychainManager = KeychainManager()
@@ -12,6 +12,7 @@ public struct DependencyContainer: StyleManaging,
     public var authService: AuthService
     public var messageService: MessageService
     public var peopleService: PeopleService
+    public var notificationService: UserNotificationService
     
     init() {
         let httpClient = HttpClient()
@@ -20,5 +21,6 @@ public struct DependencyContainer: StyleManaging,
         self.authService = AuthService(httpClient: httpClient, keychainManager: keychainManager)
         self.messageService = MessageService(httpClient: authorizedHttpClient)
         self.peopleService = PeopleService(httpClient: authorizedHttpClient)
+        self.notificationService = UserNotificationService(httpClient: authorizedHttpClient)
     }
 }

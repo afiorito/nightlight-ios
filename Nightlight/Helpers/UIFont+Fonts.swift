@@ -51,6 +51,11 @@ extension UIFont {
         return UIFont.systemFont(ofSize: 16.0, weight: .medium)
     }
     
+    /// Secondary font with size 16pt and medium weight.
+    public class var secondary16ptBold: UIFont? {
+        return UIFont.systemFont(ofSize: 16.0, weight: .bold)
+    }
+    
     /// Secondary font with size 16pt and normal weight.
     public class var secondary16ptNormal: UIFont? {
         return UIFont.systemFont(ofSize: 16.0)

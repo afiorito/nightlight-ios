@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 public class HttpClient {
     public typealias RequestResult = Result<(HTTPURLResponse, Data), Error>
@@ -18,6 +19,7 @@ public class HttpClient {
     @discardableResult
     public func request(urlRequest: URLRequest, result: @escaping (RequestResult) -> Void) -> URLSessionDataTask? {
         let task = urlSession.dataTask(with: urlRequest) { taskResult in
+
             switch taskResult {
             case .success(let response, let data):
                 guard let response = response as? HTTPURLResponse, let data = data else {

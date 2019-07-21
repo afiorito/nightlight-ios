@@ -179,7 +179,7 @@ extension MessagesViewController: Themeable {
         messagesView.updateColors(for: theme)
         toastView?.updateColors(for: theme)
         messagesView.tableView.emptyView?.updateColors(for: theme)
-        refreshControl.tintColor = .primaryGrayScale(for: theme)
+        refreshControl.tintColor = .neutral
         
         switch theme {
         case .light:

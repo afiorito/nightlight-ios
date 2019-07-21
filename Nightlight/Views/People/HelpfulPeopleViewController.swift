@@ -94,7 +94,7 @@ extension HelpfulPeopleViewController: UITableViewDelegate {
 extension HelpfulPeopleViewController: Themeable {
     func updateColors(for theme: Theme) {
         peopleView.updateColors(for: theme)
-        refreshControl.tintColor = .primaryGrayScale(for: theme)
+        refreshControl.tintColor = .neutral
         (peopleView.tableView.tableHeaderView as? Themeable)?.updateColors(for: theme)
     }
 }

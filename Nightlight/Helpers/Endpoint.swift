@@ -95,7 +95,7 @@ extension Endpoint {
         return Endpoint(path: "/user/helpful")
     }
     
-    static func users(filter: String, start: String?, end: String?) -> Endpoint {
+    static func user(filter: String, start: String?, end: String?) -> Endpoint {
         var queryItems: [URLQueryItem] = []
         
         if !filter.isEmpty {
@@ -112,5 +112,23 @@ extension Endpoint {
         
         return Endpoint(path: "/user", queryItems: queryItems)
         
+    }
+}
+
+// MARK: - Notification Endpoints
+
+extension Endpoint {
+    static func notification(start: String?, end: String?) -> Endpoint {
+        var queryItems: [URLQueryItem] = []
+        
+        if let start = start {
+            queryItems.append(URLQueryItem(name: "start", value: start))
+        }
+        
+        if let end = end {
+            queryItems.append(URLQueryItem(name: "end", value: end))
+        }
+        
+        return Endpoint(path: "/notification", queryItems: queryItems)
     }
 }

@@ -35,7 +35,7 @@ public class PeopleService {
             task.cancel()
         }
         
-        filterTask = httpClient.get(endpoint: Endpoint.users(filter: filter, start: start, end: end), result: { [weak self] networkResult in
+        filterTask = httpClient.get(endpoint: Endpoint.user(filter: filter, start: start, end: end), result: { [weak self] networkResult in
             self?.filterTask = nil
 
             switch networkResult {

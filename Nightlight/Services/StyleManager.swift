@@ -10,7 +10,7 @@ public class StyleManager {
     public static var `default`: StyleManager = StyleManager()
     
     /// The currently active theme.
-    public var theme: Theme = .dark {
+    public var theme: Theme = .light {
         didSet {
             guard oldValue != theme else { return }
             
