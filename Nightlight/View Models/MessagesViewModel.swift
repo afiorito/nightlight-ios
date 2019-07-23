@@ -10,7 +10,7 @@ public class MessagesViewModel {
         return dependencies.styleManager.theme
     }
     
-    private let type: MessageType
+    public let type: MessageType
     
     private var startPage: String?
     private var endPage: String?
@@ -40,7 +40,7 @@ public class MessagesViewModel {
                 self.endPage = messageResponse.metadata.end
                 self.totalCount = messageResponse.metadata.total
                 
-                let messages = messageResponse.data.map { MessageViewModel(dependencies: self.dependencies, message: $0) }
+                let messages = messageResponse.data.map { MessageViewModel(dependencies: self.dependencies, message: $0, type: self.type) }
                 
                 DispatchQueue.main.async { result(.success(messages)) }
             case .failure(let error):

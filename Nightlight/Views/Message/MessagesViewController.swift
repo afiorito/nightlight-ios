@@ -1,6 +1,6 @@
 import UIKit
 
-public class MessagesViewController: UIViewController {
+public class MessagesViewController: UIViewController, MessageContextHandling {
 
     private let viewModel: MessagesViewModel
     
@@ -88,6 +88,28 @@ public class MessagesViewController: UIViewController {
         messagesView.tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
     }
     
+    public func deleteSelectedIndexPath(with message: MessageViewModel) {
+        didDeleteMessage(message: message, at: messagesView.tableView.indexPathForSelectedRow)
+    }
+    
+    public func didReportMessage(message: MessageViewModel, at indexPath: IndexPath?) {
+        showToast("The message has been reported!", severity: .success)
+    }
+    
+    public func didDeleteMessage(message: MessageViewModel, at indexPath: IndexPath?) {
+        message.delete { [weak self] result in
+            switch result {
+            case .success:
+                if let indexPath = indexPath {
+                    self?.dataSource.data.remove(at: indexPath.row)
+                    self?.messagesView.tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+            case .failure:
+                self?.showToast("Could not connect to Nightlight.", severity: .urgent)
+            }
+        }
+    }
+    
     @objc private func refresh() {
         loadMoreMessages(fromStart: true)
     }
@@ -131,7 +153,7 @@ extension MessagesViewController: MessageTableViewCellDelegate {
         
         let viewModel = dataSource.data[indexPath.row]
 
-        delegate?.messagesViewController(self, moreContextFor: viewModel)
+        delegate?.messagesViewController(self, moreContextFor: viewModel, at: indexPath)
     }
     
     public func cellDidTapLove(_ cell: UITableViewCell) {
@@ -163,7 +185,7 @@ extension MessagesViewController: MessageTableViewCellDelegate {
 
 extension MessagesViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.messagesViewController(self, didSelect: dataSource.data[indexPath.row])
+        delegate?.messagesViewController(self, didSelect: dataSource.data[indexPath.row], at: indexPath)
     }
 }
 

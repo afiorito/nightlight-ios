@@ -56,10 +56,8 @@ public class UserNotificationViewModel {
         return NSAttributedString(string: str, attributes: attributes)
     }
     
-    
     init(userNotification: AnyUserNotification) {
         self.userNotification = userNotification
     }
-    
     
 }

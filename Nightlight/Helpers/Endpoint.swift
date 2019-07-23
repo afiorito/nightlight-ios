@@ -86,6 +86,10 @@ extension Endpoint {
         
         return Endpoint(path: "/message/\(id)/action", queryItems: queryItems)
     }
+    
+    static func deleteMessage(with id: Int) -> Endpoint {
+        return Endpoint(path: "/message/\(id)")
+    }
 }
 
 // MARK: - User Endpoints
@@ -111,7 +115,10 @@ extension Endpoint {
         }
         
         return Endpoint(path: "/user", queryItems: queryItems)
-        
+    }
+    
+    static func user(username: String) -> Endpoint {
+        return Endpoint(path: "/user/\(username)")
     }
 }
 

@@ -20,7 +20,7 @@ public struct DependencyContainer: StyleManaging,
         
         self.authService = AuthService(httpClient: httpClient, keychainManager: keychainManager)
         self.messageService = MessageService(httpClient: authorizedHttpClient)
-        self.peopleService = PeopleService(httpClient: authorizedHttpClient)
+        self.peopleService = PeopleService(httpClient: authorizedHttpClient, keychainManager: keychainManager)
         self.notificationService = UserNotificationService(httpClient: authorizedHttpClient)
     }
 }

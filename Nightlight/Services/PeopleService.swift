@@ -7,11 +7,13 @@ public protocol PeopleServiced {
 public class PeopleService {
     
     private let httpClient: HttpClient
+    private let keychainManager: KeychainManager
     
     private var filterTask: URLSessionDataTask?
     
-    init(httpClient: HttpClient) {
+    init(httpClient: HttpClient, keychainManager: KeychainManager) {
         self.httpClient = httpClient
+        self.keychainManager = keychainManager
     }
     
     public func getHelpfulPeople(result: @escaping (Result<[User], PersonError>) -> Void) {
@@ -50,6 +52,30 @@ public class PeopleService {
                 result(.failure(.unknown))
             }
         })
+    }
+    
+    public func getPerson(result: @escaping (Result<User, PersonError>) -> Void) {
+        guard let accessToken = try? keychainManager.string(forKey: KeychainKey.accessToken.rawValue),
+            let jwt = try? JWTDecoder().decode(accessToken),
+            let username = jwt["username"] as? String
+            else {
+                return result(.failure(.unknown))
+            }
+        
+        httpClient.get(endpoint: Endpoint.user(username: username)) { networkResult in
+            switch networkResult {
+            case .success(_, let data):
+                guard let person: User = try? data.decodeJSON() else {
+                    return result(.failure(.unknown))
+                }
+                
+                result(.success(person))
+                
+            case .failure:
+                result(.failure(.unknown))
+            }
+        }
+        
     }
 
 }

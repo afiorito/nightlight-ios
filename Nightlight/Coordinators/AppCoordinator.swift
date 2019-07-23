@@ -87,7 +87,7 @@ public class AppCoordinator: NSObject, Coordinator {
             RecentMessagesCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
             SearchCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
             NotificationsCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
-            ProfileCoordinator(dependencies: self.dependencies)
+            ProfileCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies)
         ]
 
         for coordinator in coordinators {

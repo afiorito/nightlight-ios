@@ -105,6 +105,17 @@
 		9276314B22D4B41E000D4B8F /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276314A22D4B41E000D4B8F /* KeychainManager.swift */; };
 		9276314D22D4C6FA000D4B8F /* KeychainAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276314C22D4C6FA000D4B8F /* KeychainAccessibility.swift */; };
 		9276314F22D4DDAE000D4B8F /* KeychainKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276314E22D4DDAE000D4B8F /* KeychainKey.swift */; };
+		9279AC7F22E6091C0098C4C2 /* JWTDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC7E22E6091C0098C4C2 /* JWTDecoder.swift */; };
+		9279AC8D22E671E70098C4C2 /* PageTabsViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC8C22E671E70098C4C2 /* PageTabsViewDataSource.swift */; };
+		9279AC9B22E692D60098C4C2 /* PageTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9422E692820098C4C2 /* PageTabController.swift */; };
+		9279AC9C22E692D90098C4C2 /* PageTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9322E692810098C4C2 /* PageTabsView.swift */; };
+		9279AC9D22E692DB0098C4C2 /* PageTabsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9622E692820098C4C2 /* PageTabsViewDelegate.swift */; };
+		9279AC9E22E692DD0098C4C2 /* PageTabControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9722E692820098C4C2 /* PageTabControllerDataSource.swift */; };
+		9279AC9F22E692E30098C4C2 /* TabFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9522E692820098C4C2 /* TabFlowLayout.swift */; };
+		9279ACA022E692E60098C4C2 /* TabSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9822E692820098C4C2 /* TabSeparatorView.swift */; };
+		9279ACA122E692E80098C4C2 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9922E692830098C4C2 /* TabCollectionViewCell.swift */; };
+		9279ACA222E692EB0098C4C2 /* ContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9A22E692830098C4C2 /* ContainerCollectionViewCell.swift */; };
+		9279ACA822E73E120098C4C2 /* MessageContextHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACA722E73E120098C4C2 /* MessageContextHandling.swift */; };
 		9282180B22D20CB50007FF9B /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282180A22D20CB50007FF9B /* KeyboardManager.swift */; };
 		928A10A622D3CDF000FF78FB /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A10A522D3CDF000FF78FB /* URLSession+Extension.swift */; };
 		928A10A822D3CFBF00FF78FB /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A10A722D3CFBF00FF78FB /* NetworkError.swift */; };
@@ -294,6 +305,17 @@
 		9276314A22D4B41E000D4B8F /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		9276314C22D4C6FA000D4B8F /* KeychainAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccessibility.swift; sourceTree = "<group>"; };
 		9276314E22D4DDAE000D4B8F /* KeychainKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainKey.swift; sourceTree = "<group>"; };
+		9279AC7E22E6091C0098C4C2 /* JWTDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JWTDecoder.swift; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Helpers/JWTDecoder.swift"; sourceTree = "<group>"; };
+		9279AC8C22E671E70098C4C2 /* PageTabsViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTabsViewDataSource.swift; sourceTree = "<group>"; };
+		9279AC9322E692810098C4C2 /* PageTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTabsView.swift; sourceTree = "<group>"; };
+		9279AC9422E692820098C4C2 /* PageTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTabController.swift; sourceTree = "<group>"; };
+		9279AC9522E692820098C4C2 /* TabFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabFlowLayout.swift; sourceTree = "<group>"; };
+		9279AC9622E692820098C4C2 /* PageTabsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTabsViewDelegate.swift; sourceTree = "<group>"; };
+		9279AC9722E692820098C4C2 /* PageTabControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTabControllerDataSource.swift; sourceTree = "<group>"; };
+		9279AC9822E692820098C4C2 /* TabSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSeparatorView.swift; sourceTree = "<group>"; };
+		9279AC9922E692830098C4C2 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
+		9279AC9A22E692830098C4C2 /* ContainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerCollectionViewCell.swift; sourceTree = "<group>"; };
+		9279ACA722E73E120098C4C2 /* MessageContextHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessageContextHandling.swift; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Helpers/MessageContextHandling.swift"; sourceTree = "<group>"; };
 		9282180A22D20CB50007FF9B /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		928A10A522D3CDF000FF78FB /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		928A10A722D3CFBF00FF78FB /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -533,8 +555,8 @@
 				92F1763222DCCC68008AEB82 /* Context Menu */,
 				92F1763122DCA5FC008AEB82 /* Data Source */,
 				92F1762522DBF6D3008AEB82 /* Message */,
-				925763DC22CAD7760031D616 /* Onboarding */,
 				92BB2F2F22E2040100AAF662 /* Notification */,
+				925763DC22CAD7760031D616 /* Onboarding */,
 				925BE1CA22DE72260000BEC9 /* People */,
 				920E495322DFBFB600AA1EDB /* Send Message */,
 				928A10AD22D3E35200FF78FB /* Splash Screen */,
@@ -593,6 +615,7 @@
 				92F1761D22DBC232008AEB82 /* MessageActionType.swift */,
 				92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */,
 				920E495122DFA23800AA1EDB /* PaginatedResponse.swift */,
+				9279ACA722E73E120098C4C2 /* MessageContextHandling.swift */,
 				9228D6C422D7BD02003B03DB /* MessageType.swift */,
 				9237A1DE22CA859600FC9331 /* NLNotification.swift */,
 				92B5502E22E222460057589E /* NotificationType.swift */,
@@ -615,6 +638,7 @@
 				9276314622D4AEC4000D4B8F /* ValidationErrorDescription.swift */,
 				92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */,
 				9261402C22E0F2AC005C7B33 /* NewMessageData.swift */,
+				9279AC7E22E6091C0098C4C2 /* JWTDecoder.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -659,6 +683,22 @@
 				925BE1DB22DEA0C90000BEC9 /* HelpfulPeopleHeader.swift */,
 			);
 			path = People;
+			sourceTree = "<group>";
+		};
+		9279AC9222E692710098C4C2 /* Page Tab Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9279AC9422E692820098C4C2 /* PageTabController.swift */,
+				9279AC9322E692810098C4C2 /* PageTabsView.swift */,
+				9279AC9622E692820098C4C2 /* PageTabsViewDelegate.swift */,
+				9279AC9722E692820098C4C2 /* PageTabControllerDataSource.swift */,
+				9279AC8C22E671E70098C4C2 /* PageTabsViewDataSource.swift */,
+				9279AC9522E692820098C4C2 /* TabFlowLayout.swift */,
+				9279AC9822E692820098C4C2 /* TabSeparatorView.swift */,
+				9279AC9922E692830098C4C2 /* TabCollectionViewCell.swift */,
+				9279AC9A22E692830098C4C2 /* ContainerCollectionViewCell.swift */,
+			);
+			path = "Page Tab Controller";
 			sourceTree = "<group>";
 		};
 		928A10AB22D3E2DA00FF78FB /* Errors */ = {
@@ -737,6 +777,7 @@
 		92F1763022DCA5E0008AEB82 /* Container */ = {
 			isa = PBXGroup;
 			children = (
+				9279AC9222E692710098C4C2 /* Page Tab Controller */,
 				9213185222D6142700C91D90 /* MainNavigationController.swift */,
 				9213184A22D6050000C91D90 /* NLTabBarController.swift */,
 			);
@@ -937,6 +978,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9213184922D5728F00C91D90 /* SignInCredentials.swift in Sources */,
+				9279ACA222E692EB0098C4C2 /* ContainerCollectionViewCell.swift in Sources */,
 				925763E322CB7BE00031D616 /* AuthViewBackground.swift in Sources */,
 				925763D022CABF6A0031D616 /* TextButton.swift in Sources */,
 				920E495D22DFD12A00AA1EDB /* MessageBodyCell.swift in Sources */,
@@ -986,10 +1028,13 @@
 				92B302F922D6435200CE5668 /* SendMessageViewController.swift in Sources */,
 				9237A1DF22CA859600FC9331 /* NLNotification.swift in Sources */,
 				925BE1D022DE80A30000BEC9 /* AccoladeView.swift in Sources */,
+				9279AC9D22E692DB0098C4C2 /* PageTabsViewDelegate.swift in Sources */,
 				92418D4522D7C048001B6DFB /* PaginationMetadata.swift in Sources */,
 				9228D6C522D7BD02003B03DB /* MessageType.swift in Sources */,
+				9279ACA822E73E120098C4C2 /* MessageContextHandling.swift in Sources */,
 				9213184D22D605AE00C91D90 /* SendMessageCoordinator.swift in Sources */,
 				92D398A522C906A500AAC887 /* UIView+Extension.swift in Sources */,
+				9279AC9B22E692D60098C4C2 /* PageTabController.swift in Sources */,
 				92931C2522D35C8000C54EB8 /* AuthorizedHttpClient.swift in Sources */,
 				925763D422CAC9C00031D616 /* OnboardViewControllerDelegate.swift in Sources */,
 				9276314B22D4B41E000D4B8F /* KeychainManager.swift in Sources */,
@@ -1002,6 +1047,7 @@
 				925BE1CC22DE78ED0000BEC9 /* PersonTableViewCell.swift in Sources */,
 				92748B1622E0AFC900C2957E /* NumPeopleCell.swift in Sources */,
 				92418D4722D7C1D0001B6DFB /* MessageError.swift in Sources */,
+				9279AC8D22E671E70098C4C2 /* PageTabsViewDataSource.swift in Sources */,
 				92CA9C8622D6484B009900E6 /* ProfileCoordinator.swift in Sources */,
 				928A10B322D3EBF400FF78FB /* SignUpCredentials.swift in Sources */,
 				9237A1E322CA8D8C00FC9331 /* StyleManager.swift in Sources */,
@@ -1021,7 +1067,9 @@
 				920E495222DFA23800AA1EDB /* PaginatedResponse.swift in Sources */,
 				9213185322D6142700C91D90 /* MainNavigationController.swift in Sources */,
 				92B5502B22E20E8D0057589E /* UserNotification.swift in Sources */,
+				9279ACA122E692E80098C4C2 /* TabCollectionViewCell.swift in Sources */,
 				925DD4AD22DDEA1800D50A89 /* Toastable.swift in Sources */,
+				9279AC9C22E692D90098C4C2 /* PageTabsView.swift in Sources */,
 				925DD4AF22DDEA5A00D50A89 /* UIViewController+Toastable.swift in Sources */,
 				9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */,
 				9237A1D722CA7D7200FC9331 /* Theme.swift in Sources */,
@@ -1051,11 +1099,14 @@
 				9276314D22D4C6FA000D4B8F /* KeychainAccessibility.swift in Sources */,
 				92F1761E22DBC232008AEB82 /* MessageActionType.swift in Sources */,
 				92F1765A22DD3EA9008AEB82 /* BottomSheetPresentationController.swift in Sources */,
+				9279ACA022E692E60098C4C2 /* TabSeparatorView.swift in Sources */,
 				925BE1C322DE48A20000BEC9 /* LabelTitleView.swift in Sources */,
 				925DD4B522DE04C300D50A89 /* CompactTableView.swift in Sources */,
 				92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */,
 				9228D6BA22D77ED9003B03DB /* MessageViewModel.swift in Sources */,
+				9279AC9E22E692DD0098C4C2 /* PageTabControllerDataSource.swift in Sources */,
 				92931C3622D3A09600C54EB8 /* Env.swift in Sources */,
+				9279AC9F22E692E30098C4C2 /* TabFlowLayout.swift in Sources */,
 				92F1765822DD3E4E008AEB82 /* BottomSheetPresentable+LayoutHelpers.swift in Sources */,
 				925763DF22CB768D0031D616 /* SignInViewController.swift in Sources */,
 				92B9008822CD8720009E619B /* AuthCoordinator.swift in Sources */,
@@ -1070,6 +1121,7 @@
 				92BB2F3322E2054100AAF662 /* NotificationTableViewCell.swift in Sources */,
 				92F1766222DD4777008AEB82 /* DimmedView.swift in Sources */,
 				925BE1C922DE721A0000BEC9 /* PeopleView.swift in Sources */,
+				9279AC7F22E6091C0098C4C2 /* JWTDecoder.swift in Sources */,
 				92F1762922DBF7F0008AEB82 /* MessageContentView.swift in Sources */,
 				925BE1D822DE87670000BEC9 /* PeopleViewModel.swift in Sources */,
 				92748B1822E0B4C500C2957E /* NSRegularExpression+Extension.swift in Sources */,

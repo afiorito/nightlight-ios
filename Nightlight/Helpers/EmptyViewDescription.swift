@@ -12,6 +12,20 @@ public extension EmptyViewDescription {
         return EmptyViewDescription(title: "No Recent Messages", subtitle: "Tap the + to send one", imageName: "empty_message")
     }
     
+    static var noReceivedMessages: EmptyViewDescription {
+        return EmptyViewDescription(title: "No Received Messages",
+                                    subtitle: "When someone sends you a message, you will see it here.",
+                                    imageName: "empty_message")
+    }
+    
+    static var noSentMessages: EmptyViewDescription {
+        return EmptyViewDescription(title: "No Sent Messages", subtitle: "Tap the + to send one", imageName: "empty_message")
+    }
+    
+    static var noSavedMessages: EmptyViewDescription {
+        return EmptyViewDescription(title: "No Saved Messages", subtitle: "Your saved messages will show up here.", imageName: "empty_message")
+    }
+    
     static var noResults: EmptyViewDescription {
         return EmptyViewDescription(title: "No Users Found", subtitle: "Try searching for someone else", imageName: "empty_results")
     }

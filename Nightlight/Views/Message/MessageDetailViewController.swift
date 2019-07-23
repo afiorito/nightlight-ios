@@ -1,6 +1,6 @@
 import UIKit
 
-public class MessageDetailViewController: UIViewController {
+public class MessageDetailViewController: UIViewController, MessageContextHandling {
 
     private let viewModel: MessageViewModel
     
@@ -33,18 +33,20 @@ public class MessageDetailViewController: UIViewController {
         prepareSubviews()
     }
     
-    public override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        delegate?.messageDetailViewController(self, didUpdate: viewModel)
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
         removeDidChangeThemeObserver()
+    }
+    
+    public func didReportMessage(message: MessageViewModel, at indexPath: IndexPath?) {
+        showToast("The message has been reported!", severity: .success)
+    }
+    
+    public func didDeleteMessage(message: MessageViewModel, at indexPath: IndexPath?) {
+        self.delegate?.messageDetailViewController(self, didDelete: message)
     }
     
     @objc private func loveTapped() {
@@ -68,7 +70,8 @@ public class MessageDetailViewController: UIViewController {
     
     private func handleMessageAction(result: Result<MessageViewModel, MessageError>) {
         switch result {
-        case .success: break
+        case .success:
+            delegate?.messageDetailViewController(self, didUpdate: viewModel)
         case .failure:
             self.showToast("Could not connect to Nightlight.", severity: .urgent)
         }
@@ -78,7 +81,7 @@ public class MessageDetailViewController: UIViewController {
     
     private func updateView() {
         messageContentView.titleLabel.text = viewModel.title
-        messageContentView.usernameLabel.text = viewModel.username
+        messageContentView.usernameLabel.text = viewModel.displayName
         messageContentView.timeAgoLabel.text = viewModel.timeAgo
         messageContentView.bodyLabel.text = viewModel.body
         messageContentView.loveAction.isSelected = viewModel.isLoved

@@ -5,13 +5,19 @@ public class MessageViewModel {
     
     private let dependencies: Dependencies
     
-    private var message: Message
+    private(set) var message: Message
+    
+    public let type: MessageType
     
     public var title: String {
         return message.title
     }
     
     public var username: String {
+        return message.user.username
+    }
+    
+    public var displayName: String {
         return message.isAnonymous ? "anonymous" : message.user.username
     }
     
@@ -43,9 +49,10 @@ public class MessageViewModel {
         return message.isSaved
     }
     
-    public init(dependencies: Dependencies, message: Message) {
+    public init(dependencies: Dependencies, message: Message, type: MessageType) {
         self.dependencies = dependencies
         self.message = message
+        self.type = type
     }
     
     public func loveMessage(result: @escaping (Result<MessageViewModel, MessageError>) -> Void) {
@@ -56,7 +63,10 @@ public class MessageViewModel {
                 self.message.isLoved = loveResponse.isLoved
                 self.message.loveCount += loveResponse.isLoved ? 1 : -1
                 
-                DispatchQueue.main.async { result(.success(MessageViewModel(dependencies: self.dependencies, message: self.message))) }
+                DispatchQueue.main.async {
+                    result(.success(MessageViewModel(dependencies: self.dependencies, message: self.message, type: self.type)))
+                    
+                }
                 
             case .failure:
                 DispatchQueue.main.async { result(.failure(.unknown)) }
@@ -71,8 +81,23 @@ public class MessageViewModel {
                 
                 self.message.isSaved = saveResponse.isSaved
 
-                DispatchQueue.main.async { result(.success(MessageViewModel(dependencies: self.dependencies, message: self.message))) }
+                DispatchQueue.main.async {
+                    result(.success(MessageViewModel(dependencies: self.dependencies, message: self.message, type: self.type)))
+                }
                 
+            case .failure:
+                DispatchQueue.main.async { result(.failure(.unknown)) }
+            }
+        }
+    }
+    
+    public func delete(result: @escaping (Result<MessageViewModel, MessageError>) -> Void) {
+        dependencies.messageService.deleteMessage(with: message.id) { deleteResult in
+            switch deleteResult {
+            case .success:
+                DispatchQueue.main.async {
+                    result(.success(MessageViewModel(dependencies: self.dependencies, message: self.message, type: self.type)))
+                }
             case .failure:
                 DispatchQueue.main.async { result(.failure(.unknown)) }
             }

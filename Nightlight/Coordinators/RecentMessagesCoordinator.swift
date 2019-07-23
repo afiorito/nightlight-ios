@@ -65,13 +65,13 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
 // MARK: - MessagesViewController Delegate
 
 extension RecentMessagesCoordinator: MessagesViewControllerDelegate {
-    public func messagesViewController(_ messagesViewController: MessagesViewController, didSelect message: MessageViewModel) {
+    public func messagesViewController(_ messagesViewController: MessagesViewController, didSelect message: MessageViewModel, at indexPath: IndexPath) {
         let messageDetailViewController = MessageDetailViewController(viewModel: message)
         messageDetailViewController.delegate = self
         rootViewController.show(messageDetailViewController, sender: rootViewController)
     }
     
-    public func messagesViewController(_ messagesViewController: MessagesViewController, moreContextFor message: MessageViewModel) {
+    public func messagesViewController(_ messagesViewController: MessagesViewController, moreContextFor message: MessageViewModel, at indexPath: IndexPath) {
         handleMoreContext(for: messagesViewController)
     }
     
@@ -83,6 +83,10 @@ extension RecentMessagesCoordinator: MessageDetailViewControllerDelegate {
     public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, didUpdate message: MessageViewModel) {
         recentMessagesViewController.reloadSelectedIndexPath(with: message)
     }
+    
+    public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, didDelete message: MessageViewModel) {
+            recentMessagesViewController.deleteSelectedIndexPath(with: message)
+        }
     
     public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, moreContextFor message: MessageViewModel) {
         handleMoreContext(for: messageDetailViewController)

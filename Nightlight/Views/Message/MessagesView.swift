@@ -8,6 +8,7 @@ public class MessagesView: UIView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 300
         tableView.separatorInset = .zero
+        tableView.contentInsetAdjustmentBehavior = .never
         
         return tableView
     }()

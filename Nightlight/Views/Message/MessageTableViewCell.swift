@@ -28,7 +28,7 @@ public class MessageTableViewCell: UITableViewCell, Configurable {
     
     public func configure(with viewModel: MessageViewModel) {
         messageContentView.titleLabel.text = viewModel.title
-        messageContentView.usernameLabel.text = viewModel.username
+        messageContentView.usernameLabel.text = viewModel.displayName
         messageContentView.timeAgoLabel.text = viewModel.timeAgo
         messageContentView.bodyLabel.text = viewModel.body
         messageContentView.loveAction.isSelected = viewModel.isLoved

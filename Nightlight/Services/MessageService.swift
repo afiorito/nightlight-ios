@@ -68,4 +68,21 @@ public class MessageService {
             }
         }
     }
+    
+    public func deleteMessage(with id: Int, result: @escaping (Result<MessageDeleteResponse, MessageError>) -> Void) {
+        httpClient.delete(endpoint: Endpoint.deleteMessage(with: id)) { networkResult in
+            switch networkResult {
+            case .success(_, let data):
+                guard let deleteResponse: MessageDeleteResponse = try? data.decodeJSON() else {
+                    return result(.failure(.unknown))
+                }
+                
+                result(.success(deleteResponse))
+                
+            case .failure:
+                result(.failure(.unknown))
+            }
+            
+        }
+    }
 }
