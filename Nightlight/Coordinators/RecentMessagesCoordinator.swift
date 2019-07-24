@@ -8,23 +8,20 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
     
     private let dependencies: Dependencies
     
-    public let rootViewController: UIViewController
+    public let rootViewController: UINavigationController
     
     lazy var recentMessagesViewController: MessagesViewController = {
         let viewModel = MessagesViewModel(dependencies: dependencies as! MessagesViewModel.Dependencies, type: .recent)
         let viewController = MessagesViewController(viewModel: viewModel)
 
-        guard let navController = rootViewController as? UINavigationController else {
-            return viewController
-        }
-
         let title = "Recent Messages"
         
         viewController.delegate = self
         viewController.navigationItem.titleView = {
-            let navFrame = navController.navigationBar.frame
+            let navFrame = rootViewController.navigationBar.frame
             let titleView = LabelTitleView(frame: CGRect(x: 15, y: 0,
-                                                         width: navController.view.frame.width - 30, height: navFrame.height))
+                                                         width: rootViewController.view.frame.width - 30,
+                                                         height: navFrame.height))
             titleView.title = title
             return titleView
         }()
@@ -36,7 +33,7 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
         return viewController
     }()
     
-    init(rootViewController: UIViewController, dependencies: Dependencies) {
+    init(rootViewController: UINavigationController, dependencies: Dependencies) {
         self.rootViewController = rootViewController
         self.dependencies = dependencies
     }

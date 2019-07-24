@@ -49,6 +49,9 @@ public class SendMessageViewController: UITableViewController {
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
         bodyCell.textView.delegate = self
         
+        anonymousCell.switchControl.isOn = viewModel.isAnonymous
+        numberOfPeopleCell.textField.text = "3"
+        
         updateColors(for: theme)
     }
     

@@ -46,5 +46,5 @@ public extension Coordinator {
 }
 
 public protocol TabBarCoordinator: Coordinator {
-    var rootViewController: UIViewController { get }
+    var rootViewController: UINavigationController { get }
 }

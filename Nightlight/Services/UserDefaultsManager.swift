@@ -24,4 +24,23 @@ public class UserDefaultsManager {
         get { return userDefaults.bool(forKey: UserDefaultsKey.hasOnboarded.rawValue) }
         set { userDefaults.set(newValue, forKey: UserDefaultsKey.hasOnboarded.rawValue) }
     }
+    
+    public var theme: Theme {
+        get {
+            return Theme(rawValue: userDefaults.string(forKey: UserDefaultsKey.theme.rawValue) ?? "") ?? .light
+        }
+        set {
+            userDefaults.set(newValue.rawValue, forKey: UserDefaultsKey.theme.rawValue)
+        }
+    }
+    
+    public var messageDefault: MessageDefault {
+        get {
+            return MessageDefault(rawValue: userDefaults.string(forKey: UserDefaultsKey.messageDefault.rawValue) ?? "") ?? .username
+        }
+        
+        set {
+            userDefaults.set(newValue.rawValue, forKey: UserDefaultsKey.messageDefault.rawValue)
+        }
+    }
 }

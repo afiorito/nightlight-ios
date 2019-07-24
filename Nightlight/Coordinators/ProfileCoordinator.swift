@@ -1,6 +1,6 @@
 import UIKit
 
-public class ProfileCoordinator: TabBarCoordinator {
+public class ProfileCoordinator: NSObject, TabBarCoordinator {
     public typealias Dependencies = KeychainManaging & StyleManaging
 
     public weak var parent: Coordinator?
@@ -8,7 +8,7 @@ public class ProfileCoordinator: TabBarCoordinator {
     
     private let dependencies: Dependencies
 
-    public let rootViewController: UIViewController
+    public let rootViewController: UINavigationController
     
     private var previousMessagesViewControllerIndex: Int?
     
@@ -41,12 +41,13 @@ public class ProfileCoordinator: TabBarCoordinator {
         
         viewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "tb_profile"), tag: 0)
         
+        viewController.delegate = self
         viewController.messageViewControllers = messageViewControllers
         
         return viewController
     }()
     
-    init(rootViewController: UIViewController, dependencies: Dependencies) {
+    init(rootViewController: UINavigationController, dependencies: Dependencies) {
         self.dependencies = dependencies
         self.rootViewController = rootViewController
     }
@@ -104,7 +105,8 @@ extension ProfileCoordinator: MessagesViewControllerDelegate {
         let messageDetailViewController = MessageDetailViewController(viewModel: message)
         messageDetailViewController.delegate = self
         previousMessagesViewControllerIndex = messageViewControllers.firstIndex(of: messagesViewController)
-        rootViewController.show(messageDetailViewController, sender: rootViewController)
+        
+        rootViewController.pushViewController(messageDetailViewController, animated: true)
     }
     
     public func messagesViewController(_ messagesViewController: MessagesViewController, moreContextFor message: MessageViewModel, at indexPath: IndexPath) {
@@ -126,7 +128,7 @@ extension ProfileCoordinator: MessageDetailViewControllerDelegate {
     
     public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, didDelete message: MessageViewModel) {
             if let index = previousMessagesViewControllerIndex {
-                (rootViewController as? UINavigationController)?.popViewController(animated: true)
+                rootViewController.popViewController(animated: true)
                 messageViewControllers[index].deleteSelectedIndexPath(with: message)
                 previousMessagesViewControllerIndex = nil
             }
@@ -136,4 +138,16 @@ extension ProfileCoordinator: MessageDetailViewControllerDelegate {
         handleMoreContext(for: message, at: nil, contextHandler: messageDetailViewController)
     }
     
+}
+
+// MARK: - ProfileViewController Delegate
+
+extension ProfileCoordinator: ProfileViewControllerDelegate {
+    public func profileViewControllerDidTapSettings(_ profileViewController: ProfileViewController) {
+        let coordinator = SettingsCoordinator(rootViewController: rootViewController,
+                                              dependencies: self.dependencies as SettingsCoordinator.Dependencies)
+        addChild(coordinator)
+        
+        coordinator.start()
+    }
 }

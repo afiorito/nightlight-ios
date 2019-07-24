@@ -8,20 +8,16 @@ public class NotificationsCoordinator: TabBarCoordinator {
     
     private let dependencies: Dependencies
 
-    public let rootViewController: UIViewController
+    public let rootViewController: UINavigationController
     
     lazy var notificationsViewController: NotificationsViewController = {
         let viewModel = UserNotificationsViewModel(dependencies: dependencies as! UserNotificationsViewModel.Dependencies)
         let viewController = NotificationsViewController(viewModel: viewModel)
-
-        guard let navController = rootViewController as? UINavigationController else {
-            return viewController
-        }
         
         viewController.navigationItem.titleView = {
-            let navFrame = navController.navigationBar.frame
+            let navFrame = rootViewController.navigationBar.frame
             let titleView = LabelTitleView(frame: CGRect(x: 15, y: 0,
-                                                         width: navController.view.frame.width - 30,
+                                                         width: rootViewController.view.frame.width - 30,
                                                          height: navFrame.height))
             titleView.title = "Notifications"
             return titleView
@@ -33,7 +29,7 @@ public class NotificationsCoordinator: TabBarCoordinator {
         return viewController
     }()
     
-    init(rootViewController: UIViewController, dependencies: Dependencies) {
+    init(rootViewController: UINavigationController, dependencies: Dependencies) {
         self.rootViewController = rootViewController
         self.dependencies = dependencies
     }

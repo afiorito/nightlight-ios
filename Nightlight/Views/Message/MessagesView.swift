@@ -6,9 +6,8 @@ public class MessagesView: UIView {
         tableView.tableFooterView = UIView()
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: MessageTableViewCell.className)
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 300
+        tableView.estimatedRowHeight = 150
         tableView.separatorInset = .zero
-        tableView.contentInsetAdjustmentBehavior = .never
         
         return tableView
     }()
@@ -41,5 +40,6 @@ extension MessagesView: Themeable {
         tableView.backgroundColor = .background(for: theme)
         tableView.separatorColor = .border(for: theme)
         (tableView.backgroundView as? Themeable)?.updateColors(for: theme)
+        tableView.reloadData()
     }
 }

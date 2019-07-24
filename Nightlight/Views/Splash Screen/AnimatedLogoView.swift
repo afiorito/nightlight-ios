@@ -11,8 +11,7 @@ public class AnimatedLogoView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
-        
+        updateColors(for: theme)
         prepareSubviews()
     }
     
@@ -48,5 +47,15 @@ public class AnimatedLogoView: UIView {
             logo.widthAnchor.constraint(equalToConstant: 100),
             logo.heightAnchor.constraint(equalTo: logo.widthAnchor, multiplier: 1.0)
         ])
+    }
+}
+
+extension AnimatedLogoView: Themeable {
+    func updateColors(for theme: Theme) {
+        if #available(iOS 13.0, *) {
+            backgroundColor = UIColor.systemBackground
+        } else {
+            backgroundColor = .white
+        }
     }
 }

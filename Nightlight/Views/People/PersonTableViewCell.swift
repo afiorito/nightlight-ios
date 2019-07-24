@@ -35,7 +35,6 @@ public class PersonTableViewCell: UITableViewCell, Configurable {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        
         backgroundCardView.layer.cornerRadius = 4
         backgroundCardView.addShadow(forTheme: theme)
     }
@@ -62,6 +61,8 @@ public class PersonTableViewCell: UITableViewCell, Configurable {
 extension PersonTableViewCell: Themeable {
     func updateColors(for theme: Theme) {
         backgroundCardView.backgroundColor = .cellBackground(for: theme)
-        contentView.backgroundColor = .background(for: theme)
+        contentView.backgroundColor = .darkBackground(for: theme)
+        personContentView.updateColors(for: theme)
+//        backgroundCardView.addShadow(forTheme: theme)
     }
 }

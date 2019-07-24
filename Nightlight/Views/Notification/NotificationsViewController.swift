@@ -30,15 +30,14 @@ public class NotificationsViewController: UIViewController {
         updateColors(for: theme)
         
         notificationsView.tableView.dataSource = dataSource
+        notificationsView.tableView.delegate = self
         notificationsView.tableView.prefetchDataSource = dataSource
         notificationsView.tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         dataSource.prefetchCallback = { [weak self] in
             self?.loadMoreNotifications()
         }
 
-        self.refreshControl.beginRefreshing()
         refresh()
     }
     
@@ -93,6 +92,16 @@ public class NotificationsViewController: UIViewController {
     }
 }
 
+// MARK: - UITableView Delegate
+
+extension NotificationsViewController: UITableViewDelegate {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if refreshControl.isRefreshing {
+            refresh()
+        }
+    }
+}
+
 // MARK: - Themeable
 
 extension NotificationsViewController: Themeable {
@@ -103,5 +112,6 @@ extension NotificationsViewController: Themeable {
     public func updateColors(for theme: Theme) {
         notificationsView.updateColors(for: theme)
         refreshControl.tintColor = .neutral
+        (navigationItem.titleView as? Themeable)?.updateColors(for: theme)
     }
 }

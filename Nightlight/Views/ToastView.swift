@@ -64,7 +64,7 @@ public class ToastView: UIView {
             iconImageView.image = UIImage(named: "toast_urgent")
             colorView.backgroundColor = .neutral
         case .success:
-            iconImageView.image = UIImage(named: "toast_success")
+            iconImageView.image = UIImage(named: "check")
             colorView.backgroundColor = .success
         case .urgent:
             iconImageView.image = UIImage(named: "toast_urgent")

@@ -1,7 +1,7 @@
 import Foundation
 
 public class SendMessageViewModel {
-    public typealias Dependencies = MessageServiced & StyleManaging
+    public typealias Dependencies = MessageServiced & UserDefaultsManaging & StyleManaging
     
     private let dependencies: Dependencies
     
@@ -11,6 +11,10 @@ public class SendMessageViewModel {
     
     public init(dependencies: Dependencies) {
         self.dependencies = dependencies
+    }
+    
+    public var isAnonymous: Bool {
+        return dependencies.userDefaultsManager.messageDefault == .anonymous
     }
     
     public func sendMessage(title: String?, body: String?, numPeople: String?, isAnonymous: Bool, result: @escaping (Result<MessageViewModel, MessageError>) -> Void) {

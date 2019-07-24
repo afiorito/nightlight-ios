@@ -31,7 +31,7 @@ public class HelpfulPeopleViewController: UIViewController {
         peopleView.tableView.delegate = self
         peopleView.tableView.dataSource = dataSource
         peopleView.tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        peopleView.tableView.register(HelpfulPeopleHeader.self, forHeaderFooterViewReuseIdentifier: HelpfulPeopleHeader.className)
         
         updateColors(for: theme)
 
@@ -81,11 +81,23 @@ public class HelpfulPeopleViewController: UIViewController {
 
 extension HelpfulPeopleViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return dataSource.data.isEmpty ? nil : HelpfulPeopleHeader()
+        guard !dataSource.data.isEmpty else { return nil }
+        
+        return tableView.dequeueReusableHeaderFooterView(withIdentifier: HelpfulPeopleHeader.className)
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return dataSource.data.isEmpty ? 0 : UITableView.automaticDimension
+    }
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 100
+    }
+    
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if refreshControl.isRefreshing {
+            refresh()
+        }
     }
 }
 
@@ -95,6 +107,6 @@ extension HelpfulPeopleViewController: Themeable {
     func updateColors(for theme: Theme) {
         peopleView.updateColors(for: theme)
         refreshControl.tintColor = .neutral
-        (peopleView.tableView.tableHeaderView as? Themeable)?.updateColors(for: theme)
+        (tableView(peopleView.tableView, viewForHeaderInSection: 0) as? Themeable)?.updateColors(for: theme)
     }
 }

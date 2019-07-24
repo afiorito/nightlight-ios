@@ -36,6 +36,8 @@ public class NotificationTableViewCell: UITableViewCell, Configurable {
     public func configure(with viewModel: UserNotificationViewModel) {
         bodyLabel.attributedText = viewModel.body
         iconImageView.image = viewModel.icon
+        
+        updateColors(for: theme)
     }
     
     private func prepareSubviews() {

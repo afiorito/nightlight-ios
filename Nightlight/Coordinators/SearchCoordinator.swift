@@ -8,7 +8,7 @@ public class SearchCoordinator: TabBarCoordinator {
     
     private let dependencies: Dependencies
     
-    public let rootViewController: UIViewController
+    public let rootViewController: UINavigationController
     
     public lazy var searchViewController: SearchViewController = {
         let peopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
@@ -25,7 +25,7 @@ public class SearchCoordinator: TabBarCoordinator {
         return viewController
     }()
 
-    init(rootViewController: UIViewController, dependencies: Dependencies) {
+    init(rootViewController: UINavigationController, dependencies: Dependencies) {
         self.rootViewController = rootViewController
         self.dependencies = dependencies
     }

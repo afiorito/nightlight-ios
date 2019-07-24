@@ -11,6 +11,7 @@ public class PageTabsView: UIView {
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(TabCollectionViewCell.self, forCellWithReuseIdentifier: TabCollectionViewCell.className)
+        collectionView.bounces = false
         
         return collectionView
     }()
@@ -105,7 +106,9 @@ extension PageTabsView: UICollectionViewDelegateFlowLayout {
 
 extension PageTabsView: Themeable {
     func updateColors(for theme: Theme) {
+        backgroundColor = .background(for: theme)
         collectionView.backgroundColor = .background(for: theme)
         tabIndicatorView.backgroundColor = .accent(for: theme)
+        collectionView.reloadData()
     }
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-public class SwitchTableViewCell: UITableViewCell {
+public class SwitchTableViewCell: BaseStaticTableViewCell {
 
     let switchControl = Switch()
     
@@ -10,7 +10,7 @@ public class SwitchTableViewCell: UITableViewCell {
         selectionStyle = .none
         
         textLabel?.font = .primary17ptNormal
-        self.accessoryView = switchControl
+        accessoryView = switchControl
         
         updateColors(for: theme)
     }
@@ -18,12 +18,11 @@ public class SwitchTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-// MARK: - Themeable
-
-extension SwitchTableViewCell: Themeable {
-    func updateColors(for theme: Theme) {
+    
+    // MARK: - Themeable
+    
+    public override func updateColors(for theme: Theme) {
+        super.updateColors(for: theme)
         textLabel?.textColor = .primaryText(for: theme)
         backgroundColor = .background(for: theme)
         accessoryView?.backgroundColor = .background(for: theme)

@@ -5,7 +5,7 @@ public class SendMessageCoordinator: TabBarCoordinator {
     public weak var parent: Coordinator?
     public var children = [Coordinator]()
     
-    public var rootViewController: UIViewController
+    public var rootViewController: UINavigationController
     
     public lazy var sendMessageViewController: SendMessageViewController = {
         let viewModel = SendMessageViewModel(dependencies: dependencies as! SendMessageViewModel.Dependencies)
@@ -19,7 +19,7 @@ public class SendMessageCoordinator: TabBarCoordinator {
     
     private let dependencies: Dependencies
     
-    init(rootViewController: UIViewController, dependencies: Dependencies) {
+    init(rootViewController: UINavigationController, dependencies: Dependencies) {
         self.dependencies = dependencies
         self.rootViewController = rootViewController
     }

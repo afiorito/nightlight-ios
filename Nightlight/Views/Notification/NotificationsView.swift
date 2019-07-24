@@ -40,5 +40,6 @@ extension NotificationsView: Themeable {
         tableView.backgroundColor = .background(for: theme)
         tableView.separatorColor = .border(for: theme)
         (tableView.backgroundView as? Themeable)?.updateColors(for: theme)
+        tableView.reloadData()
     }
 }

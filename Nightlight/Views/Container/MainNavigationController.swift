@@ -39,6 +39,7 @@ extension MainNavigationController: Themeable {
             navigationBar.shadowImage = UIColor.border(for: theme).darker(amount: 0.1).asImage()
         }
         navigationBar.tintColor = .primaryGrayScale(for: theme)
+        navigationBar.backgroundColor = .background(for: theme)
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.primaryText(for: theme)]
     }
 }

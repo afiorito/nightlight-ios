@@ -38,6 +38,8 @@ public class AppCoordinator: NSObject, Coordinator {
     }
     
     public func start() {
+        dependencies.styleManager.theme = dependencies.userDefaultsManager.theme
+        
         let splashScreenViewController = SplashScreenViewController()
         window.rootViewController = splashScreenViewController
         

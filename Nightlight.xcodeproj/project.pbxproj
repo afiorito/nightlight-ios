@@ -116,6 +116,19 @@
 		9279ACA122E692E80098C4C2 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9922E692830098C4C2 /* TabCollectionViewCell.swift */; };
 		9279ACA222E692EB0098C4C2 /* ContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9A22E692830098C4C2 /* ContainerCollectionViewCell.swift */; };
 		9279ACA822E73E120098C4C2 /* MessageContextHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACA722E73E120098C4C2 /* MessageContextHandling.swift */; };
+		9279ACAA22E7775B0098C4C2 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACA922E7775B0098C4C2 /* SettingsCoordinator.swift */; };
+		9279ACB022E780220098C4C2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACAF22E780220098C4C2 /* SettingsViewModel.swift */; };
+		9279ACB322E7B3B60098C4C2 /* ProfileViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACB222E7B3A70098C4C2 /* ProfileViewControllerDelegate.swift */; };
+		9279ACB722E7B5930098C4C2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACB622E7B5740098C4C2 /* SettingsViewController.swift */; };
+		9279ACB922E7B9220098C4C2 /* SelectOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACB822E7B9220098C4C2 /* SelectOptionTableViewCell.swift */; };
+		9279ACBB22E7BDF70098C4C2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACBA22E7BDF70098C4C2 /* String+Extension.swift */; };
+		9279ACBD22E7C2A40098C4C2 /* SettingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACBC22E7C2A40098C4C2 /* SettingOptions.swift */; };
+		9279ACBF22E7CA060098C4C2 /* BasicOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACBE22E7CA060098C4C2 /* BasicOptionTableViewCell.swift */; };
+		9279ACC122E7CDD60098C4C2 /* InformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACC022E7CDD60098C4C2 /* InformationTableViewCell.swift */; };
+		9279ACC322E7D0BB0098C4C2 /* BaseStaticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACC222E7D0BB0098C4C2 /* BaseStaticTableViewCell.swift */; };
+		9279ACC522E7D2A40098C4C2 /* SettingsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACC422E7D2A40098C4C2 /* SettingsViewControllerDelegate.swift */; };
+		9279ACC922E7D6450098C4C2 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACC822E7D6450098C4C2 /* OptionsTableViewController.swift */; };
+		9279ACCB22E7DB3E0098C4C2 /* OptionsTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACCA22E7DB3E0098C4C2 /* OptionsTableViewControllerDelegate.swift */; };
 		9282180B22D20CB50007FF9B /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9282180A22D20CB50007FF9B /* KeyboardManager.swift */; };
 		928A10A622D3CDF000FF78FB /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A10A522D3CDF000FF78FB /* URLSession+Extension.swift */; };
 		928A10A822D3CFBF00FF78FB /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A10A722D3CFBF00FF78FB /* NetworkError.swift */; };
@@ -316,6 +329,19 @@
 		9279AC9922E692830098C4C2 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
 		9279AC9A22E692830098C4C2 /* ContainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerCollectionViewCell.swift; sourceTree = "<group>"; };
 		9279ACA722E73E120098C4C2 /* MessageContextHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessageContextHandling.swift; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Helpers/MessageContextHandling.swift"; sourceTree = "<group>"; };
+		9279ACA922E7775B0098C4C2 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsCoordinator.swift; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Coordinators/SettingsCoordinator.swift"; sourceTree = "<group>"; };
+		9279ACAF22E780220098C4C2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsViewModel.swift; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/View Models/SettingsViewModel.swift"; sourceTree = "<group>"; };
+		9279ACB222E7B3A70098C4C2 /* ProfileViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerDelegate.swift; sourceTree = "<group>"; };
+		9279ACB622E7B5740098C4C2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		9279ACB822E7B9220098C4C2 /* SelectOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectOptionTableViewCell.swift; path = "../../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Views/Static TableView/SelectOptionTableViewCell.swift"; sourceTree = "<group>"; };
+		9279ACBA22E7BDF70098C4C2 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Extension.swift"; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Extensions/String+Extension.swift"; sourceTree = "<group>"; };
+		9279ACBC22E7C2A40098C4C2 /* SettingOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingOptions.swift; path = "../../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Views/Settings/SettingOptions.swift"; sourceTree = "<group>"; };
+		9279ACBE22E7CA060098C4C2 /* BasicOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BasicOptionTableViewCell.swift; path = "../../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Views/Static TableView/BasicOptionTableViewCell.swift"; sourceTree = "<group>"; };
+		9279ACC022E7CDD60098C4C2 /* InformationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTableViewCell.swift; sourceTree = "<group>"; };
+		9279ACC222E7D0BB0098C4C2 /* BaseStaticTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseStaticTableViewCell.swift; path = "../../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Views/Static TableView/BaseStaticTableViewCell.swift"; sourceTree = "<group>"; };
+		9279ACC422E7D2A40098C4C2 /* SettingsViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsViewControllerDelegate.swift; path = "../../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Views/Settings/SettingsViewControllerDelegate.swift"; sourceTree = "<group>"; };
+		9279ACC822E7D6450098C4C2 /* OptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionsTableViewController.swift; path = "../../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Views/Settings/OptionsTableViewController.swift"; sourceTree = "<group>"; };
+		9279ACCA22E7DB3E0098C4C2 /* OptionsTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionsTableViewControllerDelegate.swift; path = "../../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Views/Settings/OptionsTableViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		9282180A22D20CB50007FF9B /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		928A10A522D3CDF000FF78FB /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		928A10A722D3CFBF00FF78FB /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -541,6 +567,7 @@
 				92B302EE22D63AB300CE5668 /* RecentMessagesCoordinator.swift */,
 				92B302F422D63E6E00CE5668 /* SearchCoordinator.swift */,
 				9213184C22D605AE00C91D90 /* SendMessageCoordinator.swift */,
+				9279ACA922E7775B0098C4C2 /* SettingsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -558,17 +585,18 @@
 				92BB2F2F22E2040100AAF662 /* Notification */,
 				925763DC22CAD7760031D616 /* Onboarding */,
 				925BE1CA22DE72260000BEC9 /* People */,
+				9279ACB122E7B39A0098C4C2 /* Profile */,
 				920E495322DFBFB600AA1EDB /* Send Message */,
+				9279ACB522E7B55E0098C4C2 /* Settings */,
 				928A10AD22D3E35200FF78FB /* Splash Screen */,
+				9279ACB422E7B5400098C4C2 /* Static TableView */,
 				9229482322CCE0BD0080B328 /* Text Input */,
 				9228D6B522D77029003B03DB /* ActionView.swift */,
 				9228D6AB22D65A4D003B03DB /* EmptyView.swift */,
 				925BE1C222DE48A20000BEC9 /* LabelTitleView.swift */,
 				925763D522CAD0160031D616 /* PageControl.swift */,
-				92CA9C8922D6494C009900E6 /* ProfileViewController.swift */,
 				92B302F222D63B6F00CE5668 /* SearchViewController.swift */,
 				92748B1322E0A9BD00C2957E /* Switch.swift */,
-				92748B1122E0A61A00C2957E /* SwitchTableViewCell.swift */,
 				92DF5D2622D52B9A00207D4D /* ToastView.swift */,
 			);
 			path = Views;
@@ -590,6 +618,7 @@
 				9276314822D4B07B000D4B8F /* Data+Extension.swift */,
 				9228D6C022D798AB003B03DB /* Date+Extension.swift */,
 				92418D4822D7D422001B6DFB /* DateFormatter+Extension.swift */,
+				9279ACBA22E7BDF70098C4C2 /* String+Extension.swift */,
 				928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */,
 				9237A1D422CA74E100FC9331 /* UIColor+Extension.swift */,
 				92418D4A22D7D645001B6DFB /* NSObject+Extension.swift */,
@@ -701,6 +730,39 @@
 			path = "Page Tab Controller";
 			sourceTree = "<group>";
 		};
+		9279ACB122E7B39A0098C4C2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9279ACB222E7B3A70098C4C2 /* ProfileViewControllerDelegate.swift */,
+				92CA9C8922D6494C009900E6 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		9279ACB422E7B5400098C4C2 /* Static TableView */ = {
+			isa = PBXGroup;
+			children = (
+				9279ACC222E7D0BB0098C4C2 /* BaseStaticTableViewCell.swift */,
+				92748B1122E0A61A00C2957E /* SwitchTableViewCell.swift */,
+				9279ACB822E7B9220098C4C2 /* SelectOptionTableViewCell.swift */,
+				9279ACC022E7CDD60098C4C2 /* InformationTableViewCell.swift */,
+				9279ACBE22E7CA060098C4C2 /* BasicOptionTableViewCell.swift */,
+			);
+			path = "Static TableView";
+			sourceTree = "<group>";
+		};
+		9279ACB522E7B55E0098C4C2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				9279ACB622E7B5740098C4C2 /* SettingsViewController.swift */,
+				9279ACC422E7D2A40098C4C2 /* SettingsViewControllerDelegate.swift */,
+				9279ACBC22E7C2A40098C4C2 /* SettingOptions.swift */,
+				9279ACC822E7D6450098C4C2 /* OptionsTableViewController.swift */,
+				9279ACCA22E7DB3E0098C4C2 /* OptionsTableViewControllerDelegate.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		928A10AB22D3E2DA00FF78FB /* Errors */ = {
 			isa = PBXGroup;
 			children = (
@@ -743,6 +805,7 @@
 				925BE1D322DE855A0000BEC9 /* PersonViewModel.swift */,
 				92CA9C8722D6492C009900E6 /* ProfileViewModel.swift */,
 				92B302F622D6431800CE5668 /* SendMessageViewModel.swift */,
+				9279ACAF22E780220098C4C2 /* SettingsViewModel.swift */,
 				928A10B022D3E3EA00FF78FB /* SignUpViewModel.swift */,
 				9213184622D571BF00C91D90 /* SignInViewModel.swift */,
 			);
@@ -1000,8 +1063,11 @@
 				92F1762B22DBFBFE008AEB82 /* MessagesViewControllerDelegate.swift in Sources */,
 				920E495F22DFEE4000AA1EDB /* TextView.swift in Sources */,
 				92B5502922E20E490057589E /* UserNotificationService.swift in Sources */,
+				9279ACC122E7CDD60098C4C2 /* InformationTableViewCell.swift in Sources */,
+				9279ACC522E7D2A40098C4C2 /* SettingsViewControllerDelegate.swift in Sources */,
 				92F1765C22DD3FAB008AEB82 /* BottomSheetHeight.swift in Sources */,
 				9247606B22D8E2E4001EF6BE /* MessageTableViewCellDelegate.swift in Sources */,
+				9279ACB022E780220098C4C2 /* SettingsViewModel.swift in Sources */,
 				9237A1EF22CA99E000FC9331 /* Strings.swift in Sources */,
 				9237A1F422CAA79500FC9331 /* ContainedButton.swift in Sources */,
 				9233618B22C664A2002B7BBA /* AppCoordinator.swift in Sources */,
@@ -1021,6 +1087,7 @@
 				92F1765422DD38B0008AEB82 /* BottomSheetPresentable.swift in Sources */,
 				9229482122CCC3ED0080B328 /* TextField.swift in Sources */,
 				92F1763522DCD037008AEB82 /* ContextMenuViewController.swift in Sources */,
+				9279ACC322E7D0BB0098C4C2 /* BaseStaticTableViewCell.swift in Sources */,
 				9213185122D6068200C91D90 /* MessagesViewController.swift in Sources */,
 				9237A1E122CA890D00FC9331 /* UIViewController+ThemeObserving.swift in Sources */,
 				925BE1CE22DE796D0000BEC9 /* PersonContentView.swift in Sources */,
@@ -1039,6 +1106,7 @@
 				925763D422CAC9C00031D616 /* OnboardViewControllerDelegate.swift in Sources */,
 				9276314B22D4B41E000D4B8F /* KeychainManager.swift in Sources */,
 				9228D6C122D798AB003B03DB /* Date+Extension.swift in Sources */,
+				9279ACB722E7B5930098C4C2 /* SettingsViewController.swift in Sources */,
 				925BE1C522DE64480000BEC9 /* UISearchBar+Themeable.swift in Sources */,
 				92418D4B22D7D645001B6DFB /* NSObject+Extension.swift in Sources */,
 				9213184B22D6050000C91D90 /* NLTabBarController.swift in Sources */,
@@ -1051,6 +1119,7 @@
 				92CA9C8622D6484B009900E6 /* ProfileCoordinator.swift in Sources */,
 				928A10B322D3EBF400FF78FB /* SignUpCredentials.swift in Sources */,
 				9237A1E322CA8D8C00FC9331 /* StyleManager.swift in Sources */,
+				9279ACB322E7B3B60098C4C2 /* ProfileViewControllerDelegate.swift in Sources */,
 				9228D6AC22D65A4D003B03DB /* EmptyView.swift in Sources */,
 				925763EB22CBA7E50031D616 /* SignUpView.swift in Sources */,
 				92CA9C8422D647E5009900E6 /* UserNotificationsViewModel.swift in Sources */,
@@ -1087,6 +1156,7 @@
 				920E495022DF966C00AA1EDB /* Searchable.swift in Sources */,
 				92BB2F3122E2050700AAF662 /* NotificationsView.swift in Sources */,
 				92B9008A22CE94A7009E619B /* SplashScreenViewController.swift in Sources */,
+				9279ACB922E7B9220098C4C2 /* SelectOptionTableViewCell.swift in Sources */,
 				925763E122CB76E80031D616 /* SignInView.swift in Sources */,
 				928A10B522D3F3A800FF78FB /* AuthError.swift in Sources */,
 				92CA9C8822D6492C009900E6 /* ProfileViewModel.swift in Sources */,
@@ -1094,12 +1164,14 @@
 				92B302EF22D63AB300CE5668 /* RecentMessagesCoordinator.swift in Sources */,
 				9228D6BD22D79250003B03DB /* Message.swift in Sources */,
 				92F1762022DBC42C008AEB82 /* MessageActionResponse.swift in Sources */,
+				9279ACAA22E7775B0098C4C2 /* SettingsCoordinator.swift in Sources */,
 				9228D6BF22D79643003B03DB /* User.swift in Sources */,
 				92F1762F22DC19E6008AEB82 /* MessageDetailViewControllerDelegate.swift in Sources */,
 				9276314D22D4C6FA000D4B8F /* KeychainAccessibility.swift in Sources */,
 				92F1761E22DBC232008AEB82 /* MessageActionType.swift in Sources */,
 				92F1765A22DD3EA9008AEB82 /* BottomSheetPresentationController.swift in Sources */,
 				9279ACA022E692E60098C4C2 /* TabSeparatorView.swift in Sources */,
+				9279ACBB22E7BDF70098C4C2 /* String+Extension.swift in Sources */,
 				925BE1C322DE48A20000BEC9 /* LabelTitleView.swift in Sources */,
 				925DD4B522DE04C300D50A89 /* CompactTableView.swift in Sources */,
 				92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */,
@@ -1108,6 +1180,7 @@
 				92931C3622D3A09600C54EB8 /* Env.swift in Sources */,
 				9279AC9F22E692E30098C4C2 /* TabFlowLayout.swift in Sources */,
 				92F1765822DD3E4E008AEB82 /* BottomSheetPresentable+LayoutHelpers.swift in Sources */,
+				9279ACC922E7D6450098C4C2 /* OptionsTableViewController.swift in Sources */,
 				925763DF22CB768D0031D616 /* SignInViewController.swift in Sources */,
 				92B9008822CD8720009E619B /* AuthCoordinator.swift in Sources */,
 				9237A1E922CA970000FC9331 /* CircularStdFont.swift in Sources */,
@@ -1124,6 +1197,7 @@
 				9279AC7F22E6091C0098C4C2 /* JWTDecoder.swift in Sources */,
 				92F1762922DBF7F0008AEB82 /* MessageContentView.swift in Sources */,
 				925BE1D822DE87670000BEC9 /* PeopleViewModel.swift in Sources */,
+				9279ACBD22E7C2A40098C4C2 /* SettingOptions.swift in Sources */,
 				92748B1822E0B4C500C2957E /* NSRegularExpression+Extension.swift in Sources */,
 				9237A1D322CA559500FC9331 /* UIViewController+Extension.swift in Sources */,
 				925DD4A922DDE5EA00D50A89 /* EmptyViewable.swift in Sources */,
@@ -1136,8 +1210,10 @@
 				928E53CF22C81E1A00260C8D /* OnboardPageViewController.swift in Sources */,
 				928A10A822D3CFBF00FF78FB /* NetworkError.swift in Sources */,
 				9228D6B422D763A2003B03DB /* MessageTableViewCell.swift in Sources */,
+				9279ACCB22E7DB3E0098C4C2 /* OptionsTableViewControllerDelegate.swift in Sources */,
 				928A10B122D3E3EA00FF78FB /* SignUpViewModel.swift in Sources */,
 				92F1765E22DD404E008AEB82 /* BottomSheetPresentable+Defaults.swift in Sources */,
+				9279ACBF22E7CA060098C4C2 /* BasicOptionTableViewCell.swift in Sources */,
 				9237A1DD22CA829700FC9331 /* ThemeObserving.swift in Sources */,
 				9276314922D4B07B000D4B8F /* Data+Extension.swift in Sources */,
 				92CA9C8022D6475C009900E6 /* NotificationsCoordinator.swift in Sources */,

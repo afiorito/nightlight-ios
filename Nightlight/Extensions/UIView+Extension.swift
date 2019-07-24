@@ -48,6 +48,7 @@ extension UIView {
     }
     
     public func addShadow(forTheme theme: Theme, shouldRasterize: Bool = true) {
+        layoutIfNeeded()
         layer.shadowColor = UIColor.shadow(for: theme).cgColor
         layer.shadowOffset = CGSize(width: 0, height: 1)
         layer.shadowRadius = 4.0

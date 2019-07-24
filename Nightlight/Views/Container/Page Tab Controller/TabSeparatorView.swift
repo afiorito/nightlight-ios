@@ -13,6 +13,7 @@ public class TabSeparatorView: UICollectionReusableView {
     
     public override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         self.frame = layoutAttributes.frame
+        updateColors(for: theme)
     }
 }
 

@@ -36,7 +36,6 @@ public class MessagesViewController: UIViewController, MessageContextHandling {
         messagesView.tableView.dataSource = dataSource
         messagesView.tableView.prefetchDataSource = dataSource
         messagesView.tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         dataSource.prefetchCallback = { [weak self] in
             self?.loadMoreMessages()
@@ -44,6 +43,14 @@ public class MessagesViewController: UIViewController, MessageContextHandling {
 
         self.refreshControl.beginRefreshing()
         refresh()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let selectedIndexPath = messagesView.tableView.indexPathForSelectedRow {
+            messagesView.tableView.deselectRow(at: selectedIndexPath, animated: true)
+        }
     }
     
     private func loadMoreMessages(fromStart: Bool = false) {
@@ -187,6 +194,12 @@ extension MessagesViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.messagesViewController(self, didSelect: dataSource.data[indexPath.row], at: indexPath)
     }
+    
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if refreshControl.isRefreshing {
+            refresh()
+        }
+    }
 }
 
 // MARK: - Themeable
@@ -209,5 +222,7 @@ extension MessagesViewController: Themeable {
         case .dark:
             messagesView.tableView.emptyView?.image = UIImage(named: "empty_message_dark")
         }
+        
+        (navigationItem.titleView as? Themeable)?.updateColors(for: theme)
     }
 }
