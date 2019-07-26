@@ -57,6 +57,9 @@
 		9237A1F122CA9E8D00FC9331 /* CircularStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9237A1EC22CA981A00FC9331 /* CircularStd-Book.otf */; };
 		9237A1F222CA9E9000FC9331 /* CircularStd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9237A1EB22CA981A00FC9331 /* CircularStd-Medium.otf */; };
 		9237A1F422CAA79500FC9331 /* ContainedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237A1F322CAA79500FC9331 /* ContainedButton.swift */; };
+		923B894622EB9CFE003912EC /* ContentPathName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B894522EB9CFE003912EC /* ContentPathName.swift */; };
+		923B894C22EBAD0D003912EC /* WebContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B894B22EBAD01003912EC /* WebContentViewController.swift */; };
+		923B894D22EBAD0D003912EC /* WebContentViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B894A22EBAD01003912EC /* WebContentViewControllerDelegate.swift */; };
 		92418D4522D7C048001B6DFB /* PaginationMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92418D4422D7C048001B6DFB /* PaginationMetadata.swift */; };
 		92418D4722D7C1D0001B6DFB /* MessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92418D4622D7C1D0001B6DFB /* MessageError.swift */; };
 		92418D4922D7D422001B6DFB /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92418D4822D7D422001B6DFB /* DateFormatter+Extension.swift */; };
@@ -270,6 +273,9 @@
 		9237A1ED22CA981A00FC9331 /* CircularStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Bold.otf"; sourceTree = "<group>"; };
 		9237A1EE22CA99E000FC9331 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		9237A1F322CAA79500FC9331 /* ContainedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainedButton.swift; sourceTree = "<group>"; };
+		923B894522EB9CFE003912EC /* ContentPathName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentPathName.swift; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Helpers/ContentPathName.swift"; sourceTree = "<group>"; };
+		923B894A22EBAD01003912EC /* WebContentViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebContentViewControllerDelegate.swift; sourceTree = "<group>"; };
+		923B894B22EBAD01003912EC /* WebContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebContentViewController.swift; sourceTree = "<group>"; };
 		92418D4422D7C048001B6DFB /* PaginationMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationMetadata.swift; sourceTree = "<group>"; };
 		92418D4622D7C1D0001B6DFB /* MessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageError.swift; sourceTree = "<group>"; };
 		92418D4822D7D422001B6DFB /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
@@ -556,6 +562,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		923B894922EBACF5003912EC /* Web Content */ = {
+			isa = PBXGroup;
+			children = (
+				923B894B22EBAD01003912EC /* WebContentViewController.swift */,
+				923B894A22EBAD01003912EC /* WebContentViewControllerDelegate.swift */,
+			);
+			path = "Web Content";
+			sourceTree = "<group>";
+		};
 		925763D722CAD62B0031D616 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -591,6 +606,7 @@
 				928A10AD22D3E35200FF78FB /* Splash Screen */,
 				9279ACB422E7B5400098C4C2 /* Static TableView */,
 				9229482322CCE0BD0080B328 /* Text Input */,
+				923B894922EBACF5003912EC /* Web Content */,
 				9228D6B522D77029003B03DB /* ActionView.swift */,
 				9228D6AB22D65A4D003B03DB /* EmptyView.swift */,
 				925BE1C222DE48A20000BEC9 /* LabelTitleView.swift */,
@@ -668,6 +684,7 @@
 				92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */,
 				9261402C22E0F2AC005C7B33 /* NewMessageData.swift */,
 				9279AC7E22E6091C0098C4C2 /* JWTDecoder.swift */,
+				923B894522EB9CFE003912EC /* ContentPathName.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1106,6 +1123,7 @@
 				925763D422CAC9C00031D616 /* OnboardViewControllerDelegate.swift in Sources */,
 				9276314B22D4B41E000D4B8F /* KeychainManager.swift in Sources */,
 				9228D6C122D798AB003B03DB /* Date+Extension.swift in Sources */,
+				923B894D22EBAD0D003912EC /* WebContentViewControllerDelegate.swift in Sources */,
 				9279ACB722E7B5930098C4C2 /* SettingsViewController.swift in Sources */,
 				925BE1C522DE64480000BEC9 /* UISearchBar+Themeable.swift in Sources */,
 				92418D4B22D7D645001B6DFB /* NSObject+Extension.swift in Sources */,
@@ -1183,6 +1201,7 @@
 				9279ACC922E7D6450098C4C2 /* OptionsTableViewController.swift in Sources */,
 				925763DF22CB768D0031D616 /* SignInViewController.swift in Sources */,
 				92B9008822CD8720009E619B /* AuthCoordinator.swift in Sources */,
+				923B894C22EBAD0D003912EC /* WebContentViewController.swift in Sources */,
 				9237A1E922CA970000FC9331 /* CircularStdFont.swift in Sources */,
 				9228D6B022D665C9003B03DB /* TableViewArrayDataSource.swift in Sources */,
 				9237A1E522CA91BE00FC9331 /* DependencyContainer.swift in Sources */,
@@ -1201,6 +1220,7 @@
 				92748B1822E0B4C500C2957E /* NSRegularExpression+Extension.swift in Sources */,
 				9237A1D322CA559500FC9331 /* UIViewController+Extension.swift in Sources */,
 				925DD4A922DDE5EA00D50A89 /* EmptyViewable.swift in Sources */,
+				923B894622EB9CFE003912EC /* ContentPathName.swift in Sources */,
 				925763E722CB95900031D616 /* AuthView.swift in Sources */,
 				9229DFA222D2BDF200827A03 /* AuthService.swift in Sources */,
 				9237A1E722CA95DF00FC9331 /* UIFont+Fonts.swift in Sources */,

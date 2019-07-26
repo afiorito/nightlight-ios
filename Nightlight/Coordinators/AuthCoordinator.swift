@@ -86,6 +86,19 @@ public class AuthCoordinator: Coordinator {
 }
 
 extension AuthCoordinator: SignUpViewControllerDelegate, SignInViewControllerDelegate {
+    public func signUpViewController(_ signUpViewController: SignUpViewController, didTapPolicyWith url: URL) {
+        let webContentViewController = WebContentViewController(url: url)
+        webContentViewController.title = url.lastPathComponent == "terms" ? "Term of Use" : "Privacy Policy"
+        
+        let barButton = UIBarButtonItem(image: UIImage(named: "nb_cancel"),
+                                                style: .plain,
+                                                target: webContentViewController,
+                                                action: #selector(webContentViewController.dismissContent))
+        webContentViewController.navigationItem.leftBarButtonItem = barButton
+        
+        signUpViewController.present(MainNavigationController(rootViewController: webContentViewController), animated: true)
+    }
+    
     public func signInViewControllerDidSignIn(_ signInViewController: SignInViewController) {
         parent?.childDidFinish(self)
     }

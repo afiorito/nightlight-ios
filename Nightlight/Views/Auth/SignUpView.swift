@@ -11,6 +11,28 @@ public class SignUpView: AuthView {
         return textField
     }()
     
+    public let policiesTextView: UITextView = {
+        let textView = UITextView()
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.isSelectable = true
+        textView.backgroundColor = .clear
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = 2
+        
+        let string = "By signing up you agree to the\nTerms of Use and Privacy Policy"
+        let attributedString = NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        attributedString.addAttribute(.link, value: "https://nightlight.electriapp.com/terms", range: NSRange(location: 31, length: 12))
+        attributedString.addAttribute(.link, value: ContentPathName.privacy.rawValue, range: NSRange(location: 48, length: 14))
+        
+        textView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.brand]
+        textView.attributedText = attributedString
+        
+        return textView
+    }()
+    
     public var email: String {
         return emailField.input.text ?? ""
     }
@@ -18,6 +40,8 @@ public class SignUpView: AuthView {
     public override var isAuthButtonEnabled: Bool {
         return super.isAuthButtonEnabled && !email.isEmpty
     }
+    
+    public var policyAction: ((URL) -> Void)?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,6 +58,8 @@ public class SignUpView: AuthView {
         passwordField.input.addTarget(passwordField.input,
                                       action: #selector(passwordField.input.resignFirstResponder),
                                       for: UIControl.Event.primaryActionTriggered)
+        
+        policiesTextView.delegate = self
         
         prepareSubviews()
     }
@@ -64,6 +90,15 @@ public class SignUpView: AuthView {
         authButton.setTitle("Sign Up", for: .normal)
         
         fieldContainer.addArrangedSubviews([usernameField, emailField, passwordField])
+        
+        addSubviews(policiesTextView)
+        
+        NSLayoutConstraint.activate([
+            policiesTextView.topAnchor.constraint(equalTo: authButton.bottomAnchor),
+            policiesTextView.leadingAnchor.constraint(equalTo: authButton.leadingAnchor, constant: 15),
+            policiesTextView.trailingAnchor.constraint(equalTo: authButton.trailingAnchor, constant: -15),
+            policiesTextView.bottomAnchor.constraint(lessThanOrEqualTo: bottomContainer.topAnchor, constant: -10)
+        ])
     }
     
     // MARK: - Themeable
@@ -74,5 +109,14 @@ public class SignUpView: AuthView {
         usernameField.updateColors(for: theme)
         emailField.updateColors(for: theme)
         passwordField.updateColors(for: theme)
+        policiesTextView.textColor = .primaryText(for: theme)
+    }
+}
+
+extension SignUpView: UITextViewDelegate {
+    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        policyAction?(URL)
+        
+        return false
     }
 }

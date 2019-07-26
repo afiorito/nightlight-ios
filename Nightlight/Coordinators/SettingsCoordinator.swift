@@ -1,4 +1,6 @@
 import UIKit
+import MessageUI
+import SafariServices
 
 public class SettingsCoordinator: NSObject, Coordinator {
     public typealias Dependencies = StyleManaging
@@ -39,7 +41,17 @@ public class SettingsCoordinator: NSObject, Coordinator {
         rootViewController.popViewController(animated: true)
     }
     
+    private func presentWebContentViewController(pathName: ContentPathName) {
+        let webContentViewController = WebContentViewController(url: pathName.url)
+        webContentViewController.title = pathName.title
+        webContentViewController.delegate = self
+        
+        rootViewController.pushViewController(webContentViewController, animated: true)
+    }
+    
 }
+
+// MARK: - SettingsViewController Delegate
 
 extension SettingsCoordinator: SettingsViewControllerDelegate {
     public func settingsViewControllerDidSelectTheme(_ settingsViewController: SettingsViewController, for currentTheme: Theme) {
@@ -59,7 +71,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     }
     
     public func settingsViewControllerDidSelectFeedback(_ settingsViewController: SettingsViewController) {
-        
+        presentWebContentViewController(pathName: .feedback)
     }
     
     public func settingsViewControllerDidSelectRate(_ settingsViewController: SettingsViewController) {
@@ -67,21 +79,23 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     }
     
     public func settingsViewControllerDidSelectAbout(_ settingsViewController: SettingsViewController) {
-        
+        presentWebContentViewController(pathName: .about)
     }
     
     public func settingsViewControllerDidSelectPrivacyPolicy(_ settingsViewController: SettingsViewController) {
-        
+        presentWebContentViewController(pathName: .privacy)
     }
     
     public func settingsViewControllerDidSelectTermsOfUse(_ settingsViewController: SettingsViewController) {
-            
-        }
+        presentWebContentViewController(pathName: .terms)
+    }
     
     public func settingsViewControllerDidSelectSignout(_ settingsViewController: SettingsViewController) {
         NLNotification.unauthorized.post()
     }
 }
+
+// MARK: - OptionsTableViewController Delegate
 
 extension SettingsCoordinator: OptionsTableViewControllerDelegate {
     public func optionsTableViewController<E: CaseIterable & RawRepresentable>(_ optionsTableViewController: OptionsTableViewController<E>, didSelect option: E) where E.RawValue == String {
@@ -94,6 +108,37 @@ extension SettingsCoordinator: OptionsTableViewControllerDelegate {
         }
     }
     
+}
+
+// MARK: - WebContentViewController Delegate
+
+extension SettingsCoordinator: WebContentViewControllerDelegate {
+    public func webContentViewController(_ webContentViewController: WebContentViewController, didNavigateTo url: URL) {
+        if url.scheme == "mailto" {
+            if MFMailComposeViewController.canSendMail() {
+                let mail = MFMailComposeViewController()
+                let email = URLComponents(url: url, resolvingAgainstBaseURL: false)?.path ?? ""
+                mail.mailComposeDelegate = self
+                mail.setToRecipients(email.isEmpty ? nil : [email])
+                
+                webContentViewController.present(mail, animated: true)
+            } else {
+                webContentViewController.showToast("Mail is not configured on this device.", severity: .urgent)
+            }
+        } else {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            
+            webContentViewController.present(SFSafariViewController(url: url, configuration: config), animated: true)
+        }
+    }
+    
+}
+
+extension SettingsCoordinator: MFMailComposeViewControllerDelegate {
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
 }
 
 extension SettingsCoordinator: UIGestureRecognizerDelegate {}

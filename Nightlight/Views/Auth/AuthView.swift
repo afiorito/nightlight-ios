@@ -27,7 +27,7 @@ public class AuthView: UIView {
         return stackView
     }()
     
-    private let bottomContainer: UIStackView = {
+    internal let bottomContainer: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center

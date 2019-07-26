@@ -46,6 +46,14 @@ public class SettingsViewController: UIViewController {
         updateColors(for: theme)
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+         
+         if let selectedIndexPath = tableView.indexPathForSelectedRow {
+             tableView.deselectRow(at: selectedIndexPath, animated: true)
+         }
+     }
+    
     deinit {
         removeDidChangeThemeObserver()
     }

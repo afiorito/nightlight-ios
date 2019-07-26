@@ -37,7 +37,12 @@ public class SignUpViewController: UIViewController {
     }
     
     public override func loadView() {
-        view = SignUpView()
+        let signUpView = SignUpView()
+        signUpView.policyAction = { [weak self] url in
+            guard let self = self else { return }
+            self.delegate?.signUpViewController(self, didTapPolicyWith: url)
+        }
+        view = signUpView
         
     }
     
