@@ -34,7 +34,7 @@ public class SendMessageViewModel {
         dependencies.messageService.sendMessage(message) { messageResult in
             switch messageResult {
             case .success(let message):
-                let viewModel = MessageViewModel(dependencies: self.dependencies, message: message, type: .sent)
+                let viewModel = MessageViewModel(dependencies: self.dependencies as! MessageViewModel.Dependencies, message: message, type: .sent)
                 DispatchQueue.main.async { result(.success(viewModel)) }
             case .failure(let error):
                 DispatchQueue.main.async { result(.failure(error)) }

@@ -1,9 +1,9 @@
 import UIKit
 
-public class BottomSheetPresentationController: UIPresentationController {
+public class ModalPresentationController: UIPresentationController {
     
-    private var presentable: BottomSheetPresentable? {
-        return presentedViewController as? BottomSheetPresentable
+    private var presentable: ModalPresentable? {
+        return presentedViewController as? ModalPresentable
     }
     
     private lazy var backgroundView: DimmedView = {
@@ -57,10 +57,18 @@ public class BottomSheetPresentationController: UIPresentationController {
 
 // MARK: - Layout Configuration
 
-private extension BottomSheetPresentationController {
+private extension ModalPresentationController {
     func layoutPresentedView(in containerView: UIView) {
-        containerView.addSubview(presentedViewController.view)
-        addRoundedCorners(to: presentedViewController.view)
+        guard let presentableViewController = presentedViewController as? ModalPresentable.Presentable
+            else { return }
+        
+        let margins = presentableViewController.sideMargins
+        
+        let view: UIView = presentableViewController.view
+        view.frame = view.frame.inset(by: UIEdgeInsets(top: 0, left: margins, bottom: 0, right: margins))
+        
+        containerView.addSubview(view)
+        addRoundedCorners(to: presentedViewController.view, ofSize: presentableViewController.targetSize)
     }
 
     func layoutBackgroundView(in containerView: UIView) {
@@ -77,11 +85,11 @@ private extension BottomSheetPresentationController {
 
 // MARK: - UIBezierPath
 
-private extension BottomSheetPresentationController {
-    func addRoundedCorners(to view: UIView) {
+private extension ModalPresentationController {
+    func addRoundedCorners(to view: UIView, ofSize size: CGSize) {
         let radius = presentable?.cornerRadius ?? 0
-        let path = UIBezierPath(roundedRect: view.bounds,
-                                byRoundingCorners: [.topLeft, .topRight],
+        let path = UIBezierPath(roundedRect: CGRect(origin: .zero, size: size),
+                                byRoundingCorners: [.allCorners],
                                 cornerRadii: CGSize(width: radius, height: radius))
         
         // Set path as a mask to display optional drag indicator view & rounded corners

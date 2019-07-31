@@ -19,7 +19,9 @@ public class ProfileViewController: UIViewController {
     private lazy var usernameView: UIView = {
         let navHeight = navigationController?.navigationBar.bounds.height ?? 0
         let frame = CGRect(x: 0, y: 0, width: self.view.frame.width - 100, height: navHeight)
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 100, height: navHeight))
+        let view = UIView(frame: frame)
+        
+        view.backgroundColor = .blue
 
         let label = UILabel()
         label.font = .primary16ptNormal
@@ -47,7 +49,7 @@ public class ProfileViewController: UIViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(didTapSettings))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.usernameView)
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.usernameView)
         
         pageTabController.dataSource = self
         
@@ -59,7 +61,8 @@ public class ProfileViewController: UIViewController {
 
             switch result {
             case .success(let viewModel):
-                self.usernameView.subview(ofType: UILabel.self)?.text = viewModel.username
+//                self.usernameView.subview(ofType: UILabel.self)?.text = viewModel.username
+                self.personView.usernameLabel.text = viewModel.username
                 self.personView.dateLabel.text = viewModel.helpingSince
                 self.personView.loveAccolade.actionView.count = viewModel.totalLove
                 self.personView.appreciateAccolade.actionView.count = viewModel.totalAppreciation
@@ -70,17 +73,21 @@ public class ProfileViewController: UIViewController {
     }
     
     public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.barTintColor = .clear
+        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.view.backgroundColor = .alternateBackground(for: theme)
+        navigationController?.navigationBar.shadowImage = UIColor.clear.asImage()
         
-        navigationController?.navigationBar.barTintColor = .alternateBackground(for: theme)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        super.viewWillAppear(animated)
     }
     
     public override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            
-            (navigationController as? Themeable)?.updateColors(for: theme)
-        }
+        (navigationController as? Themeable)?.updateColors(for: theme)
+
+        super.viewWillDisappear(animated)
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -102,7 +109,7 @@ public class ProfileViewController: UIViewController {
             headerBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             headerBackground.bottomAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10),
-            personView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            personView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             personView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             personView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             pageTabController.view.topAnchor.constraint(equalTo: headerBackground.bottomAnchor),

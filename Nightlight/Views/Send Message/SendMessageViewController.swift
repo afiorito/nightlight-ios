@@ -37,7 +37,7 @@ public class SendMessageViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nb_send"),
                                                             style: .plain, target: self,
                                                             action: #selector(sendTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nb_cancel"),
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_cancel"),
                                                            style: .plain,
                                                            target: self, action: #selector(cancelTapped))
         

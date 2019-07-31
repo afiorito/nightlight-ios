@@ -10,6 +10,8 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
     
     public let rootViewController: UINavigationController
     
+    private var activeIndexPath: IndexPath?
+    
     lazy var recentMessagesViewController: MessagesViewController = {
         let viewModel = MessagesViewModel(dependencies: dependencies as! MessagesViewModel.Dependencies, type: .recent)
         let viewController = MessagesViewController(viewModel: viewModel)
@@ -62,6 +64,22 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
 // MARK: - MessagesViewController Delegate
 
 extension RecentMessagesCoordinator: MessagesViewControllerDelegate {
+    public func messagesViewController(_ messagesViewController: MessagesViewController, didAppreciate message: MessageViewModel, at indexPath: IndexPath) {
+        guard !message.isAppreciated
+            else { return }
+
+        activeIndexPath = indexPath
+        
+        let childCoordinator = SendAppreciationCoordinator(rootViewController: rootViewController,
+                                                           messageViewModel: message,
+                                                           dependencies: dependencies as! SendAppreciationCoordinator.Dependencies)
+        childCoordinator.delegate = self
+
+        addChild(childCoordinator)
+        
+        childCoordinator.start()
+    }
+    
     public func messagesViewController(_ messagesViewController: MessagesViewController, didSelect message: MessageViewModel, at indexPath: IndexPath) {
         let messageDetailViewController = MessageDetailViewController(viewModel: message)
         messageDetailViewController.delegate = self
@@ -88,5 +106,21 @@ extension RecentMessagesCoordinator: MessageDetailViewControllerDelegate {
     public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, moreContextFor message: MessageViewModel) {
         handleMoreContext(for: messageDetailViewController)
     }
+    
+}
+
+// MARK: - SendAppreciationCoordinator Delegate
+
+extension RecentMessagesCoordinator: SendAppreciationCoordinatorDelegate {
+    public func sendAppreciationCoordinatorDidAppreciate(_ sendAppreciationCoordinator: SendAppreciationCoordinator) {
+        guard let indexPath = activeIndexPath else { return }
+        
+//        recentMessagesViewController.didAppreciateMessage(message: , at: )
+    }
+    
+    public func sendAppreciationCoordinatorDidFailAppreciate(_ sendAppreciationCoordinator: SendAppreciationCoordinator) {
+
+    }
+    
     
 }

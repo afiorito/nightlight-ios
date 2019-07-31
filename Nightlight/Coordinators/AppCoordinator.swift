@@ -38,6 +38,7 @@ public class AppCoordinator: NSObject, Coordinator {
     }
     
     public func start() {
+        try? dependencies.keychainManager.set(100, forKey: KeychainKey.numTokens.rawValue)
         dependencies.styleManager.theme = dependencies.userDefaultsManager.theme
         
         let splashScreenViewController = SplashScreenViewController()

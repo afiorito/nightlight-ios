@@ -6,7 +6,7 @@ public struct Message: Codable {
     let body: String
     let isAnonymous: Bool
     var isLoved: Bool
-    let isAppreciated: Bool
+    var isAppreciated: Bool
     var isSaved: Bool
     var loveCount: Int
     let appreciationCount: Int

@@ -2,8 +2,8 @@ import Foundation
 
 /// A dependency container to inject into other objects.
 public struct DependencyContainer: StyleManaging,
-    UserDefaultsManaging, KeychainManaging, NotificationObserving, KeyboardManaging, AuthServiced, MessageServiced,
-    PeopleServiced, UserNotificationServiced {
+    UserDefaultsManaging, KeychainManaging, NotificationObserving, KeyboardManaging, IAPManaging, AuthServiced,
+    MessageServiced, PeopleServiced, UserNotificationServiced {
     public var styleManager = StyleManager.default
     public var userDefaultsManager = UserDefaultsManager()
     public var keychainManager = KeychainManager()
@@ -13,6 +13,7 @@ public struct DependencyContainer: StyleManaging,
     public var messageService: MessageService
     public var peopleService: PeopleService
     public var notificationService: UserNotificationService
+    public var iapManager = IAPManager(productIdentifiers: IAPIdentifier.allCases.map { $0.fullIdentifier })
     
     init() {
         let httpClient = HttpClient()

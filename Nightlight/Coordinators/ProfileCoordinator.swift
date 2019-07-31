@@ -101,6 +101,9 @@ public class ProfileCoordinator: NSObject, TabBarCoordinator {
 // MARK: - MessagesViewController Delegate
 
 extension ProfileCoordinator: MessagesViewControllerDelegate {
+    public func messagesViewController(_ messagesViewController: MessagesViewController, didAppreciate message: MessageViewModel, at indexPath: IndexPath) {
+    }
+    
     public func messagesViewController(_ messagesViewController: MessagesViewController, didSelect message: MessageViewModel, at indexPath: IndexPath) {
         let messageDetailViewController = MessageDetailViewController(viewModel: message)
         messageDetailViewController.delegate = self

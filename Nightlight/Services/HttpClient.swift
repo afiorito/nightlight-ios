@@ -9,6 +9,7 @@ public class HttpClient {
     enum HttpMethod: String {
         case get
         case post, put
+        case head
         case delete
     }
     
@@ -89,6 +90,16 @@ public class HttpClient {
         }
         
         return request(urlRequest: urlRequest(for: url, method: .delete), result: result)
+    }
+    
+    @discardableResult
+    public func head(endpoint: Endpoint, result: @escaping (RequestResult) -> Void) -> URLSessionDataTask? {
+        guard let url = endpoint.url else {
+            result(.failure(NetworkError.badURL))
+            return nil
+        }
+        
+        return request(urlRequest: urlRequest(for: url, method: .head), result: result)
     }
     
     private func urlRequest(for url: URL, method: HttpMethod) -> URLRequest {

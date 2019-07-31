@@ -47,11 +47,14 @@ public class SettingsViewController: UIViewController {
     }
     
     public override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         
-         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-             tableView.deselectRow(at: selectedIndexPath, animated: true)
-         }
+        navigationController?.navigationBar.barTintColor = .alternateBackground(for: theme)
+        navigationController?.navigationBar.backgroundColor = .alternateBackground(for: theme)
+
+        super.viewWillAppear(animated)
+        
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedIndexPath, animated: true)
+        }
      }
     
     deinit {

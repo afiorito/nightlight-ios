@@ -77,7 +77,7 @@ public class AuthCoordinator: Coordinator {
         }
         
         // Avoid continously presenting more view controllers if going between sign in and sign up
-        if type(of: currentViewController) === type(of: otherViewController) {
+        if type(of: currentViewController) == type(of: otherViewController) {
             currentViewController.dismiss(animated: true)
         } else {
             currentViewController.present(otherViewController, animated: true)
@@ -90,7 +90,7 @@ extension AuthCoordinator: SignUpViewControllerDelegate, SignInViewControllerDel
         let webContentViewController = WebContentViewController(url: url)
         webContentViewController.title = url.lastPathComponent == "terms" ? "Term of Use" : "Privacy Policy"
         
-        let barButton = UIBarButtonItem(image: UIImage(named: "nb_cancel"),
+        let barButton = UIBarButtonItem(image: UIImage(named: "icon_cancel"),
                                                 style: .plain,
                                                 target: webContentViewController,
                                                 action: #selector(webContentViewController.dismissContent))

@@ -117,6 +117,13 @@ public class MessagesViewController: UIViewController, MessageContextHandling {
         }
     }
     
+    public func didAppreciateMessage(message: MessageViewModel, at indexPath: IndexPath?) {
+        if let indexPath = indexPath {
+            self.dataSource.data[indexPath.row] = message
+            self.messagesView.tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
     @objc private func refresh() {
         loadMoreMessages(fromStart: true)
     }
@@ -138,7 +145,13 @@ public class MessagesViewController: UIViewController, MessageContextHandling {
 
 extension MessagesViewController: MessageTableViewCellDelegate {
     public func cellDidTapAppreciate(_ cell: UITableViewCell) {
-        print("appreciate")
+        guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
+            return
+        }
+
+        let viewModel = dataSource.data[indexPath.row]
+        
+        delegate?.messagesViewController(self, didAppreciate: viewModel, at: indexPath)
     }
     
     public func cellDidTapSave(_ cell: UITableViewCell) {

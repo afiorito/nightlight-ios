@@ -9,3 +9,7 @@ public struct MessageSaveResponse: Codable {
 public struct MessageDeleteResponse: Codable {
     let isDeleted: Bool
 }
+
+public struct MessageAppreciateResponse: Codable {
+    let isAppreciated: Bool
+}
