@@ -206,6 +206,9 @@
 		92E9608D22F4A705005DF33D /* UserTokensResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9608C22F4A705005DF33D /* UserTokensResponse.swift */; };
 		92E9608F22F4AFA5005DF33D /* UserTokensBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9608E22F4AFA5005DF33D /* UserTokensBody.swift */; };
 		92E9609122F5D6ED005DF33D /* ErrorBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9609022F5D6ED005DF33D /* ErrorBody.swift */; };
+		92E9609322F5F8A9005DF33D /* InformationSubDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9609222F5F8A8005DF33D /* InformationSubDetailTableViewCell.swift */; };
+		92E9609522F5F8FA005DF33D /* InformationRightDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9609422F5F8FA005DF33D /* InformationRightDetailTableViewCell.swift */; };
+		92E9609722F5F97A005DF33D /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9609622F5F97A005DF33D /* UITableView+Extension.swift */; };
 		92F1761E22DBC232008AEB82 /* MessageActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761D22DBC232008AEB82 /* MessageActionType.swift */; };
 		92F1762022DBC42C008AEB82 /* MessageActionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */; };
 		92F1762722DBF771008AEB82 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */; };
@@ -453,6 +456,9 @@
 		92E9608C22F4A705005DF33D /* UserTokensResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTokensResponse.swift; sourceTree = "<group>"; };
 		92E9608E22F4AFA5005DF33D /* UserTokensBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTokensBody.swift; sourceTree = "<group>"; };
 		92E9609022F5D6ED005DF33D /* ErrorBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBody.swift; sourceTree = "<group>"; };
+		92E9609222F5F8A8005DF33D /* InformationSubDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSubDetailTableViewCell.swift; sourceTree = "<group>"; };
+		92E9609422F5F8FA005DF33D /* InformationRightDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationRightDetailTableViewCell.swift; sourceTree = "<group>"; };
+		92E9609622F5F97A005DF33D /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		92F1761D22DBC232008AEB82 /* MessageActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionType.swift; sourceTree = "<group>"; };
 		92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionResponse.swift; sourceTree = "<group>"; };
 		92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
@@ -710,6 +716,7 @@
 				928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */,
 				9237A1D422CA74E100FC9331 /* UIColor+Extension.swift */,
 				92418D4A22D7D645001B6DFB /* NSObject+Extension.swift */,
+				92E9609622F5F97A005DF33D /* UITableView+Extension.swift */,
 				92D398A422C906A400AAC887 /* UIView+Extension.swift */,
 				9237A1D222CA559500FC9331 /* UIViewController+Extension.swift */,
 				928A10A522D3CDF000FF78FB /* URLSession+Extension.swift */,
@@ -890,6 +897,8 @@
 				92748B1122E0A61A00C2957E /* SwitchTableViewCell.swift */,
 				9279ACB822E7B9220098C4C2 /* SelectOptionTableViewCell.swift */,
 				9279ACC022E7CDD60098C4C2 /* InformationTableViewCell.swift */,
+				92E9609222F5F8A8005DF33D /* InformationSubDetailTableViewCell.swift */,
+				92E9609422F5F8FA005DF33D /* InformationRightDetailTableViewCell.swift */,
 				9279ACBE22E7CA060098C4C2 /* BasicOptionTableViewCell.swift */,
 			);
 			path = "Static TableView";
@@ -1326,6 +1335,7 @@
 				9276314B22D4B41E000D4B8F /* KeychainManager.swift in Sources */,
 				9228D6C122D798AB003B03DB /* Date+Extension.swift in Sources */,
 				923B894D22EBAD0D003912EC /* WebContentViewControllerDelegate.swift in Sources */,
+				92E9609322F5F8A9005DF33D /* InformationSubDetailTableViewCell.swift in Sources */,
 				9279ACB722E7B5930098C4C2 /* SettingsViewController.swift in Sources */,
 				92E9607822F3C1BD005DF33D /* BuyTokensView.swift in Sources */,
 				925BE1C522DE64480000BEC9 /* UISearchBar+Themeable.swift in Sources */,
@@ -1385,6 +1395,7 @@
 				920E495022DF966C00AA1EDB /* Searchable.swift in Sources */,
 				92BB2F3122E2050700AAF662 /* NotificationsView.swift in Sources */,
 				92E9607322F3BF9C005DF33D /* SendAppreciationViewControllerDelegate.swift in Sources */,
+				92E9609722F5F97A005DF33D /* UITableView+Extension.swift in Sources */,
 				92B9008A22CE94A7009E619B /* SplashScreenViewController.swift in Sources */,
 				9279ACB922E7B9220098C4C2 /* SelectOptionTableViewCell.swift in Sources */,
 				925763E122CB76E80031D616 /* SignInView.swift in Sources */,
@@ -1456,6 +1467,7 @@
 				9279ACBF22E7CA060098C4C2 /* BasicOptionTableViewCell.swift in Sources */,
 				9237A1DD22CA829700FC9331 /* ThemeObserving.swift in Sources */,
 				9276314922D4B07B000D4B8F /* Data+Extension.swift in Sources */,
+				92E9609522F5F8FA005DF33D /* InformationRightDetailTableViewCell.swift in Sources */,
 				92CA9C8022D6475C009900E6 /* NotificationsCoordinator.swift in Sources */,
 				92931C2722D3907E00C54EB8 /* Endpoint.swift in Sources */,
 				92D8EBC922CFA8BA0083D6C4 /* AnimatedLogoView.swift in Sources */,

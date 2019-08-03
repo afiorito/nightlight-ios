@@ -43,7 +43,8 @@ public class SendAppreciationCoordinator: Coordinator {
     }
     
     @objc private func handleFinishedTransaction(_ notification: Notification) {
-        guard let outcome = notification.userInfo?[NLNotification.didFinishTransaction.rawValue] as? IAPManager.TransactionOutcome
+        guard buyTokensViewController != nil,
+            let outcome = notification.userInfo?[NLNotification.didFinishTransaction.rawValue] as? IAPManager.TransactionOutcome
             else { return }
         
         switch outcome {

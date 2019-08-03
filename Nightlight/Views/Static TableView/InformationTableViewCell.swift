@@ -15,7 +15,7 @@ public class InformationTableViewCell: BaseStaticTableViewCell {
     private let disclosureIndicator = UIImageView(image: UIImage(named: "disclosure"))
     
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         accessoryView = disclosureIndicator
         

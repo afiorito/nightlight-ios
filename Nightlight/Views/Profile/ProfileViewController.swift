@@ -91,14 +91,13 @@ public class ProfileViewController: UIViewController {
             headerBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             headerBackground.bottomAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10),
-            personView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            personView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             personView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             personView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             pageTabController.view.topAnchor.constraint(equalTo: headerBackground.bottomAnchor),
             pageTabController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pageTabController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             pageTabController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            
         ])
     }
     

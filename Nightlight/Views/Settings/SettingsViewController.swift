@@ -3,10 +3,11 @@ import UIKit
 public class SettingsViewController: UIViewController {
 
     private enum Section: Int, CaseIterable {
-        case general = 0
-        case feedback = 1
-        case about = 2
-        case account = 3
+        case appreciation = 0
+        case general
+        case feedback
+        case about
+        case account
     }
     
     private let viewModel: SettingsViewModel
@@ -15,11 +16,12 @@ public class SettingsViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(SelectOptionTableViewCell<Theme>.self, forCellReuseIdentifier: SelectOptionTableViewCell<Theme>.className)
-        tableView.register(SelectOptionTableViewCell<MessageDefault>.self,
-                           forCellReuseIdentifier: SelectOptionTableViewCell<MessageDefault>.className)
-        tableView.register(InformationTableViewCell.self, forCellReuseIdentifier: InformationTableViewCell.className)
-        tableView.register(BasicOptionTableViewCell.self, forCellReuseIdentifier: BasicOptionTableViewCell.className)
+        tableView.register(SelectOptionTableViewCell<Theme>.self)
+        tableView.register(SelectOptionTableViewCell<MessageDefault>.self)
+        tableView.register(InformationTableViewCell.self)
+        tableView.register(InformationSubDetailTableViewCell.self)
+        tableView.register(InformationRightDetailTableViewCell.self)
+        tableView.register(BasicOptionTableViewCell.self)
         
         tableView.tableFooterView = UIView()
         return tableView
@@ -66,6 +68,18 @@ public class SettingsViewController: UIViewController {
     public override func loadView() {
         view = tableView
     }
+    
+    private func formatTokens(for font: UIFont?) -> NSAttributedString {
+        let string = NSMutableAttributedString(string: "")
+        
+        let imageAttachment = TokenImageAttachment(font: font)
+        imageAttachment.image = UIImage(named: "glyph_token")
+        
+        string.appendTokenAttachment(imageAttachment)
+        string.append(NSAttributedString(string: "\(viewModel.tokens)"))
+        
+        return string
+    }
 
 }
 
@@ -77,6 +91,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue: section) {
+        case .appreciation: return 1
         case .general: return 2
         case .feedback: return 2
         case .about: return 3
@@ -89,6 +104,8 @@ extension SettingsViewController: UITableViewDataSource {
         let settingsCell: UITableViewCell
 
         switch Section(rawValue: indexPath.section) {
+        case .appreciation:
+            settingsCell = appreciationCell(for: indexPath)
         case .general:
             settingsCell = generalCell(for: indexPath)
         case .feedback:
@@ -129,6 +146,16 @@ extension SettingsViewController: UITableViewDataSource {
 // MARK: - Cell Preparation
 
 extension SettingsViewController {
+    private func appreciationCell(for indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: InformationRightDetailTableViewCell.className,
+                                                 for: indexPath) as! InformationRightDetailTableViewCell
+        
+        cell.title = "Nightlight Tokens"
+        cell.detailTextLabel?.attributedText = formatTokens(for: cell.detailTextLabel?.font)
+        
+        return cell
+    }
+
     private func generalCell(for indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
@@ -161,8 +188,8 @@ extension SettingsViewController {
             
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: InformationTableViewCell.className,
-                                                                     for: indexPath) as! InformationTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: InformationSubDetailTableViewCell.className,
+                                                                     for: indexPath) as! InformationSubDetailTableViewCell
             
             cell.title = "Please Rate Nightlight"
             cell.subtitle = "0 people have rated this version."
@@ -202,6 +229,8 @@ extension SettingsViewController {
 extension SettingsViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch Section(rawValue: indexPath.section) {
+        case .appreciation:
+            appreciationTapAction(for: indexPath)
         case .general:
             generalTapAction(for: indexPath)
         case .feedback:
@@ -216,6 +245,10 @@ extension SettingsViewController: UITableViewDelegate {
 }
 
 extension SettingsViewController {
+    private func appreciationTapAction(for indexPath: IndexPath) {
+        delegate?.settingsViewControllerDidSelectAppreciation(self)
+    }
+
     private func generalTapAction(for indexPath: IndexPath) {
         switch indexPath.row {
         case 0: delegate?.settingsViewControllerDidSelectTheme(self, for: viewModel.theme)
@@ -239,6 +272,20 @@ extension SettingsViewController {
         case 2: delegate?.settingsViewControllerDidSelectTermsOfUse(self)
         default: break
         }
+    }
+}
+
+extension SettingsViewController {
+    func didFailLoadingProducts() {
+        showToast("Could not load products.", severity: .urgent)
+    }
+    
+    public func didCompletePurchase() {
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+    }
+    
+    public func didFailPurchase() {
+        showToast("Something Went Wrong.", severity: .urgent)
     }
 }
 

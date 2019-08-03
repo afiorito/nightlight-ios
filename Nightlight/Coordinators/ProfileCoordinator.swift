@@ -212,7 +212,7 @@ extension ProfileCoordinator: MessageDetailViewControllerDelegate {
 extension ProfileCoordinator: ProfileViewControllerDelegate {
     public func profileViewControllerDidTapSettings(_ profileViewController: ProfileViewController) {
         let coordinator = SettingsCoordinator(rootViewController: rootViewController,
-                                              dependencies: self.dependencies as SettingsCoordinator.Dependencies)
+                                              dependencies: self.dependencies as! SettingsCoordinator.Dependencies)
         addChild(coordinator)
         
         coordinator.start()

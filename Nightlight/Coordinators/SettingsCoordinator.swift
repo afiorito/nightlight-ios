@@ -3,7 +3,7 @@ import MessageUI
 import SafariServices
 
 public class SettingsCoordinator: NSObject, Coordinator {
-    public typealias Dependencies = StyleManaging
+    public typealias Dependencies = NotificationObserving & StyleManaging
     public weak var parent: Coordinator?
     
     public var children = [Coordinator]()
@@ -11,6 +11,8 @@ public class SettingsCoordinator: NSObject, Coordinator {
     private let dependencies: Dependencies
     
     private let rootViewController: UINavigationController
+    
+    private weak var buyTokensViewController: BuyTokensViewController?
     
     public lazy var settingsViewController: SettingsViewController = {
         let viewModel = SettingsViewModel(dependencies: dependencies as! SettingsViewModel.Dependencies)
@@ -33,7 +35,14 @@ public class SettingsCoordinator: NSObject, Coordinator {
         self.dependencies = dependencies
     }
     
+    deinit {
+        dependencies.notificationCenter.removeObserver(self,
+                                                       name: Notification.Name(rawValue: NLNotification.didFinishTransaction.rawValue),
+                                                       object: nil)
+    }
+    
     public func start() {
+        NLNotification.didFinishTransaction.observe(target: self, selector: #selector(handleFinishedTransaction))
         rootViewController.pushViewController(settingsViewController, animated: true)
     }
     
@@ -49,11 +58,56 @@ public class SettingsCoordinator: NSObject, Coordinator {
         rootViewController.pushViewController(webContentViewController, animated: true)
     }
     
+    @objc private func handleFinishedTransaction(_ notification: Notification) {
+        guard buyTokensViewController != nil,
+            let outcome = notification.userInfo?[NLNotification.didFinishTransaction.rawValue] as? IAPManager.TransactionOutcome
+            else { return }
+        
+        switch outcome {
+        case .success:
+            buyTokensViewController = nil
+            settingsViewController.dismiss(animated: true)
+            settingsViewController.didCompletePurchase()
+        case .cancelled:
+            buyTokensViewController?.didCancelTransaction()
+        case .failed:
+            buyTokensViewController = nil
+            settingsViewController.dismiss(animated: true)
+            settingsViewController.didFailPurchase()
+        }
+    }
+    
 }
 
 // MARK: - SettingsViewController Delegate
 
 extension SettingsCoordinator: SettingsViewControllerDelegate {
+    public func settingsViewControllerDidSelectAppreciation(_ settingsViewController: SettingsViewController) {
+        let viewModel = BuyTokensViewModel(dependencies: dependencies as! BuyTokensViewModel.Dependencies)
+        
+        // need to fetch products before presenting so that collectionView has intrinsic size.
+        viewModel.getProducts { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let products):
+                DispatchQueue.main.async {
+                    let buyTokensViewController = BuyTokensViewController(viewModel: viewModel, products: products)
+                    
+                    buyTokensViewController.modalPresentationStyle = .custom
+                    buyTokensViewController.modalPresentationCapturesStatusBarAppearance = true
+                    buyTokensViewController.transitioningDelegate = ModalTransitioningDelegate.default
+                    
+                    self.buyTokensViewController = buyTokensViewController
+                    settingsViewController.present(buyTokensViewController, animated: true)
+                }
+            case .failure:
+                DispatchQueue.main.async {
+                    settingsViewController.didFailLoadingProducts()
+                }
+            }
+        }
+    }
+    
     public func settingsViewControllerDidSelectTheme(_ settingsViewController: SettingsViewController, for currentTheme: Theme) {
         let optionsViewController = OptionsTableViewController<Theme>(currentOption: currentTheme)
         optionsViewController.title = "Theme"

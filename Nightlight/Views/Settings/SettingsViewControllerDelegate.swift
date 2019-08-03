@@ -1,4 +1,5 @@
 public protocol SettingsViewControllerDelegate: class {
+    func settingsViewControllerDidSelectAppreciation(_ settingsViewController: SettingsViewController)
     func settingsViewControllerDidSelectTheme(_ settingsViewController: SettingsViewController, for currentTheme: Theme)
     func settingsViewControllerDidSelectDefaultMessage(_ settingsViewController: SettingsViewController, for currentMessageDefault: MessageDefault)
     func settingsViewControllerDidSelectFeedback(_ settingsViewController: SettingsViewController)
