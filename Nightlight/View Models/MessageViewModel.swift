@@ -3,7 +3,7 @@ import StoreKit
 
 public class MessageViewModel {
     public typealias MessageResultCompletion = (Result<MessageViewModel, MessageError>) -> Void
-    public typealias Dependencies = MessageServiced & IAPManaging
+    public typealias Dependencies = KeychainManaging & MessageServiced & IAPManaging
     
     private var purchaseCompletionHandler: MessageResultCompletion?
     
@@ -65,7 +65,7 @@ public class MessageViewModel {
             case .success(let loveResponse):
                 
                 self.message.isLoved = loveResponse.isLoved
-                self.message.loveCount += loveResponse.isLoved ? 1 : -1
+                self.message.loveCount = max(0, self.message.loveCount + (loveResponse.isLoved ? 1 : -1))
                 
                 DispatchQueue.main.async {
                     result(.success(self))
@@ -95,27 +95,24 @@ public class MessageViewModel {
         }
     }
     
-    public func appreciateMessage(result: @escaping MessageResultCompletion) {
-        HttpClient().head(endpoint: Endpoint(path: "/", queryItems: nil, isAuthorized: false)) { (statusResult) in
-            switch statusResult {
-            case .success:
-                self.purchaseCompletionHandler = result
-                self.dependencies.iapManager.delegate = self
-                self.dependencies.iapManager.purchase(.appreciation)
-            case .failure:
-                result(.failure(.unknown))
-            }
-        }
-    }
+    typealias MessageAppreciateResult = Result<MessageAppreciateResponse, MessageError>
     
-    private func appreciateMessage(result: @escaping (Result<Bool, Error>) -> Void) {
-        dependencies.messageService.actionMessage(with: message.id, type: .appreciate) { (appreciateResult: Result<MessageAppreciateResponse, MessageError>) in
+    public func appreciateMessage(result: @escaping MessageResultCompletion) {
+        dependencies.messageService.actionMessage(with: message.id, type: .appreciate) { [weak self] (appreciateResult: MessageAppreciateResult) in
+            guard let self = self else { return }
+
             switch appreciateResult {
             case .success(let appreciateResponse):
-                self.message.isAppreciated = appreciateResponse.isAppreciated
-                result(.success(appreciateResponse.isAppreciated))
+                if appreciateResponse.isAppreciated {
+                    self.message.appreciationCount += 1
+                    self.message.isAppreciated = true
+                    let tokens = (try? self.dependencies.keychainManager.integer(forKey: KeychainKey.tokens.rawValue)) ?? 0
+                    try? self.dependencies.keychainManager.set(tokens - 100, forKey: KeychainKey.tokens.rawValue)
+                }
+                
+                DispatchQueue.main.async { result(.success(self)) }
             case .failure(let error):
-                result(.failure(error))
+                DispatchQueue.main.async { result(.failure(error)) }
                 
             }
         }
@@ -133,39 +130,4 @@ public class MessageViewModel {
             }
         }
     }
-}
-
-extension MessageViewModel: IAPManagerDelegate {
-    public func iapManager(_ iapManager: IAPManager, didComplete transaction: SKPaymentTransaction) {
-        appreciateMessage { [weak self] (result: Result<Bool, Error>) in
-            guard let self = self
-                else { return }
-            
-            self.finish(transaction: transaction)
-            
-            switch result {
-            case .success(let isAppreciated):
-                print(isAppreciated)
-                if isAppreciated {
-                    self.purchaseCompletionHandler?(.success(self))
-                    return
-                }
-                self.purchaseCompletionHandler?(.failure(.unknown))
-            case .failure:
-                print("fail")
-                self.purchaseCompletionHandler?(.failure(.unknown))
-            }
-        }
-    }
-    
-    public func iapManager(_ iapManager: IAPManager, didFail transaction: SKPaymentTransaction) {
-        self.finish(transaction: transaction)
-        self.purchaseCompletionHandler?(.failure(.unknown))
-    }
-
-    private func finish(transaction: SKPaymentTransaction) {
-        dependencies.iapManager.paymentQueue.finishTransaction(transaction)
-        purchaseCompletionHandler = nil
-    }
-    
 }

@@ -3,10 +3,10 @@ import Foundation
 public class SendAppreciationViewModel {
     public typealias Dependencies = KeychainManaging & MessageServiced & StyleManaging
     
-    var numTokens: Int {
-        let numTokens = try? dependencies.keychainManager.integer(forKey: KeychainKey.numTokens.rawValue)
-        
-        return numTokens ?? 0
+    var tokens: Int {
+        let tokens = try? dependencies.keychainManager.integer(forKey: KeychainKey.tokens.rawValue)
+
+        return tokens ?? 0
     }
     
     private let dependencies: Dependencies

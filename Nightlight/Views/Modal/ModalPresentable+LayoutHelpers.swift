@@ -6,7 +6,6 @@ extension ModalPresentable where Self: UIViewController {
     }
     
     var targetSize: CGSize {
-        print("view", view.frame)
         view.layoutIfNeeded()
 
         let targetSize = CGSize(width: containerBounds.width - 2 * sideMargins,

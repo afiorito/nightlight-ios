@@ -2,6 +2,8 @@ import UIKit
 
 public class SendAppreciationView: UIView {
 
+    public var cancelAction: (() -> Void)?
+    
     public let headerView = SendAppreciationHeaderView()
     
     private let appreciationImageView: UIImageView = {
@@ -29,7 +31,6 @@ public class SendAppreciationView: UIView {
     public let actionButton: ContainedButton = {
         let button = ContainedButton()
         button.backgroundColor = .brand
-        button.setTitle("Confirm Purchase", for: .normal)
         return button
     }()
     
@@ -60,12 +61,9 @@ public class SendAppreciationView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
+        headerView.cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+        
         prepareSubviews()
-    }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        print(container.frame, frame)
     }
     
     required init?(coder: NSCoder) {
@@ -86,10 +84,15 @@ public class SendAppreciationView: UIView {
             container.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             container.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
             appreciationImageView.widthAnchor.constraint(equalToConstant: 50),
-            appreciationImageView.heightAnchor.constraint(equalToConstant: 50)
+            appreciationImageView.heightAnchor.constraint(equalToConstant: 50),
+            actionButton.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 1.0)
         ])
     }
 
+    @objc private func cancelTapped() {
+        cancelAction?()
+    }
+    
 }
 
 // MARK: - Themeable

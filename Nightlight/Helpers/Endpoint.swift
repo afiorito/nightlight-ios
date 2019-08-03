@@ -120,6 +120,10 @@ extension Endpoint {
     static func user(username: String) -> Endpoint {
         return Endpoint(path: "/user/\(username)")
     }
+    
+    static var userAddTokens: Endpoint {
+        return Endpoint(path: "/user/tokens")
+    }
 }
 
 // MARK: - Notification Endpoints

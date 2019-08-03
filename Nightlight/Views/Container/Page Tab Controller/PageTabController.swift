@@ -44,18 +44,8 @@ public class PageTabController: UIViewController {
         removeDidChangeThemeObserver()
     }
     
-    public override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        // For some reason the collection view initially returns its content size when
-        // accessing collectionView.frame until a few passes of viewDidLayoutSubviews
-        if childrenCollectionView.visibleCells.first?.frame != childrenCollectionView.frame {
-            childrenCollectionView.performBatchUpdates({})
-        }
-    }
-    
     private func prepareSubviews() {
-        view.addSubviews([childrenCollectionView, pageTabsView])
+        view.addSubviews([pageTabsView, childrenCollectionView])
         
         NSLayoutConstraint.activate([
             pageTabsView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -105,7 +95,7 @@ extension PageTabController: UICollectionViewDataSource {
 
 extension PageTabController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         return collectionView.frame.size
     }
     

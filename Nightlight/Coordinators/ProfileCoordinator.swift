@@ -8,9 +8,13 @@ public class ProfileCoordinator: NSObject, TabBarCoordinator {
     
     private let dependencies: Dependencies
 
+    private var currentInfo: (index: Int?, indexPath: IndexPath?)
+    
     public let rootViewController: UINavigationController
     
     private var previousMessagesViewControllerIndex: Int?
+    
+    private weak var activeViewController: AppreciationEventHandling?
     
     private lazy var messageViewControllers: [MessagesViewController] = {
         let messageDependencies = self.dependencies as! MessagesViewModel.Dependencies
@@ -50,13 +54,17 @@ public class ProfileCoordinator: NSObject, TabBarCoordinator {
     init(rootViewController: UINavigationController, dependencies: Dependencies) {
         self.dependencies = dependencies
         self.rootViewController = rootViewController
+        
+        super.init()
+        
+        rootViewController.delegate = self
     }
     
     public func start() {
         rootViewController.show(profileViewController, sender: rootViewController)
     }
     
-    private func handleMoreContext(for message: MessageViewModel, at indexPath: IndexPath?, contextHandler: UIViewController & MessageContextHandling) {
+    private func handleMoreContext(for message: MessageViewModel, at indexPath: IndexPath, contextHandler: UIViewController & MessageContextHandling) {
         let contextMenuViewController = ContextMenuViewController()
         
         contextMenuViewController.addOption(ContextOption.reportOption({ _ in
@@ -95,19 +103,47 @@ public class ProfileCoordinator: NSObject, TabBarCoordinator {
         
         contextHandler.present(contextMenuViewController, animated: true)
     }
+    
+    private func handleAppreciation(for message: MessageViewModel, at indexPath: IndexPath) {
+        guard !message.isAppreciated
+            else { return }
+        
+        let childCoordinator = SendAppreciationCoordinator(rootViewController: rootViewController,
+                                                           messageViewModel: message,
+                                                           dependencies: dependencies as! SendAppreciationCoordinator.Dependencies)
+        addChild(childCoordinator)
+        
+        childCoordinator.start()
+    }
 
 }
 
 // MARK: - MessagesViewController Delegate
 
 extension ProfileCoordinator: MessagesViewControllerDelegate {
+    public func messagesViewControllerAppreciation(_ messagesViewController: MessagesViewController, didComplete complete: Bool) {
+        activeViewController = nil
+        currentInfo = (nil, nil)
+        rootViewController.dismiss(animated: true)
+    }
+    
     public func messagesViewController(_ messagesViewController: MessagesViewController, didAppreciate message: MessageViewModel, at indexPath: IndexPath) {
+
+        handleAppreciation(for: message, at: indexPath)
+        activeViewController = messagesViewController
+        currentInfo = (messageViewControllers.firstIndex(of: messagesViewController), indexPath)
     }
     
     public func messagesViewController(_ messagesViewController: MessagesViewController, didSelect message: MessageViewModel, at indexPath: IndexPath) {
+        
         let messageDetailViewController = MessageDetailViewController(viewModel: message)
+        messageDetailViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nb_back"),
+                                                                                       style: .plain,
+                                                                                       target: self,
+                                                                                       action: #selector(goBack))
         messageDetailViewController.delegate = self
-        previousMessagesViewControllerIndex = messageViewControllers.firstIndex(of: messagesViewController)
+        rootViewController.interactivePopGestureRecognizer?.delegate = self
+        currentInfo = (messageViewControllers.firstIndex(of: messagesViewController), indexPath)
         
         rootViewController.pushViewController(messageDetailViewController, animated: true)
     }
@@ -116,31 +152,59 @@ extension ProfileCoordinator: MessagesViewControllerDelegate {
         handleMoreContext(for: message, at: indexPath, contextHandler: messagesViewController)
     }
     
+    @objc private func goBack() {
+        rootViewController.popViewController(animated: true)
+    }
+    
+    public func childDidFinish(_ child: Coordinator) {
+        removeChild(child)
+        
+        if child is SendAppreciationCoordinator {
+            guard let indexPath = currentInfo.indexPath
+                else { return }
+            activeViewController?.didAppreciateMessage(at: indexPath)
+        }
+    }
 }
 
 // MARK: - MessageDetailViewController Delegate
 
 extension ProfileCoordinator: MessageDetailViewControllerDelegate {
+    public func messageDetailViewControllerAppreciation(_ messageDetailViewController: MessageDetailViewController, didComplete complete: Bool) {
+        activeViewController = nil
+        rootViewController.dismiss(animated: true)
+    }
+    
+    public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, didAppreciate message: MessageViewModel) {
+        guard let indexPath = currentInfo.indexPath
+            else { return }
+
+        handleAppreciation(for: message, at: indexPath)
+        activeViewController = messageDetailViewController
+    }
+    
     public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, didUpdate message: MessageViewModel) {
+        guard let (index, indexPath) = currentInfo as? (Int, IndexPath)
+            else { return }
         
-        if let index = previousMessagesViewControllerIndex {
-            messageViewControllers[index].reloadSelectedIndexPath(with: message)
-            previousMessagesViewControllerIndex = nil
-        }
+        messageViewControllers[index].didUpdateMessage(message, at: indexPath)
     }
     
     public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, didDelete message: MessageViewModel) {
-            if let index = previousMessagesViewControllerIndex {
-                rootViewController.popViewController(animated: true)
-                messageViewControllers[index].deleteSelectedIndexPath(with: message)
-                previousMessagesViewControllerIndex = nil
-            }
+        guard let (index, indexPath) = currentInfo as? (Int, IndexPath)
+            else { return }
+        
+            rootViewController.popViewController(animated: true)
+            messageViewControllers[index].didDeleteMessage(message: message, at: indexPath)
+            currentInfo = (nil, nil)
         }
     
     public func messageDetailViewController(_ messageDetailViewController: MessageDetailViewController, moreContextFor message: MessageViewModel) {
-        handleMoreContext(for: message, at: nil, contextHandler: messageDetailViewController)
+        guard let indexPath = currentInfo.indexPath
+            else { return }
+
+        handleMoreContext(for: message, at: indexPath, contextHandler: messageDetailViewController)
     }
-    
 }
 
 // MARK: - ProfileViewController Delegate
@@ -154,3 +218,15 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
         coordinator.start()
     }
 }
+
+// MARK: - UINavigationController Delegate
+
+extension ProfileCoordinator: UINavigationControllerDelegate {
+    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        if navigationController.transitionCoordinator?.viewController(forKey: .to) is MessagesViewController {
+            currentInfo = (nil, nil)
+        }
+    }
+}
+
+extension ProfileCoordinator: UIGestureRecognizerDelegate {}

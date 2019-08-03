@@ -1,7 +1,7 @@
 import Foundation
 
 public class ProfileViewModel {
-    public typealias Dependencies = PeopleServiced & StyleManaging
+    public typealias Dependencies = PeopleServiced & KeychainManaging & StyleManaging
     
     private let dependencies: Dependencies
     
@@ -11,6 +11,22 @@ public class ProfileViewModel {
     
     public init(dependencies: Dependencies) {
         self.dependencies = dependencies
+    }
+    
+    var username: String {
+        let username = try? dependencies.keychainManager.string(forKey: KeychainKey.username.rawValue)
+        return username ?? "-"
+    }
+    
+    var dateSince: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM YYYY"
+        
+        if let createdAt = (try? dependencies.keychainManager.double(forKey: KeychainKey.userCreatedAt.rawValue)) {
+            return "Helping since \(formatter.string(from: Date(timeIntervalSince1970: createdAt)))"
+        }
+        
+        return "Helping since -"
     }
     
     public func getProfile(result: @escaping (Result<PersonViewModel, PersonError>) -> Void) {

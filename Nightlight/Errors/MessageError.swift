@@ -4,6 +4,8 @@ public enum MessageError: Error {
     case invalidTitle
     case invalidBody
     case invalidNumPeople
+    case insufficientTokens
+    case alreadyAppreciated
     case validation([ErrorReason])
     case unknown
     
@@ -12,6 +14,8 @@ public enum MessageError: Error {
         case .invalidTitle: return "Message title is invalid."
         case .invalidBody: return "Message body is invalid."
         case .invalidNumPeople: return "Number of people is invalid."
+        case .insufficientTokens: return "Insufficient tokens."
+        case .alreadyAppreciated: return "Message is already appreciated."
         case .validation(let reasons):
             var message = "An unknown error occured."
 

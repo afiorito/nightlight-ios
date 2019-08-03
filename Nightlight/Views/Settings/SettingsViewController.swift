@@ -47,13 +47,15 @@ public class SettingsViewController: UIViewController {
     }
     
     public override func viewWillAppear(_ animated: Bool) {
+        (navigationController as? Themeable)?.updateColors(for: theme)
         navigationController?.navigationBar.barTintColor = .alternateBackground(for: theme)
         navigationController?.navigationBar.backgroundColor = .alternateBackground(for: theme)
+        navigationController?.navigationBar.setBackgroundImage(UIColor.alternateBackground(for: theme).asImage(), for: .default)
 
         super.viewWillAppear(animated)
         
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selectedIndexPath, animated: true)
+            tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
         }
      }
     
@@ -110,12 +112,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     public func didChangeTheme(to theme: Theme) {
-        guard let selectedIndexPath = tableView.indexPathForSelectedRow else {
-            return
-        }
-
         viewModel.updateTheme(theme)
-        tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
     }
     
     public func didChangeMessageDefault(to default: MessageDefault) {

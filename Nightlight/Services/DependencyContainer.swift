@@ -13,7 +13,7 @@ public struct DependencyContainer: StyleManaging,
     public var messageService: MessageService
     public var peopleService: PeopleService
     public var notificationService: UserNotificationService
-    public var iapManager = IAPManager(productIdentifiers: IAPIdentifier.allCases.map { $0.fullIdentifier })
+    public var iapManager: IAPManager
     
     init() {
         let httpClient = HttpClient()
@@ -23,5 +23,14 @@ public struct DependencyContainer: StyleManaging,
         self.messageService = MessageService(httpClient: authorizedHttpClient)
         self.peopleService = PeopleService(httpClient: authorizedHttpClient, keychainManager: keychainManager)
         self.notificationService = UserNotificationService(httpClient: authorizedHttpClient)
+        self.iapManager = IAPManager(productIdentifiers: IAPIdentifier.allCases.map { $0.fullIdentifier })
+        self.iapManager.dependencies = {
+            struct Dependencies: PeopleServiced, KeychainManaging {
+                var peopleService: PeopleService
+                var keychainManager: KeychainManager
+            }
+            
+            return Dependencies(peopleService: self.peopleService, keychainManager: self.keychainManager)
+        }()
     }
 }

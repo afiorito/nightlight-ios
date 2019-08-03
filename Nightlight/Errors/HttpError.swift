@@ -16,4 +16,12 @@ public enum HttpError: Error {
         default: self = .unknown
         }
     }
+    
+    var data: Data? {
+        switch self {
+        case .badRequest(let data):
+            return data
+        default: return .none
+        }
+    }
 }

@@ -27,7 +27,7 @@ public class SendAppreciationHeaderView: UIView {
     
     public var numTokens: Int = 0 {
         didSet {
-            
+            updateSubtitleLabel()
         }
     }
     
@@ -42,7 +42,7 @@ public class SendAppreciationHeaderView: UIView {
     }
     
     private func prepareSubviews() {
-        updateLabel()
+        updateSubtitleLabel()
         
         textContainer.addArrangedSubviews([titleLabel, subtitleLabel])
         addSubviews([cancelButton, textContainer, separatorLineView])
@@ -60,7 +60,7 @@ public class SendAppreciationHeaderView: UIView {
         ])
     }
     
-    private func updateLabel() {
+    private func updateSubtitleLabel() {
         let string = NSMutableAttributedString(string: "Token count: ")
         let font = UIFont.secondary14ptNormal
         
@@ -72,7 +72,6 @@ public class SendAppreciationHeaderView: UIView {
         
         subtitleLabel.font = font
         subtitleLabel.attributedText = string
-        
     }
 }
 

@@ -15,11 +15,12 @@ public class TokenImageAttachment: NSTextAttachment {
     }
     
     override public func attachmentBounds(for textContainer: NSTextContainer?, proposedLineFragment lineFrag: CGRect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> CGRect {
-        
-        guard let image = image, let font = font else {
+        guard  let font = font else {
             return super.attachmentBounds(for: textContainer, proposedLineFragment: lineFrag, glyphPosition: position, characterIndex: charIndex)
         }
         
-        return CGRect(x: -1, y: (font.capHeight - image.size.height).rounded() / 2, width: image.size.width, height: image.size.height)
+        let height = font.lineHeight * 0.75
+        
+        return CGRect(x: -1, y: (font.capHeight - height).rounded() / 2, width: height, height: height)
     }
 }

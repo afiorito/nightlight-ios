@@ -10,6 +10,7 @@ public enum NLNotification: String {
     /// A notification indicating that the app's color theme has changed.
     case didChangeTheme
     case unauthorized
+    case didFinishTransaction
     
     /**
      Broadcasts a global notification.

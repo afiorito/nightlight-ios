@@ -27,7 +27,7 @@ public class HelpfulPeopleHeader: UITableViewHeaderFooterView {
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            titleLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10)
         ])
     }
 }
@@ -37,7 +37,7 @@ public class HelpfulPeopleHeader: UITableViewHeaderFooterView {
 extension HelpfulPeopleHeader: Themeable {
     func updateColors(for theme: Theme) {
         let backgroundView = UIView()
-        backgroundView.backgroundColor = .background(for: theme)
+        backgroundView.backgroundColor = .darkBackground(for: theme)
         self.backgroundView = backgroundView
         titleLabel.textColor = .primaryText(for: theme)
     }

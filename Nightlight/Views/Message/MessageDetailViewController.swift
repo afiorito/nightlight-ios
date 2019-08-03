@@ -1,6 +1,6 @@
 import UIKit
 
-public class MessageDetailViewController: UIViewController, MessageContextHandling {
+public class MessageDetailViewController: UIViewController {
 
     private let viewModel: MessageViewModel
     
@@ -16,8 +16,16 @@ public class MessageDetailViewController: UIViewController, MessageContextHandli
         super.init(nibName: nil, bundle: nil)
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        (navigationController as? Themeable)?.updateColors(for: theme)
+        
+        super.viewWillAppear(animated)
+    }
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Message"
         
         addDidChangeThemeObserver()
         
@@ -41,14 +49,6 @@ public class MessageDetailViewController: UIViewController, MessageContextHandli
         removeDidChangeThemeObserver()
     }
     
-    public func didReportMessage(message: MessageViewModel, at indexPath: IndexPath?) {
-        showToast("The message has been reported!", severity: .success)
-    }
-    
-    public func didDeleteMessage(message: MessageViewModel, at indexPath: IndexPath?) {
-        self.delegate?.messageDetailViewController(self, didDelete: message)
-    }
-    
     @objc private func loveTapped() {
         viewModel.loveMessage { [weak self] result in
             self?.handleMessageAction(result: result)
@@ -56,6 +56,7 @@ public class MessageDetailViewController: UIViewController, MessageContextHandli
     }
     
     @objc private func appreciateTapped() {
+        delegate?.messageDetailViewController(self, didAppreciate: viewModel)
     }
     
     @objc private func saveTapped() {
@@ -113,6 +114,37 @@ public class MessageDetailViewController: UIViewController, MessageContextHandli
         ])
     }
 
+}
+
+// MARK: - MessageEventHandling
+
+extension MessageDetailViewController: MessageContextHandling {
+    public func didReportMessage(message: MessageViewModel, at indexPath: IndexPath) {
+        showToast("The message has been reported!", severity: .success)
+    }
+    
+    public func didDeleteMessage(message: MessageViewModel, at indexPath: IndexPath) {
+        self.delegate?.messageDetailViewController(self, didDelete: message)
+    }
+}
+
+extension MessageDetailViewController: AppreciationEventHandling {
+    public func didAppreciateMessage(at indexPath: IndexPath) {
+        viewModel.appreciateMessage { [weak self] result in
+            guard let self = self else { return }
+            
+            self.delegate?.messageDetailViewControllerAppreciation(self, didComplete: true)
+            
+            switch result {
+            case .success:
+                self.delegate?.messageDetailViewController(self, didUpdate: self.viewModel)
+                self.updateView()
+            case .failure(let error):
+                self.showToast(error.message, severity: .urgent)
+                
+            }
+        }
+    }
 }
 
 // MARK: - Themeable

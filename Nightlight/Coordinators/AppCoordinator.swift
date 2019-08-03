@@ -38,34 +38,38 @@ public class AppCoordinator: NSObject, Coordinator {
     }
     
     public func start() {
-        try? dependencies.keychainManager.set(100, forKey: KeychainKey.numTokens.rawValue)
         dependencies.styleManager.theme = dependencies.userDefaultsManager.theme
         
         let splashScreenViewController = SplashScreenViewController()
         window.rootViewController = splashScreenViewController
         
-        if !dependencies.userDefaultsManager.hasOnboarded {
-            // Onboarding is only shown on first app load.
-            // Since keychain values are persisted even when the app is uninstalled,
-            // clear the keychain when the app is reinstalled and loaded for the first time.
-            try? dependencies.keychainManager.removeAllKeys()
+        window.makeKeyAndVisible()
+        
+        fetchUserInfo { [unowned self] in
+            if !self.dependencies.userDefaultsManager.hasOnboarded {
+                // Onboarding is only shown on first app load.
+                // Since keychain values are persisted even when the app is uninstalled,
+                // clear the keychain when the app is reinstalled and loaded for the first time.
+                try? self.dependencies.keychainManager.removeAllKeys()
+                
+                let onboardViewController = OnboardViewController()
+                onboardViewController.delegate = self
+                splashScreenViewController.initialViewController = onboardViewController
+                splashScreenViewController.showInitialViewController()
+            } else if self.isSignedIn {
+                let viewController = self.prepareMainApplication()
+                splashScreenViewController.initialViewController = viewController
+            } else {
+                let authCoordinator = AuthCoordinator(rootViewController: splashScreenViewController,
+                                                      dependencies: self.dependencies,
+                                                      authMethod: .signIn)
+                self.addChild(authCoordinator)
+                authCoordinator.start()
+            }
             
-            let onboardViewController = OnboardViewController()
-            onboardViewController.delegate = self
-            splashScreenViewController.initialViewController = onboardViewController
             splashScreenViewController.showInitialViewController()
-        } else if isSignedIn {
-            let viewController = prepareMainApplication()
-            splashScreenViewController.initialViewController = viewController
-        } else {
-            let authCoordinator = AuthCoordinator(rootViewController: splashScreenViewController, dependencies: dependencies, authMethod: .signIn)
-            addChild(authCoordinator)
-            authCoordinator.start()
         }
         
-        splashScreenViewController.showInitialViewController()
-        
-        window.makeKeyAndVisible()
     }
     
     @objc private func handleUnauthorized(_ notification: Notification) {
@@ -123,6 +127,20 @@ public class AppCoordinator: NSObject, Coordinator {
                 self?.window.rootViewController = viewController
                 UIView.setAnimationsEnabled(true)
             })
+        }
+    }
+    
+    private func fetchUserInfo(completion: @escaping () -> Void) {
+        dependencies.peopleService.getPerson { [weak self] result in
+            switch result {
+            case .success(let person):
+                try? self?.dependencies.keychainManager.set(person.tokens, forKey: KeychainKey.tokens.rawValue)
+                try? self?.dependencies.keychainManager.set(person.username, forKey: KeychainKey.username.rawValue)
+                try? self?.dependencies.keychainManager.set(person.createdAt.timeIntervalSince1970, forKey: KeychainKey.userCreatedAt.rawValue)
+            case .failure: break
+            }
+            
+            DispatchQueue.main.async { completion() }
         }
     }
 

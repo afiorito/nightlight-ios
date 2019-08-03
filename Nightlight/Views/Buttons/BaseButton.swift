@@ -12,12 +12,16 @@ open class BaseButton: UIButton {
     }()
     
     public var isLoading = false {
-        didSet {
-            if isLoading {
+        willSet {
+            if newValue {
                 originalTitleText = self.titleLabel?.text
                 self.setTitle("", for: .normal)
                 activityIndicator.startAnimating()
-            } else {
+            }
+        }
+        
+        didSet {
+            if !isLoading {
                 self.setTitle(originalTitleText, for: .normal)
                 activityIndicator.stopAnimating()
             }
@@ -44,6 +48,14 @@ open class BaseButton: UIButton {
         }
         didSet {
             backgroundColor = isHighlighted ? originalBackgroundColor?.darker(amount: 0.1) : originalBackgroundColor
+        }
+    }
+    
+    open override func setTitle(_ title: String?, for state: UIControl.State) {
+        if isLoading {
+            originalTitleText = title
+        } else {
+            super.setTitle(title, for: .normal)
         }
     }
     

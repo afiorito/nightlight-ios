@@ -1,4 +1,6 @@
 public enum KeychainKey: String {
     case accessToken, refreshToken
-    case numTokens
+    case tokens
+    case username
+    case userCreatedAt
 }

@@ -11,6 +11,8 @@ public class MessageTitleCell: UITableViewCell {
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        selectionStyle = .none
+        
         prepareSubviews()
         updateColors(for: theme)
     }

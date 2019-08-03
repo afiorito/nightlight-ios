@@ -2,6 +2,8 @@ import UIKit
 
 public class ModalPresentationController: UIPresentationController {
     
+    public weak var presentationDelegate: ModalPresentationControllerDelegate?
+    
     private var presentable: ModalPresentable? {
         return presentedViewController as? ModalPresentable
     }
@@ -38,7 +40,12 @@ public class ModalPresentationController: UIPresentationController {
         })
     }
     
+    public override func presentationTransitionDidEnd(_ completed: Bool) {
+        
+    }
+    
     public override func dismissalTransitionWillBegin() {
+        presentationDelegate?.modalPresentationControllerWillDimiss?(self)
         guard let coordinator = presentedViewController.transitionCoordinator else {
             backgroundView.dimState = .off
             return
@@ -48,6 +55,10 @@ public class ModalPresentationController: UIPresentationController {
             self?.backgroundView.dimState = .off
             self?.presentingViewController.setNeedsStatusBarAppearanceUpdate()
         })
+    }
+    
+    public override func dismissalTransitionDidEnd(_ completed: Bool) {
+        presentationDelegate?.modalPresentationController?(self, didDismiss: true)
     }
     
     func dismissPresentedViewController() {

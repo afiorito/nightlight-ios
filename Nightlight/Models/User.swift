@@ -3,6 +3,7 @@ import Foundation
 public struct User: Codable {
     let id: Int
     let username: String
+    let tokens: Int
     let totalLove: Int
     let totalAppreciation: Int
     let createdAt: Date

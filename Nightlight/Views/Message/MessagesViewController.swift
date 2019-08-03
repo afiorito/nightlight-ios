@@ -1,7 +1,6 @@
 import UIKit
 
-public class MessagesViewController: UIViewController, MessageContextHandling {
-
+public class MessagesViewController: UIViewController {
     private let viewModel: MessagesViewModel
     
     public weak var delegate: MessagesViewControllerDelegate?
@@ -87,43 +86,6 @@ public class MessagesViewController: UIViewController, MessageContextHandling {
         }
     }
     
-    public func reloadSelectedIndexPath(with message: MessageViewModel) {
-        guard let selectedIndexPath = messagesView.tableView.indexPathForSelectedRow
-            else { return }
-        
-        dataSource.data[selectedIndexPath.row] = message
-        messagesView.tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
-    }
-    
-    public func deleteSelectedIndexPath(with message: MessageViewModel) {
-        didDeleteMessage(message: message, at: messagesView.tableView.indexPathForSelectedRow)
-    }
-    
-    public func didReportMessage(message: MessageViewModel, at indexPath: IndexPath?) {
-        showToast("The message has been reported!", severity: .success)
-    }
-    
-    public func didDeleteMessage(message: MessageViewModel, at indexPath: IndexPath?) {
-        message.delete { [weak self] result in
-            switch result {
-            case .success:
-                if let indexPath = indexPath {
-                    self?.dataSource.data.remove(at: indexPath.row)
-                    self?.messagesView.tableView.deleteRows(at: [indexPath], with: .automatic)
-                }
-            case .failure:
-                self?.showToast("Could not connect to Nightlight.", severity: .urgent)
-            }
-        }
-    }
-    
-    public func didAppreciateMessage(message: MessageViewModel, at indexPath: IndexPath?) {
-        if let indexPath = indexPath {
-            self.dataSource.data[indexPath.row] = message
-            self.messagesView.tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
-    }
-    
     @objc private func refresh() {
         loadMoreMessages(fromStart: true)
     }
@@ -138,6 +100,51 @@ public class MessagesViewController: UIViewController, MessageContextHandling {
     
     deinit {
         removeDidChangeThemeObserver()
+    }
+}
+
+// MARK: - Message Events
+
+extension MessagesViewController: MessageContextHandling {
+    public func didReportMessage(message: MessageViewModel, at indexPath: IndexPath) {
+        showToast("The message has been reported!", severity: .success)
+    }
+    
+    public func didDeleteMessage(message: MessageViewModel, at indexPath: IndexPath) {
+        message.delete { [weak self] result in
+            switch result {
+            case .success:
+                self?.dataSource.data.remove(at: indexPath.row)
+                self?.messagesView.tableView.deleteRows(at: [indexPath], with: .automatic)
+            case .failure:
+                self?.showToast("Could not connect to Nightlight.", severity: .urgent)
+            }
+        }
+    }
+    
+    public func didUpdateMessage(_ message: MessageViewModel, at indexPath: IndexPath) {
+        self.dataSource.data[indexPath.row] = message
+        self.messagesView.tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+}
+
+extension MessagesViewController: AppreciationEventHandling {
+    public func didAppreciateMessage(at indexPath: IndexPath) {
+        let viewModel = self.dataSource.data[indexPath.row]
+        
+        viewModel.appreciateMessage { [weak self] result in
+            guard let self = self else { return }
+            
+            self.delegate?.messagesViewControllerAppreciation(self, didComplete: true)
+            
+            switch result {
+            case .success(let message):
+                self.didUpdateMessage(message, at: indexPath)
+            case .failure(let error):
+                self.showToast(error.message, severity: .urgent)
+                
+            }
+        }
     }
 }
 

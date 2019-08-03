@@ -20,6 +20,10 @@ public class SplashScreenViewController: UIViewController {
             view.insertSubview(viewController.view, at: 0)
             viewController.didMove(toParent: self)
         }
+        
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
     }
     
     override public func viewDidLoad() {

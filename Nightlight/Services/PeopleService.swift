@@ -75,7 +75,29 @@ public class PeopleService {
                 result(.failure(.unknown))
             }
         }
+    }
+    
+    public func addTokens(tokens: Int, result: @escaping (Result<Int, PersonError>) -> Void) {
+        guard let receiptURL = Bundle.main.appStoreReceiptURL, let receiptData = try? Data(contentsOf: receiptURL) else {
+            return result(.failure(.unknown))
+        }
         
+        let receiptString = receiptData.base64EncodedString()
+        
+        let tokensBody = try? Data.encodeJSON(value: UserTokensBody(tokens: tokens, receipt: receiptString))
+        
+        httpClient.put(endpoint: Endpoint.userAddTokens, body: tokensBody) { networkResult in
+            switch networkResult {
+            case .success(_, let data):
+                guard let tokensBody: UserTokensResponse = try? data.decodeJSON() else {
+                    return result(.failure(.unknown))
+                }
+                
+                result(.success(tokensBody.tokens))
+            case .failure:
+                result(.failure(.unknown))
+            }
+        }
     }
 
 }

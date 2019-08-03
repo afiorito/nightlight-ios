@@ -83,19 +83,6 @@ public class SendMessageViewController: UITableViewController {
                 }
         }
     }
-
-    override public var preferredStatusBarStyle: UIStatusBarStyle {
-        switch theme {
-        case .light:
-            if #available(iOS 13.0, *) {
-                return .darkContent
-            } else {
-                return .default
-            }
-        case .dark:
-            return .lightContent
-        }
-    }
 }
 
 // MARK: - UITableView DataSource

@@ -3,19 +3,28 @@ import UIKit
 /// A coordinator for authentication flow.
 public class AuthCoordinator: Coordinator {
     public typealias Dependencies = UserDefaultsManaging
+    public weak var parent: Coordinator?
+    public var children = [Coordinator]()
 
     /// A value representing the method of authentication of a user.
     public enum AuthMethod {
         case signUp, signIn
     }
 
-    public weak var parent: Coordinator?
-    public var children = [Coordinator]()
-
+    /// Determines if the auth view controller is the root view controller of the coordinator.
     public var isRoot: Bool = false
     
     /// The required dependencies.
     private let dependencies: Dependencies
+
+    /// The starting authentication method.
+    public let authMethod: AuthMethod
+    
+    public init(rootViewController: UIViewController?, dependencies: Dependencies, authMethod: AuthMethod) {
+        self.rootViewController = rootViewController
+        self.dependencies = dependencies
+        self.authMethod = authMethod
+    }
     
     /// The root view controller of the application.
     private var rootViewController: UIViewController?
@@ -36,14 +45,6 @@ public class AuthCoordinator: Coordinator {
         signUpViewController.delegate = self
         
         return signUpViewController
-    }
-
-    public let authMethod: AuthMethod
-    
-    public init(rootViewController: UIViewController?, dependencies: Dependencies, authMethod: AuthMethod) {
-        self.rootViewController = rootViewController
-        self.dependencies = dependencies
-        self.authMethod = authMethod
     }
 
     public func start() {

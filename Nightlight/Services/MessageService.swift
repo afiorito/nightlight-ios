@@ -63,7 +63,19 @@ public class MessageService {
                 
                 result(.success(actionResponse))
                 
-            case .failure:
+            case .failure(let error):
+                if type == .appreciate, case HttpError.badRequest = error {
+                    guard let errorBody: SimpleErrorBody = (try? (error as? HttpError)?.data?.decodeJSON()) else {
+                        return result(.failure(.unknown))
+                    }
+                    
+                    if errorBody.message == "Invalid Action" {
+                        return result(.failure(.alreadyAppreciated))
+                    } else {
+                        return result(.failure(.insufficientTokens))
+                    }
+                }
+                
                 result(.failure(.unknown))
             }
         }

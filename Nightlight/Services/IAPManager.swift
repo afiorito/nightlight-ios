@@ -4,46 +4,52 @@ public protocol IAPManaging {
     var iapManager: IAPManager { get }
 }
 
-public protocol IAPManagerDelegate: class {
-    func iapManager(_ iapManager: IAPManager, didComplete transaction: SKPaymentTransaction)
-    func iapManager(_ iapManager: IAPManager, didFail transaction: SKPaymentTransaction)
-}
-
 public class IAPManager: NSObject {
+    public typealias Dependencies = PeopleServiced & KeychainManaging
+    public typealias ProductsRequestCompletionHandler = (Result<[SKProduct], Error>) -> Void
+
+    public enum TransactionOutcome {
+        case success
+        case cancelled
+        case failed
+    }
+    
+    public var dependencies: Dependencies?
+    
     private let productIdentifiers: [String]
-    private var products = [SKProduct]()
-    private var productRequest: SKProductsRequest?
-    public let paymentQueue: SKPaymentQueue
+    private var productsRequest: SKProductsRequest?
+    private var productsRequestCompletionHandler: ProductsRequestCompletionHandler?
+    private let paymentQueue: SKPaymentQueue
     
-    public weak var delegate: IAPManagerDelegate?
-    
-    init(skPaymentQueue: SKPaymentQueue = SKPaymentQueue.default(), productIdentifiers: [String]) {
+    init(productIdentifiers: [String], skPaymentQueue: SKPaymentQueue = SKPaymentQueue.default()) {
         self.paymentQueue = skPaymentQueue
         self.productIdentifiers = productIdentifiers
         
         super.init()
         
         paymentQueue.add(self)
-        loadProducts()
     }
     
     public class var canMakePayments: Bool {
         return SKPaymentQueue.canMakePayments()
     }
     
-    public func purchase(_ productIdentifier: IAPIdentifier) {
-        guard let product = products.first(where: { $0.productIdentifier == productIdentifier.fullIdentifier })
-            else { return }
-        
+    public func purchase(product: SKProduct) {
         paymentQueue.add(SKPayment(product: product))
     }
     
-    private func loadProducts() {
-        self.productRequest?.cancel()
+    public func requestProducts(result: @escaping ProductsRequestCompletionHandler) {
+        self.productsRequest?.cancel()
         
-        self.productRequest = SKProductsRequest(productIdentifiers: Set(productIdentifiers))
-        self.productRequest?.delegate = self
-        self.productRequest?.start()
+        productsRequestCompletionHandler = result
+        self.productsRequest = SKProductsRequest(productIdentifiers: Set(productIdentifiers))
+        self.productsRequest?.delegate = self
+        self.productsRequest?.start()
+    }
+    
+    private func clearRequest() {
+        productsRequest = nil
+        productsRequestCompletionHandler = nil
     }
     
 }
@@ -52,7 +58,13 @@ public class IAPManager: NSObject {
 
 extension IAPManager: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        self.products = response.products
+        productsRequestCompletionHandler?(.success(response.products))
+        clearRequest()
+    }
+    
+    public func request(_ request: SKRequest, didFailWithError error: Error) {
+        productsRequestCompletionHandler?(.failure(error))
+        clearRequest()
     }
 }
 
@@ -63,20 +75,29 @@ extension IAPManager: SKPaymentTransactionObserver {
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchased:
-                print("purchased", transaction.transactionIdentifier)
-                delegate?.iapManager(self, didComplete: transaction)
+                complete(transaction: transaction)
             case .failed:
-                print("failed")
-                delegate?.iapManager(self, didFail: transaction)
-            case .deferred:
-                print("deferred")
-            case .purchasing:
-                print("purchasing")
-            case .restored:
-                print("restored")
+                NLNotification.didFinishTransaction.post(object: transaction, userInfo: TransactionOutcome.cancelled)
+                paymentQueue.finishTransaction(transaction)
+            default: break
+            }
+        }
+    }
+    
+    private func complete(transaction: SKPaymentTransaction) {
+        guard let tokens = Int(String(transaction.payment.productIdentifier.split(separator: "_")[1])) else {
+            return
+        }
+
+        dependencies?.peopleService.addTokens(tokens: tokens) { [weak self] result in
+            switch result {
+            case .success(let tokens):
+                try? self?.dependencies?.keychainManager.set(tokens, forKey: KeychainKey.tokens.rawValue)
+                NLNotification.didFinishTransaction.post(object: transaction, userInfo: TransactionOutcome.success)
+                self?.paymentQueue.finishTransaction(transaction)
+            case .failure:
+                NLNotification.didFinishTransaction.post(object: transaction, userInfo: TransactionOutcome.failed)
                 
-                break
-            @unknown default: break
             }
         }
     }

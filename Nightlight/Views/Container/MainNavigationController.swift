@@ -11,7 +11,7 @@ public class MainNavigationController: UINavigationController {
     deinit {
         removeDidChangeThemeObserver()
     }
-
+    
     override public var preferredStatusBarStyle: UIStatusBarStyle {
         switch theme {
         case .light:
@@ -38,6 +38,7 @@ extension MainNavigationController: Themeable {
         case .dark:
             navigationBar.shadowImage = UIColor.border(for: theme).darker(amount: 0.1).asImage()
         }
+        navigationBar.setBackgroundImage(UIColor.background(for: theme).asImage(), for: .default)
         navigationBar.tintColor = .primaryGrayScale(for: theme)
         navigationBar.backgroundColor = .background(for: theme)
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.primaryText(for: theme)]
