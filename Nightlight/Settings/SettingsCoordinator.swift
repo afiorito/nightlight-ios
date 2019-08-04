@@ -133,7 +133,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     }
     
     public func settingsViewControllerDidSelectRate(_ settingsViewController: SettingsViewController) {
-        
+        UIApplication.shared.open(URL(string: "itms-apps://itunes.apple.com/app/id1474711114")!)
     }
     
     public func settingsViewControllerDidSelectAbout(_ settingsViewController: SettingsViewController) {

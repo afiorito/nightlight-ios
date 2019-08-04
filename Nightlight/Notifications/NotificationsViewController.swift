@@ -44,7 +44,7 @@ public class NotificationsViewController: UIViewController {
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UIApplication.shared.applicationIconBadgeNumber > 0 {
+        if UIApplication.shared.applicationIconBadgeNumber > 0 || tabBarController?.tabBar.subview(ofType: BadgeView.self) != nil {
             refresh()
             UIApplication.shared.applicationIconBadgeNumber = 0
         }

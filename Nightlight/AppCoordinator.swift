@@ -227,5 +227,7 @@ extension AppCoordinator: OnboardViewControllerDelegate {
 extension AppCoordinator: UNUserNotificationCenterDelegate {
     public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         selectViewController(at: 3)
+        
+        completionHandler()
     }
 }

@@ -17,6 +17,8 @@ public class NLTabBarController: UITabBarController {
     }
     
     func addBadge(at index: Int) {
+        removeBadge()
+        
         let radius: CGFloat = 5
         let topMargin: CGFloat = 8
 
