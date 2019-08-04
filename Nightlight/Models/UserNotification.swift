@@ -70,6 +70,7 @@ public struct AnyUserNotification: Codable {
 public struct IncrementalNotificationData: Codable {
     let count: Int
     let title: String
+    let username: String
 }
 
 public struct OneTimeNotificationData: Codable {

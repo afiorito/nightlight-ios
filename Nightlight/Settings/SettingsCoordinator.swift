@@ -14,14 +14,15 @@ public class SettingsCoordinator: NSObject, Coordinator {
     
     private weak var buyTokensViewController: BuyTokensViewController?
     
+    var simulatedBackButton: UIBarButtonItem {
+        return UIBarButtonItem(image: UIImage(named: "nb_back"), style: .plain, target: self, action: #selector(goBack))
+    }
+    
     public lazy var settingsViewController: SettingsViewController = {
         let viewModel = SettingsViewModel(dependencies: dependencies as! SettingsViewModel.Dependencies)
         
         let viewController = SettingsViewController(viewModel: viewModel)
-        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nb_back"),
-                                                                          style: .plain,
-                                                                          target: self,
-                                                                          action: #selector(goBack))
+        viewController.navigationItem.leftBarButtonItem = simulatedBackButton
         viewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         viewController.delegate = self
         viewController.title = "Settings"
@@ -54,6 +55,7 @@ public class SettingsCoordinator: NSObject, Coordinator {
         let webContentViewController = WebContentViewController(url: pathName.url)
         webContentViewController.title = pathName.title
         webContentViewController.delegate = self
+        webContentViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
         rootViewController.pushViewController(webContentViewController, animated: true)
     }
@@ -112,6 +114,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
         let optionsViewController = OptionsTableViewController<Theme>(currentOption: currentTheme)
         optionsViewController.title = "Theme"
         optionsViewController.delegate = self
+        optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
         rootViewController.pushViewController(optionsViewController, animated: true)
     }
@@ -120,6 +123,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
         let optionsViewController = OptionsTableViewController<MessageDefault>(currentOption: currentMessageDefault)
         optionsViewController.title = "Send Message (Default)"
         optionsViewController.delegate = self
+        optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
         rootViewController.pushViewController(optionsViewController, animated: true)
     }

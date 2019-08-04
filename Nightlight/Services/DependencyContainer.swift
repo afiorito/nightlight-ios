@@ -1,8 +1,13 @@
 import Foundation
+import UserNotifications
+
+public protocol UserNotificationManaging {
+    var userNotificationCenter: UNUserNotificationCenter { get }
+}
 
 /// A dependency container to inject into other objects.
 public struct DependencyContainer: StyleManaging,
-    UserDefaultsManaging, KeychainManaging, NotificationObserving, KeyboardManaging, IAPManaging, AuthServiced,
+    UserDefaultsManaging, KeychainManaging, NotificationObserving, UserNotificationManaging, KeyboardManaging, IAPManaging, AuthServiced,
     MessageServiced, PeopleServiced, UserNotificationServiced {
     public var styleManager = StyleManager.default
     public var userDefaultsManager = UserDefaultsManager()
@@ -14,6 +19,7 @@ public struct DependencyContainer: StyleManaging,
     public var peopleService: PeopleService
     public var notificationService: UserNotificationService
     public var iapManager: IAPManager
+    public var userNotificationCenter = UNUserNotificationCenter.current()
     
     init() {
         let httpClient = HttpClient()

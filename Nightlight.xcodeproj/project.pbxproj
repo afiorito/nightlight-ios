@@ -152,6 +152,7 @@
 		928A75CF22C92E7600BC607A /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */; };
 		928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A75D022C967BE00BC607A /* OnboardViewController.swift */; };
 		928E53CF22C81E1A00260C8D /* OnboardPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E53CE22C81E1A00260C8D /* OnboardPageViewController.swift */; };
+		928EC46422F75B3E0044E235 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EC46322F75B3E0044E235 /* BadgeView.swift */; };
 		92931C2122D2D4FB00C54EB8 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92931C2022D2D4FB00C54EB8 /* HttpClient.swift */; };
 		92931C2522D35C8000C54EB8 /* AuthorizedHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92931C2422D35C8000C54EB8 /* AuthorizedHttpClient.swift */; };
 		92931C2722D3907E00C54EB8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92931C2622D3907E00C54EB8 /* Endpoint.swift */; };
@@ -209,6 +210,13 @@
 		92E960C022F60B91005DF33D /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960BF22F60B91005DF33D /* NotificationType.swift */; };
 		92E960C722F60C91005DF33D /* ContentPathName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960C622F60C90005DF33D /* ContentPathName.swift */; };
 		92E960C922F60CEB005DF33D /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960C822F60CEB005DF33D /* SettingsCoordinator.swift */; };
+		92E960CD22F632DA005DF33D /* NotificationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960CC22F632DA005DF33D /* NotificationPermissionViewController.swift */; };
+		92E960CF22F63356005DF33D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960CE22F63356005DF33D /* PermissionView.swift */; };
+		92E960D122F65255005DF33D /* PermissionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D022F65255005DF33D /* PermissionViewControllerDelegate.swift */; };
+		92E960D322F65358005DF33D /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D222F65358005DF33D /* PermissionViewController.swift */; };
+		92E960D522F65592005DF33D /* PermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D422F65592005DF33D /* PermissionViewModel.swift */; };
+		92E960D722F70A66005DF33D /* UserDeviceTokenBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */; };
+		92E960D922F73781005DF33D /* UITabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D822F73781005DF33D /* UITabBar+Extension.swift */; };
 		92F1761E22DBC232008AEB82 /* MessageActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761D22DBC232008AEB82 /* MessageActionType.swift */; };
 		92F1762022DBC42C008AEB82 /* MessageActionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */; };
 		92F1762722DBF771008AEB82 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */; };
@@ -400,6 +408,7 @@
 		928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		928A75D022C967BE00BC607A /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
 		928E53CE22C81E1A00260C8D /* OnboardPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardPageViewController.swift; sourceTree = "<group>"; };
+		928EC46322F75B3E0044E235 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		92931C2022D2D4FB00C54EB8 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		92931C2422D35C8000C54EB8 /* AuthorizedHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedHttpClient.swift; sourceTree = "<group>"; };
 		92931C2622D3907E00C54EB8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -459,6 +468,14 @@
 		92E960BF22F60B91005DF33D /* NotificationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		92E960C622F60C90005DF33D /* ContentPathName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentPathName.swift; sourceTree = "<group>"; };
 		92E960C822F60CEB005DF33D /* SettingsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		92E960CA22F6181D005DF33D /* Nightlight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nightlight.entitlements; sourceTree = "<group>"; };
+		92E960CC22F632DA005DF33D /* NotificationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionViewController.swift; sourceTree = "<group>"; };
+		92E960CE22F63356005DF33D /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
+		92E960D022F65255005DF33D /* PermissionViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewControllerDelegate.swift; sourceTree = "<group>"; };
+		92E960D222F65358005DF33D /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
+		92E960D422F65592005DF33D /* PermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewModel.swift; sourceTree = "<group>"; };
+		92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDeviceTokenBody.swift; sourceTree = "<group>"; };
+		92E960D822F73781005DF33D /* UITabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Extension.swift"; sourceTree = "<group>"; };
 		92F1761D22DBC232008AEB82 /* MessageActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionType.swift; sourceTree = "<group>"; };
 		92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionResponse.swift; sourceTree = "<group>"; };
 		92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
@@ -590,6 +607,7 @@
 				92BB2F2F22E2040100AAF662 /* Notifications */,
 				925763DC22CAD7760031D616 /* Onboarding */,
 				925BE1CA22DE72260000BEC9 /* People */,
+				92E960CB22F632BB005DF33D /* Permission */,
 				9279ACB122E7B39A0098C4C2 /* Profile */,
 				92E9609E22F60747005DF33D /* Search */,
 				92E9605F22F3BEE1005DF33D /* Send Appreciation */,
@@ -607,6 +625,7 @@
 				9233618A22C664A2002B7BBA /* AppCoordinator.swift */,
 				9233615922C643F5002B7BBA /* AppDelegate.swift */,
 				9233616222C643F7002B7BBA /* Assets.xcassets */,
+				92E960CA22F6181D005DF33D /* Nightlight.entitlements */,
 				9233616422C643F7002B7BBA /* LaunchScreen.storyboard */,
 				92931C3022D399B000C54EB8 /* Development.xcconfig */,
 				92931C3322D39B5800C54EB8 /* Production.xcconfig */,
@@ -674,6 +693,7 @@
 				925763D522CAD0160031D616 /* PageControl.swift */,
 				92748B1322E0A9BD00C2957E /* Switch.swift */,
 				92DF5D2622D52B9A00207D4D /* ToastView.swift */,
+				928EC46322F75B3E0044E235 /* BadgeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -698,6 +718,7 @@
 				928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */,
 				9237A1D422CA74E100FC9331 /* UIColor+Extension.swift */,
 				92418D4A22D7D645001B6DFB /* NSObject+Extension.swift */,
+				92E960D822F73781005DF33D /* UITabBar+Extension.swift */,
 				92E9609622F5F97A005DF33D /* UITableView+Extension.swift */,
 				92D398A422C906A400AAC887 /* UIView+Extension.swift */,
 				9237A1D222CA559500FC9331 /* UIViewController+Extension.swift */,
@@ -816,6 +837,7 @@
 			isa = PBXGroup;
 			children = (
 				92C7534522DF6A5200A84BD0 /* PersonError.swift */,
+				92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */,
 				92E9608E22F4AFA5005DF33D /* UserTokensBody.swift */,
 				92E9608C22F4A705005DF33D /* UserTokensResponse.swift */,
 				92E9609C22F60716005DF33D /* Views */,
@@ -1199,6 +1221,18 @@
 			path = Themes;
 			sourceTree = "<group>";
 		};
+		92E960CB22F632BB005DF33D /* Permission */ = {
+			isa = PBXGroup;
+			children = (
+				92E960CC22F632DA005DF33D /* NotificationPermissionViewController.swift */,
+				92E960D222F65358005DF33D /* PermissionViewController.swift */,
+				92E960CE22F63356005DF33D /* PermissionView.swift */,
+				92E960D022F65255005DF33D /* PermissionViewControllerDelegate.swift */,
+				92E960D422F65592005DF33D /* PermissionViewModel.swift */,
+			);
+			path = Permission;
+			sourceTree = "<group>";
+		};
 		92F1762522DBF6D3008AEB82 /* Message */ = {
 			isa = PBXGroup;
 			children = (
@@ -1424,7 +1458,9 @@
 				9276314322D3F673000D4B8F /* AuthToken.swift in Sources */,
 				9228D6B622D77029003B03DB /* ActionView.swift in Sources */,
 				92CA9C8222D647C0009900E6 /* NotificationsViewController.swift in Sources */,
+				92E960D322F65358005DF33D /* PermissionViewController.swift in Sources */,
 				92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */,
+				92E960D722F70A66005DF33D /* UserDeviceTokenBody.swift in Sources */,
 				925BCA4322F1CBDE00277D00 /* SendAppreciationViewModel.swift in Sources */,
 				92B302ED22D6292C00CE5668 /* MessagesViewModel.swift in Sources */,
 				928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */,
@@ -1493,6 +1529,7 @@
 				925BE1C522DE64480000BEC9 /* UISearchBar+Themeable.swift in Sources */,
 				92418D4B22D7D645001B6DFB /* NSObject+Extension.swift in Sources */,
 				92E960C722F60C91005DF33D /* ContentPathName.swift in Sources */,
+				92E960D922F73781005DF33D /* UITabBar+Extension.swift in Sources */,
 				9213184B22D6050000C91D90 /* NLTabBarController.swift in Sources */,
 				92F1766022DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift in Sources */,
 				925DD4A722DDE49300D50A89 /* UIView+Themeable.swift in Sources */,
@@ -1502,6 +1539,7 @@
 				92E9607122F3BF99005DF33D /* SendAppreciationView.swift in Sources */,
 				92418D4722D7C1D0001B6DFB /* MessageError.swift in Sources */,
 				9279AC8D22E671E70098C4C2 /* PageTabsViewDataSource.swift in Sources */,
+				92E960D122F65255005DF33D /* PermissionViewControllerDelegate.swift in Sources */,
 				92CA9C8622D6484B009900E6 /* ProfileCoordinator.swift in Sources */,
 				928A10B322D3EBF400FF78FB /* SignUpCredentials.swift in Sources */,
 				9237A1E322CA8D8C00FC9331 /* StyleManager.swift in Sources */,
@@ -1516,6 +1554,7 @@
 				928A75CF22C92E7600BC607A /* UIStackView+Extension.swift in Sources */,
 				92B302F322D63B7000CE5668 /* SearchViewController.swift in Sources */,
 				92B5502722E2074E0057589E /* UserNotificationViewModel.swift in Sources */,
+				92E960CD22F632DA005DF33D /* NotificationPermissionViewController.swift in Sources */,
 				92F1762722DBF771008AEB82 /* MessageDetailViewController.swift in Sources */,
 				92418D4922D7D422001B6DFB /* DateFormatter+Extension.swift in Sources */,
 				9276314122D3F547000D4B8F /* AuthResponse.swift in Sources */,
@@ -1559,6 +1598,7 @@
 				9228D6BD22D79250003B03DB /* Message.swift in Sources */,
 				9205E6EE22F0E3F900AFE16B /* ModalPresentable.swift in Sources */,
 				92F1762022DBC42C008AEB82 /* MessageActionResponse.swift in Sources */,
+				928EC46422F75B3E0044E235 /* BadgeView.swift in Sources */,
 				92E960A922F6085F005DF33D /* NotificationTableViewCell.swift in Sources */,
 				92E9607022F3BF99005DF33D /* SendAppreciationViewController+BottomSheetPresentable.swift in Sources */,
 				92E960C022F60B91005DF33D /* NotificationType.swift in Sources */,
@@ -1594,6 +1634,7 @@
 				925BE1D222DE83B20000BEC9 /* PeopleViewController.swift in Sources */,
 				920E495B22DFC9F900AA1EDB /* MessageTitleCell.swift in Sources */,
 				925BE1D622DE86CC0000BEC9 /* HelpfulPeopleViewController.swift in Sources */,
+				92E960CF22F63356005DF33D /* PermissionView.swift in Sources */,
 				92F1766222DD4777008AEB82 /* DimmedView.swift in Sources */,
 				925BE1C922DE721A0000BEC9 /* PeopleView.swift in Sources */,
 				9279AC7F22E6091C0098C4C2 /* JWTDecoder.swift in Sources */,
@@ -1621,6 +1662,7 @@
 				9276314922D4B07B000D4B8F /* Data+Extension.swift in Sources */,
 				92E9609522F5F8FA005DF33D /* InformationRightDetailTableViewCell.swift in Sources */,
 				92CA9C8022D6475C009900E6 /* NotificationsCoordinator.swift in Sources */,
+				92E960D522F65592005DF33D /* PermissionViewModel.swift in Sources */,
 				92931C2722D3907E00C54EB8 /* Endpoint.swift in Sources */,
 				92D8EBC922CFA8BA0083D6C4 /* AnimatedLogoView.swift in Sources */,
 			);
@@ -1790,6 +1832,7 @@
 			baseConfigurationReference = 92931C3022D399B000C54EB8 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Development.plist;
@@ -1810,6 +1853,7 @@
 			baseConfigurationReference = 92931C3022D399B000C54EB8 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Development.plist;
@@ -1973,6 +2017,7 @@
 			baseConfigurationReference = 92931C3322D39B5800C54EB8 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Production.plist;
@@ -2089,6 +2134,7 @@
 			baseConfigurationReference = 92931C3322D39B5800C54EB8 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Production.plist;

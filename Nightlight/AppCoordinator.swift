@@ -10,6 +10,8 @@ public class AppCoordinator: NSObject, Coordinator {
     
     /// The key window of the application.
     private(set) var window: UIWindow
+    
+    private weak var tabBarController: NLTabBarController?
 
     /// A boolean representing whether a user has signed in previously.
     private var isSignedIn: Bool {
@@ -17,11 +19,15 @@ public class AppCoordinator: NSObject, Coordinator {
         return accessToken != nil
     }
     
+    private var isInitialLaunch = false
+    
     public init(dependencies: DependencyContainer) {
         self.dependencies = dependencies
         window = UIWindow(frame: UIScreen.main.bounds)
         
         super.init()
+        
+        dependencies.userNotificationCenter.delegate = self
         
         dependencies
             .notificationCenter
@@ -35,6 +41,14 @@ public class AppCoordinator: NSObject, Coordinator {
         dependencies
             .notificationCenter
             .removeObserver(self, name: Notification.Name(rawValue: NLNotification.unauthorized.rawValue), object: nil)
+    }
+    
+    public func selectViewController(at index: Int) {
+        tabBarController?.selectedIndex = index
+    }
+    
+    public func addNotificationBadge() {
+        tabBarController?.addBadge(at: 3)
     }
     
     public func start() {
@@ -51,7 +65,8 @@ public class AppCoordinator: NSObject, Coordinator {
                 // Since keychain values are persisted even when the app is uninstalled,
                 // clear the keychain when the app is reinstalled and loaded for the first time.
                 try? self.dependencies.keychainManager.removeAllKeys()
-                
+                self.isInitialLaunch = true
+
                 let onboardViewController = OnboardViewController()
                 onboardViewController.delegate = self
                 splashScreenViewController.initialViewController = onboardViewController
@@ -66,7 +81,7 @@ public class AppCoordinator: NSObject, Coordinator {
                 self.addChild(authCoordinator)
                 authCoordinator.start()
             }
-            
+
             splashScreenViewController.showInitialViewController()
         }
         
@@ -112,6 +127,8 @@ public class AppCoordinator: NSObject, Coordinator {
             coordinators[3].rootViewController
         ]
         
+        self.tabBarController = tabBarController
+        
         return tabBarController
     }
     
@@ -119,14 +136,17 @@ public class AppCoordinator: NSObject, Coordinator {
         removeChild(child)
         
         if child is AuthCoordinator {
-            let viewController = prepareMainApplication()
-            
-            // animate resetting the view controller stack
-            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: { [weak self] in
-                UIView.setAnimationsEnabled(false)
-                self?.window.rootViewController = viewController
-                UIView.setAnimationsEnabled(true)
-            })
+            if isInitialLaunch {
+                let viewModel = PermissionViewModel(dependencies: dependencies)
+                
+                let notificationPermissionViewController = NotificationPermissionViewController(viewModel: viewModel)
+                notificationPermissionViewController.delegate = self
+                
+                animateRootViewController(notificationPermissionViewController)
+                
+            } else {
+                animateRootViewController(prepareMainApplication())
+            }
         }
     }
     
@@ -143,7 +163,25 @@ public class AppCoordinator: NSObject, Coordinator {
             DispatchQueue.main.async { completion() }
         }
     }
+    
+    private func animateRootViewController(_ rootViewController: UIViewController) {
+        // animate resetting the view controller stack
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: { [weak self] in
+            UIView.setAnimationsEnabled(false)
+            self?.window.rootViewController = rootViewController
+            UIView.setAnimationsEnabled(true)
+        })
+    }
 
+}
+
+// MARK: - PermissionViewController Delegate
+
+extension AppCoordinator: PermissionViewControllerDelegate {
+    public func permissionViewController(_ permissionViewController: PermissionViewController, didFinish success: Bool) {
+        animateRootViewController(prepareMainApplication())
+    }
+    
 }
 
 // MARK: - UITabBarController Delegate
@@ -184,4 +222,10 @@ extension AppCoordinator: OnboardViewControllerDelegate {
         authCoordinator.start()
     }
     
+}
+
+extension AppCoordinator: UNUserNotificationCenterDelegate {
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        selectViewController(at: 3)
+    }
 }

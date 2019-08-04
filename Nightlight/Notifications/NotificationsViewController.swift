@@ -41,6 +41,15 @@ public class NotificationsViewController: UIViewController {
         refresh()
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if UIApplication.shared.applicationIconBadgeNumber > 0 {
+            refresh()
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -71,6 +80,8 @@ public class NotificationsViewController: UIViewController {
                     let newIndexPaths = self.dataSource.updateData(with: notifications)
                     self.notificationsView.tableView.insertRows(at: newIndexPaths, with: .none)
                 }
+                
+                (self.tabBarController as? NLTabBarController)?.removeBadge()
                 
             case .failure:
                 // ensure empty view is updated properly.

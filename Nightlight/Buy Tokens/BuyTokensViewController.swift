@@ -31,6 +31,11 @@ public class BuyTokensViewController: UIViewController {
         buyTokensView.productsCollectionView.delegate = self
         buyTokensView.productsCollectionView.dataSource = self
         
+        if !IAPManager.canMakePayments {
+            buyTokensView.confirmPurchaseButton.setTitle("Unavailable", for: .normal)
+            buyTokensView.confirmPurchaseButton.isEnabled = false
+        }
+        
         prepareSubviews()
         updateColors(for: theme)
         

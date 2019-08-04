@@ -124,6 +124,10 @@ extension Endpoint {
     static var userAddTokens: Endpoint {
         return Endpoint(path: "/user/tokens")
     }
+    
+    static var userNotificationDeviceToken: Endpoint {
+        return Endpoint(path: "/user/notification/deviceToken")
+    }
 }
 
 // MARK: - Notification Endpoints
