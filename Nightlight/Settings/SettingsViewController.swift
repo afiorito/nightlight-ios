@@ -11,8 +11,9 @@ public class SettingsViewController: UIViewController {
     }
     
     private let viewModel: SettingsViewModel
-    
     public weak var delegate: SettingsViewControllerDelegate?
+    
+    private var ratingCount: Int = 0
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -46,6 +47,15 @@ public class SettingsViewController: UIViewController {
         tableView.delegate = self
         
         updateColors(for: theme)
+        
+        viewModel.loadRatings { (result) in
+            switch result {
+            case .success(let ratingCount):
+                self.ratingCount = ratingCount
+                self.tableView.reloadRows(at: [IndexPath(row: 1, section: Section.feedback.rawValue)], with: .automatic)
+            case .failure: break
+            }
+        }
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -192,8 +202,19 @@ extension SettingsViewController {
                                                                      for: indexPath) as! InformationSubDetailTableViewCell
             
             cell.title = "Please Rate Nightlight"
-            cell.subtitle = "0 people have rated this version."
             
+            let prefix: String
+            
+            if ratingCount == 1 {
+                prefix = "Only \(ratingCount) person has"
+            } else if (2...50) ~= ratingCount {
+                prefix = "Only \(ratingCount) people have"
+            } else {
+                prefix = "\(ratingCount) people have"
+            }
+            
+            cell.subtitle = "\(prefix) rated this version."
+
             return cell
         default: return UITableViewCell()
         }

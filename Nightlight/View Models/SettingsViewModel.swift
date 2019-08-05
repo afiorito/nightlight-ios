@@ -30,4 +30,21 @@ public class SettingsViewModel {
     public func updateMessageDefault(_ default: MessageDefault) {
         dependencies.userDefaultsManager.messageDefault = `default`
     }
+    
+    public func loadRatings(result: @escaping (Result<Int, Error>) -> Void) {
+        HttpClient().get(endpoint: Endpoint.itunesRatingCount) { networkResult in
+            switch networkResult {
+            case .success(_, let data):
+                do {
+                    let itunesSearchBody: iTunesSearchBody = try data.decodeJSON()
+                    DispatchQueue.main.async { result(.success(itunesSearchBody.userRatingCountForCurrentVersion ?? 0)) }
+                    
+                } catch let error {
+                    DispatchQueue.main.async { result(.failure(error)) }
+                }
+            case .failure(let error):
+                DispatchQueue.main.async { result(.failure(error)) }
+            }
+        }
+    }
 }

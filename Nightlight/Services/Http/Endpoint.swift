@@ -10,24 +10,34 @@ public struct Endpoint {
     
     let isAuthorized: Bool
     
-    init(path: String, queryItems: [URLQueryItem]? = nil, isAuthorized: Bool = true) {
+    let isExternal: Bool
+    
+    init(path: String, queryItems: [URLQueryItem]? = nil, isAuthorized: Bool = true, isExternal: Bool = false) {
         self.path = path
         self.queryItems = queryItems
         self.isAuthorized = isAuthorized
+        self.isExternal = isExternal
     }
     
     /// The composition of url components.
     var url: URL? {
-        var components = URLComponents()
-        components.scheme = Env.get(.serverScheme)
-        components.host = Env.get(.serverHost)
-        if let port = Env.get(.serverPort) {
-            components.port = Int(port)
+        if isExternal {
+            var components = URLComponents(string: path)
+            components?.queryItems = queryItems
+            
+            return components?.url
+        } else {
+            var components = URLComponents()
+            components.scheme = Env.get(.serverScheme)
+            components.host = Env.get(.serverHost)
+            if let port = Env.get(.serverPort) {
+                components.port = Int(port)
+            }
+            components.path = joinedPath(path)
+            components.queryItems = (queryItems ?? []).isEmpty ? .none : queryItems
+            
+            return components.url
         }
-        components.path = joinedPath(path)
-        components.queryItems = (queryItems ?? []).isEmpty ? .none : queryItems
-        
-        return components.url
     }
     
     private func joinedPath(_ path: String) -> String {
@@ -145,5 +155,14 @@ extension Endpoint {
         }
         
         return Endpoint(path: "/notification", queryItems: queryItems)
+    }
+}
+
+// MARK: - External Endpoints
+
+extension Endpoint {
+    static var itunesRatingCount: Endpoint {
+        return Endpoint(path: "https://itunes.apple.com/lookup", queryItems: [URLQueryItem(name: "id", value: "1474711114")],
+                        isAuthorized: false, isExternal: true)
     }
 }

@@ -109,6 +109,8 @@
 		925DD4B322DDF02F00D50A89 /* UIViewController+Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4B222DDF02F00D50A89 /* UIViewController+Themeable.swift */; };
 		925DD4B522DE04C300D50A89 /* CompactScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4B422DE04C300D50A89 /* CompactScrollView.swift */; };
 		9261402D22E0F2AC005C7B33 /* NewMessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261402C22E0F2AC005C7B33 /* NewMessageData.swift */; };
+		9269EDE722F7B5000061D0DB /* notification.aif in Resources */ = {isa = PBXBuildFile; fileRef = 9269EDE622F7B5000061D0DB /* notification.aif */; };
+		9269EDE922F7BBA20061D0DB /* iTunesSearchBobdy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269EDE822F7BBA20061D0DB /* iTunesSearchBobdy.swift */; };
 		92748B1222E0A61A00C2957E /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92748B1122E0A61A00C2957E /* SwitchTableViewCell.swift */; };
 		92748B1422E0A9BD00C2957E /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92748B1322E0A9BD00C2957E /* Switch.swift */; };
 		92748B1622E0AFC900C2957E /* NumPeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92748B1522E0AFC900C2957E /* NumPeopleCell.swift */; };
@@ -365,6 +367,8 @@
 		925DD4B222DDF02F00D50A89 /* UIViewController+Themeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Themeable.swift"; sourceTree = "<group>"; };
 		925DD4B422DE04C300D50A89 /* CompactScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactScrollView.swift; sourceTree = "<group>"; };
 		9261402C22E0F2AC005C7B33 /* NewMessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageData.swift; sourceTree = "<group>"; };
+		9269EDE622F7B5000061D0DB /* notification.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = notification.aif; sourceTree = "<group>"; };
+		9269EDE822F7BBA20061D0DB /* iTunesSearchBobdy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesSearchBobdy.swift; sourceTree = "<group>"; };
 		92748B1122E0A61A00C2957E /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		92748B1322E0A9BD00C2957E /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 		92748B1522E0AFC900C2957E /* NumPeopleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPeopleCell.swift; sourceTree = "<group>"; };
@@ -624,6 +628,7 @@
 				925763DB22CAD72C0031D616 /* Helpers */,
 				9233618A22C664A2002B7BBA /* AppCoordinator.swift */,
 				9233615922C643F5002B7BBA /* AppDelegate.swift */,
+				9269EDE622F7B5000061D0DB /* notification.aif */,
 				9233616222C643F7002B7BBA /* Assets.xcassets */,
 				92E960CA22F6181D005DF33D /* Nightlight.entitlements */,
 				9233616422C643F7002B7BBA /* LaunchScreen.storyboard */,
@@ -737,6 +742,7 @@
 				92931C3422D39C7300C54EB8 /* Env.swift */,
 				925DD4B022DDEDF200D50A89 /* EmptyViewDescription.swift */,
 				925DD4A822DDE5EA00D50A89 /* EmptyViewable.swift */,
+				9269EDE822F7BBA20061D0DB /* iTunesSearchBobdy.swift */,
 				9279AC7E22E6091C0098C4C2 /* JWTDecoder.swift */,
 				9276314C22D4C6FA000D4B8F /* KeychainAccessibility.swift */,
 				9237A1DE22CA859600FC9331 /* NLNotification.swift */,
@@ -1395,6 +1401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92931C3122D399B000C54EB8 /* Development.xcconfig in Resources */,
+				9269EDE722F7B5000061D0DB /* notification.aif in Resources */,
 				9237A1F222CA9E9000FC9331 /* CircularStd-Medium.otf in Resources */,
 				9233616622C643F7002B7BBA /* LaunchScreen.storyboard in Resources */,
 				9237A1F022CA9E8A00FC9331 /* CircularStd-Bold.otf in Resources */,
@@ -1608,6 +1615,7 @@
 				92E9607622F3C0DA005DF33D /* BuyTokensViewController.swift in Sources */,
 				92F1761E22DBC232008AEB82 /* MessageActionType.swift in Sources */,
 				92F1765A22DD3EA9008AEB82 /* BottomSheetPresentationController.swift in Sources */,
+				9269EDE922F7BBA20061D0DB /* iTunesSearchBobdy.swift in Sources */,
 				9279ACA022E692E60098C4C2 /* TabSeparatorView.swift in Sources */,
 				9279ACBB22E7BDF70098C4C2 /* String+Extension.swift in Sources */,
 				92E9608922F49450005DF33D /* ModalPresentationControllerDelegate.swift in Sources */,
