@@ -71,8 +71,8 @@ public class MessageContentView: UIView {
         return action
     }()
     
-    public let contextButton: UIButton = {
-        let button = UIButton()
+    public let contextButton: BaseButton = {
+        let button = BaseButton()
         button.setImage(UIImage(named: "context_menu"), for: .normal)
         button.setContentHuggingPriority(.defaultLow + 1, for: .horizontal)
         button.setContentCompressionResistancePriority(.defaultHigh + 1, for: .horizontal)
@@ -100,7 +100,7 @@ public class MessageContentView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: contextButton.leadingAnchor, constant: -10),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             contextButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
             contextButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             usernameLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
@@ -116,7 +116,7 @@ public class MessageContentView: UIView {
             bottomContainer.trailingAnchor.constraint(equalTo: contextButton.trailingAnchor),
             bottomContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
             contextButton.heightAnchor.constraint(equalToConstant: 24),
-            contextButton.widthAnchor.constraint(equalTo: contextButton.heightAnchor),
+            contextButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             bottomContainer.heightAnchor.constraint(equalToConstant: 24)
         ])
     }

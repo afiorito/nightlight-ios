@@ -67,4 +67,11 @@ open class BaseButton: UIButton {
             activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
+    
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let widthDelta = 60.0 - self.bounds.size.width
+        let heightDelta = 60.0 - self.bounds.size.width
+        let largerBounds = self.bounds.insetBy(dx: -0.5 * widthDelta, dy: -0.5 * heightDelta)
+        return largerBounds.contains(point)
+    }
 }

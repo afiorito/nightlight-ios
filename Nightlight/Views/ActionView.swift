@@ -7,7 +7,7 @@ public class ActionView: UIView {
         return stackView
     }()
 
-    let button = UIButton()
+    let button = BaseButton()
     
     let countLabel: UILabel = {
         let label = UILabel()

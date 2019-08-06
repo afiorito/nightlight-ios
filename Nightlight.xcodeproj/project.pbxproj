@@ -88,7 +88,6 @@
 		925763ED22CBB4F80031D616 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925763EC22CBB4F80031D616 /* FormTextField.swift */; };
 		925BCA3F22F1C53C00277D00 /* TokenImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BCA3E22F1C53C00277D00 /* TokenImageAttachment.swift */; };
 		925BCA4122F1C81400277D00 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BCA4022F1C81400277D00 /* NSMutableAttributedString+Extension.swift */; };
-		925BCA4322F1CBDE00277D00 /* SendAppreciationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BCA4222F1CBDE00277D00 /* SendAppreciationViewModel.swift */; };
 		925BE1C322DE48A20000BEC9 /* LabelTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1C222DE48A20000BEC9 /* LabelTitleView.swift */; };
 		925BE1C522DE64480000BEC9 /* UISearchBar+Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1C422DE64480000BEC9 /* UISearchBar+Themeable.swift */; };
 		925BE1C922DE721A0000BEC9 /* PeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1C822DE721A0000BEC9 /* PeopleView.swift */; };
@@ -132,7 +131,6 @@
 		9279ACA022E692E60098C4C2 /* TabSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9822E692820098C4C2 /* TabSeparatorView.swift */; };
 		9279ACA122E692E80098C4C2 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9922E692830098C4C2 /* TabCollectionViewCell.swift */; };
 		9279ACA222E692EB0098C4C2 /* ContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279AC9A22E692830098C4C2 /* ContainerCollectionViewCell.swift */; };
-		9279ACB022E780220098C4C2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACAF22E780220098C4C2 /* SettingsViewModel.swift */; };
 		9279ACB322E7B3B60098C4C2 /* ProfileViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACB222E7B3A70098C4C2 /* ProfileViewControllerDelegate.swift */; };
 		9279ACB722E7B5930098C4C2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACB622E7B5740098C4C2 /* SettingsViewController.swift */; };
 		9279ACB922E7B9220098C4C2 /* SelectOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279ACB822E7B9220098C4C2 /* SelectOptionTableViewCell.swift */; };
@@ -167,7 +165,6 @@
 		92B302F522D63E6E00CE5668 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B302F422D63E6E00CE5668 /* SearchCoordinator.swift */; };
 		92B302F722D6431800CE5668 /* SendMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B302F622D6431800CE5668 /* SendMessageViewModel.swift */; };
 		92B302F922D6435200CE5668 /* SendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B302F822D6435200CE5668 /* SendMessageViewController.swift */; };
-		92B5502722E2074E0057589E /* UserNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B5502622E2074E0057589E /* UserNotificationViewModel.swift */; };
 		92B5502922E20E490057589E /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B5502822E20E490057589E /* UserNotificationService.swift */; };
 		92B5502B22E20E8D0057589E /* UserNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B5502A22E20E8D0057589E /* UserNotification.swift */; };
 		92B5502D22E20EE10057589E /* UserNotificationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B5502C22E20EE10057589E /* UserNotificationError.swift */; };
@@ -188,6 +185,9 @@
 		92DC9DE222F8E1DF008A91BC /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DE122F8E1DF008A91BC /* AppInfoViewController.swift */; };
 		92DC9DE422F8EFF7008A91BC /* AppInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DE322F8EFF7008A91BC /* AppInfoViewModel.swift */; };
 		92DC9DE622F8F55F008A91BC /* ModalHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DE522F8F55F008A91BC /* ModalHeight.swift */; };
+		92DC9DEE22F9A54A008A91BC /* UserNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DED22F9A54A008A91BC /* UserNotificationViewModel.swift */; };
+		92DC9DF522F9A5F3008A91BC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DF422F9A5F3008A91BC /* SettingsViewModel.swift */; };
+		92DC9DF922F9A645008A91BC /* SendAppreciationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DF822F9A645008A91BC /* SendAppreciationViewModel.swift */; };
 		92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */; };
 		92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2622D52B9A00207D4D /* ToastView.swift */; };
 		92E9606F22F3BF99005DF33D /* SendAppreciationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */; };
@@ -349,7 +349,6 @@
 		925763EC22CBB4F80031D616 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		925BCA3E22F1C53C00277D00 /* TokenImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TokenImageAttachment.swift; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Helpers/TokenImageAttachment.swift"; sourceTree = "<group>"; };
 		925BCA4022F1C81400277D00 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSMutableAttributedString+Extension.swift"; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Extensions/NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
-		925BCA4222F1CBDE00277D00 /* SendAppreciationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SendAppreciationViewModel.swift; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/View Models/SendAppreciationViewModel.swift"; sourceTree = "<group>"; };
 		925BE1C222DE48A20000BEC9 /* LabelTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTitleView.swift; sourceTree = "<group>"; };
 		925BE1C422DE64480000BEC9 /* UISearchBar+Themeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Themeable.swift"; sourceTree = "<group>"; };
 		925BE1C822DE721A0000BEC9 /* PeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleView.swift; sourceTree = "<group>"; };
@@ -393,7 +392,6 @@
 		9279AC9822E692820098C4C2 /* TabSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSeparatorView.swift; sourceTree = "<group>"; };
 		9279AC9922E692830098C4C2 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
 		9279AC9A22E692830098C4C2 /* ContainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerCollectionViewCell.swift; sourceTree = "<group>"; };
-		9279ACAF22E780220098C4C2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsViewModel.swift; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/View Models/SettingsViewModel.swift"; sourceTree = "<group>"; };
 		9279ACB222E7B3A70098C4C2 /* ProfileViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerDelegate.swift; sourceTree = "<group>"; };
 		9279ACB622E7B5740098C4C2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9279ACB822E7B9220098C4C2 /* SelectOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectOptionTableViewCell.swift; path = "../../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/Views/Static TableView/SelectOptionTableViewCell.swift"; sourceTree = "<group>"; };
@@ -429,7 +427,6 @@
 		92B302F422D63E6E00CE5668 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		92B302F622D6431800CE5668 /* SendMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageViewModel.swift; sourceTree = "<group>"; };
 		92B302F822D6435200CE5668 /* SendMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageViewController.swift; sourceTree = "<group>"; };
-		92B5502622E2074E0057589E /* UserNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserNotificationViewModel.swift; path = "../../../../../../../System/Volumes/Data/Users/Anthony/Programming/nightlight/nightlight-ios/Nightlight/View Models/UserNotificationViewModel.swift"; sourceTree = "<group>"; };
 		92B5502822E20E490057589E /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		92B5502A22E20E8D0057589E /* UserNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotification.swift; sourceTree = "<group>"; };
 		92B5502C22E20EE10057589E /* UserNotificationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationError.swift; sourceTree = "<group>"; };
@@ -451,6 +448,9 @@
 		92DC9DE122F8E1DF008A91BC /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
 		92DC9DE322F8EFF7008A91BC /* AppInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewModel.swift; sourceTree = "<group>"; };
 		92DC9DE522F8F55F008A91BC /* ModalHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHeight.swift; sourceTree = "<group>"; };
+		92DC9DED22F9A54A008A91BC /* UserNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationViewModel.swift; sourceTree = "<group>"; };
+		92DC9DF422F9A5F3008A91BC /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		92DC9DF822F9A645008A91BC /* SendAppreciationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAppreciationViewModel.swift; sourceTree = "<group>"; };
 		92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		92DF5D2622D52B9A00207D4D /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationViewController.swift; sourceTree = "<group>"; };
@@ -564,6 +564,7 @@
 				92E960A322F60797005DF33D /* Coordinators */,
 				92E960A222F6078A005DF33D /* Delegates */,
 				92E960A122F6077F005DF33D /* Views */,
+				92DC9DE922F9A483008A91BC /* View Models */,
 			);
 			path = "Send Message";
 			sourceTree = "<group>";
@@ -615,18 +616,17 @@
 			children = (
 				925BCA6622F23DF900277D00 /* Authentication */,
 				92E9607C22F466BC005DF33D /* Buy Tokens */,
+				9228D6BB22D79115003B03DB /* Models */,
+				92E9609822F605E6005DF33D /* Messages */,
 				92BB2F2F22E2040100AAF662 /* Notifications */,
 				925763DC22CAD7760031D616 /* Onboarding */,
-				925BE1CA22DE72260000BEC9 /* People */,
 				92E960CB22F632BB005DF33D /* Permission */,
+				925BE1CA22DE72260000BEC9 /* People */,
 				9279ACB122E7B39A0098C4C2 /* Profile */,
 				92E9609E22F60747005DF33D /* Search */,
 				92E9605F22F3BEE1005DF33D /* Send Appreciation */,
 				925763DD22CAD7BD0031D616 /* Services */,
 				9279ACB522E7B55E0098C4C2 /* Settings */,
-				928A10AF22D3E3A800FF78FB /* View Models */,
-				9228D6BB22D79115003B03DB /* Models */,
-				92E9609822F605E6005DF33D /* Messages */,
 				92E960C122F60BD0005DF33D /* Themes */,
 				925763D822CAD6630031D616 /* Views */,
 				928A10AC22D3E2EE00FF78FB /* Constants */,
@@ -854,6 +854,7 @@
 				92E9608E22F4AFA5005DF33D /* UserTokensBody.swift */,
 				92E9608C22F4A705005DF33D /* UserTokensResponse.swift */,
 				92E9609C22F60716005DF33D /* Views */,
+				92DC9DEF22F9A55F008A91BC /* View Models */,
 			);
 			path = People;
 			sourceTree = "<group>";
@@ -880,6 +881,7 @@
 				92E960B022F608CC005DF33D /* Coordinators */,
 				92E960AF22F608C3005DF33D /* Delegates */,
 				92E960AE22F608BB005DF33D /* Views */,
+				92DC9DF022F9A575008A91BC /* View Models */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -905,7 +907,7 @@
 				92E960B322F60950005DF33D /* Coordinators */,
 				92E960B222F60942005DF33D /* Delegates */,
 				92E960B122F6092C005DF33D /* Views */,
-				92DC9DE322F8EFF7008A91BC /* AppInfoViewModel.swift */,
+				92DC9DF122F9A591008A91BC /* View Models */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -932,23 +934,6 @@
 			path = "Splash Screen";
 			sourceTree = "<group>";
 		};
-		928A10AF22D3E3A800FF78FB /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-				92B302EC22D6292C00CE5668 /* MessagesViewModel.swift */,
-				9228D6B922D77ED9003B03DB /* MessageViewModel.swift */,
-				92CA9C8322D647E4009900E6 /* UserNotificationsViewModel.swift */,
-				92B5502622E2074E0057589E /* UserNotificationViewModel.swift */,
-				925BE1D722DE87670000BEC9 /* PeopleViewModel.swift */,
-				925BE1D322DE855A0000BEC9 /* PersonViewModel.swift */,
-				92CA9C8722D6492C009900E6 /* ProfileViewModel.swift */,
-				92B302F622D6431800CE5668 /* SendMessageViewModel.swift */,
-				9279ACAF22E780220098C4C2 /* SettingsViewModel.swift */,
-				925BCA4222F1CBDE00277D00 /* SendAppreciationViewModel.swift */,
-			);
-			path = "View Models";
-			sourceTree = "<group>";
-		};
 		92BB2F2F22E2040100AAF662 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -956,8 +941,69 @@
 				92B5502C22E20EE10057589E /* UserNotificationError.swift */,
 				92E960AC22F6088B005DF33D /* Coordinators */,
 				92E960AB22F6086C005DF33D /* Views */,
+				92DC9DEA22F9A4AE008A91BC /* View Models */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		92DC9DE822F9A469008A91BC /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				9228D6B922D77ED9003B03DB /* MessageViewModel.swift */,
+				92B302EC22D6292C00CE5668 /* MessagesViewModel.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
+		92DC9DE922F9A483008A91BC /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				92B302F622D6431800CE5668 /* SendMessageViewModel.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
+		92DC9DEA22F9A4AE008A91BC /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				92CA9C8322D647E4009900E6 /* UserNotificationsViewModel.swift */,
+				92DC9DED22F9A54A008A91BC /* UserNotificationViewModel.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
+		92DC9DEF22F9A55F008A91BC /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				925BE1D722DE87670000BEC9 /* PeopleViewModel.swift */,
+				925BE1D322DE855A0000BEC9 /* PersonViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		92DC9DF022F9A575008A91BC /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				92CA9C8722D6492C009900E6 /* ProfileViewModel.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
+		92DC9DF122F9A591008A91BC /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				92DC9DE322F8EFF7008A91BC /* AppInfoViewModel.swift */,
+				92DC9DF422F9A5F3008A91BC /* SettingsViewModel.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
+		92DC9DF622F9A604008A91BC /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				92DC9DF822F9A645008A91BC /* SendAppreciationViewModel.swift */,
+			);
+			name = "View Models";
 			sourceTree = "<group>";
 		};
 		92E9605F22F3BEE1005DF33D /* Send Appreciation */ = {
@@ -966,6 +1012,7 @@
 				92E9606322F3BF32005DF33D /* Delegates */,
 				92E9606222F3BF26005DF33D /* Coordinators */,
 				92E9606022F3BF17005DF33D /* Views */,
+				92DC9DF622F9A604008A91BC /* View Models */,
 			);
 			path = "Send Appreciation";
 			sourceTree = "<group>";
@@ -1254,6 +1301,7 @@
 				92E9609A22F60684005DF33D /* Coordinators */,
 				92E9609B22F606AB005DF33D /* Delegates */,
 				92E9609922F6066F005DF33D /* Views */,
+				92DC9DE822F9A469008A91BC /* View Models */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -1477,7 +1525,6 @@
 				92E960D322F65358005DF33D /* PermissionViewController.swift in Sources */,
 				92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */,
 				92E960D722F70A66005DF33D /* UserDeviceTokenBody.swift in Sources */,
-				925BCA4322F1CBDE00277D00 /* SendAppreciationViewModel.swift in Sources */,
 				92B302ED22D6292C00CE5668 /* MessagesViewModel.swift in Sources */,
 				928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */,
 				928A10AA22D3D19200FF78FB /* HttpError.swift in Sources */,
@@ -1490,13 +1537,14 @@
 				9228D6C322D7A0D6003B03DB /* MessageService.swift in Sources */,
 				92F1762B22DBFBFE008AEB82 /* MessagesViewControllerDelegate.swift in Sources */,
 				920E495F22DFEE4000AA1EDB /* TextView.swift in Sources */,
+				92DC9DF922F9A645008A91BC /* SendAppreciationViewModel.swift in Sources */,
 				9205E6F122F0E3F900AFE16B /* ModalPresentable+Defaults.swift in Sources */,
 				92B5502922E20E490057589E /* UserNotificationService.swift in Sources */,
 				9279ACC122E7CDD60098C4C2 /* InformationTableViewCell.swift in Sources */,
 				9279ACC522E7D2A40098C4C2 /* SettingsViewControllerDelegate.swift in Sources */,
+				92DC9DEE22F9A54A008A91BC /* UserNotificationViewModel.swift in Sources */,
 				92F1765C22DD3FAB008AEB82 /* BottomSheetHeight.swift in Sources */,
 				9247606B22D8E2E4001EF6BE /* MessageTableViewCellDelegate.swift in Sources */,
-				9279ACB022E780220098C4C2 /* SettingsViewModel.swift in Sources */,
 				92E9606F22F3BF99005DF33D /* SendAppreciationViewController.swift in Sources */,
 				9237A1EF22CA99E000FC9331 /* Strings.swift in Sources */,
 				92E9608022F46758005DF33D /* BuyTokensViewModel.swift in Sources */,
@@ -1570,7 +1618,6 @@
 				925DD4B122DDEDF200D50A89 /* EmptyViewDescription.swift in Sources */,
 				928A75CF22C92E7600BC607A /* UIStackView+Extension.swift in Sources */,
 				92B302F322D63B7000CE5668 /* SearchViewController.swift in Sources */,
-				92B5502722E2074E0057589E /* UserNotificationViewModel.swift in Sources */,
 				92E960CD22F632DA005DF33D /* NotificationPermissionViewController.swift in Sources */,
 				92F1762722DBF771008AEB82 /* MessageDetailViewController.swift in Sources */,
 				92418D4922D7D422001B6DFB /* DateFormatter+Extension.swift in Sources */,
@@ -1605,6 +1652,7 @@
 				92E9607322F3BF9C005DF33D /* SendAppreciationViewControllerDelegate.swift in Sources */,
 				92E9609722F5F97A005DF33D /* UITableView+Extension.swift in Sources */,
 				92B9008A22CE94A7009E619B /* SplashScreenViewController.swift in Sources */,
+				92DC9DF522F9A5F3008A91BC /* SettingsViewModel.swift in Sources */,
 				9279ACB922E7B9220098C4C2 /* SelectOptionTableViewCell.swift in Sources */,
 				925763E122CB76E80031D616 /* SignInView.swift in Sources */,
 				928A10B522D3F3A800FF78FB /* AuthError.swift in Sources */,
