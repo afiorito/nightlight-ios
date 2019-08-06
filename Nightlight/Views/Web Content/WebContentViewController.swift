@@ -42,6 +42,9 @@ public class WebContentViewController: UIViewController {
         super.viewDidLoad()
 
         webView.scrollView.delegate = self
+
+        title = ExternalPage(rawValue: url.absoluteString)?.title
+        navigationItem.leftBarButtonItem = UIBarButtonItem.cancel(target: self, action: #selector(cancel))
         
         prepareSubviews()
         updateColors(for: theme)
@@ -85,7 +88,7 @@ public class WebContentViewController: UIViewController {
         ])
     }
 
-    @objc public func dismissContent() {
+    @objc public func cancel() {
         dismiss(animated: true)
     }
     

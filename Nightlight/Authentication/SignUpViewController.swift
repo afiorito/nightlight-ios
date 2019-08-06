@@ -1,10 +1,11 @@
 import UIKit
 
+/// A view controller for managing sign up.
 public class SignUpViewController: UIViewController {
-    public typealias Dependencies = StyleManaging
-    
+    /// The viewModel for handling state.
     private let viewModel: SignUpViewModel
     
+    /// The delegate for managing UI actions.
     public weak var delegate: SignUpViewControllerDelegate?
     
     public var signUpView: SignUpView {
@@ -46,6 +47,9 @@ public class SignUpViewController: UIViewController {
         
     }
     
+    /**
+    Handle a sign up tap event.
+    */
     @objc private func signUpTapped() {
         let credentials = SignUpCredentials(
             username: signUpView.username,
@@ -54,11 +58,9 @@ public class SignUpViewController: UIViewController {
         )
         
         signUpView.authButton.isLoading = true
-        signUpView.authButton.isEnabled = false
         
         viewModel.signUp(with: credentials) { [unowned self] (result) in
             self.signUpView.authButton.isLoading = false
-            self.signUpView.authButton.isEnabled = true
             
             switch result {
             case .success:

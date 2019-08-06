@@ -1,9 +1,11 @@
 import UIKit
 
+/// A view with authentication elements for sign in.
 public class SignInView: AuthView {    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
+        // move to next field when return is tapped.
         usernameField.input.addTarget(passwordField.input,
                                       action: #selector(passwordField.input.becomeFirstResponder),
                                       for: UIControl.Event.primaryActionTriggered)
@@ -22,15 +24,16 @@ public class SignInView: AuthView {
         super.prepareSubviews()
         
         headerBackground.shapeType = .signIn
-        headerText = "Welcome\nBack!"
-        accountStatusLabel.text = "Don't have an account?"
-        actionButton.setTitle("Sign up", for: .normal)
-        authButton.setTitle("Sign In", for: .normal)
+        headerText = Strings.auth.signInHeaderText
+        accountStatusLabel.text = Strings.auth.noAccount
+        actionButton.setTitle(Strings.auth.signUpButtonText, for: .normal)
+        authButton.setTitle(Strings.auth.signInButtonText, for: .normal)
         
         fieldContainer.addArrangedSubviews([usernameField, passwordField])
     }
     
     public override func showFieldErrors(reasons: [ErrorReason]) {
+        // don't display specific errors during sign in.
         usernameField.error = ""
         passwordField.error = ""
     }

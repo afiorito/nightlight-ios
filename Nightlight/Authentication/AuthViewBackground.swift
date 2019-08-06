@@ -1,11 +1,14 @@
 import UIKit
 
+/// An organically shaped background view for authentication views.
 public class AuthViewBackground: UIView {
 
+    /// Constants for specifying the shape of the background.
     public enum ShapeType {
         case signIn, signUp
     }
     
+    /// The shape of the background.
     public var shapeType: ShapeType = .signIn {
         didSet {
             setNeedsDisplay()

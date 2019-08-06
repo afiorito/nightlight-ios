@@ -91,14 +91,11 @@ public class AppCoordinator: NSObject, Coordinator {
         try? dependencies.keychainManager.remove(key: KeychainKey.refreshToken.rawValue)
         try? dependencies.keychainManager.remove(key: KeychainKey.accessToken.rawValue)
         
-        let authCoordinator = AuthCoordinator(rootViewController: window.rootViewController, dependencies: dependencies, authMethod: .signIn)
+        let authCoordinator = AuthCoordinator(rootViewController: nil, dependencies: dependencies, authMethod: .signIn)
         addChild(authCoordinator)
+        authCoordinator.start()
         
-        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: { 
-            UIView.setAnimationsEnabled(false)
-            authCoordinator.start()
-            UIView.setAnimationsEnabled(true)
-        })
+        animateRootViewController(authCoordinator.rootViewController!)
     }
     
     private func prepareMainApplication() -> UIViewController {

@@ -10,9 +10,6 @@ public class AuthCoordinator: Coordinator {
     public enum AuthMethod {
         case signUp, signIn
     }
-
-    /// Determines if the auth view controller is the root view controller of the coordinator.
-    public var isRoot: Bool = false
     
     /// The required dependencies.
     private let dependencies: Dependencies
@@ -27,7 +24,7 @@ public class AuthCoordinator: Coordinator {
     }
     
     /// The root view controller of the application.
-    private var rootViewController: UIViewController?
+    private(set) var rootViewController: UIViewController?
     
     /// The view controller used to sign in a user.
     private var signInViewController: SignInViewController {
@@ -57,7 +54,8 @@ public class AuthCoordinator: Coordinator {
             authViewController = signUpViewController
         }
         
-        if isRoot {
+        // An auth view controller may become root during reauthentication.
+        if rootViewController == .none {
             rootViewController = authViewController
         } else if let splashScreenViewController = rootViewController as? SplashScreenViewController {
             splashScreenViewController.initialViewController = authViewController
@@ -67,6 +65,13 @@ public class AuthCoordinator: Coordinator {
         }
     }
     
+    /**
+     Show the other authentication view controller.
+     
+     Avoids adding more view controllers to the stack.
+     
+     - parameter currentViewController: the current presented view controller.
+     */
     private func showOtherViewController(currentViewController: UIViewController) {
         let otherViewController: UIViewController
         
@@ -86,17 +91,11 @@ public class AuthCoordinator: Coordinator {
     }
 }
 
+// MARK: Auth ViewController Delegates
+
 extension AuthCoordinator: SignUpViewControllerDelegate, SignInViewControllerDelegate {
     public func signUpViewController(_ signUpViewController: SignUpViewController, didTapPolicyWith url: URL) {
         let webContentViewController = WebContentViewController(url: url)
-        webContentViewController.title = url.lastPathComponent == "terms" ? "Term of Use" : "Privacy Policy"
-        
-        let barButton = UIBarButtonItem(image: UIImage(named: "icon_cancel"),
-                                                style: .plain,
-                                                target: webContentViewController,
-                                                action: #selector(webContentViewController.dismissContent))
-        webContentViewController.navigationItem.leftBarButtonItem = barButton
-        
         signUpViewController.present(MainNavigationController(rootViewController: webContentViewController), animated: true)
     }
     

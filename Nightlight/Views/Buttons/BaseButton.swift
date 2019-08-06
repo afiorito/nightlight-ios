@@ -21,6 +21,7 @@ open class BaseButton: UIButton {
         }
         
         didSet {
+            isEnabled = !isLoading
             if !isLoading {
                 self.setTitle(originalTitleText, for: .normal)
                 activityIndicator.stopAnimating()

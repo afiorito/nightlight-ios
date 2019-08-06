@@ -1,6 +1,6 @@
 import Foundation
 
-public enum ContentPathName: String {
+public enum ExternalPage: String {
     case privacy = "https://nightlight.electriapp.com/privacy"
     case terms = "https://nightlight.electriapp.com/terms"
     case feedback = "https://nightlight.electriapp.com/feedback"
@@ -12,14 +12,10 @@ public enum ContentPathName: String {
     
     var title: String {
         switch self {
-        case .privacy:
-            return "Privacy Policy"
-        case .terms:
-            return "Terms"
-        case .feedback:
-            return "Feedback"
-        case .about:
-            return "About"
+        case .privacy: return Strings.externalPage.privacyPolicy
+        case .terms: return Strings.externalPage.termsOfUse
+        case .feedback: return Strings.externalPage.feedback
+        case .about: return Strings.externalPage.about
         }
     }
 }

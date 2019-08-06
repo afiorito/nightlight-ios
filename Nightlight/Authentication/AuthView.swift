@@ -1,17 +1,24 @@
 import UIKit
 
-public class AuthView: UIView {
+/// A view with main authentication elements.
+///
+/// The view should be subclassed to provide a more specific auth view
+/// such as sign in or sign up.
+open class AuthView: UIView {
 
-    internal let headerBackground = AuthViewBackground()
+    /// A header background with organic shape.
+    let headerBackground = AuthViewBackground()
     
-    private let logoImageView: UIImageView = {
+    /// The nightlight logo image view.
+    let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .left
-        imageView.image = UIImage(named: "logo_full")
+        imageView.image = UIImage.fullLogo
         return imageView
     }()
     
-    private let headerTitleLabel: UILabel = {
+    /// A header displaying the title of the auth view.
+    let headerTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
         label.font = .primary42ptBold
@@ -19,7 +26,49 @@ public class AuthView: UIView {
         return label
     }()
     
-    private let headerContainer: UIStackView = {
+    /// A field for entering a username.
+    let usernameField: FormTextField = {
+        let textField = FormTextField()
+        textField.input.icon = UIImage.icon.person
+        textField.input.placeholder = Strings.placeholder.username
+        textField.input.autocapitalizationType = .none
+        textField.input.autocorrectionType = .no
+        
+        return textField
+    }()
+    
+    /// A field for entering a password.
+    let passwordField: FormTextField = {
+        let textField = FormTextField()
+        textField.input.icon = UIImage.icon.lock
+        textField.input.placeholder = Strings.placeholder.password
+        textField.input.isSecureTextEntry = true
+        textField.input.autocapitalizationType = .none
+        textField.input.autocorrectionType = .no
+        return textField
+    }()
+    
+    /// The button to select the auth method.
+    let authButton: ContainedButton = {
+        let button = ContainedButton()
+        button.backgroundColor = .brand
+        button.isEnabled = false
+        return button
+    }()
+    
+    /// A label for hinting whether a user has an account or not.
+    let accountStatusLabel: UILabel = {
+        let label = UILabel()
+        label.font = .primary16ptNormal
+        return label
+    }()
+    
+    // The button to submit the auth action.
+    let actionButton = TextButton()
+
+    // MARK: - Stack Views
+    
+    let headerContainer: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -27,7 +76,7 @@ public class AuthView: UIView {
         return stackView
     }()
     
-    internal let bottomContainer: UIStackView = {
+    let bottomContainer: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center
@@ -35,55 +84,19 @@ public class AuthView: UIView {
         
         return stackView
     }()
-    
-    public let usernameField: FormTextField = {
-        let textField = FormTextField()
-        textField.input.icon = UIImage(named: "icon_person")
-        textField.input.placeholder = "username"
-        textField.input.autocapitalizationType = .none
-        textField.input.autocorrectionType = .no
-        
-        return textField
-    }()
-    
-    public let passwordField: FormTextField = {
-        let textField = FormTextField()
-        textField.input.icon = UIImage(named: "icon_lock")
-        textField.input.placeholder = "password"
-        textField.input.isSecureTextEntry = true
-        textField.input.autocapitalizationType = .none
-        textField.input.autocorrectionType = .no
-        return textField
-    }()
-    
-    internal let fieldContainer: UIStackView = {
+
+    let fieldContainer: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 15
-        
         return stackView
     }()
     
-    public let authButton: ContainedButton = {
-        let button = ContainedButton()
-        button.isEnabled = false
-        button.backgroundColor = .brand
-        return button
-    }()
+    // MARK: - AuthView State
     
-    internal let accountStatusLabel: UILabel = {
-        let label = UILabel()
-        label.font = .primary16ptNormal
-        
-        return label
-    }()
-    
-    internal let actionButton = TextButton()
-    
-    internal var headerText: String? {
-        get {
-            return headerTitleLabel.attributedText?.string
-        }
+    /// The text for the header title.
+    var headerText: String? {
+        get { return headerTitleLabel.attributedText?.string }
         
         set {
             let style = NSMutableParagraphStyle()
@@ -97,17 +110,22 @@ public class AuthView: UIView {
         }
     }
     
+    /// The current input for the username.
     public var username: String {
         return usernameField.input.text ?? ""
     }
     
+    /// The current input for the password.
     public var password: String {
         return passwordField.input.text ?? ""
     }
     
+    /// A noolean value indicating whether the auth button is enabled.
     public var isAuthButtonEnabled: Bool {
         return !username.isEmpty && !password.isEmpty
     }
+    
+    // MARK: - Initialization
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -120,27 +138,32 @@ public class AuthView: UIView {
         prepareSubviews()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /**
+     Display errors on authentication text fields.
+     
+     - parameter reasons: an array of errors to be displayed on the fields.
+     */
     public func showFieldErrors(reasons: [ErrorReason]) {
         if let usernameReason = reasons.first(where: { $0.property == "username" }) {
             if usernameReason.constraints[ValidationConstraint.userExists.rawValue] != nil {
-                usernameField.error = "The username already exists."
+                usernameField.error = Strings.error.usernameExists
             } else {
-                usernameField.error = "The username is invalid."
+                usernameField.error = Strings.error.invalidUsername
             }
         }
         
         if let passwordReason = reasons.first(where: { $0.property == "password" }) {
             if passwordReason.constraints[ValidationConstraint.weakPassword.rawValue] != nil {
-                passwordField.error = "The password is too weak."
+                passwordField.error = Strings.error.weakPassword
             }
         }
     }
     
-    internal func prepareSubviews() {
+    func prepareSubviews() {
         headerContainer.addArrangedSubviews([logoImageView, headerTitleLabel])
         bottomContainer.addArrangedSubviews([accountStatusLabel, actionButton])
         addSubviews([headerBackground, headerContainer, fieldContainer, authButton, bottomContainer])
@@ -165,7 +188,10 @@ public class AuthView: UIView {
         ])
     }
     
-    @objc internal func textFieldDidChange() {
+    /**
+     Handle a text field change event.
+     */
+    @objc func textFieldDidChange() {
         authButton.isEnabled = isAuthButtonEnabled
     }
     

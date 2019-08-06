@@ -1,38 +1,9 @@
 import UIKit
 
+/// A view with authentication elements for sign up.
 public class SignUpView: AuthView {
     
-    public let emailField: FormTextField = {
-        let textField = FormTextField()
-        textField.input.icon = UIImage(named: "icon_mail")
-        textField.input.placeholder = "email"
-        textField.input.autocapitalizationType = .none
-        textField.input.autocorrectionType = .no
-        return textField
-    }()
-    
-    public let policiesTextView: UITextView = {
-        let textView = UITextView()
-        textView.isScrollEnabled = false
-        textView.isEditable = false
-        textView.isSelectable = true
-        textView.backgroundColor = .clear
-
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        paragraphStyle.lineSpacing = 2
-        
-        let string = "By signing up you agree to the\nTerms of Use and Privacy Policy"
-        let attributedString = NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
-        attributedString.addAttribute(.link, value: "https://nightlight.electriapp.com/terms", range: NSRange(location: 31, length: 12))
-        attributedString.addAttribute(.link, value: ContentPathName.privacy.rawValue, range: NSRange(location: 48, length: 14))
-        
-        textView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.brand]
-        textView.attributedText = attributedString
-        
-        return textView
-    }()
-    
+    /// The current input for the email.
     public var email: String {
         return emailField.input.text ?? ""
     }
@@ -41,6 +12,7 @@ public class SignUpView: AuthView {
         return super.isAuthButtonEnabled && !email.isEmpty
     }
     
+    /// A closure for notifying when a policy is selected.
     public var policyAction: ((URL) -> Void)?
     
     public override init(frame: CGRect) {
@@ -49,6 +21,7 @@ public class SignUpView: AuthView {
         emailField.input.delegate = self
         emailField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         
+        // move to next field when return is tapped.
         usernameField.input.addTarget(emailField.input,
                                       action: #selector(emailField.input.becomeFirstResponder),
                                       for: UIControl.Event.primaryActionTriggered)
@@ -60,7 +33,6 @@ public class SignUpView: AuthView {
                                       for: UIControl.Event.primaryActionTriggered)
         
         policiesTextView.delegate = self
-        
         prepareSubviews()
     }
     
@@ -73,24 +45,56 @@ public class SignUpView: AuthView {
         
         if let emailReason = reasons.first(where: { $0.property == "email" }) {
             if emailReason.constraints[ValidationConstraint.userExists.rawValue] != nil {
-                emailField.error = "A user with that email already exists."
+                emailField.error = Strings.error.emailExists
             } else {
-                emailField.error = "The email is invalid."
+                emailField.error = Strings.error.invalidEmail
             }
         }
     }
     
-    internal override func prepareSubviews() {
+    /// A field for entering an email.
+    public let emailField: FormTextField = {
+        let textField = FormTextField()
+        textField.input.icon = UIImage.icon.mail
+        textField.input.placeholder = Strings.placeholder.email
+        textField.input.autocapitalizationType = .none
+        textField.input.autocorrectionType = .no
+        return textField
+    }()
+    
+    /// A text view for denoting the app policies.
+    public let policiesTextView: UITextView = {
+        let textView = UITextView()
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.isSelectable = true
+        textView.backgroundColor = .clear
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = 2
+        
+        let attributedString = NSMutableAttributedString(string: Strings.agreeToTerms,
+                                                         attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        attributedString.addAttribute(.link, value: ExternalPage.terms.rawValue, range: NSRange(location: 31, length: 12))
+        attributedString.addAttribute(.link, value: ExternalPage.privacy.rawValue, range: NSRange(location: 48, length: 14))
+        
+        textView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.brand]
+        textView.attributedText = attributedString
+        
+        return textView
+    }()
+    
+    override func prepareSubviews() {
         super.prepareSubviews()
         
         headerBackground.shapeType = .signUp
-        headerText = "Get\nStarted"
-        accountStatusLabel.text = "Already have an account?"
-        actionButton.setTitle("Log in", for: .normal)
-        authButton.setTitle("Sign Up", for: .normal)
+        headerText = Strings.auth.signUpHeaderText
+        accountStatusLabel.text = Strings.auth.ownsAccount
+        actionButton.setTitle(Strings.auth.signInButtonText, for: .normal)
+        authButton.setTitle(Strings.auth.signUpButtonText, for: .normal)
         
         fieldContainer.addArrangedSubviews([usernameField, emailField, passwordField])
-        
         addSubviews(policiesTextView)
         
         NSLayoutConstraint.activate([

@@ -189,6 +189,8 @@
 		92DC9DF522F9A5F3008A91BC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DF422F9A5F3008A91BC /* SettingsViewModel.swift */; };
 		92DC9DF922F9A645008A91BC /* SendAppreciationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DF822F9A645008A91BC /* SendAppreciationViewModel.swift */; };
 		92DC9DFB22F9E611008A91BC /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DFA22F9E611008A91BC /* Int+Extension.swift */; };
+		92DC9DFF22FA3172008A91BC /* UIBarButton+Instances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DFE22FA3172008A91BC /* UIBarButton+Instances.swift */; };
+		92DC9E0122FA3DDA008A91BC /* UIImage+Instances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9E0022FA3DDA008A91BC /* UIImage+Instances.swift */; };
 		92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */; };
 		92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2622D52B9A00207D4D /* ToastView.swift */; };
 		92E9606F22F3BF99005DF33D /* SendAppreciationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */; };
@@ -214,7 +216,7 @@
 		92E960AA22F60862005DF33D /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960A822F60806005DF33D /* NotificationsView.swift */; };
 		92E960BE22F60B58005DF33D /* MessageContextHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960BD22F60B58005DF33D /* MessageContextHandling.swift */; };
 		92E960C022F60B91005DF33D /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960BF22F60B91005DF33D /* NotificationType.swift */; };
-		92E960C722F60C91005DF33D /* ContentPathName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960C622F60C90005DF33D /* ContentPathName.swift */; };
+		92E960C722F60C91005DF33D /* ExternalPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960C622F60C90005DF33D /* ExternalPage.swift */; };
 		92E960C922F60CEB005DF33D /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960C822F60CEB005DF33D /* SettingsCoordinator.swift */; };
 		92E960CD22F632DA005DF33D /* NotificationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960CC22F632DA005DF33D /* NotificationPermissionViewController.swift */; };
 		92E960CF22F63356005DF33D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960CE22F63356005DF33D /* PermissionView.swift */; };
@@ -453,6 +455,8 @@
 		92DC9DF422F9A5F3008A91BC /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		92DC9DF822F9A645008A91BC /* SendAppreciationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAppreciationViewModel.swift; sourceTree = "<group>"; };
 		92DC9DFA22F9E611008A91BC /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		92DC9DFE22FA3172008A91BC /* UIBarButton+Instances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButton+Instances.swift"; sourceTree = "<group>"; };
+		92DC9E0022FA3DDA008A91BC /* UIImage+Instances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Instances.swift"; sourceTree = "<group>"; };
 		92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		92DF5D2622D52B9A00207D4D /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationViewController.swift; sourceTree = "<group>"; };
@@ -478,7 +482,7 @@
 		92E960A822F60806005DF33D /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		92E960BD22F60B58005DF33D /* MessageContextHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContextHandling.swift; sourceTree = "<group>"; };
 		92E960BF22F60B91005DF33D /* NotificationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
-		92E960C622F60C90005DF33D /* ContentPathName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentPathName.swift; sourceTree = "<group>"; };
+		92E960C622F60C90005DF33D /* ExternalPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalPage.swift; sourceTree = "<group>"; };
 		92E960C822F60CEB005DF33D /* SettingsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		92E960CA22F6181D005DF33D /* Nightlight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nightlight.entitlements; sourceTree = "<group>"; };
 		92E960CC22F632DA005DF33D /* NotificationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionViewController.swift; sourceTree = "<group>"; };
@@ -758,6 +762,8 @@
 				9237A1DE22CA859600FC9331 /* NLNotification.swift */,
 				925DD4AC22DDEA1800D50A89 /* Toastable.swift */,
 				925BCA3E22F1C53C00277D00 /* TokenImageAttachment.swift */,
+				92DC9DFE22FA3172008A91BC /* UIBarButton+Instances.swift */,
+				92DC9E0022FA3DDA008A91BC /* UIImage+Instances.swift */,
 				925DD4AA22DDE61100D50A89 /* UITableView+EmptyViewable.swift */,
 				925DD4AE22DDEA5A00D50A89 /* UIViewController+Toastable.swift */,
 				9237A1E622CA95DF00FC9331 /* UIFont+Fonts.swift */,
@@ -919,7 +925,7 @@
 			isa = PBXGroup;
 			children = (
 				9237A1E822CA970000FC9331 /* CircularStdFont.swift */,
-				92E960C622F60C90005DF33D /* ContentPathName.swift */,
+				92E960C622F60C90005DF33D /* ExternalPage.swift */,
 				9205E6D122F0690200AFE16B /* IAPIdentifier.swift */,
 				9276314E22D4DDAE000D4B8F /* KeychainKey.swift */,
 				9237A1EE22CA99E000FC9331 /* Strings.swift */,
@@ -1595,12 +1601,13 @@
 				92E9607822F3C1BD005DF33D /* BuyTokensView.swift in Sources */,
 				925BE1C522DE64480000BEC9 /* UISearchBar+Themeable.swift in Sources */,
 				92418D4B22D7D645001B6DFB /* NSObject+Extension.swift in Sources */,
-				92E960C722F60C91005DF33D /* ContentPathName.swift in Sources */,
+				92E960C722F60C91005DF33D /* ExternalPage.swift in Sources */,
 				92E960D922F73781005DF33D /* UITabBar+Extension.swift in Sources */,
 				9213184B22D6050000C91D90 /* NLTabBarController.swift in Sources */,
 				92F1766022DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift in Sources */,
 				925DD4A722DDE49300D50A89 /* UIView+Themeable.swift in Sources */,
 				925BE1CC22DE78ED0000BEC9 /* PersonTableViewCell.swift in Sources */,
+				92DC9E0122FA3DDA008A91BC /* UIImage+Instances.swift in Sources */,
 				92E9608222F46C32005DF33D /* ProductViewModel.swift in Sources */,
 				92748B1622E0AFC900C2957E /* NumPeopleCell.swift in Sources */,
 				92E9607122F3BF99005DF33D /* SendAppreciationView.swift in Sources */,
@@ -1714,6 +1721,7 @@
 				92E960AA22F60862005DF33D /* NotificationsView.swift in Sources */,
 				9279ACBD22E7C2A40098C4C2 /* SettingOptions.swift in Sources */,
 				92748B1822E0B4C500C2957E /* NSRegularExpression+Extension.swift in Sources */,
+				92DC9DFF22FA3172008A91BC /* UIBarButton+Instances.swift in Sources */,
 				9237A1D322CA559500FC9331 /* UIViewController+Extension.swift in Sources */,
 				92DC9DE422F8EFF7008A91BC /* AppInfoViewModel.swift in Sources */,
 				925DD4A922DDE5EA00D50A89 /* EmptyViewable.swift in Sources */,

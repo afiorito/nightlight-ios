@@ -51,7 +51,7 @@ public class SettingsCoordinator: NSObject, Coordinator {
         rootViewController.popViewController(animated: true)
     }
     
-    private func presentWebContentViewController(pathName: ContentPathName) {
+    private func presentWebContentViewController(pathName: ExternalPage) {
         let webContentViewController = WebContentViewController(url: pathName.url)
         webContentViewController.title = pathName.title
         webContentViewController.delegate = self

@@ -1,12 +1,15 @@
 import UIKit
 
+/// A view controller for managing sign in.
 public class SignInViewController: UIViewController {
+    /// The viewModel for handling state.
     private let viewModel: SignInViewModel
     
     private var signInView: SignInView {
         return view as! SignInView
     }
     
+    /// The delegate for managing UI actions.
     public weak var delegate: SignInViewControllerDelegate?
     
     init(viewModel: SignInViewModel) {
@@ -38,6 +41,9 @@ public class SignInViewController: UIViewController {
         view = SignInView()
     }
     
+    /**
+     Handle a sign in tap event.
+     */
     @objc private func signInTapped() {
         let credentials = SignInCredentials(
             username: signInView.username,
@@ -45,11 +51,9 @@ public class SignInViewController: UIViewController {
         )
         
         signInView.authButton.isLoading = true
-        signInView.authButton.isEnabled = false
         
         viewModel.signIn(with: credentials) { [unowned self] (result) in
             self.signInView.authButton.isLoading = false
-            self.signInView.authButton.isEnabled = true
             
             switch result {
             case .success:
@@ -66,10 +70,15 @@ public class SignInViewController: UIViewController {
         }
     }
     
+    /**
+     Handle a sign up tap event.
+     */
     @objc private func signUpTapped(gesture: UITapGestureRecognizer) {
         delegate?.signInViewControllerDidTapSignUp(self)
     }
 }
+
+// MARK: - Themeable
 
 extension SignInViewController: Themeable {
     var theme: Theme {
