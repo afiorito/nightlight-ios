@@ -35,7 +35,7 @@ public class UserNotificationViewModel {
                 action = "loved"
             }
             
-            bodyString.append(bolded(str: "\(data.count) \(noun)"))
+            bodyString.append(bolded(str: "\(data.count.abbreviated) \(noun)"))
             bodyString.append(NSAttributedString(string: " \(action) your message "))
             bodyString.append(bolded(str: "\"\(data.title)\""))
         default:

@@ -26,7 +26,7 @@ public class ActionView: UIView {
     
     var count: Int {
         get { return Int(countLabel.text ?? "0") ?? 0 }
-        set { countLabel.text = "\(newValue)" }
+        set { countLabel.text = newValue.abbreviated }
     }
     
     public var selectOnTap = true {

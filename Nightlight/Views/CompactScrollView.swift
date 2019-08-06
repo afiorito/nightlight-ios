@@ -21,7 +21,7 @@ public class CompactTableView: UITableView {
         }
     }
     
-    override public var intrinsicContentSize: CGSize {
+    override public var intrinsicContentSize: CGSize { 
         return contentSize
     }
 }

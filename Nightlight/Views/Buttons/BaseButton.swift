@@ -69,8 +69,8 @@ open class BaseButton: UIButton {
     }
     
     open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        let widthDelta = 60.0 - self.bounds.size.width
-        let heightDelta = 60.0 - self.bounds.size.width
+        let widthDelta = max(0, 60.0 - self.bounds.size.width)
+        let heightDelta = max(60.0 - self.bounds.size.height, 0)
         let largerBounds = self.bounds.insetBy(dx: -0.5 * widthDelta, dy: -0.5 * heightDelta)
         return largerBounds.contains(point)
     }

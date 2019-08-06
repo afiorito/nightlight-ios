@@ -36,7 +36,7 @@ extension BottomSheetPresentable where Self: UIViewController {
                                     height: UIView.layoutFittingCompressedSize.height)
             let intrinsicHeight = view.systemLayoutSizeFitting(targetSize).height
             
-            return bottomYPos - (intrinsicHeight + layoutInsets.bottom)
+            return bottomYPos - intrinsicHeight
         }
     }
 }

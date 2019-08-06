@@ -188,6 +188,7 @@
 		92DC9DEE22F9A54A008A91BC /* UserNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DED22F9A54A008A91BC /* UserNotificationViewModel.swift */; };
 		92DC9DF522F9A5F3008A91BC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DF422F9A5F3008A91BC /* SettingsViewModel.swift */; };
 		92DC9DF922F9A645008A91BC /* SendAppreciationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DF822F9A645008A91BC /* SendAppreciationViewModel.swift */; };
+		92DC9DFB22F9E611008A91BC /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DFA22F9E611008A91BC /* Int+Extension.swift */; };
 		92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */; };
 		92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2622D52B9A00207D4D /* ToastView.swift */; };
 		92E9606F22F3BF99005DF33D /* SendAppreciationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */; };
@@ -451,6 +452,7 @@
 		92DC9DED22F9A54A008A91BC /* UserNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationViewModel.swift; sourceTree = "<group>"; };
 		92DC9DF422F9A5F3008A91BC /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		92DC9DF822F9A645008A91BC /* SendAppreciationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAppreciationViewModel.swift; sourceTree = "<group>"; };
+		92DC9DFA22F9E611008A91BC /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		92DF5D2622D52B9A00207D4D /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationViewController.swift; sourceTree = "<group>"; };
@@ -726,6 +728,7 @@
 				9276314822D4B07B000D4B8F /* Data+Extension.swift */,
 				9228D6C022D798AB003B03DB /* Date+Extension.swift */,
 				92418D4822D7D422001B6DFB /* DateFormatter+Extension.swift */,
+				92DC9DFA22F9E611008A91BC /* Int+Extension.swift */,
 				9279ACBA22E7BDF70098C4C2 /* String+Extension.swift */,
 				928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */,
 				9237A1D422CA74E100FC9331 /* UIColor+Extension.swift */,
@@ -1689,6 +1692,7 @@
 				92E9608F22F4AFA5005DF33D /* UserTokensBody.swift in Sources */,
 				92F1765822DD3E4E008AEB82 /* BottomSheetPresentable+LayoutHelpers.swift in Sources */,
 				9279ACC922E7D6450098C4C2 /* OptionsTableViewController.swift in Sources */,
+				92DC9DFB22F9E611008A91BC /* Int+Extension.swift in Sources */,
 				925763DF22CB768D0031D616 /* SignInViewController.swift in Sources */,
 				92B9008822CD8720009E619B /* AuthCoordinator.swift in Sources */,
 				923B894C22EBAD0D003912EC /* WebContentViewController.swift in Sources */,
