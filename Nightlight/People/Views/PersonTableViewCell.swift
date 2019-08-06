@@ -63,6 +63,5 @@ extension PersonTableViewCell: Themeable {
         backgroundCardView.backgroundColor = .cellBackground(for: theme)
         contentView.backgroundColor = .darkBackground(for: theme)
         personContentView.updateColors(for: theme)
-//        backgroundCardView.addShadow(forTheme: theme)
     }
 }

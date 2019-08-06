@@ -36,6 +36,8 @@ public class MessagesViewController: UIViewController {
         messagesView.tableView.prefetchDataSource = dataSource
         messagesView.tableView.refreshControl = refreshControl
         
+        self.dataSource.emptyViewDescription = self.emptyViewDescription
+        
         dataSource.prefetchCallback = { [weak self] in
             self?.loadMoreMessages()
         }

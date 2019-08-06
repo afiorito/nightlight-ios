@@ -185,6 +185,9 @@
 		92D8EBC922CFA8BA0083D6C4 /* AnimatedLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBC822CFA8BA0083D6C4 /* AnimatedLogoView.swift */; };
 		92D8EBCB22CFD83D0083D6C4 /* SignUpViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBCA22CFD83C0083D6C4 /* SignUpViewControllerDelegate.swift */; };
 		92D8EBCD22CFE0120083D6C4 /* SignInViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBCC22CFE0120083D6C4 /* SignInViewControllerDelegate.swift */; };
+		92DC9DE222F8E1DF008A91BC /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DE122F8E1DF008A91BC /* AppInfoViewController.swift */; };
+		92DC9DE422F8EFF7008A91BC /* AppInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DE322F8EFF7008A91BC /* AppInfoViewModel.swift */; };
+		92DC9DE622F8F55F008A91BC /* ModalHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC9DE522F8F55F008A91BC /* ModalHeight.swift */; };
 		92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */; };
 		92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2622D52B9A00207D4D /* ToastView.swift */; };
 		92E9606F22F3BF99005DF33D /* SendAppreciationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */; };
@@ -445,6 +448,9 @@
 		92D8EBCA22CFD83C0083D6C4 /* SignUpViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerDelegate.swift; sourceTree = "<group>"; };
 		92D8EBCC22CFE0120083D6C4 /* SignInViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerDelegate.swift; sourceTree = "<group>"; };
 		92DA4F9D22D3C61500511C80 /* Production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Production.plist; sourceTree = "<group>"; };
+		92DC9DE122F8E1DF008A91BC /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
+		92DC9DE322F8EFF7008A91BC /* AppInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewModel.swift; sourceTree = "<group>"; };
+		92DC9DE522F8F55F008A91BC /* ModalHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHeight.swift; sourceTree = "<group>"; };
 		92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		92DF5D2622D52B9A00207D4D /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationViewController.swift; sourceTree = "<group>"; };
@@ -547,6 +553,7 @@
 				9205E6E722F0E26A00AFE16B /* ModalPresentable+Defaults.swift */,
 				9205E6EB22F0E26B00AFE16B /* ModalPresentable+UIViewController.swift */,
 				9205E6E522F0E26900AFE16B /* ModalPresentable+LayoutHelpers.swift */,
+				92DC9DE522F8F55F008A91BC /* ModalHeight.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -898,6 +905,7 @@
 				92E960B322F60950005DF33D /* Coordinators */,
 				92E960B222F60942005DF33D /* Delegates */,
 				92E960B122F6092C005DF33D /* Views */,
+				92DC9DE322F8EFF7008A91BC /* AppInfoViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1177,6 +1185,7 @@
 			children = (
 				9279ACB622E7B5740098C4C2 /* SettingsViewController.swift */,
 				9279ACC822E7D6450098C4C2 /* OptionsTableViewController.swift */,
+				92DC9DE122F8E1DF008A91BC /* AppInfoViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1549,6 +1558,7 @@
 				92E960D122F65255005DF33D /* PermissionViewControllerDelegate.swift in Sources */,
 				92CA9C8622D6484B009900E6 /* ProfileCoordinator.swift in Sources */,
 				928A10B322D3EBF400FF78FB /* SignUpCredentials.swift in Sources */,
+				92DC9DE222F8E1DF008A91BC /* AppInfoViewController.swift in Sources */,
 				9237A1E322CA8D8C00FC9331 /* StyleManager.swift in Sources */,
 				9279ACB322E7B3B60098C4C2 /* ProfileViewControllerDelegate.swift in Sources */,
 				9228D6AC22D65A4D003B03DB /* EmptyView.swift in Sources */,
@@ -1621,6 +1631,7 @@
 				92E9608922F49450005DF33D /* ModalPresentationControllerDelegate.swift in Sources */,
 				925BE1C322DE48A20000BEC9 /* LabelTitleView.swift in Sources */,
 				925DD4B522DE04C300D50A89 /* CompactScrollView.swift in Sources */,
+				92DC9DE622F8F55F008A91BC /* ModalHeight.swift in Sources */,
 				92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */,
 				9205E6ED22F0E3F900AFE16B /* ModalAnimator.swift in Sources */,
 				9228D6BA22D77ED9003B03DB /* MessageViewModel.swift in Sources */,
@@ -1652,6 +1663,7 @@
 				9279ACBD22E7C2A40098C4C2 /* SettingOptions.swift in Sources */,
 				92748B1822E0B4C500C2957E /* NSRegularExpression+Extension.swift in Sources */,
 				9237A1D322CA559500FC9331 /* UIViewController+Extension.swift in Sources */,
+				92DC9DE422F8EFF7008A91BC /* AppInfoViewModel.swift in Sources */,
 				925DD4A922DDE5EA00D50A89 /* EmptyViewable.swift in Sources */,
 				925763E722CB95900031D616 /* AuthView.swift in Sources */,
 				9229DFA222D2BDF200827A03 /* AuthService.swift in Sources */,

@@ -6,6 +6,10 @@ public extension ModalPresentable where Self: UIViewController {
         return 8.0
     }
     
+    var height: ModalHeight {
+        return .intrinsicHeight
+    }
+    
     var sideMargins: CGFloat {
         return 15.0
     }

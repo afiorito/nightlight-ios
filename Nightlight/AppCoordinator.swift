@@ -59,31 +59,31 @@ public class AppCoordinator: NSObject, Coordinator {
         
         window.makeKeyAndVisible()
         
-        fetchUserInfo { [unowned self] in
-            if !self.dependencies.userDefaultsManager.hasOnboarded {
-                // Onboarding is only shown on first app load.
-                // Since keychain values are persisted even when the app is uninstalled,
-                // clear the keychain when the app is reinstalled and loaded for the first time.
-                try? self.dependencies.keychainManager.removeAllKeys()
-                self.isInitialLaunch = true
+        fetchUserInfo {}
+        
+        if !self.dependencies.userDefaultsManager.hasOnboarded {
+            // Onboarding is only shown on first app load.
+            // Since keychain values are persisted even when the app is uninstalled,
+            // clear the keychain when the app is reinstalled and loaded for the first time.
+            try? self.dependencies.keychainManager.removeAllKeys()
+            self.isInitialLaunch = true
 
-                let onboardViewController = OnboardViewController()
-                onboardViewController.delegate = self
-                splashScreenViewController.initialViewController = onboardViewController
-                splashScreenViewController.showInitialViewController()
-            } else if self.isSignedIn {
-                let viewController = self.prepareMainApplication()
-                splashScreenViewController.initialViewController = viewController
-            } else {
-                let authCoordinator = AuthCoordinator(rootViewController: splashScreenViewController,
-                                                      dependencies: self.dependencies,
-                                                      authMethod: .signIn)
-                self.addChild(authCoordinator)
-                authCoordinator.start()
-            }
-
+            let onboardViewController = OnboardViewController()
+            onboardViewController.delegate = self
+            splashScreenViewController.initialViewController = onboardViewController
             splashScreenViewController.showInitialViewController()
+        } else if self.isSignedIn {
+            let viewController = self.prepareMainApplication()
+            splashScreenViewController.initialViewController = viewController
+        } else {
+            let authCoordinator = AuthCoordinator(rootViewController: splashScreenViewController,
+                                                  dependencies: self.dependencies,
+                                                  authMethod: .signIn)
+            self.addChild(authCoordinator)
+            authCoordinator.start()
         }
+
+        splashScreenViewController.showInitialViewController()
         
     }
     

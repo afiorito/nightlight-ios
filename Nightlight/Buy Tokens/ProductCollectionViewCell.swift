@@ -102,7 +102,7 @@ public class ProductCollectionViewCell: UICollectionViewCell, Configurable {
 
 extension ProductCollectionViewCell: Themeable {
     func updateColors(for theme: Theme) {
-        contentView.backgroundColor = .background(for: theme)
+        contentView.backgroundColor = .cellBackground(for: theme)
         tokenLabel.textColor = .primaryText(for: theme)
         priceTextView.backgroundColor = .brand
         subtitleLabel.textColor = .secondaryText

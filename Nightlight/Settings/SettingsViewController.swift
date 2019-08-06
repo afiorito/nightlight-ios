@@ -180,7 +180,7 @@ extension SettingsViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: SelectOptionTableViewCell<MessageDefault>.className,
                                                      for: indexPath) as! SelectOptionTableViewCell<MessageDefault>
                             
-            cell.optionName = "Send Message (Default)"
+            cell.optionName = "Send Message As"
             cell.optionValue = viewModel.messageDefault
             
             return cell

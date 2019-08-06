@@ -57,6 +57,12 @@ public class SettingsCoordinator: NSObject, Coordinator {
         webContentViewController.delegate = self
         webContentViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
+        if pathName == .about {
+            webContentViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nb_info"),
+                                                                                         style: .plain,
+                                                                                         target: self, action: #selector(showAppInfo))
+        }
+        
         rootViewController.pushViewController(webContentViewController, animated: true)
     }
     
@@ -77,6 +83,16 @@ public class SettingsCoordinator: NSObject, Coordinator {
             settingsViewController.dismiss(animated: true)
             settingsViewController.didFailPurchase()
         }
+    }
+    
+    @objc private func showAppInfo() {
+        let appInfoViewController = AppInfoViewController(viewModel: AppInfoViewModel())
+        
+        appInfoViewController.modalPresentationStyle = .custom
+        appInfoViewController.modalPresentationCapturesStatusBarAppearance = true
+        appInfoViewController.transitioningDelegate = ModalTransitioningDelegate.default
+        
+        rootViewController.present(appInfoViewController, animated: true)
     }
     
 }
@@ -121,7 +137,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     
     public func settingsViewControllerDidSelectDefaultMessage(_ settingsViewController: SettingsViewController, for currentMessageDefault: MessageDefault) {
         let optionsViewController = OptionsTableViewController<MessageDefault>(currentOption: currentMessageDefault)
-        optionsViewController.title = "Send Message (Default)"
+        optionsViewController.title = "Send Message As"
         optionsViewController.delegate = self
         optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
