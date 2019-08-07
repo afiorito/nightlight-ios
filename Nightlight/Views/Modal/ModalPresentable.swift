@@ -1,8 +1,6 @@
 import UIKit
 
-public protocol ModalPresentable: class {
-    var panScrollable: UIScrollView? { get }
-    
+public protocol ModalPresentable: class {    
     var height: ModalHeight { get }
     
     var sideMargins: CGFloat { get }

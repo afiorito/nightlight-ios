@@ -1,9 +1,17 @@
 import Foundation
 
+/// An object for representing a notification received by a user.
 public struct AnyUserNotification: Codable {
+    /// The notification type.
     let type: Int
+    
+    /// The id of the identity (message) the notification is associated with.
     let entityId: Int
+    
+    /// The payload of the notification.
     let data: Any?
+    
+    /// The date the notification was created.
     let createdAt: Date
     
     private enum CodingKeys: String, CodingKey {
@@ -67,12 +75,15 @@ public struct AnyUserNotification: Codable {
     }
 }
 
+/// An object representing an incremental notification (eg. love)
 public struct IncrementalNotificationData: Codable {
     let count: Int
     let title: String
     let username: String
 }
 
+
+/// An object representing a one time notification (eg. sending a message).
 public struct OneTimeNotificationData: Codable {
     let username: String
 }

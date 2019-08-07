@@ -1,40 +1,13 @@
 import UIKit
 
+/// A view with elements for purchasing tokens.
 public class BuyTokensView: UIView {
     
+    /// A handler for notifying when a purchasing is cancelled.
     public var cancelAction: (() -> Void)?
+    
+    /// A handler for notifying when a purchase is confirmed.
     public var confirmAction: (() -> Void)?
-    
-    private let cancelButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "icon_cancel"), for: .normal)
-        return button
-    }()
-    
-    public let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Token Packs"
-        label.font = .primary16ptMedium
-        return label
-    }()
-    
-    public let confirmPurchaseButton: ContainedButton = {
-        let button = ContainedButton()
-        button.backgroundColor = .brand
-        button.setTitle("Confirm Purchase", for: .normal)
-        return button
-    }()
-    
-    public let productsCollectionView: CompactCollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 15
-        layout.minimumInteritemSpacing = 15
-        let collectionView = CompactCollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.className)
-        collectionView.contentInset = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
-        
-        return collectionView
-    }()
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,12 +20,46 @@ public class BuyTokensView: UIView {
         confirmPurchaseButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
         
         prepareSubviews()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    /// A button for cancelling the purchase.
+    private let cancelButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage.icon.cancel, for: .normal)
+        return button
+    }()
+    
+    /// A label for displaying the title.
+    public let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = Strings.tokenPacksTitle
+        label.font = .primary16ptMedium
+        return label
+    }()
+    
+    /// A button for confirming the purchase.
+    public let confirmPurchaseButton: ContainedButton = {
+        let button = ContainedButton()
+        button.backgroundColor = .brand
+        button.setTitle(Strings.confirmPurchaseButtonText, for: .normal)
+        return button
+    }()
+    
+    /// A collection view for displaying products.
+    public let productsCollectionView: CompactCollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 15
+        layout.minimumInteritemSpacing = 15
+        let collectionView = CompactCollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.className)
+        collectionView.contentInset = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
+        
+        return collectionView
+    }()
     
     private func prepareSubviews() {
         addSubviews([cancelButton, titleLabel, productsCollectionView, confirmPurchaseButton])
@@ -72,14 +79,22 @@ public class BuyTokensView: UIView {
         ])
     }
     
+    /**
+     Handle a cancel button tap event.
+     */
     @objc private func cancelTapped() {
         cancelAction?()
     }
     
+    /**
+    Handle a confirm button tap event.
+    */
     @objc private func confirmTapped() {
         confirmAction?()
     }
 }
+
+// MARK: - Themeable
 
 extension BuyTokensView: Themeable {
     func updateColors(for theme: Theme) {

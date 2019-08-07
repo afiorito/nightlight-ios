@@ -1,33 +1,14 @@
 import UIKit
 
+/// A cell for token products.
 public class ProductCollectionViewCell: UICollectionViewCell, Configurable {
     public typealias ViewModel = ProductViewModel
     public typealias Delegate = AnyObject
     
+    /// The delegate for managing UI actions on the cell.
     public weak var delegate: Delegate?
     
-    private let tokenLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
-    
-    private let subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .secondary14ptNormal
-        return label
-    }()
-    
-    private let priceTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = .secondary14ptNormal
-        textView.isScrollEnabled = false
-        textView.isSelectable = false
-        textView.isEditable = false
-        textView.textContainerInset = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
-        textView.layer.cornerRadius = 4
-        return textView
-    }()
-    
+    /// The name of the product.
     public var productName: String = "" {
         didSet {
             updateTokenLabel()
@@ -67,12 +48,37 @@ public class ProductCollectionViewCell: UICollectionViewCell, Configurable {
         }
     }
     
+    /// A label for displaying the number of tokens.
+    private let tokenLabel = UILabel()
+    
+    /// A label for displaying product description.
+    private let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .secondary14ptNormal
+        return label
+    }()
+    
+    /// A text view for display product price.
+    private let priceTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = .secondary14ptNormal
+        textView.isScrollEnabled = false
+        textView.isSelectable = false
+        textView.isEditable = false
+        textView.textContainerInset = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        textView.layer.cornerRadius = 4
+        return textView
+    }()
+    
+    /**
+     Update the token label text with an attributed string of the product name.
+     */
     private func updateTokenLabel() {
         let string = NSMutableAttributedString(string: "")
         let font = UIFont.secondary16ptMedium
         
         let imageAttachment = TokenImageAttachment(font: font)
-        imageAttachment.image = UIImage(named: "glyph_token")
+        imageAttachment.image = UIImage.glyph.token
         
         string.appendTokenAttachment(imageAttachment)
         

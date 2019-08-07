@@ -123,11 +123,9 @@ extension AppInfoViewController: Themeable {
     }
 }
 
+// MARK: - Modal Presentable
+
 extension AppInfoViewController: ModalPresentable {
-    public var panScrollable: UIScrollView? {
-        return nil
-    }
-    
     public var height: ModalHeight {
         return .square
     }

@@ -1,11 +1,13 @@
 import UIKit
 
-public class BuyTokensViewController: UIViewController {
-    
+/// A view controller for handling the purchase of tokens.
+public class BuyTokensViewController: UIViewController, ModalPresentable {
     private var buyTokensView = BuyTokensView()
     
+    /// The viewModel for handling state.
     private let viewModel: BuyTokensViewModel
     
+    /// The products available for purchase.
     private let products: [ProductViewModel]
     
     init(viewModel: BuyTokensViewModel, products: [ProductViewModel]) {
@@ -26,19 +28,20 @@ public class BuyTokensViewController: UIViewController {
             self?.dismiss(animated: true)
         }
         
-        buyTokensView.confirmAction = purchaseProduct
+        buyTokensView.confirmAction = confirmPurchase
         
         buyTokensView.productsCollectionView.delegate = self
         buyTokensView.productsCollectionView.dataSource = self
         
-        if !IAPManager.canMakePayments {
-            buyTokensView.confirmPurchaseButton.setTitle("Unavailable", for: .normal)
+        if !viewModel.canMakePayments {
+            buyTokensView.confirmPurchaseButton.setTitle(Strings.unavailableButtonText, for: .normal)
             buyTokensView.confirmPurchaseButton.isEnabled = false
         }
         
         prepareSubviews()
         updateColors(for: theme)
         
+        /// Set the first product as selected so confirming the purchase is possible.
         buyTokensView.productsCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
 
@@ -53,22 +56,24 @@ public class BuyTokensViewController: UIViewController {
         ])
     }
     
-    private func purchaseProduct() {
-        guard let indexPath = buyTokensView.productsCollectionView.indexPathsForSelectedItems?.first else {
-            return
-        }
+    /**
+     Confirm the selected purchase.
+     */
+    private func confirmPurchase() {
+        guard let indexPath = buyTokensView.productsCollectionView.indexPathsForSelectedItems?.first
+            else { return }
         
-        buyTokensView.confirmPurchaseButton.isEnabled = false
         buyTokensView.confirmPurchaseButton.isLoading = true
         
-        let product = products[indexPath.row]
-        product.purchaseProduct()
+        products[indexPath.row].purchaseProduct()
     }
 
 }
 
+// MARK: - External Transaction Events
+
 extension BuyTokensViewController {
-    func didCancelTransaction() {
+    public func didCancelTransaction() {
         buyTokensView.confirmPurchaseButton.isEnabled = true
         buyTokensView.confirmPurchaseButton.isLoading = false
     }
@@ -103,6 +108,10 @@ extension BuyTokensViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - Themeable
 
 extension BuyTokensViewController: Themeable {
+    var theme: Theme {
+        return viewModel.theme
+    }
+
     func updateColors(for theme: Theme) {
         buyTokensView.updateColors(for: theme)
     }

@@ -39,4 +39,7 @@ public struct Strings {
     }
     
     static let agreeToTerms = "By signing up you agree to the\nTerms of Use and Privacy Policy"
+    static let unavailableButtonText = "Unavailable"
+    static let tokenPacksTitle = "Token Packs"
+    static let confirmPurchaseButtonText = "Confirm Purchase"
 }
