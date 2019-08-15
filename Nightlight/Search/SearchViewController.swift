@@ -1,13 +1,19 @@
 import UIKit
 
+/// A view controller for managing search.
 public class SearchViewController: UIViewController {
     public typealias SearchResultsController = UIViewController & Searchable
     
+    /// The active search task. Used to throttle searching.
     private var searchTask: DispatchWorkItem?
     
+    /// A view controller to display when user is not searching.
     private let baseViewController: UIViewController
+    
+    /// A view controller to display when user is searching.
     private let searchResultsController: SearchResultsController
     
+    /// A search controller for the search bar.
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: searchResultsController)
         searchController.hidesNavigationBarDuringPresentation = false
@@ -42,10 +48,6 @@ public class SearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        removeDidChangeThemeObserver()
-    }
-    
     private func prepareSubviews() {
         add(child: baseViewController)
         
@@ -55,6 +57,10 @@ public class SearchViewController: UIViewController {
             baseViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             baseViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+    }
+    
+    deinit {
+        removeDidChangeThemeObserver()
     }
 
 }

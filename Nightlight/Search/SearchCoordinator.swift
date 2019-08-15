@@ -1,15 +1,18 @@
 import UIKit
 
+/// A coordinator for search flow.
 public class SearchCoordinator: TabBarCoordinator {
     public typealias Dependencies = StyleManaging
-
     public weak var parent: Coordinator?
     public var children = [Coordinator]()
     
+    /// The required depedencies.
     private let dependencies: Dependencies
     
+    /// The root view controller of the search view controller.
     public let rootViewController: UINavigationController
     
+    /// A view controller for displaying search results.
     public lazy var searchViewController: SearchViewController = {
         let peopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
         let helpfulPeopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
@@ -20,7 +23,7 @@ public class SearchCoordinator: TabBarCoordinator {
         
         let viewController = SearchViewController(baseViewController: helpfulPeopleViewController, searchResultsController: peopleViewController)
         
-        viewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "tb_search"), tag: 0)
+        viewController.tabBarItem = UITabBarItem(title: Strings.search.searchTitle, image: UIImage.tab.search, tag: 0)
         
         return viewController
     }()

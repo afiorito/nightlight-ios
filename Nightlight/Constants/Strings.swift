@@ -1,6 +1,9 @@
 /// All raw application strings displayed to the user.
 public struct Strings {
     
+    static let cancel = "Cancel"
+    static let delete = "Delete"
+    
     /// information for describing initial onboarding screens.
     struct onboard {
         static let pages = [
@@ -48,6 +51,17 @@ public struct Strings {
         static let reported = "The message has been reported!"
         static let sendAnonymously = "Send Anonymously"
         static let numPeople = "People to send to (1-5)"
+        static let deleteMessage = "Delete Message"
+        static let confirmDelete = "Are you sure you want to delete this message? This action is irreversible."
+    }
+    
+    struct profile {
+        static let profileTitle = "Profile"
+        static let helpingSince = "Helping Since"
+    }
+    
+    struct search {
+        static let searchTitle = "Search"
     }
     
     struct notification {

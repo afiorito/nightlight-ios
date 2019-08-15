@@ -1,21 +1,24 @@
 import UIKit
 
+/// A coordinator for recent profile flow.
 public class ProfileCoordinator: NSObject, TabBarCoordinator {
     public typealias Dependencies = KeychainManaging & StyleManaging
-
     public weak var parent: Coordinator?
     public var children = [Coordinator]()
     
+    /// The required dependencies.
     private let dependencies: Dependencies
 
-    private var currentInfo: (index: Int?, indexPath: IndexPath?)
-    
+    /// The root view controller of the recent messages view controller.
     public let rootViewController: UINavigationController
     
-    private var previousMessagesViewControllerIndex: Int?
+    /// The current messages view controller index & message index path.
+    private var currentInfo: (index: Int?, indexPath: IndexPath?)
     
+    /// The active view controller handling appreciation events (eg. view or detail view).
     private weak var activeViewController: AppreciationEventHandling?
     
+    /// An array of view controller for displaying messages.
     private lazy var messageViewControllers: [MessagesViewController] = {
         let messageDependencies = self.dependencies as! MessagesViewModel.Dependencies
 
@@ -39,11 +42,12 @@ public class ProfileCoordinator: NSObject, TabBarCoordinator {
         }
     }()
     
+    /// A view controller for displaying a profile.
     lazy var profileViewController: ProfileViewController = {
         let viewModel = ProfileViewModel(dependencies: dependencies as! ProfileViewModel.Dependencies)
         let viewController = ProfileViewController(viewModel: viewModel)
         
-        viewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "tb_profile"), tag: 0)
+        viewController.tabBarItem = UITabBarItem(title: Strings.profile.profileTitle, image: UIImage.tab.profile, tag: 0)
         
         viewController.delegate = self
         viewController.messageViewControllers = messageViewControllers
@@ -64,6 +68,13 @@ public class ProfileCoordinator: NSObject, TabBarCoordinator {
         rootViewController.show(profileViewController, sender: rootViewController)
     }
     
+    /**
+     Handles extra context options for messages.
+     
+     - parameter message: the message that needs context handling.
+     - parameter indexPath: the index path of the message that needs context handling.
+     - parameter contextHandler: a view controller type object responsible for handling message context events.
+     */
     private func handleMoreContext(for message: MessageViewModel, at indexPath: IndexPath, contextHandler: UIViewController & MessageContextHandling) {
         let contextMenuViewController = ContextMenuViewController()
         
@@ -83,12 +94,13 @@ public class ProfileCoordinator: NSObject, TabBarCoordinator {
         if (username != nil || message.type == .received) && message.type != .saved {
             contextMenuViewController.addOption(ContextOption.deleteOption({ _ in
                 contextMenuViewController.dismiss(animated: true) {
-                    let alertController = UIAlertController(title: "Delete Message", message: "Are you sure you want to delete this message? This action is irreversible.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                    let alertController = UIAlertController(title: Strings.message.deleteMessage,
+                                                            message: Strings.message.confirmDelete, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: Strings.cancel, style: .cancel, handler: { _ in
                         alertController.dismiss(animated: true)
                     }))
                     
-                    alertController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                    alertController.addAction(UIAlertAction(title: Strings.delete, style: .destructive, handler: { _ in
                         contextHandler.didDeleteMessage(message: message, at: indexPath)
                     }))
                     
@@ -104,6 +116,12 @@ public class ProfileCoordinator: NSObject, TabBarCoordinator {
         contextHandler.present(contextMenuViewController, animated: true)
     }
     
+    /**
+     Handles the appreciation of a message.
+     
+     - parameter message: the message being appreciated.
+     - parameter indexPath: the index path of the message being appreciated.
+     */
     private func handleAppreciation(for message: MessageViewModel, at indexPath: IndexPath) {
         guard !message.isAppreciated
             else { return }

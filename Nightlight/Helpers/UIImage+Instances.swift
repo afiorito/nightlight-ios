@@ -7,6 +7,7 @@ extension UIImage {
         static var lock: UIImage? { return UIImage(named: "icon_lock") }
         static var mail: UIImage? { return UIImage(named: "icon_mail") }
         static var context: UIImage? { return UIImage(named: "icon_context") }
+        static var settings: UIImage? { return UIImage(named: "icon_settings") }
         static var send: UIImage? { return UIImage(named: "icon_send") }
         static var heartSelected: UIImage? { return UIImage(named: "icon_heart--selected") }
         static var heartUnselected: UIImage? { return UIImage(named: "icon_heart--unselected") }
@@ -20,6 +21,8 @@ extension UIImage {
     struct tab {
         static var recent: UIImage? { return UIImage(named: "tb_recent") }
         static var notification: UIImage? { return UIImage(named: "tb_notification") }
+        static var profile: UIImage? { return UIImage(named: "tb_profile") }
+        static var search: UIImage? { return UIImage(named: "tb_search") }
     }
     
     struct empty {

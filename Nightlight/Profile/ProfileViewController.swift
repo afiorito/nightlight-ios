@@ -1,16 +1,23 @@
 import UIKit
 
+/// A view controller for managing the profile.
 public class ProfileViewController: UIViewController {
+    /// The viewModel for handling state.
     private let viewModel: ProfileViewModel
     
+    /// A view for displaying the person header content.
     private let personView = PersonContentView()
     
+    /// A background view for extending content view color.
     private let headerBackground = UIView()
     
+    /// A page controller for handling message view controllers.
     private let pageTabController = PageTabController()
     
+    /// The delegate for managing UI actions.
     public weak var delegate: ProfileViewControllerDelegate?
     
+    /// An array of view controllers for displaying messages.
     public var messageViewControllers: [UIViewController] {
         get { return pageTabController.viewControllers }
         set { pageTabController.viewControllers = newValue }
@@ -22,14 +29,18 @@ public class ProfileViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - View Controller Lifecyle
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         addDidChangeThemeObserver()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nb_settings"),
-                                                            style: .plain,
-                                                            target: self,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.icon.settings, style: .plain, target: self,
                                                             action: #selector(didTapSettings))
         
         pageTabController.dataSource = self
@@ -39,7 +50,17 @@ public class ProfileViewController: UIViewController {
         
         self.personView.usernameLabel.text = viewModel.username
         self.personView.dateLabel.text = viewModel.dateSince
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.barTintColor = .clear
+        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.view.backgroundColor = .alternateBackground(for: theme)
+        navigationController?.navigationBar.shadowImage = UIColor.clear.asImage()
         
+        super.viewWillAppear(animated)
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -55,32 +76,12 @@ public class ProfileViewController: UIViewController {
                 self.personView.loveAccolade.actionView.count = viewModel.totalLove
                 self.personView.appreciateAccolade.actionView.count = viewModel.totalAppreciation
             case .failure:
-                self.showToast("Could not connect to Nightlight.", severity: .urgent)
+                self.showToast(Strings.error.couldNotConnect, severity: .urgent)
             }
         }
     }
-
-    public override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.barTintColor = .clear
-        navigationController?.navigationBar.backgroundColor = .clear
-        navigationController?.view.backgroundColor = .alternateBackground(for: theme)
-        navigationController?.navigationBar.shadowImage = UIColor.clear.asImage()
-        
-        super.viewWillAppear(animated)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        removeDidChangeThemeObserver()
-    }
     
     private func prepareSubviews() {
-        
         view.addSubviews([headerBackground, personView])
         add(child: pageTabController)
 
@@ -101,8 +102,14 @@ public class ProfileViewController: UIViewController {
         ])
     }
     
+    // MARK: - Gesture Recognizer Handlers
+    
     @objc private func didTapSettings() {
         delegate?.profileViewControllerDidTapSettings(self)
+    }
+    
+    deinit {
+        removeDidChangeThemeObserver()
     }
 
 }
