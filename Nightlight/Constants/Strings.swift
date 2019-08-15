@@ -22,11 +22,27 @@ public struct Strings {
     }
     
     struct error {
-        static let usernameExists = "The username already exists."
-        static let invalidUsername = "The username is invalid."
-        static let weakPassword = "The password is too weak."
-        static let emailExists = "A user with that email already exists."
-        static let invalidEmail = "The email is invalid."
+        static let couldNotConnect = "Could not connect to Nightlight."
+        static let unknown = "An unknown error occured."
+    }
+
+    struct message {
+        static let invalidTitle = "Message title is invalid."
+        static let titleTooLong = "Message title is too long."
+        static let titleTooShort = "Message title is too short."
+        static let bodyTooShort = "Message body is too short."
+        static let bodyTooLong = "Message body is too long."
+        static let invalidyBody = "Message body is invalid."
+        static let invalidNumPeople = "Number of people is invalid."
+        static let insufficientTokens = "Insufficient tokens."
+        static let alreadyAppreciated = "Message is already appreciated."
+        static let recentMessagesNavTitle = "Recent Messages"
+        static let recentMessagesTabTitle = "Recent"
+        static let sendMessageTitle = "New Message"
+        static let detailTitle = "Message"
+        static let reported = "The message has been reported!"
+        static let sendAnonymously = "Send Anonymously"
+        static let numPeople = "People to send to (1-5)"
     }
     
     struct auth {
@@ -36,6 +52,11 @@ public struct Strings {
         static let ownsAccount = "Already have an account?"
         static let signInButtonText = "Sign in"
         static let signUpButtonText = "Sign up"
+        static let usernameExists = "The username already exists."
+        static let invalidUsername = "The username is invalid."
+        static let weakPassword = "The password is too weak."
+        static let emailExists = "A user with that email already exists."
+        static let invalidEmail = "The email is invalid."
     }
     
     static let agreeToTerms = "By signing up you agree to the\nTerms of Use and Privacy Policy"

@@ -22,7 +22,6 @@ public class ProductViewModel {
         return product.localizedTitle
     }
     
-    
     /// The price of the product.
     var productPrice: String {
         Self.formatter.locale = product.priceLocale

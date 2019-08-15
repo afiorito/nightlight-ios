@@ -1,9 +1,12 @@
 import UIKit
 
+/// The table view cell for selecting the number of people.
 public class NumPeopleCell: UITableViewCell {
     
+    /// A pattern for limiting the number of people input.
     private let regex: NSRegularExpression = try! NSRegularExpression(pattern: "^(^$|[1-5])$")
     
+    /// A text field for inputting the number of people.
     public let textField: UITextField = {
         let textField = UITextField()
         textField.text = "100"
@@ -19,7 +22,7 @@ public class NumPeopleCell: UITableViewCell {
         
         selectionStyle = .none
         
-        self.textLabel?.text = "People to send to (1-5)"
+        self.textLabel?.text = Strings.message.numPeople
         textLabel?.font = .primary17ptNormal
         textField.text = "1"
         self.accessoryView = textField
@@ -53,7 +56,6 @@ extension NumPeopleCell: UITextFieldDelegate {
             else { return false }
         
         let updatedText = text.replacingCharacters(in: stringRange, with: string)
-
         return regex.matches(updatedText)
     }
     

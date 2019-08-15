@@ -8,7 +8,7 @@ public class SendAppreciationView: UIView {
     
     private let appreciationImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "sun_selected")
+        imageView.image = UIImage.icon.sunSelected
         return imageView
     }()
     

@@ -45,9 +45,9 @@ public class SignUpView: AuthView {
         
         if let emailReason = reasons.first(where: { $0.property == "email" }) {
             if emailReason.constraints[ValidationConstraint.userExists.rawValue] != nil {
-                emailField.error = Strings.error.emailExists
+                emailField.error = Strings.auth.emailExists
             } else {
-                emailField.error = Strings.error.invalidEmail
+                emailField.error = Strings.auth.invalidEmail
             }
         }
     }

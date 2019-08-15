@@ -1,18 +1,24 @@
 import UIKit
 
+/// A view controller for managing a list of messages.
 public class MessagesViewController: UIViewController {
+    /// The viewModel for handling state.
     private let viewModel: MessagesViewModel
     
+    /// The delegate for managing UI actions.
     public weak var delegate: MessagesViewControllerDelegate?
     
     private var messagesView: MessagesView {
         return view as! MessagesView
     }
     
+    /// a refresh control for messages.
     private let refreshControl = UIRefreshControl()
     
+    /// a view displayed when the messages list is empty.
     public var emptyViewDescription: EmptyViewDescription?
     
+    // the object that acts as the data source of the table view.
     private let dataSource: TableViewArrayPaginatedDataSource<MessageTableViewCell>
     
     init(viewModel: MessagesViewModel) {
@@ -20,9 +26,14 @@ public class MessagesViewController: UIViewController {
         self.dataSource = TableViewArrayPaginatedDataSource(reuseIdentifier: MessageTableViewCell.className)
         
         super.init(nibName: nil, bundle: nil)
-        
         self.dataSource.cellDelegate = self
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: View Controller Lifecycle
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -49,11 +60,21 @@ public class MessagesViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // deselect row upon returning to the view controller.
         if let selectedIndexPath = messagesView.tableView.indexPathForSelectedRow {
             messagesView.tableView.deselectRow(at: selectedIndexPath, animated: true)
         }
     }
     
+    public override func loadView() {
+        view = MessagesView()
+    }
+    
+    /**
+     Requests more messages to be displayed.
+     
+     - parameter fromStart: A boolean that determines if messages are loaded from the beginning of the list or appended to the current list.
+     */
     private func loadMoreMessages(fromStart: Bool = false) {
         if fromStart { viewModel.resetPaging() }
         
@@ -83,21 +104,16 @@ public class MessagesViewController: UIViewController {
                     self.dataSource.emptyViewDescription = EmptyViewDescription.noLoad
                     self.messagesView.tableView.reloadData()
                 }
-                self.showToast("Could not connect to Nightlight.", severity: .urgent)
+                self.showToast(Strings.error.couldNotConnect, severity: .urgent)
             }
         }
     }
     
+    /**
+     Refresh the table view.
+     */
     @objc private func refresh() {
         loadMoreMessages(fromStart: true)
-    }
-    
-    public override func loadView() {
-        view = MessagesView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
@@ -109,7 +125,7 @@ public class MessagesViewController: UIViewController {
 
 extension MessagesViewController: MessageContextHandling {
     public func didReportMessage(message: MessageViewModel, at indexPath: IndexPath) {
-        showToast("The message has been reported!", severity: .success)
+        showToast(Strings.message.reported, severity: .success)
     }
     
     public func didDeleteMessage(message: MessageViewModel, at indexPath: IndexPath) {
@@ -119,7 +135,7 @@ extension MessagesViewController: MessageContextHandling {
                 self?.dataSource.data.remove(at: indexPath.row)
                 self?.messagesView.tableView.deleteRows(at: [indexPath], with: .automatic)
             case .failure:
-                self?.showToast("Could not connect to Nightlight.", severity: .urgent)
+                self?.showToast(Strings.error.couldNotConnect, severity: .urgent)
             }
         }
     }
@@ -129,6 +145,8 @@ extension MessagesViewController: MessageContextHandling {
         self.messagesView.tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
+
+// MARK: - Appreciation Event Handling
 
 extension MessagesViewController: AppreciationEventHandling {
     public func didAppreciateMessage(at indexPath: IndexPath) {
@@ -153,46 +171,38 @@ extension MessagesViewController: AppreciationEventHandling {
 // MARK: - MessageTableViewCell Delegate
 
 extension MessagesViewController: MessageTableViewCellDelegate {
-    public func cellDidTapAppreciate(_ cell: UITableViewCell) {
+    public func cellDidTapAppreciate(_ cell: MessageTableViewCell) {
         guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
             return
         }
 
-        let viewModel = dataSource.data[indexPath.row]
-        
-        delegate?.messagesViewController(self, didAppreciate: viewModel, at: indexPath)
+        delegate?.messagesViewController(self, didAppreciate: dataSource.data[indexPath.row], at: indexPath)
     }
     
-    public func cellDidTapSave(_ cell: UITableViewCell) {
+    public func cellDidTapSave(_ cell: MessageTableViewCell) {
         guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
             return
         }
-        
-        let viewModel = dataSource.data[indexPath.row]
 
-        viewModel.saveMessage { [weak self] result in
+        dataSource.data[indexPath.row].saveMessage { [weak self] result in
             self?.handleMessageAction(at: indexPath, result: result)
         }
     }
     
-    public func cellDidTapContext(_ cell: UITableViewCell) {
+    public func cellDidTapContext(_ cell: MessageTableViewCell) {
         guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
             return
         }
-        
-        let viewModel = dataSource.data[indexPath.row]
 
-        delegate?.messagesViewController(self, moreContextFor: viewModel, at: indexPath)
+        delegate?.messagesViewController(self, moreContextFor: dataSource.data[indexPath.row], at: indexPath)
     }
     
-    public func cellDidTapLove(_ cell: UITableViewCell) {
+    public func cellDidTapLove(_ cell: MessageTableViewCell) {
         guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
             return
         }
         
-        let viewModel = dataSource.data[indexPath.row]
-        
-        viewModel.loveMessage { [weak self] result in
+        dataSource.data[indexPath.row].loveMessage { [weak self] result in
             self?.handleMessageAction(at: indexPath, result: result)
         }
     }
@@ -240,9 +250,9 @@ extension MessagesViewController: Themeable {
         
         switch theme {
         case .light:
-            messagesView.tableView.emptyView?.image = UIImage(named: "empty_message_light")
+            messagesView.tableView.emptyView?.image = UIImage.empty.messageLight
         case .dark:
-            messagesView.tableView.emptyView?.image = UIImage(named: "empty_message_dark")
+            messagesView.tableView.emptyView?.image = UIImage.empty.messageDark
         }
         
         (navigationItem.titleView as? Themeable)?.updateColors(for: theme)

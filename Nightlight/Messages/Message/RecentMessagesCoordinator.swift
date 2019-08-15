@@ -4,19 +4,25 @@ protocol AppreciationEventHandling: class {
     func didAppreciateMessage(at indexPath: IndexPath)
 }
 
+/// A coordinator for recent messages flow.
 public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
     public typealias Dependencies = StyleManaging
-
     public weak var parent: Coordinator?
     public var children = [Coordinator]()
     
+    /// The required dependencies.
     private let dependencies: Dependencies
     
+    /// The root view controller of the recent messages view controller.
     public let rootViewController: UINavigationController
+    
+    /// The current index path for a message.
     private var currentIndexPath: IndexPath?
     
+    /// The active view controller handling appreciation events (eg. view or detail view).
     private weak var activeViewController: AppreciationEventHandling?
     
+    /// a view controller for display recent messages.
     lazy var recentMessagesViewController: MessagesViewController = {
         let viewModel = MessagesViewModel(dependencies: dependencies as! MessagesViewModel.Dependencies, type: .recent)
         let viewController = MessagesViewController(viewModel: viewModel)
@@ -27,12 +33,12 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
             let titleView = LabelTitleView(frame: CGRect(x: 15, y: 0,
                                                          width: rootViewController.view.frame.width - 30,
                                                          height: navFrame.height))
-            titleView.title = "Recent Messages"
+            titleView.title = Strings.message.recentMessagesNavTitle
             return titleView
         }()
         
         viewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        viewController.tabBarItem = UITabBarItem(title: "Recent", image: UIImage(named: "tb_recent"), tag: 0)
+        viewController.tabBarItem = UITabBarItem(title: Strings.message.recentMessagesTabTitle, image: UIImage.tab.recent, tag: 0)
         viewController.emptyViewDescription = EmptyViewDescription.noRecentMessages
         
         return viewController
@@ -43,7 +49,6 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
         self.dependencies = dependencies
         
         super.init()
-        
         self.rootViewController.delegate = self
     }
     
@@ -51,6 +56,13 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
         rootViewController.show(recentMessagesViewController, sender: rootViewController)
     }
     
+    /**
+     Handles extra context options for messages.
+     
+     - parameter message: the message that needs context handling.
+     - parameter indexPath: the index path of the message that needs context handling.
+     - parameter handler: a view controller type object responsible for handling message context events.
+     */
     private func handleMoreContext(for message: MessageViewModel, at indexPath: IndexPath, handler: UIViewController & MessageContextHandling) {
         let contextMenuViewController = ContextMenuViewController()
         
@@ -67,6 +79,22 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
         handler.present(contextMenuViewController, animated: true)
     }
     
+    /**
+     Handles the appreciation of a message.
+     
+     - parameter message: the message being appreciated.
+     - parameter indexPath: the index path of the message being appreciated.
+     */
+    private func handleAppreciation(for message: MessageViewModel, at indexPath: IndexPath) {
+        guard !message.isAppreciated
+            else { return }
+        
+        let coordinator = SendAppreciationCoordinator(rootViewController: rootViewController, messageViewModel: message,
+                                                      dependencies: dependencies as! SendAppreciationCoordinator.Dependencies)
+        addChild(coordinator)
+        coordinator.start()
+    }
+    
     public func childDidFinish(_ child: Coordinator) {
         removeChild(child)
         
@@ -76,24 +104,12 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
             activeViewController?.didAppreciateMessage(at: indexPath)
         }
     }
-    
-    private func handleAppreciation(for message: MessageViewModel, at indexPath: IndexPath) {
-        guard !message.isAppreciated
-            else { return }
-        
-        let childCoordinator = SendAppreciationCoordinator(rootViewController: rootViewController,
-                                                           messageViewModel: message,
-                                                           dependencies: dependencies as! SendAppreciationCoordinator.Dependencies)
-        addChild(childCoordinator)
-        
-        childCoordinator.start()
-    }
 }
 
 // MARK: - MessagesViewController Delegate
 
 extension RecentMessagesCoordinator: MessagesViewControllerDelegate {
-    public func messagesViewControllerAppreciation(_ messagesViewController: MessagesViewController, didComplete complete: Bool) {
+    public func messagesViewControllerAppreciation(_ messagesViewController: MessagesViewController, didComplete completed: Bool) {
         activeViewController = nil
         currentIndexPath = nil
         rootViewController.dismiss(animated: true)
@@ -160,6 +176,7 @@ extension RecentMessagesCoordinator: MessageDetailViewControllerDelegate {
 
 extension RecentMessagesCoordinator: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        // reset coordinator state when navigating back to previous view controller.
         if navigationController.transitionCoordinator?.viewController(forKey: .to) is MessagesViewController {
             currentIndexPath = nil
         }

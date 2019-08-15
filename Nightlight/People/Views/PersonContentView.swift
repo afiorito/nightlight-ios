@@ -37,8 +37,8 @@ public class PersonContentView: UIView {
     let loveAccolade: AccoladeView = {
         let accoladeView = AccoladeView()
         accoladeView.actionView.isSelected = true
-        accoladeView.actionView.button.setImage(UIImage(named: "heart_unselected"), for: .normal)
-        accoladeView.actionView.button.setImage(UIImage(named: "heart_selected"), for: .selected)
+        accoladeView.actionView.button.setImage(UIImage.icon.heartUnselected, for: .normal)
+        accoladeView.actionView.button.setImage(UIImage.icon.heartSelected, for: .selected)
         accoladeView.descriptionLabel.text = "Love"
         return accoladeView
     }()
@@ -46,8 +46,8 @@ public class PersonContentView: UIView {
     let appreciateAccolade: AccoladeView = {
         let accoladeView = AccoladeView()
         accoladeView.actionView.isSelected = true
-        accoladeView.actionView.button.setImage(UIImage(named: "sun_unselected"), for: .normal)
-        accoladeView.actionView.button.setImage(UIImage(named: "sun_selected"), for: .selected)
+        accoladeView.actionView.button.setImage(UIImage.icon.sunUnselected, for: .normal)
+        accoladeView.actionView.button.setImage(UIImage.icon.sunSelected, for: .selected)
         accoladeView.descriptionLabel.text = "Appreciation"
         return accoladeView
     }()

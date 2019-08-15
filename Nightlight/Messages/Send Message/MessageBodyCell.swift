@@ -1,7 +1,8 @@
 import UIKit
 
+/// The table view cell for entering the body of a message.
 public class MessageBodyCell: UITableViewCell {
-
+    /// A text view for inputting the message body.
     public let textView: TextView = {
         let textView = TextView()
         textView.font = .secondary16ptNormal
@@ -37,6 +38,8 @@ public class MessageBodyCell: UITableViewCell {
     }
 
 }
+
+// MARK: - Themeable
 
 extension MessageBodyCell: Themeable {
     func updateColors(for theme: Theme) {

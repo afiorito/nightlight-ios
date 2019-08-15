@@ -1,13 +1,20 @@
 import UIKit
 
+/// A view controller for managing a message detail.
 public class MessageDetailViewController: UIViewController {
-
+    /// The viewModel for handling state.
     private let viewModel: MessageViewModel
     
+    /// A container scroll view for handling long content.
     private let scrollView = UIScrollView()
+    
+    /// The contentView of the scroll view.
     private let contentView = UIView()
+    
+    /// The view of the view controller.
     private let messageContentView = MessageContentView()
     
+    /// The delegate for managing UI actions.
     public weak var delegate: MessageDetailViewControllerDelegate?
     
     init(viewModel: MessageViewModel) {
@@ -16,16 +23,14 @@ public class MessageDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
-        (navigationController as? Themeable)?.updateColors(for: theme)
-        
-        super.viewWillAppear(animated)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Message"
+        title = Strings.message.detailTitle
         
         addDidChangeThemeObserver()
         
@@ -35,19 +40,17 @@ public class MessageDetailViewController: UIViewController {
         messageContentView.contextButton.addTarget(self, action: #selector(contextTapped), for: .touchUpInside)
         
         updateView()
-        
         updateColors(for: theme)
-        
         prepareSubviews()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public override func viewWillAppear(_ animated: Bool) {
+        (navigationController as? Themeable)?.updateColors(for: theme)
+        
+        super.viewWillAppear(animated)
     }
     
-    deinit {
-        removeDidChangeThemeObserver()
-    }
+    // MARK: - Gesture Recognizer Handlers
     
     @objc private func loveTapped() {
         viewModel.loveMessage { [weak self] result in
@@ -69,17 +72,25 @@ public class MessageDetailViewController: UIViewController {
         delegate?.messageDetailViewController(self, moreContextFor: viewModel)
     }
     
+    /**
+     Handle the result of a message action.
+     
+     - parameter result: the result of the message action, success or failure.
+     */
     private func handleMessageAction(result: Result<MessageViewModel, MessageError>) {
         switch result {
         case .success:
             delegate?.messageDetailViewController(self, didUpdate: viewModel)
         case .failure:
-            self.showToast("Could not connect to Nightlight.", severity: .urgent)
+            self.showToast(Strings.error.couldNotConnect, severity: .urgent)
         }
         
         updateView()
     }
     
+    /**
+     Refresh the view with values from the view model.
+     */
     private func updateView() {
         messageContentView.titleLabel.text = viewModel.title
         messageContentView.usernameLabel.text = viewModel.displayName
@@ -113,7 +124,10 @@ public class MessageDetailViewController: UIViewController {
             messageContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
         ])
     }
-
+    
+    deinit {
+        removeDidChangeThemeObserver()
+    }
 }
 
 // MARK: - MessageEventHandling

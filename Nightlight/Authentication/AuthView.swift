@@ -150,15 +150,15 @@ open class AuthView: UIView {
     public func showFieldErrors(reasons: [ErrorReason]) {
         if let usernameReason = reasons.first(where: { $0.property == "username" }) {
             if usernameReason.constraints[ValidationConstraint.userExists.rawValue] != nil {
-                usernameField.error = Strings.error.usernameExists
+                usernameField.error = Strings.auth.usernameExists
             } else {
-                usernameField.error = Strings.error.invalidUsername
+                usernameField.error = Strings.auth.invalidUsername
             }
         }
         
         if let passwordReason = reasons.first(where: { $0.property == "password" }) {
             if passwordReason.constraints[ValidationConstraint.weakPassword.rawValue] != nil {
-                passwordField.error = Strings.error.weakPassword
+                passwordField.error = Strings.auth.weakPassword
             }
         }
     }

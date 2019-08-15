@@ -1,6 +1,9 @@
 import UIKit
 
+/// A view for displaying a list of messages.
 public class MessagesView: UIView {
+    
+    /// A table view for displaying a list of messages.
     public let tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
@@ -34,6 +37,8 @@ public class MessagesView: UIView {
     }
 
 }
+
+// MARK: - Themeable
 
 extension MessagesView: Themeable {
     public func updateColors(for theme: Theme) {

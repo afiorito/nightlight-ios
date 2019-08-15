@@ -1,22 +1,30 @@
 import Foundation
 
+/// A view model for handling messages.
 public class MessagesViewModel {
-    
     public typealias Dependencies = MessageServiced & StyleManaging
     
+    /// The required dependencies.
     private let dependencies: Dependencies
     
+    /// The active theme.
     public var theme: Theme {
         return dependencies.styleManager.theme
     }
     
+    /// The type of message to handle.
     public let type: MessageType
     
+    /// The start page for loading messages.
     private var startPage: String?
+    
+    /// The end page for loading messages.
     private var endPage: String?
     
+    /// The total number of messages.
     private(set) var totalCount: Int = 0
     
+    /// A boolean for determing if messages are already being fetched.
     private var isFetchInProgress = false
     
     public init(dependencies: Dependencies, type: MessageType) {
@@ -24,6 +32,11 @@ public class MessagesViewModel {
         self.type = type
     }
     
+    /**
+     Retrieve messages.
+     
+     - parameter result: The result of retrieving the messages.
+     */
     public func getMessages(result: @escaping (Result<[MessageViewModel], MessageError>) -> Void) {
         guard !isFetchInProgress && (endPage != nil || startPage == nil) else {
             return
@@ -51,6 +64,11 @@ public class MessagesViewModel {
         }
     }
  
+    /**
+     Resets the paging.
+     
+     Causes messages to be fetched from the beginning.
+     */
     public func resetPaging() {
         startPage = nil
         endPage = nil

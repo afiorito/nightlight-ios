@@ -1,16 +1,20 @@
 import UIKit
 
+/// A table view cell for displaying a message.
 public class MessageTableViewCell: UITableViewCell, Configurable {
     public typealias Delegate = MessageTableViewCellDelegate
     public typealias ViewModel = MessageViewModel
     
+    /// The delegate for managing UI actions.
     public weak var delegate: MessageTableViewCellDelegate?
     
+    //// the content of the table view cell.
     private let messageContentView = MessageContentView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        /// limit the number of lines when displaying a message in a cell.
         messageContentView.bodyLabel.numberOfLines = 10
         
         messageContentView.loveAction.button.addTarget(self, action: #selector(loveTapped), for: .touchUpInside)
@@ -52,6 +56,8 @@ public class MessageTableViewCell: UITableViewCell, Configurable {
         ])
     }
     
+    // MARK: - Gesture Recognizer  Handlers
+    
     @objc private func loveTapped() {
         delegate?.cellDidTapLove(self)
     }
@@ -69,6 +75,8 @@ public class MessageTableViewCell: UITableViewCell, Configurable {
     }
 
 }
+
+// MARK: - Themeable
 
 extension MessageTableViewCell: Themeable {
     public func updateColors(for theme: Theme) {

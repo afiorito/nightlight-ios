@@ -225,7 +225,7 @@
 		92E960D722F70A66005DF33D /* UserDeviceTokenBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */; };
 		92E960D922F73781005DF33D /* UITabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D822F73781005DF33D /* UITabBar+Extension.swift */; };
 		92F1761E22DBC232008AEB82 /* MessageActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761D22DBC232008AEB82 /* MessageActionType.swift */; };
-		92F1762022DBC42C008AEB82 /* MessageActionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */; };
+		92F1762022DBC42C008AEB82 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761F22DBC42C008AEB82 /* MessageResponse.swift */; };
 		92F1762722DBF771008AEB82 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */; };
 		92F1762922DBF7F0008AEB82 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1762822DBF7F0008AEB82 /* MessageContentView.swift */; };
 		92F1762B22DBFBFE008AEB82 /* MessagesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1762A22DBFBFE008AEB82 /* MessagesViewControllerDelegate.swift */; };
@@ -491,7 +491,7 @@
 		92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDeviceTokenBody.swift; sourceTree = "<group>"; };
 		92E960D822F73781005DF33D /* UITabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Extension.swift"; sourceTree = "<group>"; };
 		92F1761D22DBC232008AEB82 /* MessageActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionType.swift; sourceTree = "<group>"; };
-		92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionResponse.swift; sourceTree = "<group>"; };
+		92F1761F22DBC42C008AEB82 /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
 		92F1762822DBF7F0008AEB82 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
 		92F1762A22DBFBFE008AEB82 /* MessagesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -1082,7 +1082,7 @@
 		92E9609822F605E6005DF33D /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				92F1761F22DBC42C008AEB82 /* MessageActionResponse.swift */,
+				92F1761F22DBC42C008AEB82 /* MessageResponse.swift */,
 				92F1761D22DBC232008AEB82 /* MessageActionType.swift */,
 				92E960BD22F60B58005DF33D /* MessageContextHandling.swift */,
 				92418D4622D7C1D0001B6DFB /* MessageError.swift */,
@@ -1168,9 +1168,9 @@
 			isa = PBXGroup;
 			children = (
 				92B302F822D6435200CE5668 /* SendMessageViewController.swift */,
-				92748B1522E0AFC900C2957E /* NumPeopleCell.swift */,
 				920E495A22DFC9F900AA1EDB /* MessageTitleCell.swift */,
 				920E495C22DFD12A00AA1EDB /* MessageBodyCell.swift */,
+				92748B1522E0AFC900C2957E /* NumPeopleCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1668,7 +1668,7 @@
 				92B302EF22D63AB300CE5668 /* RecentMessagesCoordinator.swift in Sources */,
 				9228D6BD22D79250003B03DB /* Message.swift in Sources */,
 				9205E6EE22F0E3F900AFE16B /* ModalPresentable.swift in Sources */,
-				92F1762022DBC42C008AEB82 /* MessageActionResponse.swift in Sources */,
+				92F1762022DBC42C008AEB82 /* MessageResponse.swift in Sources */,
 				928EC46422F75B3E0044E235 /* BadgeView.swift in Sources */,
 				92E960A922F6085F005DF33D /* NotificationTableViewCell.swift in Sources */,
 				92E9607022F3BF99005DF33D /* SendAppreciationViewController+BottomSheetPresentable.swift in Sources */,

@@ -1,5 +1,6 @@
 import Foundation
 
+/// An error for message events.
 public enum MessageError: Error {
     case invalidTitle
     case invalidBody
@@ -11,33 +12,33 @@ public enum MessageError: Error {
     
     var message: String {
         switch self {
-        case .invalidTitle: return "Message title is invalid."
-        case .invalidBody: return "Message body is invalid."
-        case .invalidNumPeople: return "Number of people is invalid."
-        case .insufficientTokens: return "Insufficient tokens."
-        case .alreadyAppreciated: return "Message is already appreciated."
+        case .invalidTitle: return Strings.message.invalidTitle
+        case .invalidBody: return Strings.message.invalidyBody
+        case .invalidNumPeople: return Strings.message.invalidNumPeople
+        case .insufficientTokens: return Strings.message.insufficientTokens
+        case .alreadyAppreciated: return Strings.message.alreadyAppreciated
         case .validation(let reasons):
-            var message = "An unknown error occured."
+            var message = Strings.error.unknown
 
             if let titleReason = reasons.first(where: { $0.property == "title" }) {
                 if titleReason.constraints[ValidationConstraint.maxLength.rawValue] != nil {
-                    message = "Message title is too long."
+                    message = Strings.message.titleTooLong
                 } else if titleReason.constraints[ValidationConstraint.minLength.rawValue] != nil {
-                    message = "Message title is too short"
+                    message = Strings.message.titleTooShort
                 }
             }
             
             if let bodyReason = reasons.first(where: { $0.property == "body" }) {
                 if bodyReason.constraints[ValidationConstraint.maxLength.rawValue] != nil {
-                    message = "Message body is too long"
+                    message = Strings.message.bodyTooLong
                 } else if bodyReason.constraints[ValidationConstraint.minLength.rawValue] != nil {
-                    message = "Body message is too short"
+                    message = Strings.message.titleTooShort
                 }
             }
             
             return message
             
-        case .unknown: return "Could not connect to Nightlight."
+        case .unknown: return Strings.error.couldNotConnect
         }
     }
 }

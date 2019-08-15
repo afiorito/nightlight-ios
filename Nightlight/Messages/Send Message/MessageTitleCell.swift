@@ -1,7 +1,9 @@
 import UIKit
 
+/// The table view cell for entering the title of a message.
 public class MessageTitleCell: UITableViewCell {
 
+    /// A text field for inputting the message title.
     public let textField: UITextField = {
         let textField = UITextField()
         textField.font = .secondary16ptNormal
@@ -33,6 +35,8 @@ public class MessageTitleCell: UITableViewCell {
     }
 
 }
+
+// MARK: - Themeable
 
 extension MessageTitleCell: Themeable {
     func updateColors(for theme: Theme) {

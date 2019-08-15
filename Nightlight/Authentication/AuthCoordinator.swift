@@ -23,7 +23,7 @@ public class AuthCoordinator: Coordinator {
         self.authMethod = authMethod
     }
     
-    /// The root view controller of the application.
+    /// The root view controller of the authentication flow.
     private(set) var rootViewController: UIViewController?
     
     /// The view controller used to sign in a user.

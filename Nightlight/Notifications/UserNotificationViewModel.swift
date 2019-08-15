@@ -7,13 +7,13 @@ public class UserNotificationViewModel {
     public var icon: UIImage? {
         switch NotificationType(rawValue: userNotification.type) {
         case .loveMessage:
-            return UIImage(named: "heart_selected")
+            return UIImage.icon.heartSelected
         case .appreciateMessage:
-            return UIImage(named: "sun_selected")
+            return UIImage.icon.sunSelected
         case .receiveMessage:
             return UIImage(named: "message_selected")
         default:
-            return UIImage(named: "heart_selected")
+            return UIImage.icon.heartSelected
         }
     }
     

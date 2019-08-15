@@ -1,7 +1,89 @@
 import UIKit
 
+/// A view for display message content.
 public class MessageContentView: UIView {
-
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        prepareSubviews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    /// A label for the title of the message.
+    public let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .primary20ptMedium
+        label.numberOfLines = 3
+        return label
+    }()
+    
+    /// A label for the username of the message sender.
+    public let usernameLabel: UILabel = {
+        let label = UILabel()
+        label.font = .secondary16ptNormal
+        label.setContentHuggingPriority(.defaultLow + 1, for: .horizontal)
+        return label
+    }()
+    
+    /// A label for the time the message is posted.
+    public let timeAgoLabel: UILabel = {
+        let label = UILabel()
+        label.font = .secondary16ptNormal
+        return label
+    }()
+    
+    /// A label for the body of the message.
+    public let bodyLabel: UILabel = {
+        let label = UILabel()
+        label.font = .secondary16ptNormal
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    /// A view for the love action of the message.
+    public let loveAction: ActionView = {
+        let action = ActionView()
+        action.button.isSelected = true
+        action.button.setImage(UIImage.icon.heartUnselected, for: .normal)
+        action.button.setImage(UIImage.icon.heartSelected, for: .selected)
+        return action
+    }()
+    
+    /// A view for the appreciate action of the message.
+    public let appreciateAction: ActionView = {
+        let action = ActionView()
+        action.button.setImage(UIImage.icon.sunUnselected, for: .normal)
+        action.button.setImage(UIImage.icon.sunSelected, for: .selected)
+        action.selectOnTap = false
+        return action
+    }()
+    
+    /// A view for the save action of the message.
+    public let saveAction: ActionView = {
+        let action = ActionView()
+        action.isCountHidden = true
+        action.button.setImage(UIImage.icon.bookmarkUnselected, for: .normal)
+        action.button.setImage(UIImage.icon.bookmarkSelected, for: .selected)
+        action.button.isSelected = true
+        return action
+    }()
+    
+    /// A view for the more context action of the message.
+    public let contextButton: BaseButton = {
+        let button = BaseButton()
+        button.setImage(UIImage.icon.context, for: .normal)
+        button.setContentHuggingPriority(.defaultLow + 1, for: .horizontal)
+        button.setContentCompressionResistancePriority(.defaultHigh + 1, for: .horizontal)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
+    
+    // MARK: - Stack view containers
+    
     private let bottomContainer: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing
@@ -18,77 +100,6 @@ public class MessageContentView: UIView {
         let stackView = UIStackView()
         return stackView
     }()
-    
-    public let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .primary20ptMedium
-        label.numberOfLines = 3
-        return label
-    }()
-    
-    public let usernameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .secondary16ptNormal
-        label.setContentHuggingPriority(.defaultLow + 1, for: .horizontal)
-        return label
-    }()
-    
-    public let timeAgoLabel: UILabel = {
-        let label = UILabel()
-        label.font = .secondary16ptNormal
-        return label
-    }()
-    
-    public let bodyLabel: UILabel = {
-        let label = UILabel()
-        label.font = .secondary16ptNormal
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    public let loveAction: ActionView = {
-        let action = ActionView()
-        action.button.isSelected = true
-        action.button.setImage(UIImage(named: "heart_unselected"), for: .normal)
-        action.button.setImage(UIImage(named: "heart_selected"), for: .selected)
-        return action
-    }()
-    
-    public let appreciateAction: ActionView = {
-        let action = ActionView()
-        action.button.setImage(UIImage(named: "sun_unselected"), for: .normal)
-        action.button.setImage(UIImage(named: "sun_selected"), for: .selected)
-        action.selectOnTap = false
-        return action
-    }()
-    
-    public let saveAction: ActionView = {
-        let action = ActionView()
-        action.isCountHidden = true
-        action.button.setImage(UIImage(named: "bookmark_unselected"), for: .normal)
-        action.button.setImage(UIImage(named: "bookmark_selected"), for: .selected)
-        action.button.isSelected = true
-        return action
-    }()
-    
-    public let contextButton: BaseButton = {
-        let button = BaseButton()
-        button.setImage(UIImage(named: "context_menu"), for: .normal)
-        button.setContentHuggingPriority(.defaultLow + 1, for: .horizontal)
-        button.setContentCompressionResistancePriority(.defaultHigh + 1, for: .horizontal)
-        button.imageView?.contentMode = .scaleAspectFit
-        return button
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        prepareSubviews()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     private func prepareSubviews() {
         bottomButtonLeftContainer.addArrangedSubviews([loveAction, appreciateAction])

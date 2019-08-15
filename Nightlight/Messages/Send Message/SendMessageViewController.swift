@@ -1,25 +1,33 @@
 import UIKit
 
+/// A view controller for managing sending a message.
 public class SendMessageViewController: UITableViewController {
 
+    /// A constant for denoting the section of the table view.
     private enum Section: Int, CaseIterable {
         case editing = 0
         case properties = 1
     }
     
+    /// The viewModel for handling state.
     private let viewModel: SendMessageViewModel
     
+    /// The delegate for managing UI actions.
     public weak var delegate: SendMessageViewControllerDelegate?
     
+    /// The cell for displaying the title of a message.
     let titleCell = MessageTitleCell()
+    
+    /// The cell for displaying the body of a message.
     let bodyCell = MessageBodyCell()
     
+    /// The cell for selecting the number of people.
     let numberOfPeopleCell = NumPeopleCell()
     
+    /// The cell for selecting if the message is sent anonymously.
     let anonymousCell: SwitchTableViewCell = {
         let cell = SwitchTableViewCell()
-        cell.textLabel?.text = "Send Anonymously"
-        
+        cell.textLabel?.text = Strings.message.sendAnonymously
         return cell
     }()
     
@@ -29,16 +37,18 @@ public class SendMessageViewController: UITableViewController {
         super.init(style: .grouped)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         addDidChangeThemeObserver()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nb_send"),
-                                                            style: .plain, target: self,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.icon.send, style: .plain, target: self,
                                                             action: #selector(sendTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_cancel"),
-                                                           style: .plain,
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.icon.cancel, style: .plain,
                                                            target: self, action: #selector(cancelTapped))
         
         tableView.dataSource = self
@@ -55,13 +65,7 @@ public class SendMessageViewController: UITableViewController {
         updateColors(for: theme)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        removeDidChangeThemeObserver()
-    }
+    // MARK: - Gesture Recognizer Handlers.
     
     @objc private func cancelTapped() {
         delegate?.sendMessageViewControllerDidCancel(self)
@@ -82,6 +86,10 @@ public class SendMessageViewController: UITableViewController {
                     self.showToast(error.message, severity: .urgent)
                 }
         }
+    }
+    
+    deinit {
+        removeDidChangeThemeObserver()
     }
 }
 

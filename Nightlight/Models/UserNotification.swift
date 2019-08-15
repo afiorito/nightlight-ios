@@ -82,7 +82,6 @@ public struct IncrementalNotificationData: Codable {
     let username: String
 }
 
-
 /// An object representing a one time notification (eg. sending a message).
 public struct OneTimeNotificationData: Codable {
     let username: String

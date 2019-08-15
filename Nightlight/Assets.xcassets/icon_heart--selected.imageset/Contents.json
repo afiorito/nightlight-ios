@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "bookmark_unselected.pdf"
+      "filename" : "icon_heart--selected.pdf"
     }
   ],
   "info" : {
@@ -10,7 +10,7 @@
     "author" : "xcode"
   },
   "properties" : {
-    "template-rendering-intent" : "template",
+    "template-rendering-intent" : "original",
     "preserves-vector-representation" : true
   }
 }
