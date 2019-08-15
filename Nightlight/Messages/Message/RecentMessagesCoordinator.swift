@@ -22,7 +22,7 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
     /// The active view controller handling appreciation events (eg. view or detail view).
     private weak var activeViewController: AppreciationEventHandling?
     
-    /// a view controller for display recent messages.
+    /// a view controller for displaying recent messages.
     lazy var recentMessagesViewController: MessagesViewController = {
         let viewModel = MessagesViewModel(dependencies: dependencies as! MessagesViewModel.Dependencies, type: .recent)
         let viewController = MessagesViewController(viewModel: viewModel)

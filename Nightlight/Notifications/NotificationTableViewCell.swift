@@ -1,17 +1,19 @@
 import UIKit
 
+/// A table view cell for displaying a notification.
 public class NotificationTableViewCell: UITableViewCell, Configurable {
     public typealias ViewModel = UserNotificationViewModel
     public typealias Delegate = AnyObject
-    
     public weak var delegate: AnyObject?
     
+    /// An image view for the notification icon.
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         
         return imageView
     }()
     
+    /// A label for the notification body.
     private let bodyLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -56,6 +58,8 @@ public class NotificationTableViewCell: UITableViewCell, Configurable {
     }
     
 }
+
+// MARK: - Themeable
 
 extension NotificationTableViewCell: Themeable {
     func updateColors(for theme: Theme) {

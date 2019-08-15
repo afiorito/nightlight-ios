@@ -19,6 +19,7 @@ extension UIImage {
     
     struct tab {
         static var recent: UIImage? { return UIImage(named: "tb_recent") }
+        static var notification: UIImage? { return UIImage(named: "tb_notification") }
     }
     
     struct empty {

@@ -1,9 +1,12 @@
 import UIKit
 
+/// A view model for handling a user notification.
 public class UserNotificationViewModel {
     
+    /// The backing user notification model.
     private let userNotification: AnyUserNotification
     
+    /// The icon of the notification.
     public var icon: UIImage? {
         switch NotificationType(rawValue: userNotification.type) {
         case .loveMessage:
@@ -17,6 +20,7 @@ public class UserNotificationViewModel {
         }
     }
     
+    /// The body of the notification.
     public var body: NSAttributedString {
         let bodyString = NSMutableAttributedString()
         
@@ -47,17 +51,20 @@ public class UserNotificationViewModel {
         return bodyString
     }
     
-    func bolded(str: String) -> NSAttributedString {
+    init(userNotification: AnyUserNotification) {
+        self.userNotification = userNotification
+    }
+    
+    /**
+     Helper for bolding certain sections of notification body.
+     */
+    private func bolded(str: String) -> NSAttributedString {
         guard let font = UIFont.secondary16ptBold else {
             return NSAttributedString(string: str)
         }
 
         let attributes = [NSAttributedString.Key.font: font]
         return NSAttributedString(string: str, attributes: attributes)
-    }
-    
-    init(userNotification: AnyUserNotification) {
-        self.userNotification = userNotification
     }
     
 }

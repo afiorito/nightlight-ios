@@ -1,16 +1,21 @@
 import UIKit
 
+/// A view controller for managing a list of notifications.
 public class NotificationsViewController: UIViewController {
+    /// The viewModel for handling state.
     private let viewModel: UserNotificationsViewModel
     
     private var notificationsView: NotificationsView {
         return view as! NotificationsView
     }
     
+    /// A refresh control for notifications.
     private let refreshControl = UIRefreshControl()
     
+    /// A view displayed when the notifications list is empty.
     public var emptyViewDescription: EmptyViewDescription?
     
+    // The object that acts as the data source of the table view.
     private let dataSource: TableViewArrayPaginatedDataSource<NotificationTableViewCell>
     
     init(viewModel: UserNotificationsViewModel) {
@@ -22,11 +27,14 @@ public class NotificationsViewController: UIViewController {
         self.dataSource.cellDelegate = self
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         addDidChangeThemeObserver()
-        
         updateColors(for: theme)
         
         notificationsView.tableView.dataSource = dataSource
@@ -51,14 +59,19 @@ public class NotificationsViewController: UIViewController {
         }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public override func loadView() {
+        view = NotificationsView()
     }
     
     deinit {
         removeDidChangeThemeObserver()
     }
     
+    /**
+    Requests more notifications to be displayed.
+    
+    - parameter fromStart: A boolean that determines if notifications are loaded from the beginning of the list or appended to the current list.
+    */
     private func loadMoreNotifications(fromStart: Bool = false) {
         if fromStart { viewModel.resetPaging() }
         
@@ -90,15 +103,14 @@ public class NotificationsViewController: UIViewController {
                     self.dataSource.emptyViewDescription = EmptyViewDescription.noLoad
                     self.notificationsView.tableView.reloadData()
                 }
-                self.showToast("Could not connect to Nightlight.", severity: .urgent)
+                self.showToast(Strings.error.couldNotConnect, severity: .urgent)
             }
         }
     }
     
-    public override func loadView() {
-        view = NotificationsView()
-    }
-    
+    /**
+     Refresh the table view.
+     */
     @objc private func refresh() {
         loadMoreNotifications(fromStart: true)
     }

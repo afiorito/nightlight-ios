@@ -1,16 +1,40 @@
 import UIKit
 
+/// A view controller for managing onboarding.
 public class OnboardViewController: UIViewController {
+    
+    /// The delegate for managing UI actions.
+    public weak var delegate: OnboardViewControllerDelegate?
+    
+    /// The onboarding view controller pages.
     public var pages = [UIViewController]()
     
+    /// A view controller for managing the onboarding pages.
     private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
+    /// The page indicator for the onboarding pages.
     private lazy var pageControl: PageControl = {
         let pageControl = PageControl()
         pageControl.numberOfPages = pages.count
         pageControl.currentPage = 0
         
         return pageControl
+    }()
+    
+    /// A button for a getting started action.
+    private let getStartedButton: ContainedButton = {
+        let button = ContainedButton()
+        button.setTitle(Strings.onboard.getStarted, for: .normal)
+        button.backgroundColor = .brand
+        return button
+    }()
+    
+    /// A button for a sign in action.
+    private let signInButton: TextButton = {
+        let button = TextButton()
+        button.setTitle(Strings.onboard.signIn, for: .normal)
+        
+        return button
     }()
     
     private let buttonContainer: UIStackView = {
@@ -21,22 +45,6 @@ public class OnboardViewController: UIViewController {
         return stackView
     }()
     
-    private let getStartedButton: ContainedButton = {
-        let button = ContainedButton()
-        button.setTitle("Get Started", for: .normal)
-        button.backgroundColor = .brand
-        return button
-    }()
-    
-    private let signInButton: TextButton = {
-        let button = TextButton()
-        button.setTitle("Sign In", for: .normal)
-        
-        return button
-    }()
-    
-    public weak var delegate: OnboardViewControllerDelegate?
-    
     deinit {
         removeDidChangeThemeObserver()
     }
@@ -46,7 +54,7 @@ public class OnboardViewController: UIViewController {
         
         addDidChangeThemeObserver()
         
-        for onboardData in Strings.onboard {
+        for onboardData in Strings.onboard.pages {
             let page = OnboardPageViewController()
             page.titleText = onboardData.title
             page.subtitleText = onboardData.subtitle
@@ -63,6 +71,8 @@ public class OnboardViewController: UIViewController {
         
         prepareSubviews()
     }
+    
+    // MARK: - Gesture Recognizer Handlers
     
     @objc private func getStartedTapped() {
         delegate?.onboardViewControllerDidProceedAsNewUser(self)
@@ -98,7 +108,13 @@ public class OnboardViewController: UIViewController {
         updateColors(for: theme)
     }
     
-    private func page(at index: Int, direction: UIPageViewController.NavigationDirection) -> Int? {
+    /**
+     Computes the next pages giving the current page index.
+     
+     - parameter index: the index of the current page.
+     - parameter direction: the scrolling direction of the page view controller.
+     */
+    private func nextPage(for index: Int, direction: UIPageViewController.NavigationDirection) -> Int? {
         let newIndex = direction == .forward ? index + 1 : index - 1
         
         if newIndex < 0 || newIndex > pages.count - 1 {
@@ -127,7 +143,7 @@ public class OnboardViewController: UIViewController {
 extension OnboardViewController: UIPageViewControllerDataSource {
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = pages.firstIndex(of: viewController),
-            let page = page(at: index, direction: .reverse) else {
+            let page = nextPage(for: index, direction: .reverse) else {
             return nil
         }
         
@@ -136,7 +152,7 @@ extension OnboardViewController: UIPageViewControllerDataSource {
     
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = pages.firstIndex(of: viewController),
-            let page = page(at: index, direction: .forward) else {
+            let page = nextPage(for: index, direction: .forward) else {
             return nil
         }
         

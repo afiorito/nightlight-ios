@@ -1,6 +1,8 @@
 import UIKit
 
+/// A view for displaying a list of notifications.
 public class NotificationsView: UIView {
+    /// A table view for displaying a list of notifications.
     public let tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
@@ -34,6 +36,8 @@ public class NotificationsView: UIView {
     }
 
 }
+
+// MARK: - Themeable
 
 extension NotificationsView: Themeable {
     public func updateColors(for theme: Theme) {

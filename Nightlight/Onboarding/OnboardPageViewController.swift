@@ -1,10 +1,17 @@
 import UIKit
 
+/// A view controller for managing an onboarding page.
 public class OnboardPageViewController: UIViewController {
+    /// A string representing the page title.
     public var titleText: String?
+    
+    /// A string representing the page subtitle.
     public var subtitleText: String?
+    
+    /// A string representing the page image.
     public var image: UIImage?
     
+    /// A label for displaying the page title.
     public let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -12,6 +19,7 @@ public class OnboardPageViewController: UIViewController {
         return label
     }()
     
+    /// A label for displaying the page subtitle.
     public let subtitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -20,6 +28,7 @@ public class OnboardPageViewController: UIViewController {
         return label
     }()
     
+    /// A label for displaying the page image.
     public let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -42,17 +51,12 @@ public class OnboardPageViewController: UIViewController {
         stackView.spacing = 50
         return stackView
     }()
-    
-    deinit {
-        removeDidChangeThemeObserver()
-    }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         addDidChangeThemeObserver()
         prepareSubviews()
-        
         updateColors(for: theme)
     }
     
@@ -72,6 +76,10 @@ public class OnboardPageViewController: UIViewController {
         titleLabel.text = titleText
         subtitleLabel.text = subtitleText
         imageView.image = image
+    }
+    
+    deinit {
+        removeDidChangeThemeObserver()
     }
 
 }

@@ -12,10 +12,10 @@ public class MessagesViewController: UIViewController {
         return view as! MessagesView
     }
     
-    /// a refresh control for messages.
+    /// A refresh control for messages.
     private let refreshControl = UIRefreshControl()
     
-    /// a view displayed when the messages list is empty.
+    /// A view displayed when the messages list is empty.
     public var emptyViewDescription: EmptyViewDescription?
     
     // the object that acts as the data source of the table view.
