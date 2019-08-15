@@ -1,6 +1,8 @@
 import UIKit
 
+/// A view for displaying a list of people.
 public class PeopleView: UIView {
+    /// A table view for displaying a list of people.
     public let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(PersonTableViewCell.self, forCellReuseIdentifier: PersonTableViewCell.className)
@@ -34,6 +36,8 @@ public class PeopleView: UIView {
         ])
     }
 }
+
+// MARK: - Themeable
 
 extension PeopleView: Themeable {
     func updateColors(for theme: Theme) {

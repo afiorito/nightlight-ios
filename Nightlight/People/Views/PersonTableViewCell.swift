@@ -1,13 +1,17 @@
 import UIKit
 
+/// A table view cell for displaying a person.
 public class PersonTableViewCell: UITableViewCell, Configurable {
     public typealias ViewModel = PersonViewModel
     public typealias Delegate = AnyObject
     
+    /// The delegate for managing UI actions.
     public weak var delegate: Delegate?
     
+    /// A view for simulating a card like appearance for a table view cell.
     private let backgroundCardView = UIView()
     
+    /// The content of the table view cell.
     private let personContentView = PersonContentView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

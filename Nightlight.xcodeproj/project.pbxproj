@@ -919,6 +919,25 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		928465A02306088100A580A2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92E960CC22F632DA005DF33D /* NotificationPermissionViewController.swift */,
+				92E960D222F65358005DF33D /* PermissionViewController.swift */,
+				92E960CE22F63356005DF33D /* PermissionView.swift */,
+				92E960D022F65255005DF33D /* PermissionViewControllerDelegate.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		928465A12306089200A580A2 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				92E960D422F65592005DF33D /* PermissionViewModel.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
 		928A10AC22D3E2EE00FF78FB /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -1292,11 +1311,8 @@
 		92E960CB22F632BB005DF33D /* Permission */ = {
 			isa = PBXGroup;
 			children = (
-				92E960CC22F632DA005DF33D /* NotificationPermissionViewController.swift */,
-				92E960D222F65358005DF33D /* PermissionViewController.swift */,
-				92E960CE22F63356005DF33D /* PermissionView.swift */,
-				92E960D022F65255005DF33D /* PermissionViewControllerDelegate.swift */,
-				92E960D422F65592005DF33D /* PermissionViewModel.swift */,
+				928465A02306088100A580A2 /* Views */,
+				928465A12306089200A580A2 /* View Models */,
 			);
 			path = Permission;
 			sourceTree = "<group>";

@@ -35,7 +35,7 @@ public class MessagesViewModel {
     /**
      Retrieve messages.
      
-     - parameter result: The result of retrieving the messages.
+     - parameter result: the result of retrieving the messages.
      */
     public func getMessages(result: @escaping (Result<[MessageViewModel], MessageError>) -> Void) {
         guard !isFetchInProgress && (endPage != nil || startPage == nil) else {

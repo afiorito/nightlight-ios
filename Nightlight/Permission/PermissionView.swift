@@ -1,25 +1,30 @@
 import UIKit
 
+/// A view for displaying a permission.
 public class PermissionView: UIView {
     
+    /// A callback for confirming an action.
     public var confirmAction: (() -> Void)?
     
+    /// A callback for cancelling an action.
     public var cancelAction: (() -> Void)?
     
     /// Name of the image without light or dark prefix.
     public var imageName: String?
     
-    /// Title text for the permission.
+    /// The title text for the permission.
     public var title: String? {
         get { return titleLabel.text }
         set { titleLabel.text = newValue }
     }
     
+    /// The title text for the confirm action button.
     public var confirmActionTitle: String? {
         get { return confirmButton.titleLabel?.text }
         set { confirmButton.setTitle(newValue, for: .normal) }
     }
     
+    /// The title text for the cancel action button.
     public var cancelActionTitle: String? {
         get { return cancelButton.titleLabel?.text }
         set { cancelButton.setTitle(newValue, for: .normal) }
@@ -31,6 +36,7 @@ public class PermissionView: UIView {
         set { subtitleLabel.text = newValue }
     }
     
+    /// The permission image.
     private var image: UIImage? {
         get { return imageView.image }
         set { imageView.image = newValue }
@@ -50,6 +56,40 @@ public class PermissionView: UIView {
     }
     
     // MARK: - Subviews & Layout
+    
+    /// The image view to display the permission image.
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    /// A label to display the permission title.
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .primary20ptMedium
+        return label
+    }()
+    
+    /// A label to display the permission subtitle.
+    private let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = .secondary16ptNormal
+        return label
+    }()
+    
+    /// A button for confirming the permission.
+    private let confirmButton: ContainedButton = {
+        let button = ContainedButton()
+        button.backgroundColor = .brand
+        return button
+    }()
+    
+    /// A button for cancelling the permission.
+    private let cancelButton = TextButton()
     
     private let container: UIStackView = {
         let stackView = UIStackView()
@@ -87,43 +127,6 @@ public class PermissionView: UIView {
         return stackView
     }()
     
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = .primary20ptMedium
-        return label
-    }()
-    
-    private let subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.font = .secondary16ptNormal
-        return label
-    }()
-    
-    private let confirmButton: ContainedButton = {
-        let button = ContainedButton()
-        button.backgroundColor = .brand
-        return button
-    }()
-    
-    private let cancelButton = TextButton()
-    
-    @objc private func cancelTapped() {
-        cancelAction?()
-    }
-    
-    @objc private func confirmTapped() {
-        confirmAction?()
-    }
-    
     private func prepareSubviews() {
         textContainer.addArrangedSubviews([titleLabel, subtitleLabel])
         topContainer.addArrangedSubviews([imageView, textContainer])
@@ -140,6 +143,17 @@ public class PermissionView: UIView {
             imageView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
         ])
     }
+    
+    // MARK: - Gesture Recognizer Handlers
+    
+    @objc private func cancelTapped() {
+        cancelAction?()
+    }
+    
+    @objc private func confirmTapped() {
+        confirmAction?()
+    }
+
 }
 
 // MARK: - Themeable

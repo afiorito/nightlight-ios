@@ -1,17 +1,32 @@
 import UIKit
 
+/// A view controller for managing a list of people.
 public class PeopleViewController: UIViewController {
     
+    /// The object that acts as the data source of the table view.
     public var dataSource: TableViewArrayPaginatedDataSource<PersonTableViewCell>
     
+    /// The viewModel for handling state.
     private let viewModel: PeopleViewModel
     
     public var peopleView: PeopleView {
         return view as! PeopleView
     }
     
+    /// A view displayed when the people list is empty.
     public var emptyViewDescription: EmptyViewDescription?
     
+    init(viewModel: PeopleViewModel) {
+        self.viewModel = viewModel
+        self.dataSource = TableViewArrayPaginatedDataSource(reuseIdentifier: PersonTableViewCell.className)
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,25 +42,15 @@ public class PeopleViewController: UIViewController {
         updateColors(for: theme)
     }
     
-    init(viewModel: PeopleViewModel) {
-        self.viewModel = viewModel
-        self.dataSource = TableViewArrayPaginatedDataSource(reuseIdentifier: PersonTableViewCell.className)
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        removeDidChangeThemeObserver()
-    }
-    
     public override func loadView() {
         view = PeopleView()
     }
     
+    /**
+     Requests more people to be displayed.
+     
+     - parameter fromStart: A boolean that determines if people are loaded from the beginning of the list or appended to the current list.
+     */
     private func loadMorePeople(fromStart: Bool = false) {
         if fromStart { viewModel.resetPaging() }
 
@@ -70,9 +75,13 @@ public class PeopleViewController: UIViewController {
                     self.dataSource.emptyViewDescription = EmptyViewDescription.noLoad
                     self.peopleView.tableView.reloadData()
                 }
-                self.showToast("Could not connect to Nightlight.", severity: .urgent)
+                self.showToast(Strings.error.couldNotConnect, severity: .urgent)
             }
         }
+    }
+    
+    deinit {
+        removeDidChangeThemeObserver()
     }
     
 }

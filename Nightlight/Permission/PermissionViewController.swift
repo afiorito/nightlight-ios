@@ -2,10 +2,11 @@ import UIKit
 
 public class PermissionViewController: UIViewController {
     
-    private var permissionView: PermissionView {
+    var permissionView: PermissionView {
         return view as! PermissionView
     }
     
+    /// The delegate for managing UI actions.
     public weak var delegate: PermissionViewControllerDelegate?
     
     override public func viewDidLoad() {
@@ -19,20 +20,28 @@ public class PermissionViewController: UIViewController {
         
     }
     
-    internal func didConfirm() {
+    public override func loadView() {
+        view = PermissionView()
+    }
+    
+    // MARK: - Gesture Recognizer Handles
+    
+    /**
+     Confirm the permission.
+     */
+    func didConfirm() {
         delegate?.permissionViewController(self, didFinish: true)
     }
     
-    internal func didCancel() {
+    /**
+     Deny the permission.
+     */
+    func didCancel() {
         delegate?.permissionViewController(self, didFinish: false)
     }
     
     deinit {
         removeDidChangeThemeObserver()
-    }
-    
-    public override func loadView() {
-        view = PermissionView()
     }
 }
 

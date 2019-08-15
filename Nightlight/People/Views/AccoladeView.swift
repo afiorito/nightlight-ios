@@ -1,23 +1,26 @@
 import UIKit
 
+/// A view for display an accolade and its total count.
 public class AccoladeView: UIView {
-    private let container: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        return stackView
-    }()
-    
+    /// A view for displaying the type of accolade.
     let actionView: ActionView = {
         let actionView = ActionView()
         actionView.button.isUserInteractionEnabled = false
         return actionView
     }()
     
+    /// A label for displaying the accolade description.
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .primary12ptNormal
         return label
+    }()
+    
+    private let container: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        return stackView
     }()
     
     public override init(frame: CGRect) {

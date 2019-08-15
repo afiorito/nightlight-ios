@@ -1,6 +1,9 @@
 import UIKit
 
+/// A header view for the helpful people table view.
 public class HelpfulPeopleHeader: UITableViewHeaderFooterView {
+    
+    /// A label for displaying the title of the header.
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Helpful People"

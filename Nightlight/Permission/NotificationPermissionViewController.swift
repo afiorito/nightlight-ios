@@ -1,11 +1,9 @@
 import UIKit
 
+/// A view controller for managing notification permission.
 public class NotificationPermissionViewController: PermissionViewController {
     
-    private var permissionView: PermissionView {
-        return view as! PermissionView
-    }
-    
+    /// The viewModel for handling state.
     private let viewModel: PermissionViewModel
     
     init(viewModel: PermissionViewModel) {
@@ -26,7 +24,6 @@ public class NotificationPermissionViewController: PermissionViewController {
         permissionView.imageName = "empty_notifications"
         
         super.viewDidLoad()
-        
     }
     
     override func didConfirm() {
@@ -52,5 +49,4 @@ public class NotificationPermissionViewController: PermissionViewController {
     deinit {
         removeDidChangeThemeObserver()
     }
-    
 }

@@ -18,7 +18,7 @@ public class MessagesViewController: UIViewController {
     /// A view displayed when the messages list is empty.
     public var emptyViewDescription: EmptyViewDescription?
     
-    // the object that acts as the data source of the table view.
+    /// The object that acts as the data source of the table view.
     private let dataSource: TableViewArrayPaginatedDataSource<MessageTableViewCell>
     
     init(viewModel: MessagesViewModel) {

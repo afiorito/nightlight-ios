@@ -8,7 +8,7 @@ public class MessageTableViewCell: UITableViewCell, Configurable {
     /// The delegate for managing UI actions.
     public weak var delegate: MessageTableViewCellDelegate?
     
-    //// the content of the table view cell.
+    /// The content of the table view cell.
     private let messageContentView = MessageContentView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

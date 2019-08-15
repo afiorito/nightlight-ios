@@ -1,11 +1,14 @@
 import UIKit
 
+/// A view controller for managing a list of helpful people.
 public class HelpfulPeopleViewController: UIViewController {
-    
+    /// The viewModel for handling state.
     private let viewModel: PeopleViewModel
     
+    /// The object that acts as the data source of the table view.
     private let dataSource: TableViewArrayDataSource<PersonTableViewCell>
     
+    /// A refresh control for people.
     private let refreshControl = UIRefreshControl()
     
     public var peopleView: PeopleView {
@@ -38,14 +41,13 @@ public class HelpfulPeopleViewController: UIViewController {
         loadPeople()
     }
     
-    deinit {
-        removeDidChangeThemeObserver()
-    }
-    
     public override func loadView() {
         view = PeopleView()
     }
     
+    /**
+     Requests helpful people to be displayed.
+     */
     private func loadPeople() {
         viewModel.getHelpfulPeople { [weak self] result in
             guard let self = self else { return }
@@ -66,13 +68,20 @@ public class HelpfulPeopleViewController: UIViewController {
                     self.dataSource.emptyViewDescription = EmptyViewDescription.noLoad
                     self.peopleView.tableView.reloadData()
                 }
-                self.showToast("Could not connect to Nightlight.", severity: .urgent)
+                self.showToast(Strings.error.couldNotConnect, severity: .urgent)
             }
         }
     }
     
+    /**
+     Refresh the table view.
+     */
     @objc private func refresh() {
         loadPeople()
+    }
+    
+    deinit {
+        removeDidChangeThemeObserver()
     }
     
 }

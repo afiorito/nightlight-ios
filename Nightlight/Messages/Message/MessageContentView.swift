@@ -1,6 +1,6 @@
 import UIKit
 
-/// A view for display message content.
+/// A view for displaying message content.
 public class MessageContentView: UIView {
     
     override init(frame: CGRect) {
