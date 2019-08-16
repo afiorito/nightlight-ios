@@ -4,11 +4,12 @@ public protocol PeopleServiced {
     var peopleService: PeopleService { get }
 }
 
+/// A service for handling people.
 public class PeopleService {
-    
     private let httpClient: HttpClient
     private let keychainManager: KeychainManager
     
+    /// The active task for filtering users.
     private var filterTask: URLSessionDataTask?
     
     init(httpClient: HttpClient, keychainManager: KeychainManager) {
@@ -16,6 +17,11 @@ public class PeopleService {
         self.keychainManager = keychainManager
     }
     
+    /**
+     Retrieve helpful people.
+     
+     - parameter result: the result of retrieving helpful people.
+     */
     public func getHelpfulPeople(result: @escaping (Result<[User], PersonError>) -> Void) {
         httpClient.get(endpoint: Endpoint.helpfulUsers) { networkResult in
             switch networkResult {
@@ -32,6 +38,14 @@ public class PeopleService {
         }
     }
     
+    /**
+     Retrieve people.
+     
+     - parameter filter: the filter string to narrow user search.
+     - parameter start: the starting cursor of the people request.
+     - parameter end: the ending cursor of the people request.
+     - parameter result: the result of retrieving people.
+     */
     public func getPeople(filter: String, start: String?, end: String?, result: @escaping (Result<PaginatedResponse<User>, PersonError>) -> Void) {
         if let task = filterTask {
             task.cancel()
@@ -54,8 +68,13 @@ public class PeopleService {
         })
     }
     
+    /**
+     Retrieve a person.
+
+     - parameter result: the result of retrieving a person.
+     */
     public func getPerson(result: @escaping (Result<User, PersonError>) -> Void) {
-        guard let accessToken = try? keychainManager.string(forKey: KeychainKey.accessToken.rawValue),
+        guard let accessToken = try? keychainManager.string(for: KeychainKey.accessToken.rawValue),
             let jwt = try? JWTDecoder().decode(accessToken),
             let username = jwt["username"] as? String
             else {
@@ -77,6 +96,12 @@ public class PeopleService {
         }
     }
     
+    /**
+     Add tokens for a person.
+
+     - parameter tokens: the number of tokens to add.
+     - parameter result: the result of adding tokens to a user.
+     */
     public func addTokens(tokens: Int, result: @escaping (Result<Int, PersonError>) -> Void) {
         guard let receiptURL = Bundle.main.appStoreReceiptURL, let receiptData = try? Data(contentsOf: receiptURL) else {
             return result(.failure(.unknown))
@@ -100,10 +125,16 @@ public class PeopleService {
         }
     }
     
+    /**
+     Update a person's device token.
+
+     - parameter deviceToken: the new device token of the user.
+     - parameter result: the result of updating the device token.
+     */
     public func updateDeviceToken(_ deviceToken: Data, result: @escaping (Result<Bool, PersonError>) -> Void) {
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         
-        let currentToken = try? keychainManager.string(forKey: KeychainKey.deviceToken.rawValue)
+        let currentToken = try? keychainManager.string(for: KeychainKey.deviceToken.rawValue)
         
         if currentToken == token {
             return result(.success(true))

@@ -15,7 +15,7 @@ public class AppCoordinator: NSObject, Coordinator {
 
     /// A boolean representing whether a user has signed in previously.
     private var isSignedIn: Bool {
-        let accessToken = try? dependencies.keychainManager.string(forKey: KeychainKey.accessToken.rawValue)
+        let accessToken = try? dependencies.keychainManager.string(for: KeychainKey.accessToken.rawValue)
         return accessToken != nil
     }
     

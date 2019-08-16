@@ -86,7 +86,7 @@ public class ProfileCoordinator: NSObject, TabBarCoordinator {
         
         var username: String?
         
-        if let accessToken = try? dependencies.keychainManager.string(forKey: KeychainKey.accessToken.rawValue),
+        if let accessToken = try? dependencies.keychainManager.string(for: KeychainKey.accessToken.rawValue),
             let jwt = try? JWTDecoder().decode(accessToken) {
             username = jwt["username"] as? String
         }

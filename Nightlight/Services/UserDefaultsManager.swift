@@ -25,6 +25,7 @@ public class UserDefaultsManager {
         set { userDefaults.set(newValue, forKey: UserDefaultsKey.hasOnboarded.rawValue) }
     }
     
+    /// The currently selected theme.
     public var theme: Theme {
         get {
             return Theme(rawValue: userDefaults.string(forKey: UserDefaultsKey.theme.rawValue) ?? "") ?? .light
@@ -34,6 +35,7 @@ public class UserDefaultsManager {
         }
     }
     
+    /// The currently selected message default.
     public var messageDefault: MessageDefault {
         get {
             return MessageDefault(rawValue: userDefaults.string(forKey: UserDefaultsKey.messageDefault.rawValue) ?? "") ?? .username

@@ -76,7 +76,7 @@ public class SendAppreciationCoordinator: Coordinator {
 extension SendAppreciationCoordinator: SendAppreciationViewControllerDelegate {
     public func sendAppreciationViewControllerDidTapActionButton(_ sendAppreciationViewController: SendAppreciationViewController) {
         
-        let tokens = (try? dependencies.keychainManager.integer(forKey: KeychainKey.tokens.rawValue)) ?? 0
+        let tokens = (try? dependencies.keychainManager.integer(for: KeychainKey.tokens.rawValue)) ?? 0
         
         // purchase more tokens
         if tokens <= 0 {

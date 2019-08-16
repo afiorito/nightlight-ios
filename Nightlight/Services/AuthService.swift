@@ -4,8 +4,8 @@ public protocol AuthServiced {
     var authService: AuthService { get }
 }
 
+/// A service for handling authentication.
 public class AuthService {
-    
     private let httpClient: HttpClient
     private let keychainManager: KeychainManager
     
@@ -14,14 +14,32 @@ public class AuthService {
         self.keychainManager = keychainManager
     }
     
+    /**
+     Sign up a user.
+     
+     - parameter credentials: the sign up credentials of a user.
+     - parameter result: the result of signing up a user.
+     */
     public func signUp(with credentials: SignUpCredentials, result: @escaping (Result<Bool, AuthError>) -> Void) {
         authenticate(endpoint: Endpoint.signUp, body: try? Data.encodeJSON(value: credentials), result: result)
     }
     
+    /**
+     Sign in a user.
+     
+     - parameter credentials: the sign in credentials of a user.
+     - parameter result: the result of signing in a user.
+     */
     public func signIn(with credentials: SignInCredentials, result: @escaping (Result<Bool, AuthError>) -> Void) {
         authenticate(endpoint: Endpoint.signIn, body: try? Data.encodeJSON(value: credentials), result: result)
     }
     
+    /**
+     Send an authentication request for a user.
+     
+     - parameter endpoint: the endpoint for authentication.
+     - parameter result: the result of the authentication request.
+     */
     private func authenticate(endpoint: Endpoint, body: Data?, result: @escaping (Result<Bool, AuthError>) -> Void) {
         httpClient.post(endpoint: endpoint, body: body) { networkResult in
             switch networkResult {

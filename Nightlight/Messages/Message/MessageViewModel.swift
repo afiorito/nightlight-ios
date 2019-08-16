@@ -135,7 +135,7 @@ public class MessageViewModel {
                 if appreciateResponse.isAppreciated {
                     self.message.appreciationCount += 1
                     self.message.isAppreciated = true
-                    let tokens = (try? self.dependencies.keychainManager.integer(forKey: KeychainKey.tokens.rawValue)) ?? 0
+                    let tokens = (try? self.dependencies.keychainManager.integer(for: KeychainKey.tokens.rawValue)) ?? 0
                     try? self.dependencies.keychainManager.set(tokens - 100, forKey: KeychainKey.tokens.rawValue)
                 }
                 

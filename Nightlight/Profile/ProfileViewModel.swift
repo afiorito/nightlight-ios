@@ -18,7 +18,7 @@ public class ProfileViewModel {
     
     /// The username of a person.
     var username: String {
-        let username = try? dependencies.keychainManager.string(forKey: KeychainKey.username.rawValue)
+        let username = try? dependencies.keychainManager.string(for: KeychainKey.username.rawValue)
         return username ?? "-"
     }
     
@@ -27,7 +27,7 @@ public class ProfileViewModel {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM YYYY"
         
-        if let createdAt = (try? dependencies.keychainManager.double(forKey: KeychainKey.userCreatedAt.rawValue)) {
+        if let createdAt = (try? dependencies.keychainManager.double(for: KeychainKey.userCreatedAt.rawValue)) {
             return "\(Strings.profile.helpingSince) \(formatter.string(from: Date(timeIntervalSince1970: createdAt)))"
         }
         

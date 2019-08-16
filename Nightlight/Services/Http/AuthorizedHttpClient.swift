@@ -1,11 +1,12 @@
 import Foundation
 
 public class AuthorizedHttpClient: HttpClient {
-    
     private let keychainManager: KeychainManager
     
+    /// A boolean to track reauthentication status.
     private var isReauthenticating: Bool = false
     
+    /// An array of requests that failed during reauthentication.
     private var pendingRequests = [(urlRequest: URLRequest, result: (HttpClient.RequestResult) -> Void)]()
     
     public init(urlSession: URLSession = .shared, keychainManager: KeychainManager) {
@@ -16,11 +17,12 @@ public class AuthorizedHttpClient: HttpClient {
     
     @discardableResult
     public override func request(urlRequest: URLRequest, result: @escaping (HttpClient.RequestResult) -> Void) -> URLSessionDataTask? {
-        guard let accessToken = try? keychainManager.string(forKey: KeychainKey.accessToken.rawValue) else {
+        guard let accessToken = try? keychainManager.string(for: KeychainKey.accessToken.rawValue) else {
             self.notifyUnauthorized()
             return nil
         }
 
+        // inject the bearer token into the request.
         var injectedRequest = urlRequest
         injectedRequest.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
@@ -61,10 +63,15 @@ public class AuthorizedHttpClient: HttpClient {
         return task
     }
     
+    /**
+     Reauthorize a user after a token expires.
+     
+     - parameter result: the result of reauthenticating.
+     */
     private func reauthorize(result: @escaping (HttpClient.RequestResult) -> Void) {
         isReauthenticating = true
 
-        guard let refreshToken = try? keychainManager.string(forKey: KeychainKey.refreshToken.rawValue),
+        guard let refreshToken = try? keychainManager.string(for: KeychainKey.refreshToken.rawValue),
             let url = Endpoint.refresh(token: refreshToken).url
         else {
             return notifyUnauthorized()
@@ -93,6 +100,9 @@ public class AuthorizedHttpClient: HttpClient {
         }
     }
     
+    /**
+     Send an unauthorized notification.
+     */
     private func notifyUnauthorized() {
         isReauthenticating = false
         pendingRequests.removeAll()

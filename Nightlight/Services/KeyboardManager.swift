@@ -31,6 +31,7 @@ public class KeyboardManager {
     /// A value for margin between the input view and keyboard.
     public var keyboardDistanceFromInputView: CGFloat = 10.0
     
+    /// An array of disabled classes to ignore keyboard management.
     public var disabledDistanceHandlingClasses  = [UIViewController.Type]()
     
     /// A gesture for resigning first responder when tapping outside current input view.
@@ -224,8 +225,7 @@ public class KeyboardManager {
         self.adjustFrame()
     }
     
-    @objc private func keyboardDidShow(_ notification: Notification?) {
-    }
+    @objc private func keyboardDidShow(_ notification: Notification?) {}
     
     @objc private func keyboardWillHide(_ notification: Notification?) {
         guard inputView != nil else {

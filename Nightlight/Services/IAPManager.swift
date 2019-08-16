@@ -4,21 +4,31 @@ public protocol IAPManaging {
     var iapManager: IAPManager { get }
 }
 
+/// Handles operations for in-app purchases.
 public class IAPManager: NSObject {
     public typealias Dependencies = PeopleServiced & KeychainManaging
     public typealias ProductsRequestCompletionHandler = (Result<[SKProduct], Error>) -> Void
 
+    /// A constant for denoting a transaction outcome.
     public enum TransactionOutcome {
         case success
         case cancelled
         case failed
     }
     
+    /// The required dependencies.
     public var dependencies: Dependencies?
     
+    /// The list of product identifiers to load.
     private let productIdentifiers: [String]
+    
+    /// The current request for products from the product identifiers.
     private var productsRequest: SKProductsRequest?
+    
+    /// A callback for product requesting.
     private var productsRequestCompletionHandler: ProductsRequestCompletionHandler?
+    
+    /// The payment queue for handling purchases.
     private let paymentQueue: SKPaymentQueue
     
     init(productIdentifiers: [String], skPaymentQueue: SKPaymentQueue = SKPaymentQueue.default()) {
@@ -30,14 +40,25 @@ public class IAPManager: NSObject {
         paymentQueue.add(self)
     }
     
+    /// A boolean denoting if a user's device can make payments.
     public class var canMakePayments: Bool {
         return SKPaymentQueue.canMakePayments()
     }
     
+    /**
+     Purchase a product.
+     
+     - parameter product: the product to purchase.
+     */
     public func purchase(product: SKProduct) {
         paymentQueue.add(SKPayment(product: product))
     }
     
+    /**
+     Request products.
+     
+     - parameter result: the result of requesting products.
+     */
     public func requestProducts(result: @escaping ProductsRequestCompletionHandler) {
         self.productsRequest?.cancel()
         
@@ -47,6 +68,9 @@ public class IAPManager: NSObject {
         self.productsRequest?.start()
     }
     
+    /**
+     Reset the products request.
+     */
     private func clearRequest() {
         productsRequest = nil
         productsRequestCompletionHandler = nil

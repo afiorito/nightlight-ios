@@ -1,5 +1,6 @@
 import Foundation
 
+/// An error for HTTP status codes.
 public enum HttpError: Error {
     case unauthorized
     case badRequest(Data)

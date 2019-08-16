@@ -14,7 +14,7 @@ public class SettingsViewModel {
 
     /// The number of tokens a person has.
     var tokens: Int {
-        let tokens = try? dependencies.keychainManager.integer(forKey: KeychainKey.tokens.rawValue)
+        let tokens = try? dependencies.keychainManager.integer(for: KeychainKey.tokens.rawValue)
         return tokens ?? 0
     }
     

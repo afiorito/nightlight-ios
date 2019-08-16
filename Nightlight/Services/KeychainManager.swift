@@ -6,7 +6,7 @@ public protocol KeychainManaging {
     var keychainManager: KeychainManager { get }
 }
 
-/// Handles operations around Keychain
+/// Handles operations around the iOS Keychain.
 public class KeychainManager {
     enum KeyChainError: Error {
         case noKey
@@ -21,9 +21,15 @@ public class KeychainManager {
         self.accessGroup = accessGroup
     }
     
-    public func hasValue(forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) -> Bool {
+    /**
+     Determines if keychain data exists for a specified key.
+     
+     - parameter key: the key to check for.
+     - parameter accessibility: an optional accessibility to use when retrieving keychain data.
+     */
+    public func hasValue(for key: String, withAccessibility accessibility: KeychainAccessibility? = nil) -> Bool {
         do {
-            _ = try data(forKey: key, withAccessibility: accessibility)
+            _ = try data(for: key, withAccessibility: accessibility)
             
             return true
         } catch {
@@ -31,40 +37,72 @@ public class KeychainManager {
         }
     }
     
-    public func integer(forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> Int {
-        guard let number = try object(forKey: key, withAccessibility: accessibility) as? NSNumber else {
+    // MARK: - Getters
+    
+    /**
+     Retrieves keychain data as an integer for a specified key.
+     
+     - parameter key: the key to lookup data for.
+     - parameter accessibility: an optional accessibility to use when retrieving keychain data.
+     */
+    public func integer(for key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> Int {
+        guard let number = try object(for: key, withAccessibility: accessibility) as? NSNumber else {
             throw KeyChainError.unexpectedData
         }
         
         return number.intValue
     }
     
-    public func float(forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> Float {
-        guard let number = try object(forKey: key, withAccessibility: accessibility) as? NSNumber else {
+    /**
+     Retrieves keychain data as a float for a specified key.
+     
+     - parameter key: the key to lookup data for.
+     - parameter accessibility: an optional accessibility to use when retrieving keychain data.
+     */
+    public func float(for key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> Float {
+        guard let number = try object(for: key, withAccessibility: accessibility) as? NSNumber else {
             throw KeyChainError.unexpectedData
         }
         
         return number.floatValue
     }
     
-    public func double(forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> Double {
-        guard let number = try object(forKey: key, withAccessibility: accessibility) as? NSNumber else {
+    /**
+     Retrieves keychain data as a double for a specified key.
+     
+     - parameter key: the key to lookup data for.
+     - parameter accessibility: an optional accessibility to use when retrieving keychain data.
+     */
+    public func double(for key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> Double {
+        guard let number = try object(for: key, withAccessibility: accessibility) as? NSNumber else {
             throw KeyChainError.unexpectedData
         }
         
         return number.doubleValue
     }
     
-    public func bool(forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> Bool {
-        guard let number = try object(forKey: key, withAccessibility: accessibility) as? NSNumber else {
+    /**
+     Retrieves keychain data as a boolean for a specified key.
+     
+     - parameter key: the key to lookup data for.
+     - parameter accessibility: an optional accessibility to use when retrieving keychain data.
+     */
+    public func bool(for key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> Bool {
+        guard let number = try object(for: key, withAccessibility: accessibility) as? NSNumber else {
             throw KeyChainError.unexpectedData
         }
         
         return number.boolValue
     }
     
-    public func string(forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> String {
-        let keychainData = try data(forKey: key, withAccessibility: accessibility)
+    /**
+     Retrieves keychain data as a string for a specified key.
+     
+     - parameter key: the key to lookup data for.
+     - parameter accessibility: an optional accessibility to use when retrieving keychain data.
+     */
+    public func string(for key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> String {
+        let keychainData = try data(for: key, withAccessibility: accessibility)
         
         guard let string = String(data: keychainData, encoding: .utf8) else {
             throw KeyChainError.unexpectedData
@@ -73,8 +111,14 @@ public class KeychainManager {
         return string
     }
     
-    public func object(forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> NSCoding {
-        let keychainData = try data(forKey: key, withAccessibility: accessibility)
+    /**
+     Retrieves keychain data as an NSCoding object for a specified key.
+     
+     - parameter key: the key to lookup data for.
+     - parameter accessibility: an optional accessibility to use when retrieving keychain data.
+     */
+    public func object(for key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> NSCoding {
+        let keychainData = try data(for: key, withAccessibility: accessibility)
         
         guard let object = NSKeyedUnarchiver.unarchiveObject(with: keychainData) as? NSCoding else {
             throw KeyChainError.unexpectedData
@@ -83,7 +127,13 @@ public class KeychainManager {
         return object
     }
     
-    public func data(forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> Data {
+    /**
+     Retrieves keychain data as a Data object for a specified key.
+     
+     - parameter key: the key to lookup data for.
+     - parameter accessibility: an optional accessibility to use when retrieving keychain data.
+     */
+    public func data(for key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws -> Data {
         var query = keychainQuery(forKey: key, withAccessibility: accessibility)
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = kCFBooleanTrue
@@ -99,22 +149,59 @@ public class KeychainManager {
         return data
     }
     
+    // MARK: - Setters
+    
+    /**
+     Save an integer value to the keychain associated with a specified key.
+     
+     - parameter value: the value to save.
+     - parameter key: the key to save the value under.
+     - parameter accessibility: an optional accessibility to use when setting the keychain data.
+     */
     public func set(_ value: Int, forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws {
         return try set(NSNumber(value: value), forKey: key, withAccessibility: accessibility)
     }
     
+    /**
+     Save a float value to the keychain associated with a specified key.
+     
+     - parameter value: the value to save.
+     - parameter key: the key to save the value under.
+     - parameter accessibility: an optional accessibility to use when setting the keychain data.
+     */
     public func set(_ value: Float, forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws {
         return try set(NSNumber(value: value), forKey: key, withAccessibility: accessibility)
     }
     
+    /**
+     Save a double value to the keychain associated with a specified key.
+     
+     - parameter value: the value to save.
+     - parameter key: the key to save the value under.
+     - parameter accessibility: an optional accessibility to use when setting the keychain data.
+     */
     public func set(_ value: Double, forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws {
         return try set(NSNumber(value: value), forKey: key, withAccessibility: accessibility)
     }
     
+    /**
+     Save a boolean value to the keychain associated with a specified key.
+     
+     - parameter value: the value to save.
+     - parameter key: the key to save the value under.
+     - parameter accessibility: an optional accessibility to use when setting the keychain data.
+     */
     public func set(_ value: Bool, forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws {
         return try set(NSNumber(value: value), forKey: key, withAccessibility: accessibility)
     }
     
+    /**
+     Save a string value to the keychain associated with a specified key.
+     
+     - parameter value: the value to save.
+     - parameter key: the key to save the value under.
+     - parameter accessibility: an optional accessibility to use when setting the keychain data.
+     */
     public func set(_ value: String, forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws {
         if let data = value.data(using: .utf8) {
             return try set(data, forKey: key, withAccessibility: accessibility)
@@ -123,12 +210,26 @@ public class KeychainManager {
         throw KeyChainError.unexpectedData
     }
     
+    /**
+     Save an NSCoding object to the keychain associated with a specified key.
+     
+     - parameter value: the value to save.
+     - parameter key: the key to save the value under.
+     - parameter accessibility: an optional accessibility to use when setting the keychain data.
+     */
     public func set(_ value: NSCoding, forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
         
         return try set(data, forKey: key, withAccessibility: accessibility)
     }
     
+    /**
+     Save a Data object to the keychain associated with a specified key.
+     
+     - parameter value: the value to save.
+     - parameter key: the key to save the value under.
+     - parameter accessibility: an optional accessibility to use when setting the keychain data.
+     */
     public func set(_ value: Data, forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws {
         var query = keychainQuery(forKey: key, withAccessibility: accessibility)
         
@@ -147,6 +248,13 @@ public class KeychainManager {
         }
     }
     
+    /**
+     Update existing data in the keychain for a specified key.
+     
+     - parameter value: the value to save.
+     - parameter key: the key to save the value under.
+     - parameter accessibility: an optional accessibility to use when setting the keychain data.
+     */
     private func update(_ value: Data, forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws {
         let query = keychainQuery(forKey: key, withAccessibility: accessibility)
         let update = [kSecValueData as String: value]
@@ -158,6 +266,12 @@ public class KeychainManager {
         }
     }
     
+    /**
+     Remove keychain data associated with a specified key.
+     
+     - parameter key: the key to remove data for.
+     - parameter accessibility: an optional accessibility to use when retrieving keychain data.
+     */
     public func remove(key: String, withAccessibility accessibility: KeychainAccessibility? = nil) throws {
         let query = keychainQuery(forKey: key, withAccessibility: accessibility)
         
@@ -170,6 +284,9 @@ public class KeychainManager {
         }
     }
     
+    /**
+     Remove all keychain data.
+     */
     public func removeAllKeys() throws {
         var query: [String: Any] = [kSecClass as String: kSecClassGenericPassword]
         query[kSecAttrService as String] = serviceName
@@ -185,6 +302,12 @@ public class KeychainManager {
         }
     }
     
+    /**
+     Setup the keychain query dictionary.
+     
+     - parameter key: The key of the query.
+     - parameter accessibility: optional accessibility to use when querying the keychain.
+     */
     private func keychainQuery(forKey key: String, withAccessibility accessibility: KeychainAccessibility? = nil) -> [String: Any] {
         var query: [String: Any] = [kSecClass as String: kSecClassGenericPassword]
         query[kSecAttrService as String] = serviceName
