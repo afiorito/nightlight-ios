@@ -1,7 +1,8 @@
 import UIKit
 
+/// A view controller for managing a list of settings.
 public class SettingsViewController: UIViewController {
-
+    /// A constant for denoting the section of the settings.
     private enum Section: Int, CaseIterable {
         case appreciation = 0
         case general
@@ -10,11 +11,16 @@ public class SettingsViewController: UIViewController {
         case account
     }
     
+    /// The viewModel for handling state.
     private let viewModel: SettingsViewModel
+    
+    /// The delegate for managing UI actions.
     public weak var delegate: SettingsViewControllerDelegate?
     
+    /// The number of ratings the app has received for this version.
     private var ratingCount: Int = 0
     
+    /// A table view for displaying a list of settings.
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(SelectOptionTableViewCell<Theme>.self)
@@ -71,24 +77,29 @@ public class SettingsViewController: UIViewController {
         }
      }
     
-    deinit {
-        removeDidChangeThemeObserver()
-    }
-    
     public override func loadView() {
         view = tableView
     }
     
+    /**
+     Format the user tokens string.
+     
+     - parameter font: the font used to size the token glyph.
+     */
     private func formatTokens(for font: UIFont?) -> NSAttributedString {
         let string = NSMutableAttributedString(string: "")
         
         let imageAttachment = TokenImageAttachment(font: font)
-        imageAttachment.image = UIImage(named: "glyph_token")
+        imageAttachment.image = UIImage.glyph.token
         
         string.appendTokenAttachment(imageAttachment)
         string.append(NSAttributedString(string: "\(viewModel.tokens)"))
         
         return string
+    }
+    
+    deinit {
+        removeDidChangeThemeObserver()
     }
 
 }
@@ -126,7 +137,7 @@ extension SettingsViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: BasicOptionTableViewCell.className,
                                                      for: indexPath) as! BasicOptionTableViewCell
                             
-            cell.title = "Sign out"
+            cell.title = Strings.signOut
             
             settingsCell = cell
             
@@ -160,7 +171,7 @@ extension SettingsViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: InformationRightDetailTableViewCell.className,
                                                  for: indexPath) as! InformationRightDetailTableViewCell
         
-        cell.title = "Nightlight Tokens"
+        cell.title = Strings.nightlightTokens
         cell.detailTextLabel?.attributedText = formatTokens(for: cell.detailTextLabel?.font)
         
         return cell
@@ -172,7 +183,7 @@ extension SettingsViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: SelectOptionTableViewCell<Theme>.className,
                                                      for: indexPath) as! SelectOptionTableViewCell<Theme>
             
-            cell.optionName = "Theme"
+            cell.optionName = Strings.setting.theme
             cell.optionValue = viewModel.theme
             
             return cell
@@ -180,7 +191,7 @@ extension SettingsViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: SelectOptionTableViewCell<MessageDefault>.className,
                                                      for: indexPath) as! SelectOptionTableViewCell<MessageDefault>
                             
-            cell.optionName = "Send Message As"
+            cell.optionName = Strings.setting.sendMessage
             cell.optionValue = viewModel.messageDefault
             
             return cell
@@ -194,26 +205,15 @@ extension SettingsViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: InformationTableViewCell.className,
                                                      for: indexPath) as! InformationTableViewCell
             
-            cell.title = "Send Feedback"
+            cell.title = Strings.setting.sendFeedback
             
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: InformationSubDetailTableViewCell.className,
                                                                      for: indexPath) as! InformationSubDetailTableViewCell
             
-            cell.title = "Please Rate Nightlight"
-            
-            let prefix: String
-            
-            if ratingCount == 1 {
-                prefix = "Only \(ratingCount) person has"
-            } else if (2...50) ~= ratingCount {
-                prefix = "Only \(ratingCount) people have"
-            } else {
-                prefix = "\(ratingCount) people have"
-            }
-            
-            cell.subtitle = "\(prefix) rated this version."
+            cell.title = Strings.setting.rateNightlight
+            cell.subtitle = Strings.setting.ratingCount(ratingCount)
 
             return cell
         default: return UITableViewCell()
@@ -226,19 +226,19 @@ extension SettingsViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: InformationTableViewCell.className,
                                                      for: indexPath) as! InformationTableViewCell
             
-            cell.title = "About"
+            cell.title = Strings.setting.about
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: InformationTableViewCell.className,
                                                      for: indexPath) as! InformationTableViewCell
             
-            cell.title = "Privacy Policy"
+            cell.title = Strings.setting.privacyPolicy
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: InformationTableViewCell.className,
                                                                  for: indexPath) as! InformationTableViewCell
                         
-            cell.title = "Terms of Use"
+            cell.title = Strings.setting.termsOfUse
             return cell
         default: return UITableViewCell()
         }
@@ -264,6 +264,8 @@ extension SettingsViewController: UITableViewDelegate {
         }
     }
 }
+
+// MARK: - Cell Selection Actions
 
 extension SettingsViewController {
     private func appreciationTapAction(for indexPath: IndexPath) {
@@ -296,9 +298,11 @@ extension SettingsViewController {
     }
 }
 
+// MARK: - Purchase Events
+
 extension SettingsViewController {
     func didFailLoadingProducts() {
-        showToast("Could not load products.", severity: .urgent)
+        showToast(Strings.couldNotLoadProducts, severity: .urgent)
     }
     
     public func didCompletePurchase() {
@@ -306,7 +310,7 @@ extension SettingsViewController {
     }
     
     public func didFailPurchase() {
-        showToast("Something Went Wrong.", severity: .urgent)
+        showToast(Strings.error.somethingWrong, severity: .urgent)
     }
 }
 

@@ -7,6 +7,9 @@ extension UIImage {
         static var lock: UIImage? { return UIImage(named: "icon_lock") }
         static var mail: UIImage? { return UIImage(named: "icon_mail") }
         static var context: UIImage? { return UIImage(named: "icon_context") }
+        static var back: UIImage? { return UIImage(named: "icon_back") }
+        static var info: UIImage? { return UIImage(named: "icon_info") }
+        static var logo: UIImage? { return UIImage(named: "icon_logo") }
         static var settings: UIImage? { return UIImage(named: "icon_settings") }
         static var send: UIImage? { return UIImage(named: "icon_send") }
         static var heartSelected: UIImage? { return UIImage(named: "icon_heart--selected") }

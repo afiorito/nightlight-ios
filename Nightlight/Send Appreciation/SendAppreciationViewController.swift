@@ -89,7 +89,7 @@ extension SendAppreciationViewController {
     }
     
     public func didFailLoadingProducts() {
-        showToast("Could not load products.", severity: .urgent)
+        showToast(Strings.couldNotLoadProducts, severity: .urgent)
     }
 }
 

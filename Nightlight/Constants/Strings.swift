@@ -7,6 +7,9 @@ public struct Strings {
     static let getTokens = "Get Tokens"
     static let appreciationDescription = "Let’s the person know you appreciate them and increases the appreciation on their message."
     static let tokenCount = "Token count"
+    static let couldNotLoadProducts = "Could not load products."
+    static let signOut = "Sign Out"
+    static let nightlightTokens = "Nightlight Tokens"
     
     /// information for describing initial onboarding screens.
     struct onboard {
@@ -37,6 +40,7 @@ public struct Strings {
         static let couldNotConnect = "Could not connect to Nightlight."
         static let unknown = "An unknown error occured."
         static let somethingWrong = "Something Went Wrong."
+        static let mailNotConfigured = "Mail is not configured on this device."
     }
 
     struct message {
@@ -71,6 +75,30 @@ public struct Strings {
     
     struct notification {
         static let notificationsTitle = "Notifications"
+    }
+    
+    struct setting {
+        static let settingTitle = "Settings"
+        static let theme = "Theme"
+        static let sendMessage = "Send Message As"
+        static let sendFeedback = "Send Feedback"
+        static let rateNightlight = "Please Rate Nightlight"
+        static let about = "About"
+        static let privacyPolicy = "Privacy Policy"
+        static let termsOfUse = "Terms of Use"
+        static func ratingCount(_ count: Int) -> String {
+            let prefix: String
+            
+            if count == 1 {
+                prefix = "Only \(count) person has"
+            } else if (2...50) ~= count {
+                prefix = "Only \(count) people have"
+            } else {
+                prefix = "\(count) people have"
+            }
+            
+            return "\(prefix) rated this version."
+        }
     }
     
     struct auth {

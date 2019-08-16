@@ -1,16 +1,17 @@
 import UIKit
 
+/// A view controller for managing a list of setting options.
 public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UITableViewController where E.RawValue == String {
-
+    /// The delegate for managing UI actions.
     public weak var delegate: OptionsTableViewControllerDelegate?
     
+    /// The actively selected option.
     public var currentOption: E
     
     override public func viewDidLoad() {
         super.viewDidLoad()
 
         addDidChangeThemeObserver()
-        
         tableView.register(BasicOptionTableViewCell.self, forCellReuseIdentifier: BasicOptionTableViewCell.className)
     }
     
@@ -25,19 +26,13 @@ public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UIT
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        removeDidChangeThemeObserver()
-    }
-    
-    // MARK: - Table view data source
+    // MARK: - Table View DataSource
 
     override public func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return E.allCases.count
     }
 
@@ -61,8 +56,14 @@ public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UIT
         
         delegate?.optionsTableViewController(self, didSelect: option)
     }
+    
+    deinit {
+        removeDidChangeThemeObserver()
+    }
 
 }
+
+// MARK: - Themeable
 
 extension OptionsTableViewController: Themeable {
     func updateColors(for theme: Theme) {

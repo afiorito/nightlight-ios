@@ -1,38 +1,25 @@
 import UIKit
 
+/// A view controller for managing app information.
 public class AppInfoViewController: UIViewController {
-    
+    /// The viewModel for handling state.
     private let viewModel: AppInfoViewModel
     
+    /// A button for dismissing the app information.
     private let cancelButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "icon_cancel"), for: .normal)
+        button.setBackgroundImage(UIImage.icon.cancel, for: .normal)
         return button
     }()
     
+    /// An image view for displaying the logo icon.
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo_icon")
+        imageView.image = UIImage.icon.logo
         return imageView
     }()
     
-    private let container: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.spacing = 20
-        
-        return stackView
-    }()
-    
-    private let textContainer: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.spacing = 3
-        return stackView
-    }()
-    
+    /// A label for displaying the app version.
     private lazy var versionLabel: UILabel = {
         let label = UILabel()
         label.font = .primary20ptMedium
@@ -41,6 +28,7 @@ public class AppInfoViewController: UIViewController {
         return label
     }()
     
+    /// A label for displaying extra information.
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -60,6 +48,7 @@ public class AppInfoViewController: UIViewController {
         return label
     }()
     
+    /// A label for displaying a special thanks.
     private let thanksLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -67,6 +56,25 @@ public class AppInfoViewController: UIViewController {
         label.textAlignment = .center
         label.text = "A special thanks to my best friend and partner mg for her undying love and support."
         return label
+    }()
+    
+    // MARK: - Stack View Containers
+    
+    private let container: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 20
+        
+        return stackView
+    }()
+    
+    private let textContainer: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 3
+        return stackView
     }()
     
     init(viewModel: AppInfoViewModel) {
@@ -112,6 +120,8 @@ public class AppInfoViewController: UIViewController {
         dismiss(animated: true)
     }
 }
+
+// MARK: - Themeable
 
 extension AppInfoViewController: Themeable {
     func updateColors(for theme: Theme) {

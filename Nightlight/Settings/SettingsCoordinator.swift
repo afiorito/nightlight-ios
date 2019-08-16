@@ -2,22 +2,26 @@ import UIKit
 import MessageUI
 import SafariServices
 
+/// A coordinator for settings flow.
 public class SettingsCoordinator: NSObject, Coordinator {
     public typealias Dependencies = NotificationObserving & StyleManaging
     public weak var parent: Coordinator?
-    
     public var children = [Coordinator]()
     
+    /// The required dependencies.
     private let dependencies: Dependencies
     
+    /// The root view controller of the settings view controller.
     private let rootViewController: UINavigationController
     
+    /// A view controller for buying tokens.
     private weak var buyTokensViewController: BuyTokensViewController?
     
     var simulatedBackButton: UIBarButtonItem {
-        return UIBarButtonItem(image: UIImage(named: "nb_back"), style: .plain, target: self, action: #selector(goBack))
+        return UIBarButtonItem(image: UIImage.icon.back, style: .plain, target: self, action: #selector(goBack))
     }
     
+    /// A view controller for managing settings.
     public lazy var settingsViewController: SettingsViewController = {
         let viewModel = SettingsViewModel(dependencies: dependencies as! SettingsViewModel.Dependencies)
         
@@ -25,7 +29,7 @@ public class SettingsCoordinator: NSObject, Coordinator {
         viewController.navigationItem.leftBarButtonItem = simulatedBackButton
         viewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         viewController.delegate = self
-        viewController.title = "Settings"
+        viewController.title = Strings.setting.settingTitle
         rootViewController.interactivePopGestureRecognizer?.delegate = self
         
         return viewController
@@ -36,36 +40,35 @@ public class SettingsCoordinator: NSObject, Coordinator {
         self.dependencies = dependencies
     }
     
-    deinit {
-        dependencies.notificationCenter.removeObserver(self,
-                                                       name: Notification.Name(rawValue: NLNotification.didFinishTransaction.rawValue),
-                                                       object: nil)
-    }
-    
     public func start() {
         NLNotification.didFinishTransaction.observe(target: self, selector: #selector(handleFinishedTransaction))
         rootViewController.pushViewController(settingsViewController, animated: true)
     }
     
-    @objc private func goBack() {
-        rootViewController.popViewController(animated: true)
-    }
-    
-    private func presentWebContentViewController(pathName: ExternalPage) {
-        let webContentViewController = WebContentViewController(url: pathName.url)
-        webContentViewController.title = pathName.title
+    /**
+     Present a view controller to display web content such as a privacy policy page.
+     
+     - parameter path: the page to load web content for.
+     */
+    private func presentWebContentViewController(page: ExternalPage) {
+        let webContentViewController = WebContentViewController(url: page.url)
+        webContentViewController.title = page.title
         webContentViewController.delegate = self
         webContentViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
-        if pathName == .about {
-            webContentViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nb_info"),
-                                                                                         style: .plain,
+        if page == .about {
+            webContentViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.icon.info, style: .plain,
                                                                                          target: self, action: #selector(showAppInfo))
         }
         
         rootViewController.pushViewController(webContentViewController, animated: true)
     }
     
+    /**
+     Handle the finished transaction notification.
+     
+     - parameter notification: an instance of a finish transaction notification.
+     */
     @objc private func handleFinishedTransaction(_ notification: Notification) {
         guard buyTokensViewController != nil,
             let outcome = notification.userInfo?[NLNotification.didFinishTransaction.rawValue] as? IAPManager.TransactionOutcome
@@ -85,6 +88,9 @@ public class SettingsCoordinator: NSObject, Coordinator {
         }
     }
     
+    /**
+     Display the app information view controller.
+     */
     @objc private func showAppInfo() {
         let appInfoViewController = AppInfoViewController(viewModel: AppInfoViewModel())
         
@@ -93,6 +99,15 @@ public class SettingsCoordinator: NSObject, Coordinator {
         appInfoViewController.transitioningDelegate = ModalTransitioningDelegate.default
         
         rootViewController.present(appInfoViewController, animated: true)
+    }
+    
+    @objc private func goBack() {
+        rootViewController.popViewController(animated: true)
+    }
+    
+    deinit {
+        let nc = dependencies.notificationCenter
+        nc.removeObserver(self, name: Notification.Name(rawValue: NLNotification.didFinishTransaction.rawValue), object: nil)
     }
     
 }
@@ -128,7 +143,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     
     public func settingsViewControllerDidSelectTheme(_ settingsViewController: SettingsViewController, for currentTheme: Theme) {
         let optionsViewController = OptionsTableViewController<Theme>(currentOption: currentTheme)
-        optionsViewController.title = "Theme"
+        optionsViewController.title = Strings.setting.theme
         optionsViewController.delegate = self
         optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
@@ -137,7 +152,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     
     public func settingsViewControllerDidSelectDefaultMessage(_ settingsViewController: SettingsViewController, for currentMessageDefault: MessageDefault) {
         let optionsViewController = OptionsTableViewController<MessageDefault>(currentOption: currentMessageDefault)
-        optionsViewController.title = "Send Message As"
+        optionsViewController.title = Strings.setting.sendMessage
         optionsViewController.delegate = self
         optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
@@ -145,7 +160,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     }
     
     public func settingsViewControllerDidSelectFeedback(_ settingsViewController: SettingsViewController) {
-        presentWebContentViewController(pathName: .feedback)
+        presentWebContentViewController(page: .feedback)
     }
     
     public func settingsViewControllerDidSelectRate(_ settingsViewController: SettingsViewController) {
@@ -153,15 +168,15 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     }
     
     public func settingsViewControllerDidSelectAbout(_ settingsViewController: SettingsViewController) {
-        presentWebContentViewController(pathName: .about)
+        presentWebContentViewController(page: .about)
     }
     
     public func settingsViewControllerDidSelectPrivacyPolicy(_ settingsViewController: SettingsViewController) {
-        presentWebContentViewController(pathName: .privacy)
+        presentWebContentViewController(page: .privacy)
     }
     
     public func settingsViewControllerDidSelectTermsOfUse(_ settingsViewController: SettingsViewController) {
-        presentWebContentViewController(pathName: .terms)
+        presentWebContentViewController(page: .terms)
     }
     
     public func settingsViewControllerDidSelectSignout(_ settingsViewController: SettingsViewController) {
@@ -197,7 +212,7 @@ extension SettingsCoordinator: WebContentViewControllerDelegate {
                 
                 webContentViewController.present(mail, animated: true)
             } else {
-                webContentViewController.showToast("Mail is not configured on this device.", severity: .urgent)
+                webContentViewController.showToast(Strings.error.mailNotConfigured, severity: .urgent)
             }
         } else {
             let config = SFSafariViewController.Configuration()
