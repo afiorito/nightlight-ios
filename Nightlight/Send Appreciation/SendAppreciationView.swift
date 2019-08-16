@@ -1,33 +1,46 @@
 import UIKit
 
+/// A view for displaying a prompt to send appreciation.
 public class SendAppreciationView: UIView {
 
+    /// A callback for when sending appreciation is cancelled.
     public var cancelAction: (() -> Void)?
     
+    /// The number of tokens a person has.
+    public var numTokens: Int {
+        get { return headerView.numTokens }
+        set { headerView.numTokens = newValue }
+    }
+    
+    /// A view for displaying send appreciation header.
     public let headerView = SendAppreciationHeaderView()
     
+    /// A view for displaying the appreciation icon.
     private let appreciationImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage.icon.sunSelected
         return imageView
     }()
     
+    /// A label for displaying the title.
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .primary20ptMedium
-        label.text = "Send Appreciation"
+        label.text = Strings.sendAppreciation
         return label
     }()
     
+    /// A label for displaying the description.
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
         label.font = .secondary16ptNormal
-        label.text = "Let’s the person know you appreciate them and increases the appreciation on their message."
+        label.text = Strings.appreciationDescription
         return label
     }()
     
+    /// A button for confirming an appreciation action.
     public let actionButton: ContainedButton = {
         let button = ContainedButton()
         button.backgroundColor = .brand
@@ -52,11 +65,6 @@ public class SendAppreciationView: UIView {
         
         return stackView
     }()
-    
-    public var numTokens: Int {
-        get { return headerView.numTokens }
-        set { headerView.numTokens = newValue }
-    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -89,6 +97,8 @@ public class SendAppreciationView: UIView {
         ])
     }
 
+    // MARK: - Gesture Recognizer Handlers
+    
     @objc private func cancelTapped() {
         cancelAction?()
     }

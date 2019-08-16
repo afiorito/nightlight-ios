@@ -1,18 +1,21 @@
 import UIKit
 
+/// A coordinator for sending appreciation flow.
 public class SendAppreciationCoordinator: Coordinator {
     public typealias Dependencies = NotificationObserving & KeychainManaging
-
     public weak var parent: Coordinator?
-    
     public var children = [Coordinator]()
     
+    /// The required depdendencies.
     private let dependencies: Dependencies
     
+    /// The root view controller of the send appreciation view controller.
     private let rootViewController: UIViewController
     
+    /// A view controller for sending appreciation.
     let sendAppreciationViewController: SendAppreciationViewController
     
+    /// A view controller for buying tokens.
     private weak var buyTokensViewController: BuyTokensViewController?
     
     init(rootViewController: UIViewController, messageViewModel: MessageViewModel, dependencies: Dependencies) {
@@ -42,6 +45,11 @@ public class SendAppreciationCoordinator: Coordinator {
         rootViewController.present(sendAppreciationViewController, animated: true)
     }
     
+    /**
+     Handle the finished transaction notification.
+     
+     - parameter notification: an instance of a finish transaction notification.
+     */
     @objc private func handleFinishedTransaction(_ notification: Notification) {
         guard buyTokensViewController != nil,
             let outcome = notification.userInfo?[NLNotification.didFinishTransaction.rawValue] as? IAPManager.TransactionOutcome

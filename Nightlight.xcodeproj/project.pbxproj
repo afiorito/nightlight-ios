@@ -194,7 +194,6 @@
 		92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */; };
 		92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2622D52B9A00207D4D /* ToastView.swift */; };
 		92E9606F22F3BF99005DF33D /* SendAppreciationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */; };
-		92E9607022F3BF99005DF33D /* SendAppreciationViewController+BottomSheetPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606922F3BF81005DF33D /* SendAppreciationViewController+BottomSheetPresentable.swift */; };
 		92E9607122F3BF99005DF33D /* SendAppreciationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606B22F3BF8B005DF33D /* SendAppreciationView.swift */; };
 		92E9607222F3BF99005DF33D /* SendAppreciationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606D22F3BF8F005DF33D /* SendAppreciationHeaderView.swift */; };
 		92E9607322F3BF9C005DF33D /* SendAppreciationViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606822F3BF79005DF33D /* SendAppreciationViewControllerDelegate.swift */; };
@@ -460,7 +459,6 @@
 		92DF5D2622D52B9A00207D4D /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationViewController.swift; sourceTree = "<group>"; };
 		92E9606822F3BF79005DF33D /* SendAppreciationViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationViewControllerDelegate.swift; sourceTree = "<group>"; };
-		92E9606922F3BF81005DF33D /* SendAppreciationViewController+BottomSheetPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SendAppreciationViewController+BottomSheetPresentable.swift"; sourceTree = "<group>"; };
 		92E9606B22F3BF8B005DF33D /* SendAppreciationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationView.swift; sourceTree = "<group>"; };
 		92E9606D22F3BF8F005DF33D /* SendAppreciationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationHeaderView.swift; sourceTree = "<group>"; };
 		92E9607422F3C077005DF33D /* SendAppreciationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationCoordinator.swift; sourceTree = "<group>"; };
@@ -1035,8 +1033,8 @@
 		92E9605F22F3BEE1005DF33D /* Send Appreciation */ = {
 			isa = PBXGroup;
 			children = (
-				92E9606322F3BF32005DF33D /* Delegates */,
 				92E9606222F3BF26005DF33D /* Coordinators */,
+				92E9606322F3BF32005DF33D /* Delegates */,
 				92E9606022F3BF17005DF33D /* Views */,
 				92DC9DF622F9A604008A91BC /* View Models */,
 			);
@@ -1047,7 +1045,6 @@
 			isa = PBXGroup;
 			children = (
 				92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */,
-				92E9606922F3BF81005DF33D /* SendAppreciationViewController+BottomSheetPresentable.swift */,
 				92E9606B22F3BF8B005DF33D /* SendAppreciationView.swift */,
 				92E9606D22F3BF8F005DF33D /* SendAppreciationHeaderView.swift */,
 			);
@@ -1687,7 +1684,6 @@
 				92F1762022DBC42C008AEB82 /* MessageResponse.swift in Sources */,
 				928EC46422F75B3E0044E235 /* BadgeView.swift in Sources */,
 				92E960A922F6085F005DF33D /* NotificationTableViewCell.swift in Sources */,
-				92E9607022F3BF99005DF33D /* SendAppreciationViewController+BottomSheetPresentable.swift in Sources */,
 				92E960C022F60B91005DF33D /* NotificationType.swift in Sources */,
 				9228D6BF22D79643003B03DB /* User.swift in Sources */,
 				92F1762F22DC19E6008AEB82 /* MessageDetailViewControllerDelegate.swift in Sources */,

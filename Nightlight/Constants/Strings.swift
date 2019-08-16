@@ -3,6 +3,10 @@ public struct Strings {
     
     static let cancel = "Cancel"
     static let delete = "Delete"
+    static let sendAppreciation = "Send Appreciation"
+    static let getTokens = "Get Tokens"
+    static let appreciationDescription = "Let’s the person know you appreciate them and increases the appreciation on their message."
+    static let tokenCount = "Token count"
     
     /// information for describing initial onboarding screens.
     struct onboard {
@@ -32,6 +36,7 @@ public struct Strings {
     struct error {
         static let couldNotConnect = "Could not connect to Nightlight."
         static let unknown = "An unknown error occured."
+        static let somethingWrong = "Something Went Wrong."
     }
 
     struct message {

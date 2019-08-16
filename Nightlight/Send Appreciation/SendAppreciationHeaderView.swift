@@ -1,21 +1,26 @@
 import UIKit
 
+/// A view for displaying send appreciation header information.
 public class SendAppreciationHeaderView: UIView {
+    /// A button for cancelling sending appreciation.
     public let cancelButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "icon_cancel"), for: .normal)
+        button.setBackgroundImage(UIImage.icon.cancel, for: .normal)
         return button
     }()
     
+    /// A label for displaying the header title.
     public let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Send Appreciation"
+        label.text = Strings.sendAppreciation
         label.font = .primary16ptMedium
         return label
     }()
     
+    /// A label for displaying the header subtitle.
     public let subtitleLabel = UILabel()
     
+    /// A view for displaying a bottom header separator.
     public let separatorLineView = UIView()
     
     private let textContainer: UIStackView = {
@@ -25,6 +30,7 @@ public class SendAppreciationHeaderView: UIView {
         return stackView
     }()
     
+    /// The number of tokens a person has.
     public var numTokens: Int = 0 {
         didSet {
             updateSubtitleLabel()
@@ -60,12 +66,15 @@ public class SendAppreciationHeaderView: UIView {
         ])
     }
     
+    /**
+     Update the subtitle label to display the number of tokens with proper formatting.
+     */
     private func updateSubtitleLabel() {
-        let string = NSMutableAttributedString(string: "Token count: ")
+        let string = NSMutableAttributedString(string: "\(Strings.tokenCount): ")
         let font = UIFont.secondary14ptNormal
         
         let imageAttachment = TokenImageAttachment(font: font)
-        imageAttachment.image = UIImage(named: "glyph_token")
+        imageAttachment.image = UIImage.glyph.token
         
         string.appendTokenAttachment(imageAttachment)
         string.append(NSAttributedString(string: "\(numTokens)"))

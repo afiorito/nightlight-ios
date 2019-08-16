@@ -1,13 +1,18 @@
 import UIKit
 
+/// A view controller for managing sending appreciation.
 public class SendAppreciationViewController: UIViewController {
 
+    /// The viewModel for handling state.
     private let viewModel: SendAppreciationViewModel
     
+    /// The delegate for managing UI actions.
     public weak var delegate: SendAppreciationViewControllerDelegate?
     
+    /// The view of the view controller.
     private var sendAppreciationView = SendAppreciationView()
     
+    /// A boolean denoting if the user has tokens.
     private var hasTokens: Bool {
         return viewModel.tokens > 0
     }
@@ -32,7 +37,7 @@ public class SendAppreciationViewController: UIViewController {
         sendAppreciationView.actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         sendAppreciationView.numTokens = viewModel.tokens
         
-        sendAppreciationView.actionButton.setTitle(hasTokens ? "Send Appreciation" : "Get Tokens", for: .normal)
+        sendAppreciationView.actionButton.setTitle(hasTokens ? Strings.sendAppreciation : Strings.getTokens, for: .normal)
         prepareSubviews()
         updateColors(for: theme)
     }
@@ -48,6 +53,8 @@ public class SendAppreciationViewController: UIViewController {
         ])
     }
     
+    // MARK: - Gesture Recognizer Handlers
+    
     @objc public func cancel() {
         dismiss(animated: true)
     }
@@ -59,11 +66,13 @@ public class SendAppreciationViewController: UIViewController {
     }
 }
 
+// MARK: - Purchase Events
+
 extension SendAppreciationViewController {
     public func didCompletePurchase() {
         sendAppreciationView.numTokens = viewModel.tokens
         sendAppreciationView.actionButton.isEnabled = true
-        sendAppreciationView.actionButton.setTitle("Send Appreciation", for: .normal)
+        sendAppreciationView.actionButton.setTitle(Strings.sendAppreciation, for: .normal)
         sendAppreciationView.actionButton.isLoading = false
     }
     
@@ -73,14 +82,26 @@ extension SendAppreciationViewController {
     }
     
     public func didFailPurchase() {
-        sendAppreciationView.actionButton.setTitle("Get Tokens", for: .normal)
+        sendAppreciationView.actionButton.setTitle(Strings.getTokens, for: .normal)
         sendAppreciationView.actionButton.isEnabled = true
         sendAppreciationView.actionButton.isLoading = false
-        showToast("Something Went Wrong.", severity: .urgent)
+        showToast(Strings.error.somethingWrong, severity: .urgent)
     }
     
     public func didFailLoadingProducts() {
         showToast("Could not load products.", severity: .urgent)
+    }
+}
+
+// MARK: - Bottom Sheet Presentable
+
+extension SendAppreciationViewController: BottomSheetPresentable {
+    public var panScrollable: UIScrollView? {
+        return nil
+    }
+    
+    public var height: BottomSheetHeight {
+        return .intrinsicHeight
     }
 }
 
