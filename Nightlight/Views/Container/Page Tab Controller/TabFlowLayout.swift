@@ -1,5 +1,6 @@
 import UIKit
 
+/// A collection view flow layout for tabs with separators.
 public class TabFlowLayout: UICollectionViewFlowLayout {
     public override init() {
         super.init()

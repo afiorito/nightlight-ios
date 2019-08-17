@@ -1,16 +1,19 @@
 import UIKit
 
+/// A collection view cell for displaying the content of a tab.
 public class TabCollectionViewCell: UICollectionViewCell {
+    /// The title of the tab.
+    public var title: String? {
+        get { return titleLabel.text }
+        set { titleLabel.text = newValue }
+    }
+
+    /// A label for displaying the tab title.
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .primary16ptMedium
         return label
     }()
-    
-    public var title: String? {
-        get { return titleLabel.text }
-        set { titleLabel.text = newValue }
-    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

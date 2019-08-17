@@ -1,9 +1,12 @@
 import UIKit
 
+/// A container view controller for swiping between view controller tabs.
 public class PageTabController: UIViewController {
 
+    /// A view for displaying the current tab.
     private let pageTabsView = PageTabsView()
     
+    /// A collection view for swiping between view controllers.
     private let childrenCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -18,8 +21,10 @@ public class PageTabController: UIViewController {
         return collectionView
     }()
     
+    /// The object that acts as the data source of the view controller pages.
     public weak var dataSource: PageTabControllerDataSource?
     
+    /// An array of view controllers for the pages.
     public var viewControllers = [UIViewController]() {
         didSet {
             childrenCollectionView.performBatchUpdates({})
@@ -40,10 +45,6 @@ public class PageTabController: UIViewController {
         updateColors(for: theme)
     }
     
-    deinit {
-        removeDidChangeThemeObserver()
-    }
-    
     private func prepareSubviews() {
         view.addSubviews([pageTabsView, childrenCollectionView])
         
@@ -59,6 +60,9 @@ public class PageTabController: UIViewController {
         ])
     }
 
+    deinit {
+        removeDidChangeThemeObserver()
+    }
 }
 
 // MARK: - UICollectionView DataSource
@@ -113,7 +117,7 @@ extension PageTabController: PageTabsViewDataSource {
         return dataSource?.pageTabControllerNumberOfTabs(self) ?? 0
     }
     
-    public func pageTabsViewController(_ pageTabsView: PageTabsView, titleForTabAt index: Int) -> String? {
+    public func pageTabsView(_ pageTabsView: PageTabsView, titleForTabAt index: Int) -> String? {
         return dataSource?.pageTabController(self, titleForTabAt: index)
     }
     

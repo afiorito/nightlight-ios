@@ -1,5 +1,6 @@
 import UIKit
 
+/// A collection view reusable view for delimiting tabs with a separator line.
 public class TabSeparatorView: UICollectionReusableView {
     public override init(frame: CGRect) {
         super.init(frame: frame)

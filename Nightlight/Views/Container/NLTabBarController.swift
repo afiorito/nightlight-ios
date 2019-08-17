@@ -1,5 +1,6 @@
 import UIKit
 
+/// The main tab bar controller for the application.
 public class NLTabBarController: UITabBarController {
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -12,10 +13,11 @@ public class NLTabBarController: UITabBarController {
         updateColors(for: theme)
     }
     
-    deinit {
-        removeDidChangeThemeObserver()
-    }
-    
+    /**
+     Add a small notification badge to a tab bar item at a specified index.
+     
+     - parameter index: the index of the tab bar item.
+     */
     func addBadge(at index: Int) {
         removeBadge()
         
@@ -36,8 +38,15 @@ public class NLTabBarController: UITabBarController {
         tabBar.addSubview(redDot)
     }
     
+    /**
+     Remove an existing badge for the tab bar.
+     */
     func removeBadge() {
         tabBar.subview(ofType: BadgeView.self)?.removeFromSuperview()
+    }
+    
+    deinit {
+        removeDidChangeThemeObserver()
     }
 }
 

@@ -91,7 +91,6 @@ public class BottomSheetAnimator: NSObject {
     }
     
     private func presentableViewController(from context: UIViewControllerContextTransitioning) -> BottomSheetPresentable.Presentable? {
-        
         let viewController: UIViewController?
         
         switch transitionStyle {

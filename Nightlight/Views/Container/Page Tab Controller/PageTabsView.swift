@@ -1,10 +1,14 @@
 import UIKit
 
+/// A view for displaying tabs.
 public class PageTabsView: UIView {
-    
+    /// The object that acts as the data source for the tabs view.
     public weak var dataSource: PageTabsViewDataSource?
+    
+    /// The object that acts as the delegate of the tabs view.
     public weak var delegate: PageTabsViewDelegate?
     
+    /// A collection view for displaying tabs.
     private let collectionView: UICollectionView = {
         let layout = TabFlowLayout()
         layout.minimumLineSpacing = 1
@@ -75,7 +79,7 @@ extension PageTabsView: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TabCollectionViewCell.className, for: indexPath) as! TabCollectionViewCell
         
-        cell.title = dataSource?.pageTabsViewController(self, titleForTabAt: indexPath.item)
+        cell.title = dataSource?.pageTabsView(self, titleForTabAt: indexPath.item)
         
         return cell
     }
@@ -94,11 +98,13 @@ extension PageTabsView: UICollectionViewDelegate {
 
 extension PageTabsView: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let numberOfTabs = dataSource?.pageTabsViewNumberOfTabs(self) else {
-            return .zero
-        }
+        guard let numberOfTabs = dataSource?.pageTabsViewNumberOfTabs(self), let layout = collectionViewLayout as? TabFlowLayout
+            else { return .zero }
 
-        return CGSize(width: self.frame.width / CGFloat(numberOfTabs), height: self.frame.height)
+        let numTabs = CGFloat(numberOfTabs)
+        let width = (self.frame.width - (numTabs - 1) * layout.minimumLineSpacing) / numTabs
+        
+        return CGSize(width: width, height: self.frame.height)
     }
 }
 

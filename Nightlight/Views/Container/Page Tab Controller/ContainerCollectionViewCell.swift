@@ -1,5 +1,6 @@
 import UIKit
 
+/// A collection view cell container for view controllers.
 class ContainerCollectionViewCell: UICollectionViewCell {
     public var childView: UIView? {
         willSet {

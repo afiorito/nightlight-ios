@@ -1,9 +1,11 @@
 import UIKit
 
+/// A button encompassing default styling and behaviour.
 open class BaseButton: UIButton {
     private var originalBackgroundColor: UIColor?
     private var originalTitleText: String?
     
+    /// An activity indicator when the button is in the loading state.
     private let activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true
@@ -11,6 +13,7 @@ open class BaseButton: UIButton {
         return activityIndicator
     }()
     
+    /// A boolean value indicating whether the control is loading.
     public var isLoading = false {
         willSet {
             if newValue {

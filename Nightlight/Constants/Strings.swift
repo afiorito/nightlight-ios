@@ -1,6 +1,5 @@
 /// All raw application strings displayed to the user.
 public struct Strings {
-    
     static let cancel = "Cancel"
     static let delete = "Delete"
     static let sendAppreciation = "Send Appreciation"

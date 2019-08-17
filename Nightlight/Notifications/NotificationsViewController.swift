@@ -42,11 +42,11 @@ public class NotificationsViewController: UIViewController {
         notificationsView.tableView.prefetchDataSource = dataSource
         notificationsView.tableView.refreshControl = refreshControl
         
-        self.dataSource.emptyViewDescription = self.emptyViewDescription
         dataSource.prefetchCallback = { [weak self] in
             self?.loadMoreNotifications()
         }
 
+        self.refreshControl.beginRefreshing()
         refresh()
     }
     

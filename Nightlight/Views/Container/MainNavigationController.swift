@@ -1,5 +1,6 @@
 import UIKit
 
+/// The main navigation controller for the application.
 public class MainNavigationController: UINavigationController {
     override public func viewDidLoad() {
         super.viewDidLoad()
