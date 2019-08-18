@@ -1,9 +1,12 @@
 import UIKit
 
+/// A container view controller for transitioning from the splash screen to a view controller.
 public class SplashScreenViewController: UIViewController {
 
+    /// The view that is displayed before the initial view controller.
     private let animatedLogoView = AnimatedLogoView()
     
+    /// The view controller that displays after the splash screen.
     public var initialViewController: UIViewController? {
         willSet {
             guard let viewController = newValue else {
@@ -33,6 +36,9 @@ public class SplashScreenViewController: UIViewController {
         animatedLogoView.startAnimation()
     }
     
+    /**
+     Stop showing the splash screen and display the initial view controller.
+     */
     public func showInitialViewController() {
         animatedLogoView.endAnimation { [weak self] _ in
             self?.animatedLogoView.removeFromSuperview()

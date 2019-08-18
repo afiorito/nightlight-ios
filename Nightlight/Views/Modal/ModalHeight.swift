@@ -1,5 +1,6 @@
 import UIKit
 
+/// A constant for representing the height of a modal.
 public enum ModalHeight: Equatable {
     
     // Sets the height to be the maximum height (- 2*margins)

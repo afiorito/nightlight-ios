@@ -1,13 +1,20 @@
 import UIKit
 
+/// An object for coordinating between the presenting & presented view controllers.
 public class ModalPresentationController: UIPresentationController {
-    
+    /// The delegate for receiving transition events.
     public weak var presentationDelegate: ModalPresentationControllerDelegate?
     
+    /**
+     The configuration object.
+     */
     private var presentable: ModalPresentable? {
         return presentedViewController as? ModalPresentable
     }
     
+    /**
+     A background view behind the bottom sheet.
+     */
     private lazy var backgroundView: DimmedView = {
         let view: DimmedView
         if let alpha = presentable?.backgroundAlpha {
@@ -40,10 +47,6 @@ public class ModalPresentationController: UIPresentationController {
         })
     }
     
-    public override func presentationTransitionDidEnd(_ completed: Bool) {
-        
-    }
-    
     public override func dismissalTransitionWillBegin() {
         presentationDelegate?.modalPresentationControllerWillDimiss?(self)
         guard let coordinator = presentedViewController.transitionCoordinator else {
@@ -69,6 +72,11 @@ public class ModalPresentationController: UIPresentationController {
 // MARK: - Layout Configuration
 
 private extension ModalPresentationController {
+    /**
+     Adds and configures the presented view in the view hierarchy.
+     
+     - parameter containerView: the container view for the transition.
+     */
     func layoutPresentedView(in containerView: UIView) {
         guard let presentableViewController = presentedViewController as? ModalPresentable.Presentable
             else { return }
@@ -82,6 +90,11 @@ private extension ModalPresentationController {
         addRoundedCorners(to: presentedViewController.view, ofSize: presentableViewController.targetSize)
     }
 
+    /**
+     Adds and configures the background view in the view hierarchy.
+     
+     - parameter containerView: the container view for the transition.
+     */
     func layoutBackgroundView(in containerView: UIView) {
         containerView.addSubviews(backgroundView)
 
@@ -97,6 +110,9 @@ private extension ModalPresentationController {
 // MARK: - UIBezierPath
 
 private extension ModalPresentationController {
+    /**
+     Draws top rounded corners on a given view.
+     */
     func addRoundedCorners(to view: UIView, ofSize size: CGSize) {
         let radius = presentable?.cornerRadius ?? 0
         let path = UIBezierPath(roundedRect: CGRect(origin: .zero, size: size),

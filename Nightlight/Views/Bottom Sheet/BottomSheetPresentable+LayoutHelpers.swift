@@ -11,7 +11,7 @@ extension BottomSheetPresentable where Self: UIViewController {
         return UIApplication.shared.keyWindow?.rootViewController?.view.safeAreaInsets ?? .zero
     }
     
-    /// Computes the target y position of the bottom sheet.
+    /// The target y position of the bottom sheet.
     var yPos: CGFloat {
         return max(topMargin(from: height), topMargin(from: .maxHeight)) + topOffset
     }

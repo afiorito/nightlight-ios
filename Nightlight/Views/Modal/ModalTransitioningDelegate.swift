@@ -1,5 +1,6 @@
 import UIKit
 
+/// The delegate object that provides transition animator and controller for the modal transition.
 public class ModalTransitioningDelegate: NSObject {
     public static var `default` = ModalTransitioningDelegate()
 }

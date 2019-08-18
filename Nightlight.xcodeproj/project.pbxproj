@@ -15,7 +15,6 @@
 		9205E6EF22F0E3F900AFE16B /* ModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205E6E622F0E26900AFE16B /* ModalPresentationController.swift */; };
 		9205E6F022F0E3F900AFE16B /* ModalTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205E6E822F0E26A00AFE16B /* ModalTransitioningDelegate.swift */; };
 		9205E6F122F0E3F900AFE16B /* ModalPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205E6E722F0E26A00AFE16B /* ModalPresentable+Defaults.swift */; };
-		9205E6F222F0E3F900AFE16B /* ModalPresentable+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205E6EB22F0E26B00AFE16B /* ModalPresentable+UIViewController.swift */; };
 		9205E6F322F0E3F900AFE16B /* ModalPresentable+LayoutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9205E6E522F0E26900AFE16B /* ModalPresentable+LayoutHelpers.swift */; };
 		920E495022DF966C00AA1EDB /* Searchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E494F22DF966C00AA1EDB /* Searchable.swift */; };
 		920E495222DFA23800AA1EDB /* PaginatedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920E495122DFA23800AA1EDB /* PaginatedResponse.swift */; };
@@ -270,7 +269,6 @@
 		9205E6E822F0E26A00AFE16B /* ModalTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTransitioningDelegate.swift; sourceTree = "<group>"; };
 		9205E6E922F0E26A00AFE16B /* ModalPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPresentable.swift; sourceTree = "<group>"; };
 		9205E6EA22F0E26A00AFE16B /* ModalAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAnimator.swift; sourceTree = "<group>"; };
-		9205E6EB22F0E26B00AFE16B /* ModalPresentable+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModalPresentable+UIViewController.swift"; sourceTree = "<group>"; };
 		920E494F22DF966C00AA1EDB /* Searchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searchable.swift; sourceTree = "<group>"; };
 		920E495122DFA23800AA1EDB /* PaginatedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedResponse.swift; sourceTree = "<group>"; };
 		920E495422DFBFF500AA1EDB /* SendMessageViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -549,7 +547,6 @@
 				9205E6E822F0E26A00AFE16B /* ModalTransitioningDelegate.swift */,
 				92E9608822F49450005DF33D /* ModalPresentationControllerDelegate.swift */,
 				9205E6E722F0E26A00AFE16B /* ModalPresentable+Defaults.swift */,
-				9205E6EB22F0E26B00AFE16B /* ModalPresentable+UIViewController.swift */,
 				9205E6E522F0E26900AFE16B /* ModalPresentable+LayoutHelpers.swift */,
 				92DC9DE522F8F55F008A91BC /* ModalHeight.swift */,
 			);
@@ -1659,7 +1656,6 @@
 				9213184722D571BF00C91D90 /* SignInViewModel.swift in Sources */,
 				92D8EBCD22CFE0120083D6C4 /* SignInViewControllerDelegate.swift in Sources */,
 				928A10A622D3CDF000FF78FB /* URLSession+Extension.swift in Sources */,
-				9205E6F222F0E3F900AFE16B /* ModalPresentable+UIViewController.swift in Sources */,
 				920E495022DF966C00AA1EDB /* Searchable.swift in Sources */,
 				92E9607322F3BF9C005DF33D /* SendAppreciationViewControllerDelegate.swift in Sources */,
 				92E9609722F5F97A005DF33D /* UITableView+Extension.swift in Sources */,

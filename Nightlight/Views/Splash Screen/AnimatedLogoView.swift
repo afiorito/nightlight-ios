@@ -1,9 +1,12 @@
 import UIKit
 
+/// A view for animating the nightlight logo.
 public class AnimatedLogoView: UIView {
+    
+    /// An image view to displaying the logo image.
     private let logo: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo_icon")
+        imageView.image = UIImage.icon.logo
         imageView.tintColor = .brand
         return imageView
     }()
@@ -19,6 +22,9 @@ public class AnimatedLogoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /**
+     Start the logo animation.
+     */
     public func startAnimation() {
         
         let transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
@@ -28,6 +34,9 @@ public class AnimatedLogoView: UIView {
         })
     }
     
+    /**
+      Stop the logo animation by returning to original state.
+      */
     public func endAnimation(completion: ((Bool) -> Void)?) {
         logo.transform = .identity
         logo.layer.removeAllAnimations()
@@ -49,6 +58,8 @@ public class AnimatedLogoView: UIView {
         ])
     }
 }
+
+// MARK: - Themeable
 
 extension AnimatedLogoView: Themeable {
     func updateColors(for theme: Theme) {

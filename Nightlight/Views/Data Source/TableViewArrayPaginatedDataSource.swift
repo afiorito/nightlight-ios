@@ -24,12 +24,9 @@ public class TableViewArrayPaginatedDataSource<Cell: Configurable>: TableViewArr
     }
     
     public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        if data.count < totalCount && indexPaths.contains(where: isLoadingCell) {
+        if data.count < totalCount && indexPaths.contains(where: { $0.row >= data.count - 1 }) {
             prefetchCallback?()
         }
     }
-    
-    private func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= data.count - 1
-    }
+
 }
