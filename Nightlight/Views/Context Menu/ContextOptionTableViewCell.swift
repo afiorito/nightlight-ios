@@ -1,7 +1,8 @@
 import UIKit
 
+/// A table view cell for displaying a context menu option.
 public class ContextOptionTableViewCell: UITableViewCell {
-
+    /// A button for displaying the option.
     let optionButton: UIButton = {
         let button = UIButton()
         button.contentHorizontalAlignment = .left

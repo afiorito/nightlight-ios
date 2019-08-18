@@ -1,18 +1,22 @@
 import UIKit
 
 extension BottomSheetPresentable where Self: UIViewController {
+    /// A reference of the presentation controller as a BottomSheetPresentationController so we can access properties and methods.
     var presentationController: BottomSheetPresentationController? {
         return presentationController as? BottomSheetPresentationController
     }
     
+    /// Spacing from the safe area layout guides of the presenting view controller.
     var layoutInsets: UIEdgeInsets {
         return UIApplication.shared.keyWindow?.rootViewController?.view.safeAreaInsets ?? .zero
     }
     
+    /// Computes the target y position of the bottom sheet.
     var yPos: CGFloat {
         return max(topMargin(from: height), topMargin(from: .maxHeight)) + topOffset
     }
     
+    /// Computes the bottom y position to adjust for offsets.
     var bottomYPos: CGFloat {
         guard let container = presentationController?.containerView
             else { return view.bounds.height }
@@ -20,6 +24,11 @@ extension BottomSheetPresentable where Self: UIViewController {
         return container.bounds.height - topOffset
     }
     
+    /**
+     Converts a bottom sheet height into a y position value calculated from the top of the view.
+     
+     - parameter height: the height of the bottom sheet.
+     */
     func topMargin(from height: BottomSheetHeight) -> CGFloat {
         switch height {
         case .maxHeight:

@@ -235,14 +235,12 @@
 		92F1763B22DCD42D008AEB82 /* ContextOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1763A22DCD42D008AEB82 /* ContextOptionTableViewCell.swift */; };
 		92F1765222DD3781008AEB82 /* BottomSheetAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1765122DD3781008AEB82 /* BottomSheetAnimator.swift */; };
 		92F1765422DD38B0008AEB82 /* BottomSheetPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1765322DD38B0008AEB82 /* BottomSheetPresentable.swift */; };
-		92F1765622DD3932008AEB82 /* BottomSheetPresentable+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1765522DD3932008AEB82 /* BottomSheetPresentable+UIViewController.swift */; };
 		92F1765822DD3E4E008AEB82 /* BottomSheetPresentable+LayoutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1765722DD3E4E008AEB82 /* BottomSheetPresentable+LayoutHelpers.swift */; };
 		92F1765A22DD3EA9008AEB82 /* BottomSheetPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1765922DD3EA9008AEB82 /* BottomSheetPresentationController.swift */; };
 		92F1765C22DD3FAB008AEB82 /* BottomSheetHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1765B22DD3FAB008AEB82 /* BottomSheetHeight.swift */; };
 		92F1765E22DD404E008AEB82 /* BottomSheetPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1765D22DD404E008AEB82 /* BottomSheetPresentable+Defaults.swift */; };
 		92F1766022DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1765F22DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift */; };
 		92F1766222DD4777008AEB82 /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1766122DD4777008AEB82 /* DimmedView.swift */; };
-		92F1766422DD4DE1008AEB82 /* ContextMenuViewController+BottomSheetPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1766322DD4DE1008AEB82 /* ContextMenuViewController+BottomSheetPresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -500,14 +498,12 @@
 		92F1763A22DCD42D008AEB82 /* ContextOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextOptionTableViewCell.swift; sourceTree = "<group>"; };
 		92F1765122DD3781008AEB82 /* BottomSheetAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetAnimator.swift; sourceTree = "<group>"; };
 		92F1765322DD38B0008AEB82 /* BottomSheetPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentable.swift; sourceTree = "<group>"; };
-		92F1765522DD3932008AEB82 /* BottomSheetPresentable+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheetPresentable+UIViewController.swift"; sourceTree = "<group>"; };
 		92F1765722DD3E4E008AEB82 /* BottomSheetPresentable+LayoutHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheetPresentable+LayoutHelpers.swift"; sourceTree = "<group>"; };
 		92F1765922DD3EA9008AEB82 /* BottomSheetPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentationController.swift; sourceTree = "<group>"; };
 		92F1765B22DD3FAB008AEB82 /* BottomSheetHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetHeight.swift; sourceTree = "<group>"; };
 		92F1765D22DD404E008AEB82 /* BottomSheetPresentable+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheetPresentable+Defaults.swift"; sourceTree = "<group>"; };
 		92F1765F22DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetTransitioningDelegate.swift; sourceTree = "<group>"; };
 		92F1766122DD4777008AEB82 /* DimmedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmedView.swift; sourceTree = "<group>"; };
-		92F1766322DD4DE1008AEB82 /* ContextMenuViewController+BottomSheetPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContextMenuViewController+BottomSheetPresentable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1348,7 +1344,6 @@
 			isa = PBXGroup;
 			children = (
 				92F1763422DCD037008AEB82 /* ContextMenuViewController.swift */,
-				92F1766322DD4DE1008AEB82 /* ContextMenuViewController+BottomSheetPresentable.swift */,
 				92F1763A22DCD42D008AEB82 /* ContextOptionTableViewCell.swift */,
 				92F1763622DCD04C008AEB82 /* ContextOption.swift */,
 				92F1763822DCD07E008AEB82 /* ContextOptionStyle.swift */,
@@ -1364,7 +1359,6 @@
 				92F1765922DD3EA9008AEB82 /* BottomSheetPresentationController.swift */,
 				92F1765F22DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift */,
 				92F1765D22DD404E008AEB82 /* BottomSheetPresentable+Defaults.swift */,
-				92F1765522DD3932008AEB82 /* BottomSheetPresentable+UIViewController.swift */,
 				92F1765722DD3E4E008AEB82 /* BottomSheetPresentable+LayoutHelpers.swift */,
 				92F1765B22DD3FAB008AEB82 /* BottomSheetHeight.swift */,
 			);
@@ -1655,8 +1649,6 @@
 				9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */,
 				9237A1D722CA7D7200FC9331 /* Theme.swift in Sources */,
 				9205E6D222F0690200AFE16B /* IAPIdentifier.swift in Sources */,
-				92F1766422DD4DE1008AEB82 /* ContextMenuViewController+BottomSheetPresentable.swift in Sources */,
-				92F1765622DD3932008AEB82 /* BottomSheetPresentable+UIViewController.swift in Sources */,
 				92B302F722D6431800CE5668 /* SendMessageViewModel.swift in Sources */,
 				925BCA4122F1C81400277D00 /* NSMutableAttributedString+Extension.swift in Sources */,
 				92D8EBCB22CFD83D0083D6C4 /* SignUpViewControllerDelegate.swift in Sources */,
@@ -1929,6 +1921,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.nightlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1950,6 +1943,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.nightlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2114,6 +2108,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.nightlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2231,6 +2226,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.nightlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

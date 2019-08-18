@@ -10,6 +10,8 @@ extension UIImage {
         static var back: UIImage? { return UIImage(named: "icon_back") }
         static var info: UIImage? { return UIImage(named: "icon_info") }
         static var logo: UIImage? { return UIImage(named: "icon_logo") }
+        static var flag: UIImage? { return UIImage(named: "icon_flag") }
+        static var trash: UIImage? { return UIImage(named: "icon_trash") }
         static var settings: UIImage? { return UIImage(named: "icon_settings") }
         static var send: UIImage? { return UIImage(named: "icon_send") }
         static var heartSelected: UIImage? { return UIImage(named: "icon_heart--selected") }

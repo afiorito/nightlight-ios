@@ -1,12 +1,17 @@
 import UIKit
 
+/// A table view datasource for single sectioned, single cell configurable table views.
 public class TableViewArrayDataSource<Cell: Configurable>: NSObject, UITableViewDataSource {
+    /// The content of the datasource.
     public var data = [Cell.ViewModel]()
     
+    /// The reuse identifier of a cell.
     internal let reuseIdentifier: String
     
+    /// The delegate of a cell.
     public weak var cellDelegate: Cell.Delegate?
     
+    /// The empty view when the datasource contains no data.
     public var emptyViewDescription: EmptyViewDescription?
     
     public init(reuseIdentifier: String) {
@@ -14,7 +19,6 @@ public class TableViewArrayDataSource<Cell: Configurable>: NSObject, UITableView
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if let description = emptyViewDescription, data.isEmpty {
             tableView.showEmptyView(description: description)
         } else {

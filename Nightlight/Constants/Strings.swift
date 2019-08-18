@@ -2,6 +2,7 @@
 public struct Strings {
     static let cancel = "Cancel"
     static let delete = "Delete"
+    static let report = "Report"
     static let sendAppreciation = "Send Appreciation"
     static let getTokens = "Get Tokens"
     static let appreciationDescription = "Let’s the person know you appreciate them and increases the appreciation on their message."

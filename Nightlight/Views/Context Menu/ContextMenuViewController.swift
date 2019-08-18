@@ -1,9 +1,12 @@
 import UIKit
 
+/// A view controller for displaying a list of options.
 public class ContextMenuViewController: UIViewController {
 
+    /// The listed options.
     private var options = [ContextOption]()
     
+    /// A table view for displaying options.
     let tableView: CompactTableView = {
         let tableView = CompactTableView()
         tableView.register(ContextOptionTableViewCell.self, forCellReuseIdentifier: ContextOptionTableViewCell.className)
@@ -15,9 +18,10 @@ public class ContextMenuViewController: UIViewController {
         return tableView
     }()
     
+    /// A button for dismissing the option selection.
     let cancelButton: ContainedButton = {
         let button = ContainedButton()
-        button.setTitle("Cancel", for: .normal)
+        button.setTitle(Strings.cancel, for: .normal)
         button.titleLabel?.font = .secondary16ptNormal
         button.addTarget(self, action: #selector(dismissMenu), for: .touchUpInside)
         return button
@@ -34,12 +38,13 @@ public class ContextMenuViewController: UIViewController {
         prepareSubviews()
     }
     
+    /**
+     Add an option to the list of options.
+     
+     - parameter option: the option to add.
+     */
     public func addOption(_ option: ContextOption) {
         options.append(option)
-    }
-    
-    @objc private func dismissMenu() {
-        dismiss(animated: true)
     }
     
     private func prepareSubviews() {
@@ -54,6 +59,10 @@ public class ContextMenuViewController: UIViewController {
             cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
+    }
+    
+    @objc private func dismissMenu() {
+        dismiss(animated: true)
     }
 }
 
@@ -86,6 +95,22 @@ extension ContextMenuViewController: UITableViewDelegate {
         option.handler?(option)
     }
     
+}
+
+// MARK: - BottomSheet Presentable
+
+extension ContextMenuViewController: BottomSheetPresentable {
+    public var panScrollable: UIScrollView? {
+        return nil
+    }
+    
+    public var height: BottomSheetHeight {
+        return .intrinsicHeight
+    }
+    
+    public var topOffset: CGFloat {
+        return 200
+    }
 }
 
 // MARK: - Themeable

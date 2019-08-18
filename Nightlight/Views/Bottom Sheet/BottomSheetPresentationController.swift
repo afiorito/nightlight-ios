@@ -1,11 +1,17 @@
 import UIKit
 
+/// An object for coordinating between the presenting & presented view controllers.
 public class BottomSheetPresentationController: UIPresentationController {
-    
+    /**
+     The configuration object.
+     */
     private var presentable: BottomSheetPresentable? {
         return presentedViewController as? BottomSheetPresentable
     }
     
+    /**
+     A background view behind the bottom sheet.
+     */
     private lazy var backgroundView: DimmedView = {
         let view: DimmedView
         if let alpha = presentable?.backgroundAlpha {
@@ -58,11 +64,21 @@ public class BottomSheetPresentationController: UIPresentationController {
 // MARK: - Layout Configuration
 
 private extension BottomSheetPresentationController {
+    /**
+     Adds and configures the presented view in the view hierarchy.
+     
+     - parameter containerView: the container view for the transition.
+     */
     func layoutPresentedView(in containerView: UIView) {
         containerView.addSubview(presentedViewController.view)
         addRoundedCorners(to: presentedViewController.view)
     }
 
+    /**
+     Adds and configures the background view in the view hierarchy.
+     
+     - parameter containerView: the container view for the transition.
+     */
     func layoutBackgroundView(in containerView: UIView) {
         containerView.addSubviews(backgroundView)
 
@@ -78,6 +94,9 @@ private extension BottomSheetPresentationController {
 // MARK: - UIBezierPath
 
 private extension BottomSheetPresentationController {
+    /**
+     Draws top rounded corners on a given view.
+     */
     func addRoundedCorners(to view: UIView) {
         let radius = presentable?.cornerRadius ?? 0
         let path = UIBezierPath(roundedRect: view.bounds,

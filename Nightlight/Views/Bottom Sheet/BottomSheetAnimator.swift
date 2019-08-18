@@ -1,15 +1,20 @@
 import UIKit
 
+/// The object responsible for coordinating a bottom sheet view controller transition.
 public class BottomSheetAnimator: NSObject {
+    /// A constant for representing the transition style.
     public enum TransitionStyle {
         case present
         case dismiss
     }
     
+    /// The default duration of the animation.
     static let defaultDuration: TimeInterval = 0.5
     
+    /// The transition style of the animation.
     private let transitionStyle: TransitionStyle
     
+    /// A generator for announcing that the bottom sheet has appeared.
     private var feedbackGenerator: UISelectionFeedbackGenerator?
     
     required public init(transitionStyle: TransitionStyle) {
@@ -22,6 +27,11 @@ public class BottomSheetAnimator: NSObject {
         }
     }
     
+    /**
+     Executes the presentation transition.
+     
+     - parameter transitionContext: the context object containing information to use during the transition.
+     */
     private func present(transitionContext: UIViewControllerContextTransitioning) {
         guard
             let toViewController = transitionContext.viewController(forKey: .to),
@@ -53,6 +63,11 @@ public class BottomSheetAnimator: NSObject {
         })
     }
     
+    /**
+     Executes the dismissal transition.
+     
+     - parameter transitionContext: the context object containing information to use during the transition.
+     */
     private func dismiss(transitionContext: UIViewControllerContextTransitioning) {
         guard
             let toViewController = transitionContext.viewController(forKey: .to),
@@ -75,6 +90,9 @@ public class BottomSheetAnimator: NSObject {
         })
     }
     
+    /**
+     Performs the animations.
+     */
     private func animate(_ animations: @escaping BottomSheetPresentable.AnimationBlockType, config: BottomSheetPresentable?, completion: BottomSheetPresentable.AnimationCompletionType? = nil) {
         
         let transitionDuration = config?.transitionDuration ?? Self.defaultDuration
@@ -90,6 +108,11 @@ public class BottomSheetAnimator: NSObject {
                        completion: completion)
     }
     
+    /**
+     Returns the appropriate presentable view controller for a specified transition context.
+     
+     - parameter context: the context object containing information to use during the transition.
+     */
     private func presentableViewController(from context: UIViewControllerContextTransitioning) -> BottomSheetPresentable.Presentable? {
         let viewController: UIViewController?
         

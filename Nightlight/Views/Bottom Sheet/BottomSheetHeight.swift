@@ -1,7 +1,7 @@
 import UIKit
 
+/// A constant for representing the height of a bottom sheet.
 public enum BottomSheetHeight: Equatable {
-    
     /**
      Sets the height to be the maximum height (+ topOffset)
      */

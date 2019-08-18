@@ -1,5 +1,6 @@
 import UIKit
 
+/// The delegate object that provides transition animator and controller for the bottom sheet transition.
 public class BottomSheetTransitioningDelegate: NSObject {
     public static var `default` = BottomSheetTransitioningDelegate()
 }
