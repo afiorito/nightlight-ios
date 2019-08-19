@@ -221,7 +221,6 @@
 		92E960D322F65358005DF33D /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D222F65358005DF33D /* PermissionViewController.swift */; };
 		92E960D522F65592005DF33D /* PermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D422F65592005DF33D /* PermissionViewModel.swift */; };
 		92E960D722F70A66005DF33D /* UserDeviceTokenBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */; };
-		92E960D922F73781005DF33D /* UITabBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E960D822F73781005DF33D /* UITabBar+Extension.swift */; };
 		92F1761E22DBC232008AEB82 /* MessageActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761D22DBC232008AEB82 /* MessageActionType.swift */; };
 		92F1762022DBC42C008AEB82 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1761F22DBC42C008AEB82 /* MessageResponse.swift */; };
 		92F1762722DBF771008AEB82 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */; };
@@ -483,7 +482,6 @@
 		92E960D222F65358005DF33D /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		92E960D422F65592005DF33D /* PermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewModel.swift; sourceTree = "<group>"; };
 		92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDeviceTokenBody.swift; sourceTree = "<group>"; };
-		92E960D822F73781005DF33D /* UITabBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Extension.swift"; sourceTree = "<group>"; };
 		92F1761D22DBC232008AEB82 /* MessageActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionType.swift; sourceTree = "<group>"; };
 		92F1761F22DBC42C008AEB82 /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		92F1762622DBF771008AEB82 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
@@ -726,7 +724,6 @@
 				928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */,
 				9237A1D422CA74E100FC9331 /* UIColor+Extension.swift */,
 				92418D4A22D7D645001B6DFB /* NSObject+Extension.swift */,
-				92E960D822F73781005DF33D /* UITabBar+Extension.swift */,
 				92E9609622F5F97A005DF33D /* UITableView+Extension.swift */,
 				92D398A422C906A400AAC887 /* UIView+Extension.swift */,
 				9237A1D222CA559500FC9331 /* UIViewController+Extension.swift */,
@@ -1603,7 +1600,6 @@
 				925BE1C522DE64480000BEC9 /* UISearchBar+Themeable.swift in Sources */,
 				92418D4B22D7D645001B6DFB /* NSObject+Extension.swift in Sources */,
 				92E960C722F60C91005DF33D /* ExternalPage.swift in Sources */,
-				92E960D922F73781005DF33D /* UITabBar+Extension.swift in Sources */,
 				9213184B22D6050000C91D90 /* NLTabBarController.swift in Sources */,
 				92F1766022DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift in Sources */,
 				925DD4A722DDE49300D50A89 /* UIView+Themeable.swift in Sources */,

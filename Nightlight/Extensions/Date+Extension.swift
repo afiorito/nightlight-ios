@@ -1,6 +1,11 @@
 import Foundation
 
 extension Date {
+    /**
+     Format a date as time since it was posted in "ago" format
+     
+     eg. 1m, 2h, 1d
+     */
     public func ago() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short

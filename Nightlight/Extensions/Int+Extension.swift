@@ -1,4 +1,5 @@
 extension Int {
+    /// An abbreviation for integers larger than 1000.
     var abbreviated: String {
         let number = Double(self)
         let thousand = number / 1000.0

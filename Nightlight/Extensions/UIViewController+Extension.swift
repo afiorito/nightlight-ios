@@ -25,6 +25,11 @@ extension UIViewController {
         removeFromParent()
     }
     
+    /**
+     Find a parent view controller skipping the specified types.
+     
+     - parameter types: the parent types to skip.
+     */
     public func nextParent(skipping types: [UIViewController.Type] = [UITableViewController.self]) -> UIViewController? {
         for type in types {
             if self.isKind(of: type) {

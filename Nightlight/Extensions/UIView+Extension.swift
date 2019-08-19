@@ -24,6 +24,11 @@ extension UIView {
         self.addSubviews(views, shouldTranslateAutoresizeMask: shouldTranslateAutoresizeMask)
     }
     
+    /**
+     Returns a superview of the view with a specified type.
+     
+     - parameter type: the type of the superview to find.
+     */
     public func superview<T>(ofType type: T.Type) -> T? {
         var superview = self.superview
         while superview != nil && (superview as? T) == nil {
@@ -33,6 +38,11 @@ extension UIView {
         return superview as? T
     }
     
+    /**
+     Returns a subview of the view with a specified type.
+     
+     - parameter type: the type of the subview to find.
+     */
     public func subview<T>(ofType type: T.Type) -> T? {
         var match: T?
 
@@ -47,6 +57,12 @@ extension UIView {
         return match
     }
     
+    /**
+     Add a shadow to a view for the specified theme
+     
+     - parameter theme: the theme for the shadow.
+     - parameter shouldRasterize: a boolean that dictates if the shadow is rasterized.
+     */
     public func addShadow(forTheme theme: Theme, shouldRasterize: Bool = true) {
         layoutIfNeeded()
         layer.shadowColor = UIColor.shadow(for: theme).cgColor

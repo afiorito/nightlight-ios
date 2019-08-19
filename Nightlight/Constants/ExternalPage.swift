@@ -1,5 +1,6 @@
 import Foundation
 
+/// A constant for external web pages displaying in a web view.
 public enum ExternalPage: String {
     case privacy = "https://nightlight.electriapp.com/privacy"
     case terms = "https://nightlight.electriapp.com/terms"

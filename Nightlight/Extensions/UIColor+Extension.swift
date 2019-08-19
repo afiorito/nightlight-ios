@@ -89,6 +89,11 @@ extension UIColor {
         return self
     }
     
+    /**
+     Returns an image from the color with a specified size.
+     
+     - parameter size: the size of the returned image.
+     */
     public func asImage(with size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         let ctx = UIGraphicsGetCurrentContext()
@@ -101,6 +106,7 @@ extension UIColor {
         return image
     }
     
+    /// Returns a color as a 6 digit hex string.
     public var hexString: String {
         var r: CGFloat = 0
         var g: CGFloat = 0
