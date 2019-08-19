@@ -22,7 +22,7 @@ public class ModalPresentationController: UIPresentationController {
         } else {
             view = DimmedView()
         }
-        view.didTap = { [weak self] _ in
+        view.didTap = { [weak self] in
             self?.dismissPresentedViewController()
         }
         return view

@@ -1,18 +1,22 @@
 import UIKit
 
+/// A view for displaying an alert mesage.
 public class ToastView: UIView {
+    /// A constant for denoting the severity of the toast.
     public enum Severity {
         case urgent
         case neutral
         case success
     }
 
+    /// The severity of the toast.
     public var severity: Severity = .neutral {
         didSet {
             updateStyle()
         }
     }
     
+    /// A view for displaying the severity color on the left side.
     private let colorView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 4.0
@@ -21,6 +25,7 @@ public class ToastView: UIView {
         return view
     }()
     
+    /// An image view for displaying the severity icon.
     private let iconImageView = UIImageView()
 
     private let toastMessageLabel: UILabel = {
@@ -30,6 +35,7 @@ public class ToastView: UIView {
         return label
     }()
     
+    /// The message of the toast.
     public var message: String? {
         get {
             return toastMessageLabel.text
@@ -58,6 +64,9 @@ public class ToastView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /**
+     Update the styling of the view with the current severity.
+     */
     private func updateStyle() {
         switch severity {
         case .neutral:

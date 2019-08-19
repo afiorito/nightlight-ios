@@ -1,5 +1,6 @@
 import UIKit
 
+/// A static table view cell encompassing basic styling.
 public class BaseStaticTableViewCell: UITableViewCell, Themeable {
     func updateColors(for theme: Theme) {
         let background = UIView()

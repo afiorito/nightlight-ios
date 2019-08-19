@@ -1,13 +1,18 @@
 import UIKit
 import WebKit
 
+/// A view controller for displaying nightlight page content.
 public class WebContentViewController: UIViewController {
+    /// The url of the page to display.
     private let url: URL
     
+    /// The user content controller to associate with the web view.
     private var userContentController = WKUserContentController()
     
+    /// The delegate for managing UI actions.
     public weak var delegate: WebContentViewControllerDelegate?
     
+    /// A web view for displaying web content.
     private lazy var webView: WKWebView = {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = userContentController
@@ -20,6 +25,7 @@ public class WebContentViewController: UIViewController {
         return webView
     }()
     
+    /// An activity indicator while the web content is loading.
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
@@ -44,13 +50,21 @@ public class WebContentViewController: UIViewController {
         webView.scrollView.delegate = self
 
         title = ExternalPage(rawValue: url.absoluteString)?.title
-        navigationItem.leftBarButtonItem = UIBarButtonItem.cancel(target: self, action: #selector(cancel))
+        if navigationItem.leftBarButtonItem == nil {
+            navigationItem.leftBarButtonItem = UIBarButtonItem.cancel(target: self, action: #selector(cancel))
+        }
         
         prepareSubviews()
         updateColors(for: theme)
         loadContent(at: url, selector: "main.container")
     }
 
+    /**
+     Load the web page content.
+     
+     - parameter url: the url of the web page.
+     - parameter selector: the selector for the element of the webpage to select.
+     */
     private func loadContent(at url: URL, selector: String? = nil) {
         userContentController.removeAllUserScripts()
         if let selector = selector {
@@ -61,6 +75,11 @@ public class WebContentViewController: UIViewController {
         webView.load(URLRequest(url: url))
     }
     
+    /**
+     Executes JavaScript to select an element using the given selector and style the page.
+     
+     - parameter selector: the selector of an element on the page.
+     */
     private func queryScript(using selector: String) -> String {
         return  """
                 document.body.style.backgroundColor = "\(UIColor.background(for: theme).hexString)";
@@ -108,7 +127,7 @@ extension WebContentViewController: WKNavigationDelegate, WKUIDelegate {
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         activityIndicator.stopAnimating()
         
-        showToast("Something went wrong.", severity: .urgent)
+        showToast(Strings.error.somethingWrong, severity: .urgent)
     }
     
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

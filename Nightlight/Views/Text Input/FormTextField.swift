@@ -1,7 +1,8 @@
 import UIKit
 
+/// A view with a text field and error label for form input.
 public class FormTextField: UIView {
-
+    /// A textfield for user input.
     public let input: TextField = {
         let textField = TextField()
         textField.layer.borderColor = UIColor.urgent.cgColor
@@ -9,6 +10,7 @@ public class FormTextField: UIView {
         return textField
     }()
     
+    /// A label for displaying an error.
     public let errorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .urgent
@@ -38,6 +40,7 @@ public class FormTextField: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// The error message to display for the field.
     public var error: String? {
         get {
             return errorLabel.text
@@ -72,6 +75,12 @@ public class FormTextField: UIView {
         
     }
     
+    /**
+     Show/Hide the error on the field using animation.
+     
+     - parameter isHidden: a boolean to determine if the error is animated in or out.
+     - parameter completion: a block object to be executed when the animation sequence ends.
+     */
     private func animateError(isHidden: Bool, completion: ((Bool) -> Void)? = nil) {
         let finalValue: CGFloat = isHidden ? 0.0 : 1.0
         
@@ -88,6 +97,8 @@ public class FormTextField: UIView {
     }
     
 }
+
+// MARK: - Themeable
 
 extension FormTextField: Themeable {
     public func updateColors(for theme: Theme) {

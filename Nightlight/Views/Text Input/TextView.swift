@@ -1,10 +1,12 @@
 import UIKit
 
+/// A text view with a placeholder.
 public class TextView: UITextView {
-    
+    /// An array of observers for updating the placeholder.
     private var observers = [NSKeyValueObservation]()
     
-    private lazy var placeHolderTextView: UITextView = {
+    /// A text view for displaying the placeholder.
+    private lazy var placeholderTextView: UITextView = {
         let textView = UITextView()
         
         textView.textColor = .gray
@@ -14,24 +16,26 @@ public class TextView: UITextView {
         return textView
     }()
     
+    /// The placeholder of the text view.
     public var placeholder: String? {
         get {
-            return placeHolderTextView.text
+            return placeholderTextView.text
         }
         
         set {
-            placeHolderTextView.text = newValue
+            placeholderTextView.text = newValue
             updatePlaceholder()
         }
     }
     
+    /// The attributed placeholder of the text view.
     public var attributedPlaceholder: NSAttributedString? {
         get {
-            return placeHolderTextView.attributedText
+            return placeholderTextView.attributedText
         }
         
         set {
-            placeHolderTextView.attributedText = newValue
+            placeholderTextView.attributedText = newValue
             updatePlaceholder()
         }
     }
@@ -56,12 +60,33 @@ public class TextView: UITextView {
         self.updatePlaceholder()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    /**
+     Key value observer callback for updating the placeholder.
+     */
     private func observeChange<Value>(_ textView: TextView, value: NSKeyValueObservedChange<Value>) {
         self.updatePlaceholder()
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
+    /**
+     Update the placeholder text view.
+     */
+    @objc private func updatePlaceholder() {
+        if text.isEmpty {
+            insertSubview(placeholderTextView, at: 0)
+        } else {
+            placeholderTextView.removeFromSuperview()
+        }
+        
+        placeholderTextView.font = self.font
+        placeholderTextView.textAlignment = textAlignment
+        placeholderTextView.textContainer.exclusionPaths = self.textContainer.exclusionPaths
+        placeholderTextView.textContainerInset = self.textContainerInset
+        placeholderTextView.textContainer.lineFragmentPadding = self.textContainer.lineFragmentPadding
+        self.placeholderTextView.frame = self.bounds
     }
     
     deinit {
@@ -72,21 +97,6 @@ public class TextView: UITextView {
         }
         
         observers.removeAll()
-    }
-
-    @objc private func updatePlaceholder() {
-        if text.isEmpty {
-            insertSubview(placeHolderTextView, at: 0)
-        } else {
-            placeHolderTextView.removeFromSuperview()
-        }
-        
-        placeHolderTextView.font = self.font
-        placeHolderTextView.textAlignment = textAlignment
-        placeHolderTextView.textContainer.exclusionPaths = self.textContainer.exclusionPaths
-        placeHolderTextView.textContainerInset = self.textContainerInset
-        placeHolderTextView.textContainer.lineFragmentPadding = self.textContainer.lineFragmentPadding
-        self.placeHolderTextView.frame = self.bounds
     }
     
 }

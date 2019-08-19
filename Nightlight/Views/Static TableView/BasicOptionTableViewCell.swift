@@ -1,7 +1,9 @@
 import UIKit
 
+/// A table view cell with a title label for an option.
 public class BasicOptionTableViewCell: BaseStaticTableViewCell {
     
+    /// The title of the option.
     public var title: String? {
         get { return textLabel?.text }
         set { textLabel?.text = newValue }
@@ -11,7 +13,7 @@ public class BasicOptionTableViewCell: BaseStaticTableViewCell {
         didSet {
             if isSelected {
                 let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-                imageView.image = UIImage(named: "check")
+                imageView.image = UIImage.icon.check
                 imageView.tintColor = .success
                 accessoryView = imageView
             } else {
@@ -20,7 +22,8 @@ public class BasicOptionTableViewCell: BaseStaticTableViewCell {
         }
     }
     
-    private let disclosureIndicator = UIImageView(image: UIImage(named: "disclosure"))
+    /// An image view for displaying a disclosure indicator.
+    private let disclosureIndicator = UIImageView(image: UIImage.glyph.disclosure)
     
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

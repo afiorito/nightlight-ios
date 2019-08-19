@@ -1,18 +1,22 @@
 import UIKit
 
+/// A base table view cell with a title and subtitle.
 public class InformationTableViewCell: BaseStaticTableViewCell {
     
+    /// The information title.
     public var title: String? {
         get { return textLabel?.text }
         set { textLabel?.text = newValue }
     }
     
+    /// The information subtitle.
     public var subtitle: String? {
         get { return detailTextLabel?.text }
         set { detailTextLabel?.text = newValue }
     }
     
-    private let disclosureIndicator = UIImageView(image: UIImage(named: "disclosure"))
+    /// An image view for displaying a disclosure indicator.
+    private let disclosureIndicator = UIImageView(image: UIImage.glyph.disclosure)
     
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

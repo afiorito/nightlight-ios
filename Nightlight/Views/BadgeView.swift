@@ -1,5 +1,4 @@
 import UIKit
 
-public class BadgeView: UIView {
-    
-}
+/// A view for displaying a badge on a tab bar.
+public class BadgeView: UIView {}

@@ -1,13 +1,15 @@
 import UIKit
 
+/// A large title view.
 public class LabelTitleView: UIView {
-
+    /// A label for displaying the title.
     public lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .primary24ptBold
         return label
     }()
     
+    /// The title of the view.
     public var title: String? {
         get { return titleLabel.text }
         set { titleLabel.text = newValue }
@@ -32,8 +34,9 @@ public class LabelTitleView: UIView {
     private func prepareSubviews() {
         addSubview(titleLabel)
     }
-    
 }
+
+// MARK: - Themeable
 
 extension LabelTitleView: Themeable {
     func updateColors(for theme: Theme) {

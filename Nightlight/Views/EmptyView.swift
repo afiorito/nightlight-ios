@@ -1,7 +1,28 @@
 import UIKit
 
 /// A placeholder view for empty content.
-public class EmptyView: UIView {    
+public class EmptyView: UIView {
+    /// The name of the image without light or dark suffix.
+    public var imageName: String
+    
+    /// The empty image.
+    public var image: UIImage? {
+        get { return imageView.image }
+        set { imageView.image = newValue }
+    }
+    
+    /// The title text for the empty placeholder.
+    public var title: String? {
+        get { return titleLabel.text }
+        set { titleLabel.text = newValue }
+    }
+    
+    /// The subtitle text for the empty placeholder
+    public var subtitle: String? {
+        get { return subtitleLabel.text }
+        set { subtitleLabel.text = newValue }
+    }
+
     required init(description: EmptyViewDescription) {
         self.imageName = description.imageName
 
@@ -20,6 +41,30 @@ public class EmptyView: UIView {
     
     // MARK: - Subviews & Layout
     
+    /// An image view for displaying the empty image.
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    /// A label for displaying the title.
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .primary20ptMedium
+        return label
+    }()
+    
+    /// A label for displaying the subtitle.
+    private let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = .secondary16ptNormal
+        return label
+    }()
+    
     private let container: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -37,47 +82,6 @@ public class EmptyView: UIView {
         
         return stackView
     }()
-    
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = .primary20ptMedium
-        return label
-    }()
-    
-    private let subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.font = .secondary16ptNormal
-        return label
-    }()
-    
-    /// The name of the image without light or dark suffix.
-    public var imageName: String
-    
-    public var image: UIImage? {
-        get { return imageView.image }
-        set { imageView.image = newValue }
-    }
-    
-    /// The title text for the empty placeholder.
-    public var title: String? {
-        get { return titleLabel.text }
-        set { titleLabel.text = newValue }
-    }
-    
-    /// The subtitle text for the empty placeholder
-    public var subtitle: String? {
-        get { return subtitleLabel.text }
-        set { subtitleLabel.text = newValue }
-    }
     
     private func prepareSubviews() {
         textContainer.addArrangedSubviews([titleLabel, subtitleLabel])

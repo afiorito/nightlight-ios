@@ -1,7 +1,7 @@
 import UIKit
 
+/// A scroll view with equal intrinsic content size and content size.
 public class CompactScrollView: UIScrollView {
-
     override public var contentSize: CGSize {
         didSet {
             invalidateIntrinsicContentSize()
@@ -14,6 +14,7 @@ public class CompactScrollView: UIScrollView {
 
 }
 
+/// A table view with equal intrinsic content size and content size.
 public class CompactTableView: UITableView {
     override public var contentSize: CGSize {
         didSet {
@@ -26,6 +27,7 @@ public class CompactTableView: UITableView {
     }
 }
 
+/// A collection view with equal intrinsic content size and content size.
 public class CompactCollectionView: UICollectionView {
     override public var contentSize: CGSize {
         didSet {

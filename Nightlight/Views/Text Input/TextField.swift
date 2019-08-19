@@ -1,7 +1,9 @@
 import UIKit
 
+/// A text field that supports a left icon.
 public class TextField: UITextField {
     
+    /// An image view for displaying an icon on the left side of the text field.
     public var icon: UIImage? {
         set {
             let icon = UIImageView(frame: CGRect(x: 10, y: 13, width: 14, height: 14))
@@ -19,6 +21,7 @@ public class TextField: UITextField {
         }
     }
     
+    /// The placeholder of the text field.
     public override var placeholder: String? {
         didSet {
             guard let attributedPlaceholder = attributedPlaceholder,

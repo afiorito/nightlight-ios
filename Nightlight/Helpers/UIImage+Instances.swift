@@ -12,6 +12,7 @@ extension UIImage {
         static var logo: UIImage? { return UIImage(named: "icon_logo") }
         static var flag: UIImage? { return UIImage(named: "icon_flag") }
         static var trash: UIImage? { return UIImage(named: "icon_trash") }
+        static var check: UIImage? { return UIImage(named: "icon_check") }
         static var settings: UIImage? { return UIImage(named: "icon_settings") }
         static var send: UIImage? { return UIImage(named: "icon_send") }
         static var heartSelected: UIImage? { return UIImage(named: "icon_heart--selected") }
@@ -37,6 +38,7 @@ extension UIImage {
     
     struct glyph {
         static var token: UIImage? { return UIImage(named: "glyph_token") }
+        static var disclosure: UIImage? { return UIImage(named: "glyph_disclosure") }
     }
     
     static var fullLogo: UIImage? {

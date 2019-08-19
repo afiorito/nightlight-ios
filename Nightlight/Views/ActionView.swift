@@ -1,34 +1,25 @@
 import UIKit
 
+/// A view with an action button and count label.
 public class ActionView: UIView {
-    let container: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = 2
-        return stackView
-    }()
-
-    let button = BaseButton()
-    
-    let countLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0"
-        return label
-    }()
-    
+    /// A boolean that determines if the count label is hidden.
     var isCountHidden = false {
         didSet { countLabel.isHidden = isCountHidden }
     }
     
+    /// A boolean that determines if the action is in the selected state.
     var isSelected: Bool {
         get { return button.isSelected }
         set { button.isSelected = newValue }
     }
     
+    /// The count displayed on the count label.
     var count: Int {
         get { return Int(countLabel.text ?? "0") ?? 0 }
         set { countLabel.text = newValue.abbreviated }
     }
     
+    /// A boolean that determines if the button is selected immediately after tapping.
     public var selectOnTap = true {
         didSet {
             if selectOnTap {
@@ -49,16 +40,25 @@ public class ActionView: UIView {
         prepareSubviews()
     }
     
+    /**
+     Enable select on tap by adding gesture recognizers.
+     */
     private func enableSelectOnTap() {
         button.addTarget(self, action: #selector(minimize), for: .touchDown)
         button.addTarget(self, action: #selector(toggleSelection), for: .touchUpInside)
     }
     
+    /**
+     Disable select on tap by disabling gesture recognizers.
+     */
     private func removeSelectOnTap() {
         button.removeTarget(self, action: #selector(minimize), for: .touchDown)
         button.removeTarget(self, action: #selector(toggleSelection), for: .touchUpInside)
     }
     
+    /**
+     Animate the views size smaller.
+     */
     @objc private func minimize() {
         UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn], animations: {
             self.button.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -66,7 +66,6 @@ public class ActionView: UIView {
     }
     
     @objc private func toggleSelection() {
-        
         UIView.animate(
             withDuration: 0.3,
             delay: 0,
@@ -87,6 +86,22 @@ public class ActionView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    /// A button for the action.
+    let button = BaseButton()
+    
+    /// A label for displaying a count.
+    let countLabel: UILabel = {
+        let label = UILabel()
+        label.text = "0"
+        return label
+    }()
+    
+    let container: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 2
+        return stackView
+    }()
     
     private func prepareSubviews() {
         container.addArrangedSubviews([button, countLabel])
@@ -103,6 +118,8 @@ public class ActionView: UIView {
     }
 
 }
+
+// MARK: - Themeable
 
 extension ActionView: Themeable {
     public func updateColors(for theme: Theme) {

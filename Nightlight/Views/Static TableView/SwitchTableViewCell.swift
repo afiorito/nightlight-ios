@@ -1,5 +1,6 @@
 import UIKit
 
+/// A table view cell with a title label and switch.
 public class SwitchTableViewCell: BaseStaticTableViewCell {
 
     let switchControl = Switch()

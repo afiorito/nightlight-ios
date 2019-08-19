@@ -1,7 +1,8 @@
 import UIKit
 
+/// An easily dimmable view.
 public class DimmedView: UIView {
-
+    /// A constant for denoting the current state of the dim view.
     enum DimState {
         case max
         case off
@@ -10,6 +11,7 @@ public class DimmedView: UIView {
     
     // MARK: - Properties
 
+    /// The current state of the view.
     var dimState: DimState = .off {
         didSet {
             switch dimState {
@@ -24,12 +26,10 @@ public class DimmedView: UIView {
         }
     }
     
-    var didTap: ((_ recognizer: UIGestureRecognizer) -> Void)?
+    /// A callback for when the button is tapped.
+    var didTap: (() -> Void)?
     
-    private lazy var tapGesture: UIGestureRecognizer = {
-        UITapGestureRecognizer(target: self, action: #selector(didTapView))
-    }()
-    
+    /// The alpha of the view.
     private let dimAlpha: CGFloat
     
     // MARK: - Initializers
@@ -39,7 +39,7 @@ public class DimmedView: UIView {
         super.init(frame: .zero)
         alpha = 0.0
         backgroundColor = .black
-        addGestureRecognizer(tapGesture)
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapView)))
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -49,7 +49,7 @@ public class DimmedView: UIView {
     // MARK: - Event Handlers
     
     @objc private func didTapView() {
-        didTap?(tapGesture)
+        didTap?()
     }
     
 }

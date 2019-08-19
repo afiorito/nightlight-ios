@@ -1,8 +1,7 @@
 import UIKit
 
-class Switch: UISwitch {
-
-}
+/// A switch with styling.
+class Switch: UISwitch {}
 
 extension Switch: Themeable {
     func updateColors(for theme: Theme) {
