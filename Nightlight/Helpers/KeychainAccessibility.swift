@@ -4,7 +4,7 @@ protocol KeychainAttrRepresentable {
     var keychainAttrValue: CFString { get }
 }
 
-// MARK: - KeychainAccessibility
+/// A constant for representing keychain accessibility.
 public enum KeychainAccessibility {
     case afterFirstUnlock
     case afterFirstUnlockThisDeviceOnly

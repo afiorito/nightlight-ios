@@ -19,6 +19,7 @@ public class AppCoordinator: NSObject, Coordinator {
         return accessToken != nil
     }
     
+    /// A boolean denoting if the app is launching for the first time.
     private var isInitialLaunch = false
     
     public init(dependencies: DependencyContainer) {
@@ -43,10 +44,18 @@ public class AppCoordinator: NSObject, Coordinator {
             .removeObserver(self, name: Notification.Name(rawValue: NLNotification.unauthorized.rawValue), object: nil)
     }
     
+    /**
+     Select the tab of the tab bar controller at a specified index.
+     
+     - parameter index: the index of the tab to select.
+     */
     public func selectViewController(at index: Int) {
         tabBarController?.selectedIndex = index
     }
     
+    /**
+     Add a badge to the notification tab of the tab bar.
+     */
     public func addNotificationBadge() {
         tabBarController?.addBadge(at: 3)
     }
@@ -87,6 +96,11 @@ public class AppCoordinator: NSObject, Coordinator {
         
     }
     
+    /**
+     Handle an unauthorized notification. For when a user cannot be authenticated.
+     
+     - parameter notification: the unauthorized notification.
+     */
     @objc private func handleUnauthorized(_ notification: Notification) {
         try? dependencies.keychainManager.remove(key: KeychainKey.refreshToken.rawValue)
         try? dependencies.keychainManager.remove(key: KeychainKey.accessToken.rawValue)
@@ -98,6 +112,9 @@ public class AppCoordinator: NSObject, Coordinator {
         animateRootViewController(authCoordinator.rootViewController!)
     }
     
+    /**
+     Prepare the main application after successful authentication.
+     */
     private func prepareMainApplication() -> UIViewController {
         let placeholderViewController = UIViewController()
         placeholderViewController.tabBarItem = UITabBarItem(title: "Post", image: UIImage(named: "tb_post"), tag: 0)
@@ -147,6 +164,11 @@ public class AppCoordinator: NSObject, Coordinator {
         }
     }
     
+    /**
+     Cache user info for offline use.
+     
+     - parameter completion: A block called when after completion of retrieving the user info.
+     */
     private func fetchUserInfo(completion: @escaping () -> Void) {
         dependencies.peopleService.getPerson { [weak self] result in
             switch result {
@@ -161,6 +183,11 @@ public class AppCoordinator: NSObject, Coordinator {
         }
     }
     
+    /**
+     Animate the appearance root view controller of the window.
+     
+     - parameter rootViewController: the new root view controller to animate.
+     */
     private func animateRootViewController(_ rootViewController: UIViewController) {
         // animate resetting the view controller stack
         UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: { [weak self] in
@@ -220,6 +247,8 @@ extension AppCoordinator: OnboardViewControllerDelegate {
     }
     
 }
+
+// MARK: - UNUserNotificationCenter Delegate
 
 extension AppCoordinator: UNUserNotificationCenterDelegate {
     public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {

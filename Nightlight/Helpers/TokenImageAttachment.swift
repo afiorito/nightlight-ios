@@ -1,7 +1,8 @@
 import UIKit
 
+/// An text attachment for nightlight tokens.
 public class TokenImageAttachment: NSTextAttachment {
-    
+    /// The font of the text for attachment.
     public let font: UIFont?
     
     init(font: UIFont?) {
