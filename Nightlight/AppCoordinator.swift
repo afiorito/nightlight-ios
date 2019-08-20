@@ -117,7 +117,7 @@ public class AppCoordinator: NSObject, Coordinator {
      */
     private func prepareMainApplication() -> UIViewController {
         let placeholderViewController = UIViewController()
-        placeholderViewController.tabBarItem = UITabBarItem(title: "Post", image: UIImage(named: "tb_post"), tag: 0)
+        placeholderViewController.tabBarItem = UITabBarItem(title: "Post", image: UIImage.tab.post, tag: 0)
         
         let coordinators: [TabBarCoordinator] = [
             RecentMessagesCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),

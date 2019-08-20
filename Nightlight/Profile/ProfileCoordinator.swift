@@ -155,7 +155,7 @@ extension ProfileCoordinator: MessagesViewControllerDelegate {
     public func messagesViewController(_ messagesViewController: MessagesViewController, didSelect message: MessageViewModel, at indexPath: IndexPath) {
         
         let messageDetailViewController = MessageDetailViewController(viewModel: message)
-        messageDetailViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nb_back"),
+        messageDetailViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.icon.back,
                                                                                        style: .plain,
                                                                                        target: self,
                                                                                        action: #selector(goBack))

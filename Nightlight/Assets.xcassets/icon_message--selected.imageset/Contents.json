@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "urgent.pdf"
+      "filename" : "icon_message--selected.pdf"
     }
   ],
   "info" : {
@@ -10,7 +10,7 @@
     "author" : "xcode"
   },
   "properties" : {
-    "template-rendering-intent" : "template",
+    "template-rendering-intent" : "original",
     "preserves-vector-representation" : true
   }
 }

@@ -14,7 +14,7 @@ public class UserNotificationViewModel {
         case .appreciateMessage:
             return UIImage.icon.sunSelected
         case .receiveMessage:
-            return UIImage(named: "message_selected")
+            return UIImage.icon.messageSelected
         default:
             return UIImage.icon.heartSelected
         }

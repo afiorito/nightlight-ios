@@ -14,7 +14,9 @@ extension UIImage {
         static var trash: UIImage? { return UIImage(named: "icon_trash") }
         static var check: UIImage? { return UIImage(named: "icon_check") }
         static var settings: UIImage? { return UIImage(named: "icon_settings") }
+        static var urgent: UIImage? { return UIImage(named: "icon_urgent") }
         static var send: UIImage? { return UIImage(named: "icon_send") }
+        static var messageSelected: UIImage? { return UIImage(named: "icon_message--selected")}
         static var heartSelected: UIImage? { return UIImage(named: "icon_heart--selected") }
         static var heartUnselected: UIImage? { return UIImage(named: "icon_heart--unselected") }
         static var sunSelected: UIImage? { return UIImage(named: "icon_sun--selected") }
@@ -29,6 +31,7 @@ extension UIImage {
         static var notification: UIImage? { return UIImage(named: "tb_notification") }
         static var profile: UIImage? { return UIImage(named: "tb_profile") }
         static var search: UIImage? { return UIImage(named: "tb_search") }
+        static var post: UIImage? { return UIImage(named: "tb_post") }
     }
     
     struct empty {

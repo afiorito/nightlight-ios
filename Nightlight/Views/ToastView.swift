@@ -70,13 +70,13 @@ public class ToastView: UIView {
     private func updateStyle() {
         switch severity {
         case .neutral:
-            iconImageView.image = UIImage(named: "toast_urgent")
+            iconImageView.image = UIImage.icon.urgent
             colorView.backgroundColor = .neutral
         case .success:
-            iconImageView.image = UIImage(named: "check")
+            iconImageView.image = UIImage.icon.check
             colorView.backgroundColor = .success
         case .urgent:
-            iconImageView.image = UIImage(named: "toast_urgent")
+            iconImageView.image = UIImage.icon.urgent
             colorView.backgroundColor = .urgent
         }
     }
