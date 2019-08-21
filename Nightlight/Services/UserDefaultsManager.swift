@@ -45,4 +45,14 @@ public class UserDefaultsManager {
             userDefaults.set(newValue.rawValue, forKey: UserDefaultsKey.messageDefault.rawValue)
         }
     }
+    
+    public var deviceToken: String? {
+        get {
+            return userDefaults.string(forKey: UserDefaultsKey.deviceToken.rawValue)
+        }
+        
+        set {
+            userDefaults.set(newValue, forKey: UserDefaultsKey.deviceToken.rawValue)
+        }
+    }
 }

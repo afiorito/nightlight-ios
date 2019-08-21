@@ -16,7 +16,7 @@ extension UIImage {
         static var settings: UIImage? { return UIImage(named: "icon_settings") }
         static var urgent: UIImage? { return UIImage(named: "icon_urgent") }
         static var send: UIImage? { return UIImage(named: "icon_send") }
-        static var messageSelected: UIImage? { return UIImage(named: "icon_message--selected")}
+        static var messageSelected: UIImage? { return UIImage(named: "icon_message--selected") }
         static var heartSelected: UIImage? { return UIImage(named: "icon_heart--selected") }
         static var heartUnselected: UIImage? { return UIImage(named: "icon_heart--unselected") }
         static var sunSelected: UIImage? { return UIImage(named: "icon_sun--selected") }

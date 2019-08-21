@@ -131,18 +131,8 @@ public class PeopleService {
      - parameter deviceToken: the new device token of the user.
      - parameter result: the result of updating the device token.
      */
-    public func updateDeviceToken(_ deviceToken: Data, result: @escaping (Result<Bool, PersonError>) -> Void) {
-        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        
-        let currentToken = try? keychainManager.string(for: KeychainKey.deviceToken.rawValue)
-        
-        if currentToken == token {
-            return result(.success(true))
-        } else {
-            try? keychainManager.set(token, forKey: KeychainKey.deviceToken.rawValue)
-        }
-        
-        let body = try? Data.encodeJSON(value: UserDeviceTokenBody(deviceToken: token))
+    public func updateDeviceToken(_ deviceToken: String, result: @escaping (Result<Bool, PersonError>) -> Void) {
+        let body = try? Data.encodeJSON(value: UserDeviceTokenBody(deviceToken: deviceToken))
         
         httpClient.put(endpoint: Endpoint.userNotificationDeviceToken, body: body) { (networkResult) in
             switch networkResult {

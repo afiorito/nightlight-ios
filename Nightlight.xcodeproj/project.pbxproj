@@ -298,7 +298,7 @@
 		9233615922C643F5002B7BBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9233616222C643F7002B7BBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9233616522C643F7002B7BBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9233616722C643F7002B7BBA /* Development.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Development.plist; sourceTree = "<group>"; };
+		9233616722C643F7002B7BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9233616C22C643F7002B7BBA /* NightlightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NightlightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9233617022C643F7002B7BBA /* NightlightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightlightTests.swift; sourceTree = "<group>"; };
 		9233617222C643F7002B7BBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -414,7 +414,6 @@
 		92931C2422D35C8000C54EB8 /* AuthorizedHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedHttpClient.swift; sourceTree = "<group>"; };
 		92931C2622D3907E00C54EB8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		92931C3022D399B000C54EB8 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
-		92931C3322D39B5800C54EB8 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		92931C3422D39C7300C54EB8 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
 		92AE911022CD68DD002C75B6 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		92B302EC22D6292C00CE5668 /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
@@ -440,7 +439,6 @@
 		92D8EBC822CFA8BA0083D6C4 /* AnimatedLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedLogoView.swift; sourceTree = "<group>"; };
 		92D8EBCA22CFD83C0083D6C4 /* SignUpViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerDelegate.swift; sourceTree = "<group>"; };
 		92D8EBCC22CFE0120083D6C4 /* SignInViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerDelegate.swift; sourceTree = "<group>"; };
-		92DA4F9D22D3C61500511C80 /* Production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Production.plist; sourceTree = "<group>"; };
 		92DC9DE122F8E1DF008A91BC /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
 		92DC9DE322F8EFF7008A91BC /* AppInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewModel.swift; sourceTree = "<group>"; };
 		92DC9DE522F8F55F008A91BC /* ModalHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHeight.swift; sourceTree = "<group>"; };
@@ -633,9 +631,7 @@
 				92E960CA22F6181D005DF33D /* Nightlight.entitlements */,
 				9233616422C643F7002B7BBA /* LaunchScreen.storyboard */,
 				92931C3022D399B000C54EB8 /* Development.xcconfig */,
-				92931C3322D39B5800C54EB8 /* Production.xcconfig */,
-				9233616722C643F7002B7BBA /* Development.plist */,
-				92DA4F9D22D3C61500511C80 /* Production.plist */,
+				9233616722C643F7002B7BBA /* Info.plist */,
 			);
 			path = Nightlight;
 			sourceTree = "<group>";
@@ -1370,6 +1366,7 @@
 				9233615322C643F5002B7BBA /* Frameworks */,
 				9233615422C643F5002B7BBA /* Resources */,
 				9233618922C64C2C002B7BBA /* ShellScript */,
+				920F1EF7230DF95300A36278 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1491,6 +1488,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		920F1EF7230DF95300A36278 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$((0x$buildNumber)) \nbuildNumber=$(($buildNumber + 1)) \nbuildNumber=$(printf \"%X\" $buildNumber)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+		};
 		9233618922C64C2C002B7BBA /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1506,7 +1520,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1907,7 +1921,7 @@
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
-				INFOPLIST_FILE = Nightlight/Development.plist;
+				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1929,7 +1943,7 @@
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
-				INFOPLIST_FILE = Nightlight/Development.plist;
+				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2027,7 +2041,6 @@
 		};
 		92931C2822D396B000C54EB8 /* Debug (Prod) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92931C3322D39B5800C54EB8 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2088,13 +2101,12 @@
 		};
 		92931C2922D396B000C54EB8 /* Debug (Prod) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92931C3322D39B5800C54EB8 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
-				INFOPLIST_FILE = Nightlight/Production.plist;
+				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2151,7 +2163,6 @@
 		};
 		92931C2C22D396BE00C54EB8 /* Release (Prod) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92931C3322D39B5800C54EB8 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2206,13 +2217,12 @@
 		};
 		92931C2D22D396BE00C54EB8 /* Release (Prod) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92931C3322D39B5800C54EB8 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
-				INFOPLIST_FILE = Nightlight/Production.plist;
+				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -73,7 +73,7 @@ public class SettingsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+            tableView.deselectRow(at: selectedIndexPath, animated: true)
         }
      }
     
@@ -249,12 +249,14 @@ extension SettingsViewController {
 
 extension SettingsViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         switch Section(rawValue: indexPath.section) {
         case .appreciation:
             appreciationTapAction(for: indexPath)
         case .general:
             generalTapAction(for: indexPath)
         case .feedback:
+            tableView.deselectRow(at: indexPath, animated: true)
             feedbackTapAction(for: indexPath)
         case .about:
             aboutTapAction(for: indexPath)

@@ -14,7 +14,7 @@ public class AppCoordinator: NSObject, Coordinator {
     private weak var tabBarController: NLTabBarController?
 
     /// A boolean representing whether a user has signed in previously.
-    private var isSignedIn: Bool {
+    public var isSignedIn: Bool {
         let accessToken = try? dependencies.keychainManager.string(for: KeychainKey.accessToken.rawValue)
         return accessToken != nil
     }
@@ -68,8 +68,6 @@ public class AppCoordinator: NSObject, Coordinator {
         
         window.makeKeyAndVisible()
         
-        fetchUserInfo {}
-        
         if !self.dependencies.userDefaultsManager.hasOnboarded {
             // Onboarding is only shown on first app load.
             // Since keychain values are persisted even when the app is uninstalled,
@@ -80,8 +78,8 @@ public class AppCoordinator: NSObject, Coordinator {
             let onboardViewController = OnboardViewController()
             onboardViewController.delegate = self
             splashScreenViewController.initialViewController = onboardViewController
-            splashScreenViewController.showInitialViewController()
         } else if self.isSignedIn {
+            fetchUserInfo {}
             let viewController = self.prepareMainApplication()
             splashScreenViewController.initialViewController = viewController
         } else {
@@ -91,9 +89,8 @@ public class AppCoordinator: NSObject, Coordinator {
             self.addChild(authCoordinator)
             authCoordinator.start()
         }
-
-        splashScreenViewController.showInitialViewController()
         
+        splashScreenViewController.showInitialViewController()
     }
     
     /**
@@ -104,6 +101,7 @@ public class AppCoordinator: NSObject, Coordinator {
     @objc private func handleUnauthorized(_ notification: Notification) {
         try? dependencies.keychainManager.remove(key: KeychainKey.refreshToken.rawValue)
         try? dependencies.keychainManager.remove(key: KeychainKey.accessToken.rawValue)
+        try? dependencies.keychainManager.remove(key: KeychainKey.tokens.rawValue)
         
         let authCoordinator = AuthCoordinator(rootViewController: nil, dependencies: dependencies, authMethod: .signIn)
         addChild(authCoordinator)
@@ -150,7 +148,13 @@ public class AppCoordinator: NSObject, Coordinator {
         removeChild(child)
         
         if child is AuthCoordinator {
+            // update the device token after sign in or sign up.
+            if let token = dependencies.userDefaultsManager.deviceToken {
+                dependencies.peopleService.updateDeviceToken(token) { _ in }
+            }
+
             if isInitialLaunch {
+                isInitialLaunch = false
                 let viewModel = PermissionViewModel(dependencies: dependencies)
                 
                 let notificationPermissionViewController = NotificationPermissionViewController(viewModel: viewModel)

@@ -7,18 +7,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let dependencies = DependencyContainer()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-
-        application.registerForRemoteNotifications()
         
         coordinator = AppCoordinator(dependencies: dependencies)
         coordinator?.start()
+
+        application.registerForRemoteNotifications()
 
         return true
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        dependencies.peopleService.updateDeviceToken(deviceToken) { _ in }
+        let newToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        let currentToken = dependencies.userDefaultsManager.deviceToken
+        
+        dependencies.userDefaultsManager.deviceToken = newToken
+        
+        if let coordinator = coordinator, coordinator.isSignedIn, newToken != currentToken {
+            dependencies.peopleService.updateDeviceToken(newToken) { _ in }
+        }
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
