@@ -111,7 +111,7 @@ public class MessageContentView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             contextButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
             contextButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             usernameLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),

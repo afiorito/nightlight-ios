@@ -55,6 +55,7 @@ public struct Strings {
         static let alreadyAppreciated = "Message is already appreciated."
         static let recentMessagesNavTitle = "Recent Messages"
         static let recentMessagesTabTitle = "Recent"
+        static let postMessageTabTitle = "Post"
         static let sendMessageTitle = "New Message"
         static let detailTitle = "Message"
         static let reported = "The message has been reported!"

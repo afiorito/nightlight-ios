@@ -79,7 +79,6 @@ public class AppCoordinator: NSObject, Coordinator {
             onboardViewController.delegate = self
             splashScreenViewController.initialViewController = onboardViewController
         } else if self.isSignedIn {
-            fetchUserInfo {}
             let viewController = self.prepareMainApplication()
             splashScreenViewController.initialViewController = viewController
         } else {
@@ -114,8 +113,9 @@ public class AppCoordinator: NSObject, Coordinator {
      Prepare the main application after successful authentication.
      */
     private func prepareMainApplication() -> UIViewController {
+        fetchUserInfo {}
         let placeholderViewController = UIViewController()
-        placeholderViewController.tabBarItem = UITabBarItem(title: "Post", image: UIImage.tab.post, tag: 0)
+        placeholderViewController.tabBarItem = UITabBarItem(title: Strings.message.postMessageTabTitle, image: UIImage.tab.post, tag: 0)
         
         let coordinators: [TabBarCoordinator] = [
             RecentMessagesCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
@@ -217,7 +217,7 @@ extension AppCoordinator: PermissionViewControllerDelegate {
 extension AppCoordinator: UITabBarControllerDelegate {
     public func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
-        if viewController.tabBarItem.title == "Post" {
+        if viewController.tabBarItem.title == Strings.message.postMessageTabTitle {
             let coordinator = SendMessageCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies)
             addChild(coordinator)
             coordinator.start()

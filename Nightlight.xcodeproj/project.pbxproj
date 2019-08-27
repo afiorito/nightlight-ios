@@ -330,6 +330,7 @@
 		92418D4622D7C1D0001B6DFB /* MessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageError.swift; sourceTree = "<group>"; };
 		92418D4822D7D422001B6DFB /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		92418D4A22D7D645001B6DFB /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		92467F52230ED56700EDD65B /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		9247606A22D8E2E4001EF6BE /* MessageTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		9247606E22D910FF001EF6BE /* TableViewArrayPaginatedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewArrayPaginatedDataSource.swift; sourceTree = "<group>"; };
 		925763CF22CABF6A0031D616 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
@@ -631,6 +632,7 @@
 				92E960CA22F6181D005DF33D /* Nightlight.entitlements */,
 				9233616422C643F7002B7BBA /* LaunchScreen.storyboard */,
 				92931C3022D399B000C54EB8 /* Development.xcconfig */,
+				92467F52230ED56700EDD65B /* Production.xcconfig */,
 				9233616722C643F7002B7BBA /* Info.plist */,
 			);
 			path = Nightlight;

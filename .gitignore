@@ -6,3 +6,6 @@ Pods/
 
 # os
 .DS_Store
+
+# configs
+Production.xcconfig
