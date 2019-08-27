@@ -17,10 +17,10 @@ public class NotificationPermissionViewController: PermissionViewController {
     }
     
     override public func viewDidLoad() {
-        permissionView.confirmActionTitle = "Turn On Notifications"
-        permissionView.cancelActionTitle = "No Thanks"
-        permissionView.title = "Never miss out"
-        permissionView.subtitle = "You'll get notified when someone interacts with your content."
+        permissionView.confirmActionTitle = Strings.permission.notification.confirmTitle
+        permissionView.cancelActionTitle = Strings.permission.notification.cancelTitle
+        permissionView.title = Strings.permission.notification.title
+        permissionView.subtitle = Strings.permission.notification.subtitle
         permissionView.imageName = "empty_notifications"
         
         super.viewDidLoad()

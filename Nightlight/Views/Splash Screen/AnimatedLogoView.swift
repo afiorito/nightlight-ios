@@ -63,10 +63,6 @@ public class AnimatedLogoView: UIView {
 
 extension AnimatedLogoView: Themeable {
     func updateColors(for theme: Theme) {
-        if #available(iOS 13.0, *) {
-            backgroundColor = UIColor.systemBackground
-        } else {
-            backgroundColor = .white
-        }
+        backgroundColor = .brand
     }
 }

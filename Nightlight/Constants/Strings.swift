@@ -14,9 +14,9 @@ public struct Strings {
     /// information for describing initial onboarding screens.
     struct onboard {
         static let pages = [
-            (title: "Spread positivity", subtitle: "The world could use more of it", image: "onboard_earth"),
-            (title: "Make a difference", subtitle: "Send helpful, kind or motivational messages to others in need", image: "onboard_letter"),
-            (title: "Show love and appreciation", subtitle: "Celebrate people who are trying to make an impact", image: "onboard_hand")
+            (title: "Spread positivity", subtitle: "The world could use more of it.", image: "onboard_spread"),
+            (title: "Make a difference", subtitle: "Send helpful, kind or motivational messages to others.", image: "onboard_difference"),
+            (title: "Show love and appreciation", subtitle: "Celebrate people who are trying to make an impact.", image: "onboard_send")
         ]
         
         static let getStarted = "Get Started"
@@ -76,6 +76,15 @@ public struct Strings {
     
     struct notification {
         static let notificationsTitle = "Notifications"
+    }
+    
+    struct permission {
+        struct notification {
+            static let confirmTitle = "Turn On Notifications"
+            static let cancelTitle = "No Thanks"
+            static let title = "Never miss out"
+            static let subtitle = "Get notified when someone interacts with your content."
+        }
     }
     
     struct setting {

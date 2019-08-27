@@ -11,6 +11,7 @@ disabled_rules:
   - force_try
   - trailing_whitespace
   - implicitly_unwrapped_optional
+  - nesting
 
 opt_in_rules:
   - closing_brace
