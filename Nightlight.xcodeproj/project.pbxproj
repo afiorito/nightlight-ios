@@ -2043,6 +2043,7 @@
 		};
 		92931C2822D396B000C54EB8 /* Debug (Prod) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92467F52230ED56700EDD65B /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2103,6 +2104,7 @@
 		};
 		92931C2922D396B000C54EB8 /* Debug (Prod) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92467F52230ED56700EDD65B /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
@@ -2165,6 +2167,7 @@
 		};
 		92931C2C22D396BE00C54EB8 /* Release (Prod) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92467F52230ED56700EDD65B /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2219,6 +2222,7 @@
 		};
 		92931C2D22D396BE00C54EB8 /* Release (Prod) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92467F52230ED56700EDD65B /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
