@@ -2295,7 +2295,7 @@
 				92931C2C22D396BE00C54EB8 /* Release (Prod) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release (Dev)";
+			defaultConfigurationName = "Release (Prod)";
 		};
 		9233618022C643F7002B7BBA /* Build configuration list for PBXNativeTarget "Nightlight" */ = {
 			isa = XCConfigurationList;
@@ -2306,7 +2306,7 @@
 				92931C2D22D396BE00C54EB8 /* Release (Prod) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release (Dev)";
+			defaultConfigurationName = "Release (Prod)";
 		};
 		9233618322C643F7002B7BBA /* Build configuration list for PBXNativeTarget "NightlightTests" */ = {
 			isa = XCConfigurationList;
@@ -2317,7 +2317,7 @@
 				92931C2E22D396BE00C54EB8 /* Release (Prod) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release (Dev)";
+			defaultConfigurationName = "Release (Prod)";
 		};
 		9233618622C643F7002B7BBA /* Build configuration list for PBXNativeTarget "NightlightUITests" */ = {
 			isa = XCConfigurationList;
@@ -2328,7 +2328,7 @@
 				92931C2F22D396BE00C54EB8 /* Release (Prod) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release (Dev)";
+			defaultConfigurationName = "Release (Prod)";
 		};
 /* End XCConfigurationList section */
 	};
