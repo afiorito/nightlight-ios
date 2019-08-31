@@ -65,10 +65,7 @@ public class SettingsViewController: UIViewController {
     }
     
     public override func viewWillAppear(_ animated: Bool) {
-        (navigationController as? Themeable)?.updateColors(for: theme)
-        navigationController?.navigationBar.barTintColor = .alternateBackground(for: theme)
-        navigationController?.navigationBar.backgroundColor = .alternateBackground(for: theme)
-        navigationController?.navigationBar.setBackgroundImage(UIColor.alternateBackground(for: theme).asImage(), for: .default)
+        updateColors(for: theme)
 
         super.viewWillAppear(animated)
         
@@ -320,9 +317,14 @@ extension SettingsViewController {
 
 extension SettingsViewController: Themeable {
     func updateColors(for theme: Theme) {
+        if theme == .system {
+            tableView.separatorColor = nil
+        } else {
+            tableView.separatorColor = .border(for: theme)
+        }
+
+        navigationController?.setStyle(.secondary, for: theme)
         tableView.backgroundColor = .background(for: theme)
-        tableView.separatorColor = .border(for: theme)
-        navigationController?.navigationBar.barTintColor = .alternateBackground(for: theme)
         tableView.reloadData()
     }
 }

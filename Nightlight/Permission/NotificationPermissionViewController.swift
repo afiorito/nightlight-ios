@@ -21,7 +21,7 @@ public class NotificationPermissionViewController: PermissionViewController {
         permissionView.cancelActionTitle = Strings.permission.notification.cancelTitle
         permissionView.title = Strings.permission.notification.title
         permissionView.subtitle = Strings.permission.notification.subtitle
-        permissionView.imageName = "empty_notifications"
+        permissionView.image = UIImage.empty.notification
         
         super.viewDidLoad()
     }

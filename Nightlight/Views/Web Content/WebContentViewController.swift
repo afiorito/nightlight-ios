@@ -68,8 +68,8 @@ public class WebContentViewController: UIViewController {
     private func loadContent(at url: URL, selector: String? = nil) {
         userContentController.removeAllUserScripts()
         if let selector = selector {
-            let userScript = WKUserScript(source: queryScript(using: selector), injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-            userContentController.addUserScript(userScript)
+            userContentController.addUserScript(queryScript(using: selector))
+            userContentController.addUserScript(styleScript)
         }
         
         webView.load(URLRequest(url: url))
@@ -80,18 +80,35 @@ public class WebContentViewController: UIViewController {
      
      - parameter selector: the selector of an element on the page.
      */
-    private func queryScript(using selector: String) -> String {
-        return  """
-                document.body.style.backgroundColor = "\(UIColor.background(for: theme).hexString)";
-                document.querySelectorAll('h2').forEach(h => h.style.color = "\(UIColor.primaryText(for: theme).hexString)");
-                document.querySelectorAll('h3').forEach(h => h.style.color = "\(UIColor.primaryText(for: theme).hexString)");
-                document.querySelectorAll('h3').forEach(h => h.style.color = "\(UIColor.primaryText(for: theme).hexString)");
-                document.body.style.color = "\(UIColor.primaryText(for: theme).hexString)";
-                let el = document.querySelector('\(selector)');
-                let title = document.querySelector('h1');
-                title.parentNode.removeChild(title);
-                document.body.innerHTML = el.innerHTML;
-                """
+    private func queryScript(using selector: String) -> WKUserScript {
+        let script = """
+                    let title = document.querySelector('h1');
+                    title.parentNode.removeChild(title);
+                    let el = document.querySelector('\(selector)');
+                    document.body.innerHTML = el.innerHTML;
+                    """
+        
+        return WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+    }
+    
+    private var styleScript: WKUserScript {
+        let script = """
+                    document.body.style.backgroundColor = "\(UIColor.background(for: theme).hexString)";
+                    document.querySelectorAll('h2').forEach(h => h.style.color = "\(UIColor.primaryText(for: theme).hexString)");
+                    document.querySelectorAll('h3').forEach(h => h.style.color = "\(UIColor.primaryText(for: theme).hexString)");
+                    document.querySelectorAll('h3').forEach(h => h.style.color = "\(UIColor.primaryText(for: theme).hexString)");
+                    document.body.style.color = "\(UIColor.primaryText(for: theme).hexString)";
+                    """
+        
+        return WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+    }
+    
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if #available(iOS 13, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            self.webView.evaluateJavaScript(styleScript.source)
+        }
     }
     
     private func prepareSubviews() {

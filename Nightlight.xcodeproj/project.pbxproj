@@ -239,6 +239,7 @@
 		92F1765E22DD404E008AEB82 /* BottomSheetPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1765D22DD404E008AEB82 /* BottomSheetPresentable+Defaults.swift */; };
 		92F1766022DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1765F22DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift */; };
 		92F1766222DD4777008AEB82 /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1766122DD4777008AEB82 /* DimmedView.swift */; };
+		92FEE425231AAA150089F410 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE424231AAA150089F410 /* UINavigationController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -499,6 +500,7 @@
 		92F1765D22DD404E008AEB82 /* BottomSheetPresentable+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottomSheetPresentable+Defaults.swift"; sourceTree = "<group>"; };
 		92F1765F22DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetTransitioningDelegate.swift; sourceTree = "<group>"; };
 		92F1766122DD4777008AEB82 /* DimmedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmedView.swift; sourceTree = "<group>"; };
+		92FEE424231AAA150089F410 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -722,6 +724,7 @@
 				928A75CE22C92E7600BC607A /* UIStackView+Extension.swift */,
 				9237A1D422CA74E100FC9331 /* UIColor+Extension.swift */,
 				92418D4A22D7D645001B6DFB /* NSObject+Extension.swift */,
+				92FEE424231AAA150089F410 /* UINavigationController+Extension.swift */,
 				92E9609622F5F97A005DF33D /* UITableView+Extension.swift */,
 				92D398A422C906A400AAC887 /* UIView+Extension.swift */,
 				9237A1D222CA559500FC9331 /* UIViewController+Extension.swift */,
@@ -1505,7 +1508,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$((0x$buildNumber)) \nbuildNumber=$(($buildNumber + 1)) \nbuildNumber=$(printf \"%X\" $buildNumber)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1)) \n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
 		};
 		9233618922C64C2C002B7BBA /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1728,6 +1731,7 @@
 				925BE1D822DE87670000BEC9 /* PeopleViewModel.swift in Sources */,
 				92E960AA22F60862005DF33D /* NotificationsView.swift in Sources */,
 				9279ACBD22E7C2A40098C4C2 /* SettingOptions.swift in Sources */,
+				92FEE425231AAA150089F410 /* UINavigationController+Extension.swift in Sources */,
 				92748B1822E0B4C500C2957E /* NSRegularExpression+Extension.swift in Sources */,
 				92DC9DFF22FA3172008A91BC /* UIBarButton+Instances.swift in Sources */,
 				9237A1D322CA559500FC9331 /* UIViewController+Extension.swift in Sources */,

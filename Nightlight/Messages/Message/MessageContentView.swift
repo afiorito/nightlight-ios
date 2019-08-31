@@ -139,12 +139,12 @@ public class MessageContentView: UIView {
 extension MessageContentView: Themeable {
     public func updateColors(for theme: Theme) {
         titleLabel.textColor = .primaryText(for: theme)
-        usernameLabel.textColor = .secondaryText
-        timeAgoLabel.textColor = .secondaryText
+        usernameLabel.textColor = .secondaryText(for: theme)
+        timeAgoLabel.textColor = .secondaryText(for: theme)
         bodyLabel.textColor = .primaryText(for: theme)
-        contextButton.tintColor = .neutral
+        contextButton.tintColor = .gray(for: theme)
         [loveAction, appreciateAction, saveAction].forEach { $0.updateColors(for: theme) }
-        loveAction.countLabel.textColor = .secondaryText
-        appreciateAction.countLabel.textColor = .secondaryText
+        loveAction.countLabel.textColor = .secondaryText(for: theme)
+        appreciateAction.countLabel.textColor = .secondaryText(for: theme)
     }
 }

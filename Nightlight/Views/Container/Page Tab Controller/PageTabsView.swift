@@ -80,6 +80,7 @@ extension PageTabsView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TabCollectionViewCell.className, for: indexPath) as! TabCollectionViewCell
         
         cell.title = dataSource?.pageTabsView(self, titleForTabAt: indexPath.item)
+        cell.updateColors(for: theme)
         
         return cell
     }

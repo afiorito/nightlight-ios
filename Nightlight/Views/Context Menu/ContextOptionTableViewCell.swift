@@ -57,15 +57,19 @@ public class ContextOptionTableViewCell: UITableViewCell {
 
 extension ContextOptionTableViewCell: Themeable {
     public func updateColors(for theme: Theme) {
-        backgroundColor = .background(for: theme)
-        
-        let background = UIView()
-        selectedBackgroundView = background
-        switch theme {
-        case .light:
-            background.backgroundColor = UIColor.background(for: theme).darker(amount: 0.05)
-        case .dark:
-            background.backgroundColor = UIColor.background(for: theme).lighter(amount: 0.05)
+        if theme == .system {
+            selectedBackgroundView = nil
+        } else {
+            let background = UIView()
+            selectedBackgroundView = background
+            switch theme {
+            case .dark:
+                background.backgroundColor = UIColor.background(for: theme).lighter(amount: 0.05)
+            default:
+                background.backgroundColor = UIColor.background(for: theme).darker(amount: 0.05)
+            }
         }
+        
+        backgroundColor = .background(for: theme)
     }
 }

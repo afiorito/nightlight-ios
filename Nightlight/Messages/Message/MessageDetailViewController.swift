@@ -40,8 +40,8 @@ public class MessageDetailViewController: UIViewController {
         messageContentView.contextButton.addTarget(self, action: #selector(contextTapped), for: .touchUpInside)
         
         updateView()
-        updateColors(for: theme)
         prepareSubviews()
+        updateColors(for: theme)
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -165,6 +165,7 @@ extension MessageDetailViewController: AppreciationEventHandling {
 
 extension MessageDetailViewController: Themeable {
     public func updateColors(for theme: Theme) {
+        navigationController?.setStyle(.primary, for: theme)
         view.backgroundColor = .background(for: theme)
         messageContentView.updateColors(for: theme)
     }

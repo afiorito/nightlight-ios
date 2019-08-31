@@ -99,7 +99,7 @@ public class BuyTokensView: UIView {
 extension BuyTokensView: Themeable {
     func updateColors(for theme: Theme) {
         titleLabel.textColor = .primaryText(for: theme)
-        cancelButton.tintColor = .neutral
+        cancelButton.tintColor = .gray(for: theme)
         backgroundColor = .background(for: theme)
         productsCollectionView.backgroundColor = .background(for: theme)
     }

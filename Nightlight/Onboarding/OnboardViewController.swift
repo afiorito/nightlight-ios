@@ -126,14 +126,16 @@ public class OnboardViewController: UIViewController {
     
     override public var preferredStatusBarStyle: UIStatusBarStyle {
         switch theme {
+        case .dark:
+            return .lightContent
         case .light:
             if #available(iOS 13.0, *) {
                 return .darkContent
             } else {
                 return .default
             }
-        case .dark:
-            return .lightContent
+        case .system:
+            return .default
         }
     }
 }

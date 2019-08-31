@@ -9,9 +9,6 @@ public class PermissionView: UIView {
     /// A callback for cancelling an action.
     public var cancelAction: (() -> Void)?
     
-    /// Name of the image without light or dark prefix.
-    public var imageName: String?
-    
     /// The title text for the permission.
     public var title: String? {
         get { return titleLabel.text }
@@ -37,7 +34,7 @@ public class PermissionView: UIView {
     }
     
     /// The permission image.
-    private var image: UIImage? {
+    public var image: UIImage? {
         get { return imageView.image }
         set { imageView.image = newValue }
     }
@@ -162,16 +159,7 @@ extension PermissionView: Themeable {
     public func updateColors(for theme: Theme) {
         backgroundColor = .background(for: theme)
         titleLabel.textColor = .primaryText(for: theme)
-        subtitleLabel.textColor = .secondaryText
-        cancelButton.setTitleColor(.secondaryText, for: .normal)
-        
-        if let imageName = imageName {
-            switch theme {
-            case.light:
-                image = UIImage(named: "\(imageName)_light")
-            case .dark:
-                image = UIImage(named: "\(imageName)_dark")
-            }
-        }
+        subtitleLabel.textColor = .secondaryText(for: theme)
+        cancelButton.setTitleColor(.secondaryText(for: theme), for: .normal)
     }
 }

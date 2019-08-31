@@ -2,9 +2,6 @@ import UIKit
 
 /// A placeholder view for empty content.
 public class EmptyView: UIView {
-    /// The name of the image without light or dark suffix.
-    public var imageName: String
-    
     /// The empty image.
     public var image: UIImage? {
         get { return imageView.image }
@@ -24,9 +21,8 @@ public class EmptyView: UIView {
     }
 
     required init(description: EmptyViewDescription) {
-        self.imageName = description.imageName
-
         super.init(frame: .zero)
+        self.image = UIImage(named: description.imageName)
         self.title = description.title
         self.subtitle = description.subtitle
         
@@ -69,7 +65,7 @@ public class EmptyView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.spacing = 15
+        stackView.spacing = 40
         
         return stackView
     }()
@@ -103,13 +99,6 @@ public class EmptyView: UIView {
 extension EmptyView: Themeable {
     public func updateColors(for theme: Theme) {
         titleLabel.textColor = .primaryText(for: theme)
-        subtitleLabel.textColor = .secondaryText
-        
-        switch theme {
-        case.light:
-            image = UIImage(named: "\(imageName)_light")
-        case .dark:
-            image = UIImage(named: "\(imageName)_dark")
-        }
+        subtitleLabel.textColor = .secondaryText(for: theme)
     }
 }

@@ -7,7 +7,7 @@ public class AnimatedLogoView: UIView {
     private let logo: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage.icon.logo
-        imageView.tintColor = .brand
+        imageView.tintColor = .white
         return imageView
     }()
     

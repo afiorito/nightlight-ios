@@ -35,8 +35,8 @@ extension UIImage {
     }
     
     struct empty {
-        static var messageLight: UIImage? { return UIImage(named: "empty_message_light") }
-        static var messageDark: UIImage? { return UIImage(named: "empty_message_dark") }
+        static var message: UIImage? { return UIImage(named: "empty_message") }
+        static var notification: UIImage? { return UIImage(named: "empty_notifications") }
     }
     
     struct glyph {

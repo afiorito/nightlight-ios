@@ -5,4 +5,7 @@ public enum Theme: String, CaseIterable {
     
     /// a dim theme for primary dark colors.
     case dark
+    
+    /// a theme for standard system colors.
+    case system
 }

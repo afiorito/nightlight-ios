@@ -134,8 +134,9 @@ extension NotificationsViewController: Themeable {
     }
 
     public func updateColors(for theme: Theme) {
+        navigationController?.setStyle(.primary, for: theme)
         notificationsView.updateColors(for: theme)
-        refreshControl.tintColor = .neutral
+        refreshControl.tintColor = .gray(for: theme)
         (navigationItem.titleView as? Themeable)?.updateColors(for: theme)
     }
 }

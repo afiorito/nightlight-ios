@@ -103,6 +103,10 @@ extension PageTabController: UICollectionViewDelegateFlowLayout {
         return collectionView.frame.size
     }
     
+    public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let numberOfTabs = dataSource?.pageTabControllerNumberOfTabs(self)
             else { return }

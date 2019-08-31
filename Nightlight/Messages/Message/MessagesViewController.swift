@@ -240,19 +240,20 @@ extension MessagesViewController: Themeable {
     }
     
     public func updateColors(for theme: Theme) {
+        styleNavigationController(for: theme)
+
         view.backgroundColor = .background(for: theme)
         messagesView.updateColors(for: theme)
         toastView?.updateColors(for: theme)
         messagesView.tableView.emptyView?.updateColors(for: theme)
-        refreshControl.tintColor = .neutral
-        
-        switch theme {
-        case .light:
-            messagesView.tableView.emptyView?.image = UIImage.empty.messageLight
-        case .dark:
-            messagesView.tableView.emptyView?.image = UIImage.empty.messageDark
-        }
+        refreshControl.tintColor = .gray(for: theme)
+        messagesView.tableView.emptyView?.image = UIImage.empty.message
         
         (navigationItem.titleView as? Themeable)?.updateColors(for: theme)
+    }
+    
+    private func styleNavigationController(for theme: Theme) {
+        guard let navigationController = parent as? UINavigationController else { return }
+        navigationController.setStyle(.primary, for: theme)
     }
 }

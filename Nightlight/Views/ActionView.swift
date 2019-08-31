@@ -123,6 +123,6 @@ public class ActionView: UIView {
 
 extension ActionView: Themeable {
     public func updateColors(for theme: Theme) {
-        button.tintColor = .neutral
+        button.tintColor = .gray(for: theme)
     }
 }

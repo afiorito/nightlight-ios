@@ -67,9 +67,15 @@ public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UIT
 
 extension OptionsTableViewController: Themeable {
     func updateColors(for theme: Theme) {
+        if theme == .system {
+            tableView.separatorColor = nil
+        } else {
+            tableView.separatorColor = .border(for: theme)
+        }
+
+        navigationController?.setStyle(.secondary, for: theme)
         setNeedsStatusBarAppearanceUpdate()
         tableView.backgroundColor = .background(for: theme)
-        tableView.separatorColor = .border(for: theme)
         tableView.reloadData()
     }
 }

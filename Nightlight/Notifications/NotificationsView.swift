@@ -41,8 +41,12 @@ public class NotificationsView: UIView {
 
 extension NotificationsView: Themeable {
     public func updateColors(for theme: Theme) {
+        if theme != .system {
+            tableView.separatorColor = .border(for: theme)
+        } else {
+            tableView.separatorColor = nil
+        }
         tableView.backgroundColor = .background(for: theme)
-        tableView.separatorColor = .border(for: theme)
         (tableView.backgroundView as? Themeable)?.updateColors(for: theme)
         tableView.reloadData()
     }

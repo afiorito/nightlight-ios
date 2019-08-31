@@ -40,7 +40,7 @@ public class HelpfulPeopleHeader: UITableViewHeaderFooterView {
 extension HelpfulPeopleHeader: Themeable {
     func updateColors(for theme: Theme) {
         let backgroundView = UIView()
-        backgroundView.backgroundColor = .darkBackground(for: theme)
+        backgroundView.backgroundColor = .background(for: theme)
         self.backgroundView = backgroundView
         titleLabel.textColor = .primaryText(for: theme)
     }

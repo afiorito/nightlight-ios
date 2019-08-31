@@ -89,8 +89,8 @@ public class SendAppreciationHeaderView: UIView {
 extension SendAppreciationHeaderView: Themeable {
     func updateColors(for theme: Theme) {
         titleLabel.textColor = .primaryText(for: theme)
-        subtitleLabel.textColor = .secondaryText
-        cancelButton.tintColor = .neutral
+        subtitleLabel.textColor = .secondaryText(for: theme)
+        cancelButton.tintColor = .gray(for: theme)
         separatorLineView.backgroundColor = .border(for: theme)
     }
 }

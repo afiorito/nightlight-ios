@@ -28,7 +28,16 @@ public class UserDefaultsManager {
     /// The currently selected theme.
     public var theme: Theme {
         get {
-            return Theme(rawValue: userDefaults.string(forKey: UserDefaultsKey.theme.rawValue) ?? "") ?? .light
+            if let theme = Theme(rawValue: userDefaults.string(forKey: UserDefaultsKey.theme.rawValue) ?? "") {
+                return theme
+            }
+            
+            if #available(iOS 13, *) {
+                return .system
+            } else {
+                return .light
+            }
+            
         }
         set {
             userDefaults.set(newValue.rawValue, forKey: UserDefaultsKey.theme.rawValue)

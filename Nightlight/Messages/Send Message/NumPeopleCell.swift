@@ -68,6 +68,6 @@ extension NumPeopleCell: Themeable {
         textLabel?.textColor = .primaryText(for: theme)
         backgroundColor = .background(for: theme)
         accessoryView?.backgroundColor = .background(for: theme)
-        textField.textColor = .secondaryText
+        textField.textColor = .secondaryText(for: theme)
     }
 }

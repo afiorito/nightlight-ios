@@ -64,8 +64,8 @@ public class PersonTableViewCell: UITableViewCell, Configurable {
 
 extension PersonTableViewCell: Themeable {
     func updateColors(for theme: Theme) {
+        contentView.backgroundColor = .background(for: theme)
         backgroundCardView.backgroundColor = .cellBackground(for: theme)
-        contentView.backgroundColor = .darkBackground(for: theme)
         personContentView.updateColors(for: theme)
     }
 }

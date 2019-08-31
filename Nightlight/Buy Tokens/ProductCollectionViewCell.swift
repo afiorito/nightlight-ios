@@ -111,7 +111,7 @@ extension ProductCollectionViewCell: Themeable {
         contentView.backgroundColor = .cellBackground(for: theme)
         tokenLabel.textColor = .primaryText(for: theme)
         priceTextView.backgroundColor = .brand
-        subtitleLabel.textColor = .secondaryText
+        subtitleLabel.textColor = .secondaryText(for: theme)
         priceTextView.textColor = UIColor.Palette.white
     }
 }

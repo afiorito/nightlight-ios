@@ -53,13 +53,7 @@ public class ProfileViewController: UIViewController {
     }
     
     public override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.barTintColor = .clear
-        navigationController?.navigationBar.backgroundColor = .clear
-        navigationController?.view.backgroundColor = .alternateBackground(for: theme)
-        navigationController?.navigationBar.shadowImage = UIColor.clear.asImage()
-        
+        navigationController?.setStyle(.hidden, for: theme)
         super.viewWillAppear(animated)
     }
     
@@ -75,8 +69,7 @@ public class ProfileViewController: UIViewController {
                 self.personView.dateLabel.text = viewModel.helpingSince
                 self.personView.loveAccolade.actionView.count = viewModel.totalLove
                 self.personView.appreciateAccolade.actionView.count = viewModel.totalAppreciation
-            case .failure:
-                self.showToast(Strings.error.couldNotConnect, severity: .urgent)
+            case .failure: break
             }
         }
     }
@@ -137,6 +130,6 @@ extension ProfileViewController: Themeable {
     public func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
         personView.updateColors(for: theme)
-        headerBackground.backgroundColor = .alternateBackground(for: theme)
+        headerBackground.backgroundColor = .background(for: theme)
     }
 }

@@ -35,9 +35,9 @@ public class SelectOptionTableViewCell<E: RawRepresentable>: BaseStaticTableView
     
     override func updateColors(for theme: Theme) {
         super.updateColors(for: theme)
-        detailTextLabel?.textColor = .secondaryText
+        detailTextLabel?.textColor = .secondaryText(for: theme)
         textLabel?.textColor = .primaryText(for: theme)
         backgroundColor = .background(for: theme)
-        disclosureIndicator.tintColor = .primaryGrayScale(for: theme)
+        disclosureIndicator.tintColor = .invertedBackground(for: theme)
     }
 }

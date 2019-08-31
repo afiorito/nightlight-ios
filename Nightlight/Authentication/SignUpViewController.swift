@@ -60,12 +60,12 @@ public class SignUpViewController: UIViewController {
         signUpView.authButton.isLoading = true
         
         viewModel.signUp(with: credentials) { [unowned self] (result) in
-            self.signUpView.authButton.isLoading = false
             
             switch result {
             case .success:
                 self.delegate?.signUpViewControllerDidSignUp(self)
             case .failure(let error):
+                self.signUpView.authButton.isLoading = false
                 switch error {
                 case .validation(let reasons):
                     self.signUpView.showFieldErrors(reasons: reasons)
@@ -90,6 +90,6 @@ extension SignUpViewController: Themeable {
     }
 
     public func updateColors(for theme: Theme) {
-        (view as? AuthView)?.updateColors(for: theme)
+        signUpView.updateColors(for: theme)
     }
 }

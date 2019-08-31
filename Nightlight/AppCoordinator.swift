@@ -19,9 +19,6 @@ public class AppCoordinator: NSObject, Coordinator {
         return accessToken != nil
     }
     
-    /// A boolean denoting if the app is launching for the first time.
-    private var isInitialLaunch = false
-    
     public init(dependencies: DependencyContainer) {
         self.dependencies = dependencies
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -73,7 +70,6 @@ public class AppCoordinator: NSObject, Coordinator {
             // Since keychain values are persisted even when the app is uninstalled,
             // clear the keychain when the app is reinstalled and loaded for the first time.
             try? self.dependencies.keychainManager.removeAllKeys()
-            self.isInitialLaunch = true
 
             let onboardViewController = OnboardViewController()
             onboardViewController.delegate = self
@@ -152,18 +148,32 @@ public class AppCoordinator: NSObject, Coordinator {
             if let token = dependencies.userDefaultsManager.deviceToken {
                 dependencies.peopleService.updateDeviceToken(token) { _ in }
             }
+            
+            hasShownNotificationPrompt { [weak self] (result) in
+                guard let self = self else { return }
 
-            if isInitialLaunch {
-                isInitialLaunch = false
-                let viewModel = PermissionViewModel(dependencies: dependencies)
-                
-                let notificationPermissionViewController = NotificationPermissionViewController(viewModel: viewModel)
-                notificationPermissionViewController.delegate = self
-                
-                animateRootViewController(notificationPermissionViewController)
-                
-            } else {
-                animateRootViewController(prepareMainApplication())
+                switch result {
+                case .success(let hasShown):
+                    if hasShown {
+                        self.animateRootViewController(self.prepareMainApplication())
+                    } else {
+                        let viewModel = PermissionViewModel(dependencies: self.dependencies)
+                        
+                        let notificationPermissionViewController = NotificationPermissionViewController(viewModel: viewModel)
+                        notificationPermissionViewController.delegate = self
+                        
+                        self.animateRootViewController(notificationPermissionViewController)
+                    }
+                default: self.animateRootViewController(self.prepareMainApplication())
+                }
+            }
+        }
+    }
+    
+    private func hasShownNotificationPrompt(result: @escaping (Result<Bool, Error>) -> Void) {
+        dependencies.userNotificationCenter.getNotificationSettings { (settings) in
+            DispatchQueue.main.async {
+                result(.success(settings.authorizationStatus != .notDetermined))
             }
         }
     }

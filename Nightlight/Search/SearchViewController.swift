@@ -92,7 +92,7 @@ extension SearchViewController: UISearchResultsUpdating {
 
 extension SearchViewController: Themeable {
     public func updateColors(for theme: Theme) {
-        view.backgroundColor = .background(for: theme)
+        navigationController?.setStyle(.primary, for: theme)
         searchController.searchBar.updateColors(for: theme)
     }
 }

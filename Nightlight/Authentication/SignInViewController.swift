@@ -53,12 +53,12 @@ public class SignInViewController: UIViewController {
         signInView.authButton.isLoading = true
         
         viewModel.signIn(with: credentials) { [unowned self] (result) in
-            self.signInView.authButton.isLoading = false
             
             switch result {
             case .success:
                 self.delegate?.signInViewControllerDidSignIn(self)
             case .failure(let error):
+                self.signInView.authButton.isLoading = false
                 switch error {
                 case .validation(let reasons):
                     self.showToast("Username or password are incorrect.", severity: .urgent)

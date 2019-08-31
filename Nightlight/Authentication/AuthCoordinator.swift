@@ -86,6 +86,7 @@ public class AuthCoordinator: Coordinator {
         if type(of: currentViewController) == type(of: otherViewController) {
             currentViewController.dismiss(animated: true)
         } else {
+            otherViewController.modalPresentationStyle = .fullScreen
             currentViewController.present(otherViewController, animated: true)
         }
     }

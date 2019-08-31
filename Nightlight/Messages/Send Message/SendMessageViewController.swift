@@ -72,12 +72,14 @@ public class SendMessageViewController: UITableViewController {
     }
     
     @objc private func sendTapped() {
+        navigationItem.rightBarButtonItem?.isEnabled = false
         viewModel.sendMessage(
             title: titleCell.textField.text,
             body: bodyCell.textView.text,
             numPeople: numberOfPeopleCell.textField.text,
             isAnonymous: anonymousCell.switchControl.isOn) { [weak self] result in
                 guard let self = self else { return }
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
 
                 switch result {
                 case .success(let message):
@@ -156,9 +158,14 @@ extension SendMessageViewController: Themeable {
     }
 
     public func updateColors(for theme: Theme) {
-        navigationController?.navigationBar.barTintColor = .alternateBackground(for: theme)
+        if theme == .system {
+            tableView.separatorColor = nil
+        } else {
+            tableView.separatorColor = .border(for: theme)
+        }
+
+        navigationController?.setStyle(.secondary, for: theme)
         view.backgroundColor = .background(for: theme)
         tableView.backgroundColor = .background(for: theme)
-        tableView.separatorColor = .border(for: theme)
     }
 }

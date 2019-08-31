@@ -54,8 +54,13 @@ public class NLTabBarController: UITabBarController {
 
 extension NLTabBarController: Themeable {
     public func updateColors(for theme: Theme) {
-        tabBar.barTintColor = .alternateBackground(for: theme)
-        tabBar.unselectedItemTintColor = .accent(for: theme)
-        tabBar.tintColor = .primaryGrayScale(for: theme)
+        if theme != .system {
+            tabBar.barTintColor = .secondaryBackground(for: theme)
+            tabBar.unselectedItemTintColor = .accent(for: theme)
+        } else {
+            tabBar.barTintColor = nil
+            tabBar.unselectedItemTintColor = nil
+        }
+        tabBar.tintColor = .invertedBackground(for: theme)
     }
 }

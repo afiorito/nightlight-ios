@@ -50,9 +50,9 @@ public class TextField: UITextField {
 
 extension TextField: Themeable {
     public func updateColors(for theme: Theme) {
-        backgroundColor = .elementBackground(for: theme)
-        tintColor = .accent(for: theme)
         attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [.foregroundColor: UIColor.accent(for: theme)])
         textColor = .primaryText(for: theme)
+        backgroundColor = .elementBackground(for: theme)
+        tintColor = .accent(for: theme)
     }
 }

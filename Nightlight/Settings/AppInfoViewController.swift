@@ -16,6 +16,7 @@ public class AppInfoViewController: UIViewController {
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage.icon.logo
+        imageView.tintColor = .brand
         return imageView
     }()
     
@@ -126,7 +127,7 @@ public class AppInfoViewController: UIViewController {
 extension AppInfoViewController: Themeable {
     func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
-        cancelButton.tintColor = .neutral
+        cancelButton.tintColor = .gray(for: theme)
         versionLabel.textColor = .primaryText(for: theme)
         infoLabel.textColor = .primaryText(for: theme)
         thanksLabel.textColor = .primaryText(for: theme)

@@ -16,12 +16,15 @@ extension UIColor {
      - returns: the palette color for the background of standard content.
      */
     public class func background(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .systemBackground
+        }
+
         switch theme {
-        case .light:
-            return Palette.white
         case .dark:
             return Palette.black
-            
+        default:
+            return Palette.white
         }
     }
     
@@ -32,12 +35,16 @@ extension UIColor {
      
      - returns: the palette color for the alternate background color of elements.
      */
-    public class func alternateBackground(for theme: Theme) -> UIColor {
+    public class func secondaryBackground(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .secondarySystemBackground
+        }
+        
         switch theme {
-        case .light:
-            return Palette.alternateWhite
         case .dark:
             return Palette.alternateBlack
+        default:
+            return Palette.alternateWhite
             
         }
     }
@@ -51,11 +58,15 @@ extension UIColor {
      - returns: the palette color for an element background.
      */
     public class func elementBackground(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .systemGray6
+        }
+        
         switch theme {
-        case .light:
-            return Palette.lightGrey
         case .dark:
             return Palette.darkGrey
+        default:
+            return Palette.lightGrey
             
         }
     }
@@ -68,28 +79,18 @@ extension UIColor {
      - returns: the palette color for the cell background.
      */
     public class func cellBackground(for theme: Theme) -> UIColor {
+        if let color = UIColor(named: "cellBackground"),
+            theme == .system,
+            #available(iOS 13.0, *) {
+            return color
+        }
+        
         switch theme {
-        case .light:
-            return Palette.white
         case .dark:
             return Palette.darkGrey
-            
-        }
-    }
-    
-    /**
-     Handles the color for black and white elements.
-     
-     - parameter theme: the theme to determine the grayscale color.
-     
-     - returns: the palette color for black and white elements.
-     */
-    public class func primaryGrayScale(for theme: Theme) -> UIColor {
-        switch theme {
-        case .light:
-            return Palette.black
-        case .dark:
+        default:
             return Palette.white
+            
         }
     }
     
@@ -101,11 +102,15 @@ extension UIColor {
      - returns: the palette color for subtle accents.
      */
     public class func accent(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .systemGray
+        }
+        
         switch theme {
-        case .light:
-            return Palette.lightAccent
         case .dark:
-            return Palette.darkAccent
+            return Palette.gray
+        default:
+            return Palette.lightAccent
         }
     }
     
@@ -117,11 +122,15 @@ extension UIColor {
      - returns: the palette color for drop shadows.
      */
     public class func shadow(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .systemGray5
+        }
+        
         switch theme {
-        case .light:
-            return Palette.lightShadow
         case .dark:
             return Palette.darkShadow
+        default:
+            return Palette.lightShadow
         }
     }
     
@@ -133,11 +142,15 @@ extension UIColor {
      - returns: the palette color for borders.
      */
     public class func border(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .separator
+        }
+        
         switch theme {
-        case .light:
-            return Palette.lightBorder
         case .dark:
             return Palette.darkBorder
+        default:
+            return Palette.lightBorder
         }
     }
     
@@ -149,11 +162,15 @@ extension UIColor {
      - returns: the palette color for primary text.
      */
     public class func primaryText(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .label
+        }
+        
         switch theme {
-        case .light:
-            return Palette.black
         case .dark:
             return Palette.white
+        default:
+            return Palette.black
         }
     }
     
@@ -165,11 +182,17 @@ extension UIColor {
      - returns the palette color for inverted primary text.
      */
     public class func invertedPrimaryText(for theme: Theme) -> UIColor {
+        if let color = UIColor(named: "invertedLabel"),
+            theme == .system,
+            #available(iOS 13.0, *) {
+            return color
+        }
+        
         switch theme {
-        case .light:
-            return Palette.white
         case .dark:
             return Palette.black
+        default:
+            return Palette.white
         }
     }
     
@@ -181,11 +204,15 @@ extension UIColor {
      - returns: the palette color for the inverted background of standard content.
      */
     public class func invertedBackground(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .label
+        }
+        
         switch theme {
-        case .light:
-            return Palette.black
         case .dark:
             return Palette.white
+        default:
+            return Palette.black
             
         }
     }
@@ -198,11 +225,15 @@ extension UIColor {
      - returns: the palette color for dark backgrounds of standard content.
      */
     public class func darkBackground(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .tertiarySystemBackground
+        }
+        
         switch theme {
-        case .light:
-            return Palette.alternateWhite
         case .dark:
             return Palette.black
+        default:
+            return Palette.alternateWhite
             
         }
     }
@@ -215,11 +246,15 @@ extension UIColor {
      - returns: the palette color for a neutral button background color.
      */
     public class func buttonNeutral(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .systemGray5
+        }
+        
         switch theme {
-        case .light:
-            return Palette.alternateLightGrey
         case .dark:
             return Palette.alternateBlack
+        default:
+            return Palette.alternateLightGrey
         }
     }
     
@@ -231,17 +266,49 @@ extension UIColor {
      - returns: the palette color for gray content.
      */
     public class func gray(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .systemGray
+        }
+        
         switch theme {
-        case .light:
-            return Palette.lightGrey
-        case .dark:
-            return Palette.darkGrey
+        default:
+            return Palette.gray
         }
     }
     
-    /// Secondary text color for all backgrounds.
-    public class var secondaryText: UIColor {
-        return Palette.darkAccent
+    /**
+     Handles the color for gray content.
+     
+     - parameter theme: the theme to determine the gray color.
+     
+     - returns: the palette color for gray content.
+     */
+    public class func gray6(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .systemGray6
+        }
+        
+        switch theme {
+        case .dark:
+            return Palette.darkGrey
+        default:
+            return Palette.lightGrey
+        }
+    }
+    
+    /**
+     Handles the secondary text color.
+     
+     - parameter theme: the theme to determine the secondary text color.
+     
+     - returns: the palette color for secondary text.
+     */
+    public class func secondaryText(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .secondaryLabel
+        }
+
+        return Palette.gray
     }
     
     /// Represents color for hinting an urgent or erroneous occurence.
@@ -253,11 +320,7 @@ extension UIColor {
     public class var success: UIColor {
         return Palette.active
     }
-    
-    /// Represents color for hinting a neutral occurence.
-    public class var neutral: UIColor {
-        return Palette.darkAccent
-    }
+
 }
 
 // MARK: - Color Names
@@ -274,7 +337,7 @@ extension UIColor {
         static let lightGrey = UIColor(hex: "F7F7F7")
         static let alternateLightGrey = UIColor(hex: "E5EBF0")
         static let lightAccent = UIColor(hex: "C3C3C6")
-        static let darkAccent = UIColor(hex: "8A939A")
+        static let gray = UIColor(hex: "8A939A")
         static let lightShadow = UIColor(hex: "DAE0E6")
         static let darkShadow = UIColor(hex: "2D3236")
         static let active = UIColor(hex: "4BC361")
