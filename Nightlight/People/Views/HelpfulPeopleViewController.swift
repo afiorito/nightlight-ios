@@ -38,6 +38,8 @@ public class HelpfulPeopleViewController: UIViewController {
         
         updateColors(for: theme)
 
+        peopleView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+        refreshControl.beginRefreshing()
         loadPeople()
     }
     

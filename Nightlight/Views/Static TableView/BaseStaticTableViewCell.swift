@@ -2,19 +2,27 @@ import UIKit
 
 /// A static table view cell encompassing basic styling.
 public class BaseStaticTableViewCell: UITableViewCell, Themeable {
-    func updateColors(for theme: Theme) {
-        if theme == .system {
-            selectedBackgroundView = nil
-        } else {
-            let background = UIView()
-            selectedBackgroundView = background
-
+    public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        
+        if highlighted {
             switch theme {
             case .dark:
-                background.backgroundColor = UIColor.background(for: theme).lighter(amount: 0.05)
-            default:
-                background.backgroundColor = UIColor.background(for: theme).darker(amount: 0.05)
+               backgroundColor = UIColor.background(for: theme).lighter(amount: 0.05)
+            case .light:
+                backgroundColor = UIColor.background(for: theme).darker(amount: 0.05)
+            case .system: break
             }
+        } else {
+            backgroundColor = UIColor.background(for: theme)
+        }
+    }
+
+    func updateColors(for theme: Theme) {
+        if theme == .system {
+            selectionStyle = .default
+        } else {
+            selectionStyle = .none
         }
     }
 }

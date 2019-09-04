@@ -51,6 +51,8 @@ public class MessagesViewController: UIViewController {
             self?.loadMoreMessages()
         }
 
+        // fix refresh control tint bug.
+        messagesView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
         self.refreshControl.beginRefreshing()
         refresh()
     }

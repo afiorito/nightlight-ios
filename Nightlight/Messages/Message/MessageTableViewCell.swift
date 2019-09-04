@@ -30,6 +30,22 @@ public class MessageTableViewCell: UITableViewCell, Configurable {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        
+        if highlighted {
+            switch theme {
+            case .dark:
+                backgroundColor = UIColor.background(for: theme).lighter(amount: 0.05)
+            case .light:
+                backgroundColor = UIColor.background(for: theme).darker(amount: 0.05)
+            case .system: break
+            }
+        } else {
+            backgroundColor = UIColor.background(for: theme)
+        }
+    }
+    
     public func configure(with viewModel: MessageViewModel) {
         messageContentView.titleLabel.text = viewModel.title
         messageContentView.usernameLabel.text = viewModel.displayName
@@ -81,17 +97,9 @@ public class MessageTableViewCell: UITableViewCell, Configurable {
 extension MessageTableViewCell: Themeable {
     public func updateColors(for theme: Theme) {
         if theme == .system {
-            selectedBackgroundView = nil
+            selectionStyle = .default
         } else {
-            let background = UIView()
-            selectedBackgroundView = background
-            switch theme {
-            case .dark:
-                background.backgroundColor = UIColor.background(for: theme).lighter(amount: 0.05)
-            default:
-                background.backgroundColor = UIColor.background(for: theme).darker(amount: 0.05)
-            }
-            
+            selectionStyle = .none
         }
         
         backgroundColor = .background(for: theme)

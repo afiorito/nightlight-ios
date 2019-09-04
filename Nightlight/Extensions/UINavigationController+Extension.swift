@@ -8,15 +8,11 @@ extension UINavigationController {
     }
     
     public func setStyle(_ style: Style, for theme: Theme = .system) {
-        if theme == .system {
-            navigationBar.shadowImage = nil
-        } else {
-            switch theme {
-            case .dark:
-                navigationBar.shadowImage = UIColor.border(for: theme).darker(amount: 0.1).asImage()
-            default:
-                navigationBar.shadowImage = UIColor.border(for: theme).lighter(amount: 0.1).asImage()
-            }
+        switch theme {
+        case .dark:
+            navigationBar.barStyle = .blackTranslucent
+        default:
+            navigationBar.barStyle = .default
         }
 
         switch style {
@@ -24,10 +20,14 @@ extension UINavigationController {
             navigationBar.isTranslucent = false
             navigationBar.barTintColor = .background(for: theme)
             view.backgroundColor = .background(for: theme)
+            navigationBar.shadowImage = nil
+            navigationBar.setBackgroundImage(nil, for: .default)
         case .secondary:
             navigationBar.isTranslucent = false
             navigationBar.barTintColor = .secondaryBackground(for: theme)
             view.backgroundColor = .secondaryBackground(for: theme)
+            navigationBar.shadowImage = nil
+            navigationBar.setBackgroundImage(nil, for: .default)
         case .hidden:
             navigationBar.isTranslucent = true
             navigationBar.setBackgroundImage(UIImage(), for: .default)

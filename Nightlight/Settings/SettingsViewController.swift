@@ -65,10 +65,8 @@ public class SettingsViewController: UIViewController {
     }
     
     public override func viewWillAppear(_ animated: Bool) {
-        updateColors(for: theme)
-
         super.viewWillAppear(animated)
-        
+
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: true)
         }
@@ -135,13 +133,12 @@ extension SettingsViewController: UITableViewDataSource {
                                                      for: indexPath) as! BasicOptionTableViewCell
                             
             cell.title = Strings.signOut
+            cell.updateColors(for: theme)
             
             settingsCell = cell
             
         default: return UITableViewCell()
         }
-        
-        (settingsCell as? Themeable)?.updateColors(for: theme)
         
         return settingsCell
     }
@@ -170,6 +167,7 @@ extension SettingsViewController {
         
         cell.title = Strings.nightlightTokens
         cell.detailTextLabel?.attributedText = formatTokens(for: cell.detailTextLabel?.font)
+        cell.updateColors(for: theme)
         
         return cell
     }
@@ -182,6 +180,7 @@ extension SettingsViewController {
             
             cell.optionName = Strings.setting.theme
             cell.optionValue = viewModel.theme
+            cell.updateColors(for: theme)
             
             return cell
         case 1:
@@ -190,6 +189,7 @@ extension SettingsViewController {
                             
             cell.optionName = Strings.setting.sendMessage
             cell.optionValue = viewModel.messageDefault
+            cell.updateColors(for: theme)
             
             return cell
         default: return UITableViewCell()
@@ -203,6 +203,7 @@ extension SettingsViewController {
                                                      for: indexPath) as! InformationTableViewCell
             
             cell.title = Strings.setting.sendFeedback
+            cell.updateColors(for: theme)
             
             return cell
         case 1:
@@ -211,6 +212,7 @@ extension SettingsViewController {
             
             cell.title = Strings.setting.rateNightlight
             cell.subtitle = Strings.setting.ratingCount(ratingCount)
+            cell.updateColors(for: theme)
 
             return cell
         default: return UITableViewCell()
@@ -224,18 +226,21 @@ extension SettingsViewController {
                                                      for: indexPath) as! InformationTableViewCell
             
             cell.title = Strings.setting.about
+            cell.updateColors(for: theme)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: InformationTableViewCell.className,
                                                      for: indexPath) as! InformationTableViewCell
             
             cell.title = Strings.setting.privacyPolicy
+            cell.updateColors(for: theme)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: InformationTableViewCell.className,
                                                                  for: indexPath) as! InformationTableViewCell
                         
             cell.title = Strings.setting.termsOfUse
+            cell.updateColors(for: theme)
             return cell
         default: return UITableViewCell()
         }

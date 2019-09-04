@@ -46,7 +46,8 @@ public class NotificationsViewController: UIViewController {
             self?.loadMoreNotifications()
         }
 
-        self.refreshControl.beginRefreshing()
+        notificationsView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+        refreshControl.beginRefreshing()
         refresh()
     }
     
