@@ -12,6 +12,7 @@ public class ContextMenuViewController: UIViewController {
         tableView.register(ContextOptionTableViewCell.self, forCellReuseIdentifier: ContextOptionTableViewCell.className)
         tableView.separatorInset = .zero
         tableView.separatorStyle = .none
+        tableView.alwaysBounceVertical = false
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         

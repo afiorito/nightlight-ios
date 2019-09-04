@@ -33,7 +33,7 @@ public class SelectOptionTableViewCell<E: RawRepresentable>: BaseStaticTableView
     
     // MARK: - Themeable
     
-    override func updateColors(for theme: Theme) {
+    public override func updateColors(for theme: Theme) {
         super.updateColors(for: theme)
         detailTextLabel?.textColor = .secondaryText(for: theme)
         textLabel?.textColor = .primaryText(for: theme)

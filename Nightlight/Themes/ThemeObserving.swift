@@ -41,7 +41,9 @@ extension ThemeObserving {
         guard let theme = theme(from: notification) else { return }
         
         if let themeable = self as? Themeable {
-            themeable.updateColors(for: theme)
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCrossDissolve, animations: {
+                themeable.updateColors(for: theme)
+            }, completion: nil)
         }
     }
 }

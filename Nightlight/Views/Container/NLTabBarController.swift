@@ -62,5 +62,6 @@ extension NLTabBarController: Themeable {
             tabBar.unselectedItemTintColor = nil
         }
         tabBar.tintColor = .invertedBackground(for: theme)
+        tabBar.layoutIfNeeded()
     }
 }

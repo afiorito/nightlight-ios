@@ -9,9 +9,9 @@ public class BasicOptionTableViewCell: BaseStaticTableViewCell {
         set { textLabel?.text = newValue }
     }
     
-    public override var isSelected: Bool {
+    public var isCurrentOption: Bool = false {
         didSet {
-            if isSelected {
+            if isCurrentOption {
                 let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
                 imageView.image = UIImage.icon.check
                 imageView.tintColor = .success
@@ -37,7 +37,7 @@ public class BasicOptionTableViewCell: BaseStaticTableViewCell {
     
     // MARK: - Themeable
     
-    override func updateColors(for theme: Theme) {
+    public override func updateColors(for theme: Theme) {
             super.updateColors(for: theme)
             textLabel?.textColor = .primaryText(for: theme)
             backgroundColor = .background(for: theme)

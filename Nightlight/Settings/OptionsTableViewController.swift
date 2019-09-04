@@ -42,8 +42,7 @@ public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UIT
         let option = E.allCases[E.allCases.index(E.allCases.startIndex, offsetBy: indexPath.row)]
         
         cell.title = option.rawValue.capitalizingFirstLetter()
-        cell.isSelected = option == currentOption
-        cell.updateColors(for: theme)
+        cell.isCurrentOption = option == currentOption
 
         return cell
     }
@@ -52,9 +51,10 @@ public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UIT
         let option = E.allCases[E.allCases.index(E.allCases.startIndex, offsetBy: indexPath.row)]
 
         currentOption = option
-        tableView.reloadData()
         
         delegate?.optionsTableViewController(self, didSelect: option)
+
+        tableView.reloadSections(IndexSet(integer: 0), with: .fade)
     }
     
     deinit {
@@ -67,15 +67,19 @@ public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UIT
 
 extension OptionsTableViewController: Themeable {
     func updateColors(for theme: Theme) {
+        for cell in (tableView.visibleCells as? [Themeable]) ?? [] {
+            cell.updateColors(for: theme)
+        }
+
         if theme == .system {
             tableView.separatorColor = nil
         } else {
             tableView.separatorColor = .border(for: theme)
         }
 
+        navigationController?.navigationBar.layoutIfNeeded()
         navigationController?.setStyle(.secondary, for: theme)
         setNeedsStatusBarAppearanceUpdate()
         tableView.backgroundColor = .background(for: theme)
-        tableView.reloadData()
     }
 }
