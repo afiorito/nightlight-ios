@@ -8,6 +8,8 @@ public class AppCoordinator: NSObject, Coordinator {
     /// The required dependencies.
     private let dependencies: DependencyContainer
     
+    private let application: UIApplication
+    
     /// The key window of the application.
     private(set) var window: UIWindow
     
@@ -19,8 +21,9 @@ public class AppCoordinator: NSObject, Coordinator {
         return accessToken != nil
     }
     
-    public init(dependencies: DependencyContainer) {
+    public init(application: UIApplication, dependencies: DependencyContainer) {
         self.dependencies = dependencies
+        self.application = application
         window = UIWindow(frame: UIScreen.main.bounds)
         
         super.init()
@@ -109,7 +112,9 @@ public class AppCoordinator: NSObject, Coordinator {
      Prepare the main application after successful authentication.
      */
     private func prepareMainApplication() -> UIViewController {
+        application.registerForRemoteNotifications()
         fetchUserInfo {}
+        
         let placeholderViewController = UIViewController()
         placeholderViewController.tabBarItem = UITabBarItem(title: Strings.message.postMessageTabTitle, image: UIImage.tab.post, tag: 0)
         

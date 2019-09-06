@@ -180,6 +180,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     }
     
     public func settingsViewControllerDidSelectSignout(_ settingsViewController: SettingsViewController) {
+        UIApplication.shared.unregisterForRemoteNotifications()
         NLNotification.unauthorized.post()
     }
 }
