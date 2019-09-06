@@ -39,6 +39,13 @@ public class SignInViewController: UIViewController {
     
     public override func loadView() {
         view = SignInView()
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        signInView.headerBackground.setNeedsDisplay()
     }
     
     /**

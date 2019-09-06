@@ -48,7 +48,7 @@ public class OnboardPageViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.spacing = 50
+        stackView.distribution = .equalSpacing
         return stackView
     }()
 
@@ -62,14 +62,19 @@ public class OnboardPageViewController: UIViewController {
     
     private func prepareSubviews() {
         textStackView.addArrangedSubviews([titleLabel, subtitleLabel])
-        containerStackView.addArrangedSubviews([textStackView, imageView])
+        containerStackView.addArrangedSubviews([UIView(), textStackView, imageView, UIView()])
         view.addSubviews(containerStackView)
+        
+        let widthConstraint = imageView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor, multiplier: 0.70)
+        widthConstraint.priority = .required - 1
         
         NSLayoutConstraint.activate([
             containerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             containerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            containerStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            imageView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor, multiplier: 0.70),
+            containerStackView.topAnchor.constraint(equalTo: view.topAnchor),
+            containerStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            imageView.widthAnchor.constraint(lessThanOrEqualToConstant: 375),
+            widthConstraint,
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor)
         ])
         

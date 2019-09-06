@@ -175,5 +175,6 @@ extension WebContentViewController: Themeable {
     func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
         webView.backgroundColor = .background(for: theme)
+        navigationController?.setStyle(.secondary, for: theme)
     }
 }
