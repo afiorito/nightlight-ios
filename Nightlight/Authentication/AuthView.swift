@@ -168,21 +168,40 @@ open class AuthView: UIView {
         bottomContainer.addArrangedSubviews([accountStatusLabel, actionButton])
         addSubviews([headerBackground, headerContainer, fieldContainer, authButton, bottomContainer])
         
+        let topGuide = UILayoutGuide()
+        let bottomGuide = UILayoutGuide()
+        
+        addLayoutGuide(topGuide)
+        addLayoutGuide(bottomGuide)
+        
+        let headerheightConstraint = headerBackground.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1.0 / 3.0)
+        headerheightConstraint.priority = .required - 1
+        
+        let fieldWidthConstraint = fieldContainer.widthAnchor.constraint(equalToConstant: 375)
+        fieldWidthConstraint.priority = .required - 1
+        
         NSLayoutConstraint.activate([
             headerBackground.topAnchor.constraint(equalTo: topAnchor),
             headerBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
             headerBackground.trailingAnchor.constraint(equalTo: trailingAnchor),
-            headerBackground.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1.0 / 3.0),
+            headerheightConstraint,
+            headerBackground.heightAnchor.constraint(lessThanOrEqualToConstant: 300),
             headerContainer.topAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.topAnchor, constant: 30),
             headerContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             headerContainer.bottomAnchor.constraint(equalTo: headerBackground.bottomAnchor, constant: -30),
-            fieldContainer.topAnchor.constraint(equalTo: headerBackground.bottomAnchor, constant: 30),
-            fieldContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            fieldContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            topGuide.topAnchor.constraint(equalTo: headerContainer.bottomAnchor),
+            fieldWidthConstraint,
+            fieldContainer.topAnchor.constraint(equalTo: topGuide.bottomAnchor, constant: 30),
+            fieldContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
+            fieldContainer.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 30),
+            fieldContainer.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -30),
             authButton.topAnchor.constraint(equalTo: fieldContainer.bottomAnchor, constant: 30),
-            authButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            authButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            authButton.leadingAnchor.constraint(equalTo: fieldContainer.leadingAnchor),
+            authButton.trailingAnchor.constraint(equalTo: fieldContainer.trailingAnchor),
             authButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            bottomGuide.topAnchor.constraint(equalTo: authButton.bottomAnchor),
+            bottomGuide.bottomAnchor.constraint(equalTo: bottomContainer.topAnchor),
+            topGuide.heightAnchor.constraint(equalTo: bottomGuide.heightAnchor, multiplier: 0.4),
             bottomContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
             bottomContainer.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])

@@ -65,7 +65,7 @@ public class PermissionView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = .primary20ptMedium
+        label.font = .primary24ptBold
         return label
     }()
     
@@ -126,7 +126,7 @@ public class PermissionView: UIView {
     
     private func prepareSubviews() {
         textContainer.addArrangedSubviews([titleLabel, subtitleLabel])
-        topContainer.addArrangedSubviews([imageView, textContainer])
+        topContainer.addArrangedSubviews([imageView, UIView(), textContainer])
         buttonContainer.addArrangedSubviews([confirmButton, cancelButton])
         container.addArrangedSubviews([UIView(), UIView(), topContainer, UIView(), buttonContainer, UIView()])
         addSubviews([container])
@@ -134,9 +134,9 @@ public class PermissionView: UIView {
         NSLayoutConstraint.activate([
             container.topAnchor.constraint(equalTo: topAnchor),
             container.bottomAnchor.constraint(equalTo: bottomAnchor),
-            container.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            container.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
+            container.widthAnchor.constraint(lessThanOrEqualToConstant: 375),
+            container.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.75),
             imageView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
         ])
     }

@@ -44,7 +44,14 @@ public class SignUpViewController: UIViewController {
             self.delegate?.signUpViewController(self, didTapPolicyWith: url)
         }
         view = signUpView
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
+    }
+    
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        signUpView.headerBackground.setNeedsDisplay()
     }
     
     /**

@@ -38,7 +38,7 @@ public class AuthViewBackground: UIView {
         
         switch shapeType {
         case .signIn:
-            let offset = size.width * 0.15
+            let offset = min(size.width, 500) * 0.15
             path.addLine(to: bottomLeft)
             path.addCurve(to: highPoint,
                           controlPoint1: CGPoint(x: bottomLeft.x + offset, y: bottomLeft.y - offset),
