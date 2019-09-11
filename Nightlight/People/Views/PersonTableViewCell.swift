@@ -52,8 +52,8 @@ public class PersonTableViewCell: UITableViewCell, Configurable {
             personContentView.trailingAnchor.constraint(equalTo: backgroundCardView.trailingAnchor, constant: -15),
             personContentView.bottomAnchor.constraint(equalTo: backgroundCardView.bottomAnchor, constant: -15),
             backgroundCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            backgroundCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            backgroundCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            backgroundCardView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
+            backgroundCardView.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor),
             backgroundCardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }

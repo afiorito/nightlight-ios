@@ -45,9 +45,15 @@ public class MessageDetailViewController: UIViewController {
     }
     
     public override func viewWillAppear(_ animated: Bool) {
-        (navigationController as? Themeable)?.updateColors(for: theme)
+        navigationController?.setStyle(.secondary, for: theme)
         
         super.viewWillAppear(animated)
+    }
+    
+    public override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setStyle(.primary, for: theme)
+        
+        super.viewWillDisappear(animated)
     }
     
     // MARK: - Gesture Recognizer Handlers
@@ -120,8 +126,8 @@ public class MessageDetailViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: view.widthAnchor),
             messageContentView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             messageContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            messageContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            messageContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
+            messageContentView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor, constant: 15),
+            messageContentView.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor, constant: -15)
         ])
     }
     
@@ -165,7 +171,6 @@ extension MessageDetailViewController: AppreciationEventHandling {
 
 extension MessageDetailViewController: Themeable {
     public func updateColors(for theme: Theme) {
-        navigationController?.setStyle(.primary, for: theme)
         view.backgroundColor = .background(for: theme)
         messageContentView.updateColors(for: theme)
     }

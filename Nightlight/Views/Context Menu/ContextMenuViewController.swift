@@ -53,10 +53,10 @@ public class ContextMenuViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            tableView.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            cancelButton.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            cancelButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 10),
+            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])

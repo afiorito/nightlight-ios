@@ -27,9 +27,21 @@ public class SendAppreciationCoordinator: Coordinator {
         
         sendAppreciationViewController = SendAppreciationViewController(viewModel: viewModel)
         sendAppreciationViewController.delegate = self
-        sendAppreciationViewController.modalPresentationStyle = .custom
-        sendAppreciationViewController.modalPresentationCapturesStatusBarAppearance = true
-        sendAppreciationViewController.transitioningDelegate = BottomSheetTransitioningDelegate.default
+        
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            sendAppreciationViewController.modalPresentationStyle = .custom
+            sendAppreciationViewController.modalPresentationCapturesStatusBarAppearance = true
+            sendAppreciationViewController.transitioningDelegate = BottomSheetTransitioningDelegate.default
+        } else {
+            let targetSize = CGSize(width: 500, height: UIView.layoutFittingCompressedSize.height)
+            
+            let intrinsicSize = sendAppreciationViewController
+                                    .view.systemLayoutSizeFitting(targetSize,
+                                                                  withHorizontalFittingPriority: .required,
+                                                                  verticalFittingPriority: .fittingSizeLevel)
+            sendAppreciationViewController.preferredContentSize = intrinsicSize
+            sendAppreciationViewController.modalPresentationStyle = .formSheet
+        }
         
     }
     

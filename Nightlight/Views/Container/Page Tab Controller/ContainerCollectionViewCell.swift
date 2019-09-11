@@ -5,22 +5,18 @@ class ContainerCollectionViewCell: UICollectionViewCell {
     public var childView: UIView? {
         willSet {
             if let childView = newValue {
-                self.contentView.addSubview(childView)
+                self.contentView.addSubviews(childView)
+                
+                NSLayoutConstraint.activate([
+                    childView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                    childView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                    childView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                    childView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
+                ])
+                
             } else {
                 childView?.removeFromSuperview()
             }
         }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        childView = nil
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        childView?.frame = contentView.bounds
     }
 }

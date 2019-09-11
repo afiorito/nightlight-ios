@@ -8,7 +8,7 @@ public class PageTabController: UIViewController {
     
     /// A collection view for swiping between view controllers.
     private let childrenCollectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
+        let flowLayout = ContainerFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
@@ -23,6 +23,13 @@ public class PageTabController: UIViewController {
     
     /// The object that acts as the data source of the view controller pages.
     public weak var dataSource: PageTabControllerDataSource?
+    
+    public var activeTab: Int {
+        return Int(childrenCollectionView.contentOffset.x / childrenCollectionView.bounds.width)
+    }
+    
+    /// The last active tab before device orientation change.
+    private var lastTab: CGFloat = 0
     
     /// An array of view controllers for the pages.
     public var viewControllers = [UIViewController]() {
@@ -44,18 +51,50 @@ public class PageTabController: UIViewController {
         prepareSubviews()
         updateColors(for: theme)
     }
+
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        self.childrenCollectionView.contentOffset.x = lastTab * self.childrenCollectionView.bounds.width
+    }
+    
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        lastTab = childrenCollectionView.contentOffset.x / childrenCollectionView.bounds.width
+        
+        coordinator.animate(alongsideTransition: { _ in
+            self.pageTabsView.offset = self.scrollPercentage(for: self.childrenCollectionView)
+            self.pageTabsView.collectionView.collectionViewLayout.invalidateLayout()
+            self.childrenCollectionView.contentOffset.x = self.lastTab * self.childrenCollectionView.bounds.width
+        })
+    }
+    
+    private func scrollPercentage(for scrollView: UIScrollView) -> CGFloat {
+        guard let numberOfTabs = dataSource?.pageTabControllerNumberOfTabs(self), !scrollView.frame.equalTo(.zero)
+            else { return 0.0 }
+        
+        return scrollView.contentOffset.x / (scrollView.frame.width * CGFloat(numberOfTabs))
+    }
     
     private func prepareSubviews() {
         view.addSubviews([pageTabsView, childrenCollectionView])
         
+        let layoutGuide: UILayoutGuide
+        
+        switch UIDevice.current.userInterfaceIdiom {
+        case .pad: layoutGuide = view.readableContentGuide
+        default: layoutGuide = view.safeAreaLayoutGuide
+        }
+        
         NSLayoutConstraint.activate([
             pageTabsView.topAnchor.constraint(equalTo: view.topAnchor),
-            pageTabsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pageTabsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pageTabsView.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
+            pageTabsView.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
             pageTabsView.heightAnchor.constraint(equalToConstant: 40),
             childrenCollectionView.topAnchor.constraint(equalTo: pageTabsView.bottomAnchor),
-            childrenCollectionView.leadingAnchor.constraint(equalTo: pageTabsView.leadingAnchor),
-            childrenCollectionView.trailingAnchor.constraint(equalTo: pageTabsView.trailingAnchor),
+            childrenCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childrenCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             childrenCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
@@ -97,20 +136,17 @@ extension PageTabController: UICollectionViewDataSource {
 
 // MARK: - UICollectionView Delegate
 
-extension PageTabController: UICollectionViewDelegateFlowLayout {
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        return collectionView.frame.size
-    }
-    
+extension PageTabController: UICollectionViewDelegateFlowLayout {    
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return false
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let numberOfTabs = dataSource?.pageTabControllerNumberOfTabs(self)
-            else { return }
-        pageTabsView.offset = scrollView.contentOffset.x / CGFloat(numberOfTabs)
+        pageTabsView.offset = scrollPercentage(for: scrollView)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return false
     }
 }
 

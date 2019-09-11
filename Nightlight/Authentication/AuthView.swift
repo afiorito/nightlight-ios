@@ -177,9 +177,6 @@ open class AuthView: UIView {
         let headerheightConstraint = headerBackground.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1.0 / 3.0)
         headerheightConstraint.priority = .required - 1
         
-        let fieldWidthConstraint = fieldContainer.widthAnchor.constraint(equalToConstant: 375)
-        fieldWidthConstraint.priority = .required - 1
-        
         NSLayoutConstraint.activate([
             headerBackground.topAnchor.constraint(equalTo: topAnchor),
             headerBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -190,11 +187,10 @@ open class AuthView: UIView {
             headerContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             headerContainer.bottomAnchor.constraint(equalTo: headerBackground.bottomAnchor, constant: -30),
             topGuide.topAnchor.constraint(equalTo: headerContainer.bottomAnchor),
-            fieldWidthConstraint,
             fieldContainer.topAnchor.constraint(equalTo: topGuide.bottomAnchor, constant: 30),
             fieldContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            fieldContainer.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 30),
-            fieldContainer.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -30),
+            fieldContainer.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
+            fieldContainer.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
             authButton.topAnchor.constraint(equalTo: fieldContainer.bottomAnchor, constant: 30),
             authButton.leadingAnchor.constraint(equalTo: fieldContainer.leadingAnchor),
             authButton.trailingAnchor.constraint(equalTo: fieldContainer.trailingAnchor),

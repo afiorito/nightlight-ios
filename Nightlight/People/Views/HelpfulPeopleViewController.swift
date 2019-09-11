@@ -45,6 +45,7 @@ public class HelpfulPeopleViewController: UIViewController {
     
     public override func loadView() {
         view = PeopleView()
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     /**

@@ -9,7 +9,7 @@ public class PageTabsView: UIView {
     public weak var delegate: PageTabsViewDelegate?
     
     /// A collection view for displaying tabs.
-    private let collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let layout = TabFlowLayout()
         layout.minimumLineSpacing = 1
         layout.scrollDirection = .horizontal
@@ -24,7 +24,7 @@ public class PageTabsView: UIView {
     
     public var offset: CGFloat {
         get { return tabIndicatorLeadingAnchor?.constant ?? 0 }
-        set { tabIndicatorLeadingAnchor?.constant = newValue }
+        set { tabIndicatorLeadingAnchor?.constant = newValue * frame.width }
     }
     
     public override init(frame: CGRect) {

@@ -10,7 +10,12 @@ public class MessagesView: UIView {
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: MessageTableViewCell.className)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 150
-        tableView.separatorInset = .zero
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            tableView.cellLayoutMarginsFollowReadableWidth = true
+        } else {
+            tableView.separatorInset = .zero
+        }
         
         return tableView
     }()
@@ -47,7 +52,12 @@ extension MessagesView: Themeable {
         } else {
             tableView.separatorColor = nil
         }
+        
+        for cell in (tableView.visibleCells as? [Themeable]) ?? [] {
+            cell.updateColors(for: theme)
+        }
 
+        backgroundColor = .background(for: theme)
         tableView.backgroundColor = .background(for: theme)
         (tableView.backgroundView as? Themeable)?.updateColors(for: theme)
         tableView.reloadData()

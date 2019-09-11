@@ -41,8 +41,9 @@ extension BottomSheetPresentable where Self: UIViewController {
             return bottomYPos - height
         case .intrinsicHeight:
             view.layoutIfNeeded()
-            let targetSize = CGSize(width: (presentationController?.containerView?.bounds ?? UIScreen.main.bounds).width,
+            let targetSize = CGSize(width: min((presentationController?.containerView?.bounds ?? UIScreen.main.bounds).width, 500),
                                     height: UIView.layoutFittingCompressedSize.height)
+
             let intrinsicHeight = view.systemLayoutSizeFitting(targetSize).height
             
             return bottomYPos - intrinsicHeight

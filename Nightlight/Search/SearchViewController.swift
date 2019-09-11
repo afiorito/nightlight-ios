@@ -18,7 +18,6 @@ public class SearchViewController: UIViewController {
         let searchController = UISearchController(searchResultsController: searchResultsController)
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.isTranslucent = false
         searchController.searchBar.autocapitalizationType = .none
         searchController.searchResultsUpdater = self
         
@@ -38,6 +37,7 @@ public class SearchViewController: UIViewController {
         addDidChangeThemeObserver()
         
         navigationItem.titleView = searchController.searchBar
+        navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
         
         prepareSubviews()
@@ -57,6 +57,12 @@ public class SearchViewController: UIViewController {
             baseViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             baseViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+    }
+    
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        searchController.searchBar.resignFirstResponder()
+
+        super.viewWillTransition(to: size, with: coordinator)
     }
     
     deinit {

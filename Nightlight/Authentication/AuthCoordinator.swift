@@ -95,9 +95,14 @@ public class AuthCoordinator: Coordinator {
 // MARK: Auth ViewController Delegates
 
 extension AuthCoordinator: SignUpViewControllerDelegate, SignInViewControllerDelegate {
-    public func signUpViewController(_ signUpViewController: SignUpViewController, didTapPolicyWith url: URL) {
-        let webContentViewController = WebContentViewController(url: url)
-        signUpViewController.present(MainNavigationController(rootViewController: webContentViewController), animated: true)
+    public func signUpViewController(_ signUpViewController: SignUpViewController, didTapPolicyWith url: URL) {        
+        let viewController = MainNavigationController(rootViewController: WebContentViewController(url: url))
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            viewController.modalPresentationStyle = .formSheet
+        }
+        
+        signUpViewController.present(viewController, animated: true)
     }
     
     public func signInViewControllerDidSignIn(_ signInViewController: SignInViewController) {

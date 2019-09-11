@@ -63,11 +63,11 @@ public class MessageTableViewCell: UITableViewCell, Configurable {
     
     private func prepareSubviews() {
         contentView.addSubviews(messageContentView)
-        
+
         NSLayoutConstraint.activate([
             messageContentView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            messageContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            messageContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            messageContentView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
+            messageContentView.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor),
             messageContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15)
         ])
     }

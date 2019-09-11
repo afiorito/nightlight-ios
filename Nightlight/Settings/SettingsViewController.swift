@@ -29,7 +29,7 @@ public class SettingsViewController: UIViewController {
         tableView.register(InformationSubDetailTableViewCell.self)
         tableView.register(InformationRightDetailTableViewCell.self)
         tableView.register(BasicOptionTableViewCell.self)
-        
+
         tableView.tableFooterView = UIView()
         return tableView
     }()
