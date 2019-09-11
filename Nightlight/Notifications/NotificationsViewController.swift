@@ -35,6 +35,8 @@ public class NotificationsViewController: UIViewController {
         super.viewDidLoad()
         
         addDidChangeThemeObserver()
+        addTitleView()
+        
         updateColors(for: theme)
         
         notificationsView.tableView.dataSource = dataSource
@@ -107,6 +109,12 @@ public class NotificationsViewController: UIViewController {
                 self.showToast(Strings.error.couldNotConnect, severity: .urgent)
             }
         }
+    }
+    
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        updateTitleView(size: size)
     }
     
     /**

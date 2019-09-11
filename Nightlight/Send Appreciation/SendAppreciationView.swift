@@ -87,7 +87,7 @@ public class SendAppreciationView: UIView {
             headerView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             headerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            container.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 15) ,
+            container.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
             container.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             container.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             container.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),

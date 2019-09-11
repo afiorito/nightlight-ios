@@ -108,7 +108,7 @@ public class AppInfoViewController: UIViewController {
             container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             container.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 15),
-            container.bottomAnchor.constraint(lessThanOrEqualTo: thanksLabel.topAnchor, constant: -15),
+            container.bottomAnchor.constraint(lessThanOrEqualTo: thanksLabel.topAnchor, constant: -30),
             logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
             logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor, multiplier: 1.0),
             thanksLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
@@ -138,7 +138,7 @@ extension AppInfoViewController: Themeable {
 
 extension AppInfoViewController: ModalPresentable {
     public var height: ModalHeight {
-        return .square
+        return .intrinsicHeight
     }
     
 }

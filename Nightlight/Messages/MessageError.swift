@@ -32,7 +32,7 @@ public enum MessageError: Error {
                 if bodyReason.constraints[ValidationConstraint.maxLength.rawValue] != nil {
                     message = Strings.message.bodyTooLong
                 } else if bodyReason.constraints[ValidationConstraint.minLength.rawValue] != nil {
-                    message = Strings.message.titleTooShort
+                    message = Strings.message.bodyTooShort
                 }
             }
             

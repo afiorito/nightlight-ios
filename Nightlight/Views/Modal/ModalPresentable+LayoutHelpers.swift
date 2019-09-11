@@ -13,7 +13,7 @@ extension ModalPresentable where Self: UIViewController {
     
     /// The target width of modal including margins.
     var targetWidth: CGFloat {
-        return containerBounds.width - 2 * sideMargins
+        return min(containerBounds.width - 2 * sideMargins, 500)
     }
     
     /// The target height of the modal.
@@ -33,10 +33,12 @@ extension ModalPresentable where Self: UIViewController {
     
     /// The intrinsic height of the modal using compressed sizing.
     var intrinsicHeight: CGFloat {
+        // setting the width before laying out fixes the first layout pass of the view.
+        view.frame.size.width = targetWidth
         view.layoutIfNeeded()
 
-        let targetSize = CGSize(width: containerBounds.width, height: UIView.layoutFittingCompressedSize.height)
-        return view.systemLayoutSizeFitting(targetSize).height
+        let targetSize = CGSize(width: targetWidth, height: UIView.layoutFittingCompressedSize.height)
+        return view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel).height
     }
     
     /// The bounds of the container view of the transition.

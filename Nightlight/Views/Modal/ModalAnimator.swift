@@ -37,12 +37,6 @@ public class ModalAnimator: NSObject {
         
         let modal: UIView = toViewController.view
         modal.alpha = 0
-        
-        let margins = presentable?.sideMargins ?? 0
-        let targetSize = presentable?.targetSize ?? .zero
-        
-        modal.frame.origin = CGPoint(x: margins, y: modal.frame.midY - targetSize.height / 2)
-        modal.frame.size.height = targetSize.height
 
         animate({
             modal.alpha = 1

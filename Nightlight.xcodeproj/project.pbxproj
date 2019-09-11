@@ -178,6 +178,7 @@
 		92CA9C8822D6492C009900E6 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA9C8722D6492C009900E6 /* ProfileViewModel.swift */; };
 		92CA9C8A22D6494C009900E6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA9C8922D6494C009900E6 /* ProfileViewController.swift */; };
 		92D398A522C906A500AAC887 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D398A422C906A400AAC887 /* UIView+Extension.swift */; };
+		92D863D5232855F100F2CF6C /* ContainerFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D863D4232855F000F2CF6C /* ContainerFlowLayout.swift */; };
 		92D8EBC922CFA8BA0083D6C4 /* AnimatedLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBC822CFA8BA0083D6C4 /* AnimatedLogoView.swift */; };
 		92D8EBCB22CFD83D0083D6C4 /* SignUpViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBCA22CFD83C0083D6C4 /* SignUpViewControllerDelegate.swift */; };
 		92D8EBCD22CFE0120083D6C4 /* SignInViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EBCC22CFE0120083D6C4 /* SignInViewControllerDelegate.swift */; };
@@ -438,6 +439,7 @@
 		92CA9C8722D6492C009900E6 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		92CA9C8922D6494C009900E6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		92D398A422C906A400AAC887 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		92D863D4232855F000F2CF6C /* ContainerFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerFlowLayout.swift; sourceTree = "<group>"; };
 		92D8EBC822CFA8BA0083D6C4 /* AnimatedLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedLogoView.swift; sourceTree = "<group>"; };
 		92D8EBCA22CFD83C0083D6C4 /* SignUpViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerDelegate.swift; sourceTree = "<group>"; };
 		92D8EBCC22CFE0120083D6C4 /* SignInViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -691,6 +693,7 @@
 				9229482322CCE0BD0080B328 /* Text Input */,
 				923B894922EBACF5003912EC /* Web Content */,
 				9228D6B522D77029003B03DB /* ActionView.swift */,
+				928EC46322F75B3E0044E235 /* BadgeView.swift */,
 				925DD4B422DE04C300D50A89 /* CompactScrollView.swift */,
 				92F1766122DD4777008AEB82 /* DimmedView.swift */,
 				9228D6AB22D65A4D003B03DB /* EmptyView.swift */,
@@ -698,7 +701,6 @@
 				925763D522CAD0160031D616 /* PageControl.swift */,
 				92748B1322E0A9BD00C2957E /* Switch.swift */,
 				92DF5D2622D52B9A00207D4D /* ToastView.swift */,
-				928EC46322F75B3E0044E235 /* BadgeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -858,6 +860,8 @@
 		9279AC9222E692710098C4C2 /* Page Tab Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9279AC9A22E692830098C4C2 /* ContainerCollectionViewCell.swift */,
+				92D863D4232855F000F2CF6C /* ContainerFlowLayout.swift */,
 				9279AC9422E692820098C4C2 /* PageTabController.swift */,
 				9279AC9322E692810098C4C2 /* PageTabsView.swift */,
 				9279AC9622E692820098C4C2 /* PageTabsViewDelegate.swift */,
@@ -866,7 +870,6 @@
 				9279AC9522E692820098C4C2 /* TabFlowLayout.swift */,
 				9279AC9822E692820098C4C2 /* TabSeparatorView.swift */,
 				9279AC9922E692830098C4C2 /* TabCollectionViewCell.swift */,
-				9279AC9A22E692830098C4C2 /* ContainerCollectionViewCell.swift */,
 			);
 			path = "Page Tab Controller";
 			sourceTree = "<group>";
@@ -1670,6 +1673,7 @@
 				925BE1DC22DEA0C90000BEC9 /* HelpfulPeopleHeader.swift in Sources */,
 				9213184722D571BF00C91D90 /* SignInViewModel.swift in Sources */,
 				92D8EBCD22CFE0120083D6C4 /* SignInViewControllerDelegate.swift in Sources */,
+				92D863D5232855F100F2CF6C /* ContainerFlowLayout.swift in Sources */,
 				928A10A622D3CDF000FF78FB /* URLSession+Extension.swift in Sources */,
 				920E495022DF966C00AA1EDB /* Searchable.swift in Sources */,
 				92E9607322F3BF9C005DF33D /* SendAppreciationViewControllerDelegate.swift in Sources */,

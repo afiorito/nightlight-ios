@@ -17,15 +17,7 @@ public class NotificationsCoordinator: TabBarCoordinator {
         let viewModel = UserNotificationsViewModel(dependencies: dependencies as! UserNotificationsViewModel.Dependencies)
         let viewController = NotificationsViewController(viewModel: viewModel)
         
-        viewController.navigationItem.titleView = {
-            let navFrame = rootViewController.navigationBar.frame
-            let titleView = LabelTitleView(frame: CGRect(x: 15, y: 0,
-                                                         width: rootViewController.view.frame.width - 30,
-                                                         height: navFrame.height))
-            titleView.title = Strings.notification.notificationsTitle
-            return titleView
-        }()
-        
+        viewController.title = Strings.notification.notificationsTitle
         viewController.tabBarItem = UITabBarItem(title: Strings.notification.notificationsTitle, image: UIImage.tab.notification, tag: 0)
         viewController.emptyViewDescription = EmptyViewDescription.noNotifications
         

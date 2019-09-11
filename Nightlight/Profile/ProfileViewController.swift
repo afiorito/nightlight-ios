@@ -11,6 +11,9 @@ public class ProfileViewController: UIViewController {
     /// A background view for extending content view color.
     private let headerBackground = UIView()
     
+    /// A view for displaying a bottom header separator.
+    public let separatorLineView = UIView()
+    
     /// A page controller for handling message view controllers.
     private let pageTabController = PageTabController()
     
@@ -75,7 +78,7 @@ public class ProfileViewController: UIViewController {
     }
     
     private func prepareSubviews() {
-        view.addSubviews([headerBackground, personView])
+        view.addSubviews([headerBackground, separatorLineView, personView])
         add(child: pageTabController)
 
         additionalSafeAreaInsets.top -= navigationController?.navigationBar.bounds.height ?? 0
@@ -86,9 +89,13 @@ public class ProfileViewController: UIViewController {
             headerBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             headerBackground.bottomAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10),
             personView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            personView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            personView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            pageTabController.view.topAnchor.constraint(equalTo: headerBackground.bottomAnchor),
+            personView.leadingAnchor.constraint(equalTo: view.readableContentGuide.leadingAnchor),
+            personView.trailingAnchor.constraint(equalTo: view.readableContentGuide.trailingAnchor),
+            separatorLineView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 15),
+            separatorLineView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            separatorLineView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            separatorLineView.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale),
+            pageTabController.view.topAnchor.constraint(equalTo: separatorLineView.bottomAnchor),
             pageTabController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pageTabController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             pageTabController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -130,6 +137,8 @@ extension ProfileViewController: Themeable {
     public func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
         personView.updateColors(for: theme)
+        navigationController?.setStyle(.hidden, for: theme)
         headerBackground.backgroundColor = .background(for: theme)
+        separatorLineView.backgroundColor = .border(for: theme)
     }
 }

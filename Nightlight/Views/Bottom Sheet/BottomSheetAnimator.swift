@@ -43,18 +43,16 @@ public class BottomSheetAnimator: NSObject {
         fromViewController.beginAppearanceTransition(false, animated: true)
         toViewController.beginAppearanceTransition(true, animated: true)
         
-        let yPos = presentable?.yPos ?? 0.0
-        
         let bottomSheet: UIView = toViewController.view
-        
         bottomSheet.frame = transitionContext.finalFrame(for: toViewController)
-        bottomSheet.frame.size.height = transitionContext.containerView.frame.height - yPos
-        bottomSheet.frame.origin.y = transitionContext.containerView.frame.height
         
+        let finalYPos = bottomSheet.frame.minY
+        bottomSheet.frame.origin.y = transitionContext.containerView.frame.height
+
         feedbackGenerator?.selectionChanged()
         
         animate({
-            bottomSheet.frame.origin.y = yPos
+            bottomSheet.frame.origin.y = finalYPos
         }, config: presentable, completion: { [weak self] completed in
             fromViewController.endAppearanceTransition()
             toViewController.endAppearanceTransition()

@@ -176,5 +176,6 @@ extension WebContentViewController: Themeable {
         view.backgroundColor = .background(for: theme)
         webView.backgroundColor = .background(for: theme)
         navigationController?.setStyle(.secondary, for: theme)
+        activityIndicator.tintColor = .gray(for: theme)
     }
 }

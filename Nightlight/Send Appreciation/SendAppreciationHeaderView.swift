@@ -59,7 +59,7 @@ public class SendAppreciationHeaderView: UIView {
             textContainer.topAnchor.constraint(equalTo: topAnchor),
             textContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
             separatorLineView.topAnchor.constraint(equalTo: textContainer.bottomAnchor, constant: 10),
-            separatorLineView.heightAnchor.constraint(equalToConstant: 0.5),
+            separatorLineView.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale),
             separatorLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
             separatorLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
             separatorLineView.bottomAnchor.constraint(equalTo: bottomAnchor)

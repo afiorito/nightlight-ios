@@ -9,7 +9,12 @@ public class NotificationsView: UIView {
         tableView.register(NotificationTableViewCell.self, forCellReuseIdentifier: NotificationTableViewCell.className)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
-        tableView.separatorInset = .zero
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            tableView.cellLayoutMarginsFollowReadableWidth = true
+        } else {
+            tableView.separatorInset = .zero
+        }
         
         return tableView
     }()

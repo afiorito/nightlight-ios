@@ -29,7 +29,11 @@ public class SendMessageCoordinator: TabBarCoordinator {
     }
     
     public func start() {
-        rootViewController.show(sendMessageViewController, sender: rootViewController)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            rootViewController.modalPresentationStyle = .formSheet
+        }
+        
+        rootViewController.pushViewController(sendMessageViewController, animated: true)
     }    
 }
 

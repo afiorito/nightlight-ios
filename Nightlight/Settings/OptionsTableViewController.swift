@@ -43,6 +43,7 @@ public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UIT
         
         cell.title = option.rawValue.capitalizingFirstLetter()
         cell.isCurrentOption = option == currentOption
+        cell.updateColors(for: theme)
 
         return cell
     }

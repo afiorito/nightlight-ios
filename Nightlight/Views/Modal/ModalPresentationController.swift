@@ -8,8 +8,8 @@ public class ModalPresentationController: UIPresentationController {
     /**
      The configuration object.
      */
-    private var presentable: ModalPresentable? {
-        return presentedViewController as? ModalPresentable
+    private var presentable: ModalPresentable.Presentable? {
+        return presentedViewController as? ModalPresentable.Presentable
     }
     
     /**
@@ -46,6 +46,16 @@ public class ModalPresentationController: UIPresentationController {
             self?.presentedViewController.setNeedsStatusBarAppearanceUpdate()
         })
     }
+
+    public override func containerViewWillLayoutSubviews() {
+        super.containerViewWillLayoutSubviews()
+
+        presentedView?.frame = frameOfPresentedViewInContainerView
+        
+        if presentedViewController.view.layer.mask == .none {
+            addRoundedCorners(to: presentedViewController.view)
+        }
+    }
     
     public override func dismissalTransitionWillBegin() {
         presentationDelegate?.modalPresentationControllerWillDimiss?(self)
@@ -67,6 +77,16 @@ public class ModalPresentationController: UIPresentationController {
     func dismissPresentedViewController() {
         presentedViewController.dismiss(animated: true)
     }
+    
+    public override var frameOfPresentedViewInContainerView: CGRect {
+        guard let containerView = containerView else { return . zero }
+
+        let targetSize = presentable?.targetSize ?? .zero
+        let x = (containerView.frame.width - targetSize.width) / 2
+        let y = containerView.frame.midY - targetSize.height / 2
+
+        return CGRect(origin: CGPoint(x: x, y: y), size: targetSize)
+    }
 }
 
 // MARK: - Layout Configuration
@@ -78,16 +98,7 @@ private extension ModalPresentationController {
      - parameter containerView: the container view for the transition.
      */
     func layoutPresentedView(in containerView: UIView) {
-        guard let presentableViewController = presentedViewController as? ModalPresentable.Presentable
-            else { return }
-        
-        let margins = presentableViewController.sideMargins
-        
-        let view: UIView = presentableViewController.view
-        view.frame = view.frame.inset(by: UIEdgeInsets(top: 0, left: margins, bottom: 0, right: margins))
-        
-        containerView.addSubview(view)
-        addRoundedCorners(to: presentedViewController.view, ofSize: presentableViewController.targetSize)
+        containerView.addSubview(presentedViewController.view)
     }
 
     /**
@@ -113,9 +124,9 @@ private extension ModalPresentationController {
     /**
      Draws top rounded corners on a given view.
      */
-    func addRoundedCorners(to view: UIView, ofSize size: CGSize) {
+    func addRoundedCorners(to view: UIView) {
         let radius = presentable?.cornerRadius ?? 0
-        let path = UIBezierPath(roundedRect: CGRect(origin: .zero, size: size),
+        let path = UIBezierPath(roundedRect: view.bounds,
                                 byRoundingCorners: [.allCorners],
                                 cornerRadii: CGSize(width: radius, height: radius))
         

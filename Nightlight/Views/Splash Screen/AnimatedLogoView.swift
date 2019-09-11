@@ -50,10 +50,14 @@ public class AnimatedLogoView: UIView {
     private func prepareSubviews() {
         addSubviews(logo)
         
+        let widthConstraint = logo.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3)
+        widthConstraint.priority = .required - 1
+        
         NSLayoutConstraint.activate([
             logo.centerXAnchor.constraint(equalTo: centerXAnchor),
             logo.centerYAnchor.constraint(equalTo: centerYAnchor),
-            logo.widthAnchor.constraint(equalToConstant: 100),
+            widthConstraint,
+            logo.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
             logo.heightAnchor.constraint(equalTo: logo.widthAnchor, multiplier: 1.0)
         ])
     }

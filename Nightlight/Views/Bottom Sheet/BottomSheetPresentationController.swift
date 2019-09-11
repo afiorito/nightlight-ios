@@ -5,8 +5,8 @@ public class BottomSheetPresentationController: UIPresentationController {
     /**
      The configuration object.
      */
-    private var presentable: BottomSheetPresentable? {
-        return presentedViewController as? BottomSheetPresentable
+    private var presentable: BottomSheetPresentable.Presentable? {
+        return presentedViewController as? BottomSheetPresentable.Presentable
     }
     
     /**
@@ -56,9 +56,30 @@ public class BottomSheetPresentationController: UIPresentationController {
         })
     }
     
+    public override func containerViewWillLayoutSubviews() {
+        super.containerViewWillLayoutSubviews()
+        presentedView?.frame = frameOfPresentedViewInContainerView
+        
+        if presentedViewController.view.layer.mask == .none {
+            addRoundedCorners(to: presentedViewController.view)
+        }
+    }
+        
     func dismissPresentedViewController() {
         presentedViewController.dismiss(animated: true)
     }
+
+    public override var frameOfPresentedViewInContainerView: CGRect {
+        guard let containerView = containerView else { return . zero }
+
+        let y = presentable?.yPos ?? 0.0
+        let width = min(containerView.frame.width, 500)
+        let height = containerView.frame.height - y
+        let x = (containerView.frame.width - width) / 2
+        
+        return CGRect(x: x, y: y, width: width, height: height)
+    }
+
 }
 
 // MARK: - Layout Configuration
@@ -71,7 +92,6 @@ private extension BottomSheetPresentationController {
      */
     func layoutPresentedView(in containerView: UIView) {
         containerView.addSubview(presentedViewController.view)
-        addRoundedCorners(to: presentedViewController.view)
     }
 
     /**

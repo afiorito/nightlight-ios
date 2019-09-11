@@ -28,14 +28,7 @@ public class RecentMessagesCoordinator: NSObject, TabBarCoordinator {
         let viewController = MessagesViewController(viewModel: viewModel)
         
         viewController.delegate = self
-        viewController.navigationItem.titleView = {
-            let navFrame = rootViewController.navigationBar.frame
-            let titleView = LabelTitleView(frame: CGRect(x: 15, y: 0,
-                                                         width: rootViewController.view.frame.width - 30,
-                                                         height: navFrame.height))
-            titleView.title = Strings.message.recentMessagesNavTitle
-            return titleView
-        }()
+        viewController.title = Strings.message.recentMessagesNavTitle
         
         viewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         viewController.tabBarItem = UITabBarItem(title: Strings.message.recentMessagesTabTitle, image: UIImage.tab.recent, tag: 0)

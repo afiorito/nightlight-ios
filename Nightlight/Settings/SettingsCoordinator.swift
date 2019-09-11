@@ -18,7 +18,7 @@ public class SettingsCoordinator: NSObject, Coordinator {
     private weak var buyTokensViewController: BuyTokensViewController?
     
     var simulatedBackButton: UIBarButtonItem {
-        return UIBarButtonItem(image: UIImage.icon.back, style: .plain, target: self, action: #selector(goBack))
+        return UIBarButtonItem(image: UIImage.icon.back, style: .plain, target: self, action: #selector(pop))
     }
     
     /// A view controller for managing settings.
@@ -42,11 +42,22 @@ public class SettingsCoordinator: NSObject, Coordinator {
     
     public func start() {
         NLNotification.didFinishTransaction.observe(target: self, selector: #selector(handleFinishedTransaction))
-        rootViewController.pushViewController(settingsViewController, animated: true)
+        
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            settingsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
+            rootViewController.pushViewController(settingsViewController, animated: true)
+        } else {
+            settingsViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.icon.cancel,
+                                                                                      style: .plain,
+                                                                                      target: self, action: #selector(goBack))
+            let viewController = MainNavigationController(rootViewController: settingsViewController)
+            viewController.modalPresentationStyle = .formSheet
+            rootViewController.present(viewController, animated: true)
+        }
     }
     
     /**
-     Present a view controller to display web content such as a privacy policy page.
+     Present a view controller to display web content such as a privacy \ policy page.
      
      - parameter path: the page to load web content for.
      */
@@ -61,7 +72,7 @@ public class SettingsCoordinator: NSObject, Coordinator {
                                                                                          target: self, action: #selector(showAppInfo))
         }
         
-        rootViewController.pushViewController(webContentViewController, animated: true)
+        settingsViewController.navigationController?.pushViewController(webContentViewController, animated: true)
     }
     
     /**
@@ -98,11 +109,15 @@ public class SettingsCoordinator: NSObject, Coordinator {
         appInfoViewController.modalPresentationCapturesStatusBarAppearance = true
         appInfoViewController.transitioningDelegate = ModalTransitioningDelegate.default
         
-        rootViewController.present(appInfoViewController, animated: true)
+        settingsViewController.present(appInfoViewController, animated: true)
     }
     
     @objc private func goBack() {
-        rootViewController.popViewController(animated: true)
+        settingsViewController.dismiss(animated: true)
+    }
+    
+    @objc private func pop() {
+        settingsViewController.navigationController?.popViewController(animated: true)
     }
     
     deinit {
@@ -147,7 +162,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
         optionsViewController.delegate = self
         optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
-        rootViewController.pushViewController(optionsViewController, animated: true)
+        settingsViewController.navigationController?.pushViewController(optionsViewController, animated: true)
     }
     
     public func settingsViewControllerDidSelectDefaultMessage(_ settingsViewController: SettingsViewController, for currentMessageDefault: MessageDefault) {
@@ -156,7 +171,7 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
         optionsViewController.delegate = self
         optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
-        rootViewController.pushViewController(optionsViewController, animated: true)
+        settingsViewController.navigationController?.pushViewController(optionsViewController, animated: true)
     }
     
     public func settingsViewControllerDidSelectFeedback(_ settingsViewController: SettingsViewController) {

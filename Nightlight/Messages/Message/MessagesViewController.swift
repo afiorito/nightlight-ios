@@ -42,6 +42,8 @@ public class MessagesViewController: UIViewController {
         
         updateColors(for: theme)
         
+        addTitleView()
+        
         messagesView.tableView.delegate = self
         messagesView.tableView.dataSource = dataSource
         messagesView.tableView.prefetchDataSource = dataSource
@@ -68,6 +70,7 @@ public class MessagesViewController: UIViewController {
     
     public override func loadView() {
         view = MessagesView()
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
     /**
@@ -107,6 +110,12 @@ public class MessagesViewController: UIViewController {
                 self.showToast(Strings.error.couldNotConnect, severity: .urgent)
             }
         }
+    }
+    
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        updateTitleView(size: size)
     }
     
     /**

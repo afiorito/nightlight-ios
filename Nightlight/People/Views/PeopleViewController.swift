@@ -44,6 +44,7 @@ public class PeopleViewController: UIViewController {
     
     public override func loadView() {
         view = PeopleView()
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     /**
@@ -90,13 +91,16 @@ public class PeopleViewController: UIViewController {
 
 extension PeopleViewController: Searchable {
     @objc public func updateQuery(text: String) {
-        guard text != viewModel.filter else {
+        guard text != viewModel.filter else { return }
+        
+        viewModel.filter = text
+        
+        guard !text.isEmpty else {
             self.dataSource.data.removeAll()
             self.peopleView.tableView.reloadData()
             return
         }
         
-        viewModel.filter = text
         loadMorePeople(fromStart: true)
     }
     

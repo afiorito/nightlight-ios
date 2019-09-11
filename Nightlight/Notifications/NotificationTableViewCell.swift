@@ -48,9 +48,9 @@ public class NotificationTableViewCell: UITableViewCell, Configurable {
         NSLayoutConstraint.activate([
             bodyLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             bodyLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 10),
-            bodyLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            bodyLabel.trailingAnchor.constraint(equalTo: contentView.readableContentGuide.trailingAnchor),
             bodyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            iconImageView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor),
             iconImageView.topAnchor.constraint(equalTo: bodyLabel.topAnchor, constant: -1),
             iconImageView.heightAnchor.constraint(equalToConstant: 22),
             iconImageView.widthAnchor.constraint(equalTo: iconImageView.heightAnchor)
