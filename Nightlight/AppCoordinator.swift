@@ -113,7 +113,7 @@ public class AppCoordinator: NSObject, Coordinator {
      */
     private func prepareMainApplication() -> UIViewController {
         application.registerForRemoteNotifications()
-        fetchUserInfo {}
+        fetchUserInfo()
         
         let placeholderViewController = UIViewController()
         placeholderViewController.tabBarItem = UITabBarItem(title: Strings.message.postMessageTabTitle, image: UIImage.tab.post, tag: 0)
@@ -186,9 +186,9 @@ public class AppCoordinator: NSObject, Coordinator {
     /**
      Cache user info for offline use.
      
-     - parameter completion: A block called when after completion of retrieving the user info.
+     - parameter completion: A block called after retrieving the user info.
      */
-    private func fetchUserInfo(completion: @escaping () -> Void) {
+    private func fetchUserInfo(completion: (() -> Void)? = nil) {
         dependencies.peopleService.getPerson { [weak self] result in
             switch result {
             case .success(let person):
@@ -198,7 +198,7 @@ public class AppCoordinator: NSObject, Coordinator {
             case .failure: break
             }
             
-            DispatchQueue.main.async { completion() }
+            DispatchQueue.main.async { completion?() }
         }
     }
     

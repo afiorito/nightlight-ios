@@ -28,6 +28,8 @@
 		9213184D22D605AE00C91D90 /* SendMessageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213184C22D605AE00C91D90 /* SendMessageCoordinator.swift */; };
 		9213185122D6068200C91D90 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213185022D6068200C91D90 /* MessagesViewController.swift */; };
 		9213185322D6142700C91D90 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213185222D6142700C91D90 /* MainNavigationController.swift */; };
+		9221066B232BEA7900944FB9 /* UIViewController+Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221066A232BEA7900944FB9 /* UIViewController+Themeable.swift */; };
+		9221066D232BEA8200944FB9 /* UIView+Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221066C232BEA8200944FB9 /* UIView+Themeable.swift */; };
 		9228D6AA22D6571C003B03DB /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228D6A922D6571C003B03DB /* MessagesView.swift */; };
 		9228D6AC22D65A4D003B03DB /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228D6AB22D65A4D003B03DB /* EmptyView.swift */; };
 		9228D6B022D665C9003B03DB /* TableViewArrayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228D6AF22D665C9003B03DB /* TableViewArrayDataSource.swift */; };
@@ -98,13 +100,11 @@
 		925BE1D622DE86CC0000BEC9 /* HelpfulPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1D522DE86CC0000BEC9 /* HelpfulPeopleViewController.swift */; };
 		925BE1D822DE87670000BEC9 /* PeopleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1D722DE87670000BEC9 /* PeopleViewModel.swift */; };
 		925BE1DC22DEA0C90000BEC9 /* HelpfulPeopleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BE1DB22DEA0C90000BEC9 /* HelpfulPeopleHeader.swift */; };
-		925DD4A722DDE49300D50A89 /* UIView+Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4A622DDE49300D50A89 /* UIView+Themeable.swift */; };
 		925DD4A922DDE5EA00D50A89 /* EmptyViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4A822DDE5EA00D50A89 /* EmptyViewable.swift */; };
 		925DD4AB22DDE61100D50A89 /* UITableView+EmptyViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4AA22DDE61100D50A89 /* UITableView+EmptyViewable.swift */; };
 		925DD4AD22DDEA1800D50A89 /* Toastable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4AC22DDEA1800D50A89 /* Toastable.swift */; };
 		925DD4AF22DDEA5A00D50A89 /* UIViewController+Toastable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4AE22DDEA5A00D50A89 /* UIViewController+Toastable.swift */; };
 		925DD4B122DDEDF200D50A89 /* EmptyViewDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4B022DDEDF200D50A89 /* EmptyViewDescription.swift */; };
-		925DD4B322DDF02F00D50A89 /* UIViewController+Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4B222DDF02F00D50A89 /* UIViewController+Themeable.swift */; };
 		925DD4B522DE04C300D50A89 /* CompactScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4B422DE04C300D50A89 /* CompactScrollView.swift */; };
 		9261402D22E0F2AC005C7B33 /* NewMessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261402C22E0F2AC005C7B33 /* NewMessageData.swift */; };
 		92631045232AEA29009AB5F2 /* Delegating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631044232AEA29009AB5F2 /* Delegating.swift */; };
@@ -283,6 +283,8 @@
 		9213184C22D605AE00C91D90 /* SendMessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageCoordinator.swift; sourceTree = "<group>"; };
 		9213185022D6068200C91D90 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		9213185222D6142700C91D90 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		9221066A232BEA7900944FB9 /* UIViewController+Themeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Themeable.swift"; sourceTree = "<group>"; };
+		9221066C232BEA8200944FB9 /* UIView+Themeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Themeable.swift"; sourceTree = "<group>"; };
 		9228D6A922D6571C003B03DB /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		9228D6AB22D65A4D003B03DB /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		9228D6AF22D665C9003B03DB /* TableViewArrayDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewArrayDataSource.swift; sourceTree = "<group>"; };
@@ -360,13 +362,11 @@
 		925BE1D522DE86CC0000BEC9 /* HelpfulPeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpfulPeopleViewController.swift; sourceTree = "<group>"; };
 		925BE1D722DE87670000BEC9 /* PeopleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewModel.swift; sourceTree = "<group>"; };
 		925BE1DB22DEA0C90000BEC9 /* HelpfulPeopleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpfulPeopleHeader.swift; sourceTree = "<group>"; };
-		925DD4A622DDE49300D50A89 /* UIView+Themeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Themeable.swift"; sourceTree = "<group>"; };
 		925DD4A822DDE5EA00D50A89 /* EmptyViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewable.swift; sourceTree = "<group>"; };
 		925DD4AA22DDE61100D50A89 /* UITableView+EmptyViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+EmptyViewable.swift"; sourceTree = "<group>"; };
 		925DD4AC22DDEA1800D50A89 /* Toastable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toastable.swift; sourceTree = "<group>"; };
 		925DD4AE22DDEA5A00D50A89 /* UIViewController+Toastable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Toastable.swift"; sourceTree = "<group>"; };
 		925DD4B022DDEDF200D50A89 /* EmptyViewDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewDescription.swift; sourceTree = "<group>"; };
-		925DD4B222DDF02F00D50A89 /* UIViewController+Themeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Themeable.swift"; sourceTree = "<group>"; };
 		925DD4B422DE04C300D50A89 /* CompactScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactScrollView.swift; sourceTree = "<group>"; };
 		9261402C22E0F2AC005C7B33 /* NewMessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageData.swift; sourceTree = "<group>"; };
 		92631044232AEA29009AB5F2 /* Delegating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegating.swift; sourceTree = "<group>"; };
@@ -1295,8 +1295,8 @@
 				9237A1D622CA7D7200FC9331 /* Theme.swift */,
 				9237A1DC22CA829700FC9331 /* ThemeObserving.swift */,
 				925BE1C422DE64480000BEC9 /* UISearchBar+Themeable.swift */,
-				925DD4A622DDE49300D50A89 /* UIView+Themeable.swift */,
-				925DD4B222DDF02F00D50A89 /* UIViewController+Themeable.swift */,
+				9221066C232BEA8200944FB9 /* UIView+Themeable.swift */,
+				9221066A232BEA7900944FB9 /* UIViewController+Themeable.swift */,
 				9237A1E022CA890D00FC9331 /* UIViewController+ThemeObserving.swift */,
 			);
 			path = Themes;
@@ -1377,7 +1377,7 @@
 				9233615322C643F5002B7BBA /* Frameworks */,
 				9233615422C643F5002B7BBA /* Resources */,
 				9233618922C64C2C002B7BBA /* ShellScript */,
-				920F1EF7230DF95300A36278 /* ShellScript */,
+				92745234232BF23400D0576D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1499,23 +1499,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		920F1EF7230DF95300A36278 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1)) \n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
-		};
 		9233618922C64C2C002B7BBA /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1533,6 +1516,23 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		92745234232BF23400D0576D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"Nightlight/Info.plist\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"NightlightTests/Info.plist\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"NightlightUITests/Info.plist\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1548,7 +1548,6 @@
 				925763D022CABF6A0031D616 /* TextButton.swift in Sources */,
 				920E495D22DFD12A00AA1EDB /* MessageBodyCell.swift in Sources */,
 				92AE911122CD68DD002C75B6 /* UserDefaultsManager.swift in Sources */,
-				925DD4B322DDF02F00D50A89 /* UIViewController+Themeable.swift in Sources */,
 				92748B1422E0A9BD00C2957E /* Switch.swift in Sources */,
 				9205E6D422F0743E00AFE16B /* IAPManager.swift in Sources */,
 				9276314322D3F673000D4B8F /* AuthToken.swift in Sources */,
@@ -1561,6 +1560,7 @@
 				928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */,
 				928A10AA22D3D19200FF78FB /* HttpError.swift in Sources */,
 				92E960BE22F60B58005DF33D /* MessageContextHandling.swift in Sources */,
+				9221066B232BEA7900944FB9 /* UIViewController+Themeable.swift in Sources */,
 				92B302F522D63E6E00CE5668 /* SearchCoordinator.swift in Sources */,
 				92E960C922F60CEB005DF33D /* SettingsCoordinator.swift in Sources */,
 				9247606F22D910FF001EF6BE /* TableViewArrayPaginatedDataSource.swift in Sources */,
@@ -1628,7 +1628,6 @@
 				92E960C722F60C91005DF33D /* ExternalPage.swift in Sources */,
 				9213184B22D6050000C91D90 /* NLTabBarController.swift in Sources */,
 				92F1766022DD46B8008AEB82 /* BottomSheetTransitioningDelegate.swift in Sources */,
-				925DD4A722DDE49300D50A89 /* UIView+Themeable.swift in Sources */,
 				925BE1CC22DE78ED0000BEC9 /* PersonTableViewCell.swift in Sources */,
 				92DC9E0122FA3DDA008A91BC /* UIImage+Instances.swift in Sources */,
 				92E9608222F46C32005DF33D /* ProductViewModel.swift in Sources */,
@@ -1705,6 +1704,7 @@
 				9269EDE922F7BBA20061D0DB /* iTunesSearchBobdy.swift in Sources */,
 				9279ACA022E692E60098C4C2 /* TabSeparatorView.swift in Sources */,
 				9279ACBB22E7BDF70098C4C2 /* String+Extension.swift in Sources */,
+				9221066D232BEA8200944FB9 /* UIView+Themeable.swift in Sources */,
 				92E9608922F49450005DF33D /* ModalPresentationControllerDelegate.swift in Sources */,
 				925BE1C322DE48A20000BEC9 /* LabelTitleView.swift in Sources */,
 				925DD4B522DE04C300D50A89 /* CompactScrollView.swift in Sources */,
@@ -1869,6 +1869,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "";
 			};
 			name = "Debug (Dev)";
 		};
@@ -1924,6 +1925,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "";
 			};
 			name = "Release (Dev)";
 		};
@@ -1934,7 +1936,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1947,6 +1949,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Debug (Dev)";
 		};
@@ -1957,7 +1960,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1970,6 +1973,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Release (Dev)";
 		};
@@ -2113,6 +2117,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "";
 			};
 			name = "Debug (Prod)";
 		};
@@ -2123,7 +2128,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2136,6 +2141,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Debug (Prod)";
 		};
@@ -2232,6 +2238,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "";
 			};
 			name = "Release (Prod)";
 		};
@@ -2242,7 +2249,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2255,6 +2262,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Release (Prod)";
 		};

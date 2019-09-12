@@ -6,11 +6,11 @@ public protocol StyleManaging {
 
 /// Handles application styling.
 public class StyleManager {
-    
-    public static var `default`: StyleManager = StyleManager()
+
+    public static var `default` = StyleManager()
     
     /// The currently active theme.
-    public var theme: Theme = .light {
+    public var theme: Theme = .system {
         didSet {
             guard oldValue != theme else { return }
             
