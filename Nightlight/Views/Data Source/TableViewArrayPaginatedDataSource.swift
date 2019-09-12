@@ -1,7 +1,8 @@
 import UIKit
 
 /// A paginated table view datasource for single sectioned, single cell configurable table views.
-public class TableViewArrayPaginatedDataSource<Cell: Configurable>: TableViewArrayDataSource<Cell>, UITableViewDataSourcePrefetching {
+public class TableViewArrayPaginatedDataSource<Cell: ConfigurableCell & Delegating>: TableViewArrayDataSource<Cell>,
+    UITableViewDataSourcePrefetching {
     
     /// The maximum number of cells possible.
     public var totalCount: Int = 0
@@ -14,11 +15,11 @@ public class TableViewArrayPaginatedDataSource<Cell: Configurable>: TableViewArr
      
      - parameter data: the new data to append to the datasource.
      */
-    public func updateData(with data: [Cell.ViewModel]) -> [IndexPath] {
-        self.data.append(contentsOf: data)
+    public func updateData(with newData: [Cell.ViewModel]) -> [IndexPath] {
+        self.data.append(contentsOf: newData)
 
-        let startIndex = data.count - data.count
-        let endIndex = startIndex + data.count
+        let startIndex = self.data.count - newData.count
+        let endIndex = startIndex + newData.count
         
         return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
     }

@@ -1,9 +1,10 @@
 import UIKit
 
 /// A table view cell for displaying a notification.
-public class NotificationTableViewCell: UITableViewCell, Configurable {
+public class NotificationTableViewCell: ConfigurableCell, Delegating {
     public typealias ViewModel = UserNotificationViewModel
-    public typealias Delegate = AnyObject
+
+    /// The delegate for managing UI actions.
     public weak var delegate: AnyObject?
     
     /// An image view for the notification icon.

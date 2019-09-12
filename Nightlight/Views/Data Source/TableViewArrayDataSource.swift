@@ -1,7 +1,7 @@
 import UIKit
 
 /// A table view datasource for single sectioned, single cell configurable table views.
-public class TableViewArrayDataSource<Cell: Configurable>: NSObject, UITableViewDataSource {
+public class TableViewArrayDataSource<Cell: ConfigurableCell & Delegating>: NSObject, UITableViewDataSource {
     /// The content of the datasource.
     public var data = [Cell.ViewModel]()
     
@@ -34,6 +34,6 @@ public class TableViewArrayDataSource<Cell: Configurable>: NSObject, UITableView
         cell.delegate = cellDelegate
         cell.configure(with: data[indexPath.row])
         
-        return cell as! UITableViewCell
+        return cell
     }
 }

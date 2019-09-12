@@ -1,12 +1,8 @@
-import Foundation
+import UIKit
 
 /// A protocol for configurable views.
 public protocol Configurable: class {
     associatedtype ViewModel
-    associatedtype Delegate: AnyObject
-
-    /// The delegate for managing UI actions.
-    var delegate: Delegate? { get set }
     
     /**
      Configure the view.
@@ -15,3 +11,5 @@ public protocol Configurable: class {
      */
     func configure(with viewModel: ViewModel)
 }
+
+public typealias ConfigurableCell = UITableViewCell & Configurable

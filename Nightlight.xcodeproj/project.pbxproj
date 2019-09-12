@@ -107,6 +107,7 @@
 		925DD4B322DDF02F00D50A89 /* UIViewController+Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4B222DDF02F00D50A89 /* UIViewController+Themeable.swift */; };
 		925DD4B522DE04C300D50A89 /* CompactScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925DD4B422DE04C300D50A89 /* CompactScrollView.swift */; };
 		9261402D22E0F2AC005C7B33 /* NewMessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261402C22E0F2AC005C7B33 /* NewMessageData.swift */; };
+		92631045232AEA29009AB5F2 /* Delegating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631044232AEA29009AB5F2 /* Delegating.swift */; };
 		9269EDE722F7B5000061D0DB /* notification.aif in Resources */ = {isa = PBXBuildFile; fileRef = 9269EDE622F7B5000061D0DB /* notification.aif */; };
 		9269EDE922F7BBA20061D0DB /* iTunesSearchBobdy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269EDE822F7BBA20061D0DB /* iTunesSearchBobdy.swift */; };
 		92748B1222E0A61A00C2957E /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92748B1122E0A61A00C2957E /* SwitchTableViewCell.swift */; };
@@ -368,6 +369,7 @@
 		925DD4B222DDF02F00D50A89 /* UIViewController+Themeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Themeable.swift"; sourceTree = "<group>"; };
 		925DD4B422DE04C300D50A89 /* CompactScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactScrollView.swift; sourceTree = "<group>"; };
 		9261402C22E0F2AC005C7B33 /* NewMessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageData.swift; sourceTree = "<group>"; };
+		92631044232AEA29009AB5F2 /* Delegating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegating.swift; sourceTree = "<group>"; };
 		9269EDE622F7B5000061D0DB /* notification.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = notification.aif; sourceTree = "<group>"; };
 		9269EDE822F7BBA20061D0DB /* iTunesSearchBobdy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesSearchBobdy.swift; sourceTree = "<group>"; };
 		92748B1122E0A61A00C2957E /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
@@ -742,6 +744,7 @@
 			children = (
 				9233618C22C664C4002B7BBA /* Coordinator.swift */,
 				9228D6B722D77BCE003B03DB /* Configurable.swift */,
+				92631044232AEA29009AB5F2 /* Delegating.swift */,
 				92931C3422D39C7300C54EB8 /* Env.swift */,
 				925DD4B022DDEDF200D50A89 /* EmptyViewDescription.swift */,
 				925DD4A822DDE5EA00D50A89 /* EmptyViewable.swift */,
@@ -1573,6 +1576,7 @@
 				9279ACC522E7D2A40098C4C2 /* SettingsViewControllerDelegate.swift in Sources */,
 				92DC9DEE22F9A54A008A91BC /* UserNotificationViewModel.swift in Sources */,
 				92F1765C22DD3FAB008AEB82 /* BottomSheetHeight.swift in Sources */,
+				92631045232AEA29009AB5F2 /* Delegating.swift in Sources */,
 				9247606B22D8E2E4001EF6BE /* MessageTableViewCellDelegate.swift in Sources */,
 				92E9606F22F3BF99005DF33D /* SendAppreciationViewController.swift in Sources */,
 				9237A1EF22CA99E000FC9331 /* Strings.swift in Sources */,
@@ -1930,7 +1934,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1938,7 +1942,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.nightlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1953,7 +1957,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1961,7 +1965,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.nightlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2119,7 +2123,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2127,7 +2131,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.nightlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2238,7 +2242,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2246,7 +2250,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.electriapp.nightlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

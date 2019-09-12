@@ -1,7 +1,7 @@
 import UIKit
 
 /// A table view cell for displaying a message.
-public class MessageTableViewCell: UITableViewCell, Configurable {
+public class MessageTableViewCell: ConfigurableCell, Delegating {
     public typealias Delegate = MessageTableViewCellDelegate
     public typealias ViewModel = MessageViewModel
     
