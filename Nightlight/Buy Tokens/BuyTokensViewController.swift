@@ -28,7 +28,9 @@ public class BuyTokensViewController: UIViewController, ModalPresentable {
             self?.dismiss(animated: true)
         }
         
-        buyTokensView.confirmAction = confirmPurchase
+        buyTokensView.confirmAction = { [weak self] in
+            self?.confirmPurchase()
+        }
         
         buyTokensView.productsCollectionView.delegate = self
         buyTokensView.productsCollectionView.dataSource = self

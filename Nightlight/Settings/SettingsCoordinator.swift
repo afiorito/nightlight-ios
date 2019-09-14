@@ -138,6 +138,11 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success(let products):
+                if products.isEmpty {
+                    DispatchQueue.main.async { settingsViewController.didFailLoadingProducts() }
+                    return
+                }
+                
                 DispatchQueue.main.async {
                     let buyTokensViewController = BuyTokensViewController(viewModel: viewModel, products: products)
                     

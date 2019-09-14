@@ -21,7 +21,8 @@ extension UITableView: EmptyViewable {
         
         NSLayoutConstraint.activate([
             emptyView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            emptyView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            emptyView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            emptyView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
     }
     

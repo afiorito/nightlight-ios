@@ -52,6 +52,7 @@ public class SettingsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        prepareSubviews()
         updateColors(for: theme)
         
         viewModel.loadRatings { (result) in
@@ -72,8 +73,15 @@ public class SettingsViewController: UIViewController {
         }
      }
     
-    public override func loadView() {
-        view = tableView
+    private func prepareSubviews() {
+        view.addSubviews(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     /**
