@@ -2,9 +2,9 @@ import Foundation
 
 /// A constant for the iap identifiers for app store connect.
 public enum IAPIdentifier: String, CaseIterable {
-    case tokens_100
-    case tokens_300
-    case tokens_500
+    case token_100
+    case token_300
+    case token_500
     
     var fullIdentifier: String {
         return "com.electriapp.nightlight.\(self.rawValue)"
