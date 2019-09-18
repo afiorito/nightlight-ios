@@ -3,7 +3,7 @@ import UIKit
 /// An easily dimmable view.
 public class DimmedView: UIView {
     /// A constant for denoting the current state of the dim view.
-    enum DimState {
+    public enum DimState {
         case max
         case off
         case percent(CGFloat)
@@ -12,7 +12,7 @@ public class DimmedView: UIView {
     // MARK: - Properties
 
     /// The current state of the view.
-    var dimState: DimState = .off {
+    public var dimState: DimState = .off {
         didSet {
             switch dimState {
             case .max:
@@ -27,14 +27,14 @@ public class DimmedView: UIView {
     }
     
     /// A callback for when the button is tapped.
-    var didTap: (() -> Void)?
+    public var didTap: (() -> Void)?
     
     /// The alpha of the view.
     private let dimAlpha: CGFloat
     
     // MARK: - Initializers
     
-    init(dimAlpha: CGFloat = 0.7) {
+    public init(dimAlpha: CGFloat = 0.7) {
         self.dimAlpha = dimAlpha
         super.init(frame: .zero)
         alpha = 0.0

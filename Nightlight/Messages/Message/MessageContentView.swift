@@ -3,7 +3,7 @@ import UIKit
 /// A view for displaying message content.
 public class MessageContentView: UIView {
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         prepareSubviews()

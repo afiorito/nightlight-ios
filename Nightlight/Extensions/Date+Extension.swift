@@ -37,6 +37,9 @@ extension Date {
         }
     }
     
+    /**
+     Creates a new date in local time.
+     */
     public func toLocalTime() -> Date {
         let timezone = TimeZone.current
         let seconds = TimeInterval(timezone.secondsFromGMT(for: self))

@@ -1,13 +1,7 @@
 import UIKit
 
 /// A cell for token products.
-public class ProductCollectionViewCell: UICollectionViewCell, Configurable {
-    public typealias ViewModel = ProductViewModel
-    public typealias Delegate = AnyObject
-    
-    /// The delegate for managing UI actions on the cell.
-    public weak var delegate: Delegate?
-    
+public class ProductCollectionViewCell: UICollectionViewCell {
     /// The name of the product.
     public var productName: String = "" {
         didSet {
@@ -15,7 +9,7 @@ public class ProductCollectionViewCell: UICollectionViewCell, Configurable {
         }
     }
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         contentView.layer.borderColor = UIColor.brand.cgColor

@@ -3,16 +3,18 @@ import Foundation
 /// A struct for defining the format of a server endpoint
 public struct Endpoint {
     /// The path component of the url.
-    let path: String
+    public let path: String
     
     /// The query items of a url.
-    let queryItems: [URLQueryItem]?
+    public let queryItems: [URLQueryItem]?
     
-    let isAuthorized: Bool
+    /// A boolean denoting if the endpoint requires authorization.
+    public let isAuthorized: Bool
     
-    let isExternal: Bool
+    /// A boolean denoting if the endpoint is to an external source.
+    public let isExternal: Bool
     
-    init(path: String, queryItems: [URLQueryItem]? = nil, isAuthorized: Bool = true, isExternal: Bool = false) {
+    public init(path: String, queryItems: [URLQueryItem]? = nil, isAuthorized: Bool = true, isExternal: Bool = false) {
         self.path = path
         self.queryItems = queryItems
         self.isAuthorized = isAuthorized
@@ -20,7 +22,7 @@ public struct Endpoint {
     }
     
     /// The composition of url components.
-    var url: URL? {
+    public var url: URL? {
         if isExternal {
             var components = URLComponents(string: path)
             components?.queryItems = queryItems

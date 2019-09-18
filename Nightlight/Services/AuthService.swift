@@ -9,7 +9,7 @@ public class AuthService {
     private let httpClient: HttpClient
     private let keychainManager: KeychainManager
     
-    init(httpClient: HttpClient, keychainManager: KeychainManager) {
+    public init(httpClient: HttpClient, keychainManager: KeychainManager) {
         self.httpClient = httpClient
         self.keychainManager = keychainManager
     }
@@ -41,7 +41,8 @@ public class AuthService {
      - parameter result: the result of the authentication request.
      */
     private func authenticate(endpoint: Endpoint, body: Data?, result: @escaping (Result<Bool, AuthError>) -> Void) {
-        httpClient.post(endpoint: endpoint, body: body) { networkResult in
+        httpClient.post(endpoint: endpoint, body: body) { [weak self] networkResult in
+            guard let self = self else { return }
             switch networkResult {
             case .success(_, let data):
                 guard let authResponse: AuthResponse = try? data.decodeJSON() else {

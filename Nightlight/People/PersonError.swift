@@ -1,6 +1,7 @@
 import Foundation
 
-/// An error for person events.
+/// An error that indicates problems with people.
 public enum PersonError: Error {
+    /// An unexpected error.
     case unknown
 }

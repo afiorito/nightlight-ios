@@ -105,7 +105,7 @@ extension ContextMenuViewController: BottomSheetPresentable {
         return nil
     }
     
-    public var height: BottomSheetHeight {
+    public var bottomSheetHeight: BottomSheetHeight {
         return .intrinsicHeight
     }
     

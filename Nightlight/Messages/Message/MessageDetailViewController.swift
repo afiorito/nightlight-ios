@@ -11,13 +11,10 @@ public class MessageDetailViewController: UIViewController {
     /// The contentView of the scroll view.
     private let contentView = UIView()
     
-    /// The view of the view controller.
+    /// The view that the `MessageDetailViewController` manages.
     private let messageContentView = MessageContentView()
     
-    /// The delegate for managing UI actions.
-    public weak var delegate: MessageDetailViewControllerDelegate?
-    
-    init(viewModel: MessageViewModel) {
+    public init(viewModel: MessageViewModel) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -46,52 +43,7 @@ public class MessageDetailViewController: UIViewController {
     
     public override func viewWillAppear(_ animated: Bool) {
         navigationController?.setStyle(.secondary, for: theme)
-        
         super.viewWillAppear(animated)
-    }
-    
-    public override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.setStyle(.primary, for: theme)
-        
-        super.viewWillDisappear(animated)
-    }
-    
-    // MARK: - Gesture Recognizer Handlers
-    
-    @objc private func loveTapped() {
-        viewModel.loveMessage { [weak self] result in
-            self?.handleMessageAction(result: result)
-        }
-    }
-    
-    @objc private func appreciateTapped() {
-        delegate?.messageDetailViewController(self, didAppreciate: viewModel)
-    }
-    
-    @objc private func saveTapped() {
-        viewModel.saveMessage { [weak self] result in
-            self?.handleMessageAction(result: result)
-        }
-    }
-    
-    @objc private func contextTapped() {
-        delegate?.messageDetailViewController(self, moreContextFor: viewModel)
-    }
-    
-    /**
-     Handle the result of a message action.
-     
-     - parameter result: the result of the message action, success or failure.
-     */
-    private func handleMessageAction(result: Result<MessageViewModel, MessageError>) {
-        switch result {
-        case .success:
-            delegate?.messageDetailViewController(self, didUpdate: viewModel)
-        case .failure:
-            self.showToast(Strings.error.couldNotConnect, severity: .urgent)
-        }
-        
-        updateView()
     }
     
     /**
@@ -131,40 +83,49 @@ public class MessageDetailViewController: UIViewController {
         ])
     }
     
+    // MARK: - Gesture Recognizer Handlers
+    
+    @objc private func loveTapped() {
+        viewModel.loveMessage()
+    }
+    
+    @objc private func appreciateTapped() {
+        viewModel.appreciateMessage()
+    }
+    
+    @objc private func saveTapped() {
+        viewModel.saveMessage()
+    }
+    
+    @objc private func contextTapped() {
+        viewModel.contextForMessage()
+    }
+    
     deinit {
         removeDidChangeThemeObserver()
     }
 }
 
-// MARK: - MessageEventHandling
+// MARK: - MessageViewModel UI Delegate
 
-extension MessageDetailViewController: MessageContextHandling {
-    public func didReportMessage(message: MessageViewModel, at indexPath: IndexPath) {
-        showToast("The message has been reported!", severity: .success)
+extension MessageDetailViewController: MessageViewModelUIDelegate {
+    public func didFailToDeleteMessage(with error: MessageError) {
+        showToast(Strings.error.couldNotConnect, severity: .urgent)
     }
     
-    public func didDeleteMessage(message: MessageViewModel, at indexPath: IndexPath) {
-        self.delegate?.messageDetailViewController(self, didDelete: message)
+    public func didReportMessage() {
+        showToast(Strings.message.reported, severity: .success)
     }
-}
+    
+    public func didUpdateMessage() {
+        updateView()
+    }
+    
+    public func didFailToPerformMessage(action: MessageActionType, with error: MessageError) {
+        updateView()
+        showToast(error.message, severity: .urgent)
+    }
 
-extension MessageDetailViewController: AppreciationEventHandling {
-    public func didAppreciateMessage(at indexPath: IndexPath) {
-        viewModel.appreciateMessage { [weak self] result in
-            guard let self = self else { return }
-            
-            self.delegate?.messageDetailViewControllerAppreciation(self, didComplete: true)
-            
-            switch result {
-            case .success:
-                self.delegate?.messageDetailViewController(self, didUpdate: self.viewModel)
-                self.updateView()
-            case .failure(let error):
-                self.showToast(error.message, severity: .urgent)
-                
-            }
-        }
-    }
 }
 
 // MARK: - Themeable

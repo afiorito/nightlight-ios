@@ -40,21 +40,21 @@ public class TextView: UITextView {
         }
     }
     
-    public override init(frame: CGRect, textContainer: NSTextContainer?) {
+    override public init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
     
         NotificationCenter.default.addObserver(self, selector: #selector(updatePlaceholder), name: UITextView.textDidChangeNotification, object: self)
         
         observers = [
-            self.observe(\.attributedText, changeHandler: observeChange),
-            self.observe(\.bounds, changeHandler: observeChange),
-            self.observe(\.frame, changeHandler: observeChange),
-            self.observe(\.text, changeHandler: observeChange),
-            self.observe(\.textAlignment, changeHandler: observeChange),
-            self.observe(\.textContainerInset, changeHandler: observeChange),
-            self.observe(\.textContainer.exclusionPaths, changeHandler: observeChange),
-            self.observe(\.textContainer.lineFragmentPadding, changeHandler: observeChange),
-            self.observe(\.font, changeHandler: observeChange)
+            self.observe(\.attributedText, changeHandler: { [weak self] (_, _) in self?.updatePlaceholder() }),
+            self.observe(\.bounds, changeHandler: { [weak self] (_, _) in self?.updatePlaceholder() }),
+            self.observe(\.frame, changeHandler: { [weak self] (_, _) in self?.updatePlaceholder() }),
+            self.observe(\.text, changeHandler: { [weak self] (_, _) in self?.updatePlaceholder() }),
+            self.observe(\.textAlignment, changeHandler: { [weak self] (_, _) in self?.updatePlaceholder() }),
+            self.observe(\.textContainerInset, changeHandler: { [weak self] (_, _) in self?.updatePlaceholder() }),
+            self.observe(\.textContainer.exclusionPaths, changeHandler: { [weak self] (_, _) in self?.updatePlaceholder() }),
+            self.observe(\.textContainer.lineFragmentPadding, changeHandler: { [weak self] (_, _) in self?.updatePlaceholder() }),
+            self.observe(\.font, changeHandler: { [weak self] (_, _) in self?.updatePlaceholder() })
         ]
         
         self.updatePlaceholder()

@@ -2,20 +2,6 @@ import UIKit
 
 /// A view controller for managing notification permission.
 public class NotificationPermissionViewController: PermissionViewController {
-    
-    /// The viewModel for handling state.
-    private let viewModel: PermissionViewModel
-    
-    init(viewModel: PermissionViewModel) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override public func viewDidLoad() {
         permissionView.confirmActionTitle = Strings.permission.notification.confirmTitle
         permissionView.cancelActionTitle = Strings.permission.notification.cancelTitle
@@ -27,26 +13,21 @@ public class NotificationPermissionViewController: PermissionViewController {
     }
     
     override func didConfirm() {
-        viewModel.requestNotifications { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let granted):
-                if granted {
-                    self.delegate?.permissionViewController(self, didFinish: true)
-                    return
-                }
-            case .failure: break
-            }
-            
-            self.delegate?.permissionViewController(self, didFinish: false)
-        }
+        viewModel.requestNotifications()
     }
     
     override func didCancel() {
-        delegate?.permissionViewController(self, didFinish: false)
+        viewModel.rejectPermission()
     }
     
     deinit {
         removeDidChangeThemeObserver()
     }
+}
+
+// MARK: - PermissionViewModel UI Delegate
+
+extension NotificationPermissionViewController: PermissionViewModelUIDelegate {
+    public func didReceivePermission() {}
+    public func didFailToReceivePermission(with error: Error) {}
 }

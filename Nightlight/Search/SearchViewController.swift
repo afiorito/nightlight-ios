@@ -24,7 +24,7 @@ public class SearchViewController: UIViewController {
         return searchController
     }()
 
-    init(baseViewController: UIViewController, searchResultsController: SearchResultsController) {
+    public init(baseViewController: UIViewController, searchResultsController: SearchResultsController) {
         self.baseViewController = baseViewController
         self.searchResultsController = searchResultsController
         

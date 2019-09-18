@@ -5,9 +5,7 @@ public class MessagesViewController: UIViewController {
     /// The viewModel for handling state.
     private let viewModel: MessagesViewModel
     
-    /// The delegate for managing UI actions.
-    public weak var delegate: MessagesViewControllerDelegate?
-    
+    /// The view that the `MessagesViewController` manages.
     private var messagesView: MessagesView {
         return view as! MessagesView
     }
@@ -19,21 +17,20 @@ public class MessagesViewController: UIViewController {
     public var emptyViewDescription: EmptyViewDescription?
     
     /// The object that acts as the data source of the table view.
-    private let dataSource: TableViewArrayPaginatedDataSource<MessageTableViewCell>
+    private lazy var dataSource: SimpleTableViewPaginatedDataSource<MessageTableViewCell> = {
+        SimpleTableViewPaginatedDataSource(reuseIdentifier: MessageTableViewCell.className, cellConfigurator: configureCell)
+    }()
     
-    init(viewModel: MessagesViewModel) {
+    public init(viewModel: MessagesViewModel) {
         self.viewModel = viewModel
-        self.dataSource = TableViewArrayPaginatedDataSource(reuseIdentifier: MessageTableViewCell.className)
-        
         super.init(nibName: nil, bundle: nil)
-        self.dataSource.cellDelegate = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: View Controller Lifecycle
+    // MARK: - View Controller Lifecycle
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -50,17 +47,15 @@ public class MessagesViewController: UIViewController {
         messagesView.tableView.refreshControl = refreshControl
         
         dataSource.prefetchCallback = { [weak self] in
-            self?.loadMoreMessages()
+            self?.viewModel.fetchMessages(fromStart: false)
         }
 
-        // fix refresh control tint bug.
-        messagesView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
-        self.refreshControl.beginRefreshing()
-        refresh()
+        viewModel.fetchMessages(fromStart: true)
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        styleNavigationController(for: theme)
         
         // deselect row upon returning to the view controller.
         if let selectedIndexPath = messagesView.tableView.indexPathForSelectedRow {
@@ -73,45 +68,6 @@ public class MessagesViewController: UIViewController {
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
-    /**
-     Requests more messages to be displayed.
-     
-     - parameter fromStart: A boolean that determines if messages are loaded from the beginning of the list or appended to the current list.
-     */
-    private func loadMoreMessages(fromStart: Bool = false) {
-        if fromStart { viewModel.resetPaging() }
-        
-        viewModel.getMessages { [weak self] result in
-            guard let self = self else { return }
-            
-            if self.refreshControl.isRefreshing {
-                self.refreshControl.endRefreshing()
-            }
-            
-            switch result {
-            case .success(let messages):
-                self.dataSource.emptyViewDescription = self.emptyViewDescription
-                self.dataSource.totalCount = self.viewModel.totalCount
-                
-                if fromStart {
-                    self.dataSource.data = messages
-                    self.messagesView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-                } else {
-                    let newIndexPaths = self.dataSource.updateData(with: messages)
-                    self.messagesView.tableView.insertRows(at: newIndexPaths, with: .none)
-                }
-                
-            case .failure:
-                // ensure empty view is updated properly.
-                if self.dataSource.data.isEmpty {
-                    self.dataSource.emptyViewDescription = EmptyViewDescription.noLoad
-                    self.messagesView.tableView.reloadData()
-                }
-                self.showToast(Strings.error.couldNotConnect, severity: .urgent)
-            }
-        }
-    }
-    
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
@@ -119,10 +75,18 @@ public class MessagesViewController: UIViewController {
     }
     
     /**
-     Refresh the table view.
+     Configure a message cell at an index path.
+     
+     - parameter cell: The cell to configure.
+     - parameter indexPath: The index path of the cell.
      */
-    @objc private func refresh() {
-        loadMoreMessages(fromStart: true)
+    public func configureCell(_ cell: MessageTableViewCell, at indexPath: IndexPath) {
+        cell.configure(with: viewModel.messageViewModel(at: indexPath))
+        
+        cell.loveAction = { [weak self] in self?.viewModel.loveMessage(at: indexPath) }
+        cell.appreciateAction = { [weak self] in self?.viewModel.appreciateMessage(at: indexPath) }
+        cell.saveAction = { [weak self] in self?.viewModel.saveMessage(at: indexPath) }
+        cell.contextAction = { [weak self] in self?.viewModel.contextForMessage(at: indexPath) }
     }
     
     deinit {
@@ -130,115 +94,79 @@ public class MessagesViewController: UIViewController {
     }
 }
 
-// MARK: - Message Events
+// MARK: - MessagesViewModel UI Delegate
 
-extension MessagesViewController: MessageContextHandling {
-    public func didReportMessage(message: MessageViewModel, at indexPath: IndexPath) {
+extension MessagesViewController: MessagesViewModelUIDelegate {
+    
+    public func didDeleteMessage(at indexPath: IndexPath) {
+        dataSource.rowCount -= 1
+        dataSource.totalCount -= 1
+        messagesView.tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+
+    public func didFailToDeleteMessage(with error: MessageError, at indexPath: IndexPath) {
+        showToast(Strings.error.couldNotConnect, severity: .urgent)
+    }
+    
+    public func didUpdateMessage(at indexPath: IndexPath) {
+        messagesView.tableView.reloadRows(at: [indexPath], with: .none)
+    }
+    
+    public func didFailToPerformMessage(action: MessageActionType, with error: MessageError, at indexPath: IndexPath) {
+        messagesView.tableView.reloadRows(at: [indexPath], with: .none)
+        showToast(error.message, severity: .urgent)
+    }
+    
+    public func didFetchMessages(with count: Int, fromStart: Bool) {
+        dataSource.emptyViewDescription = emptyViewDescription
+        dataSource.totalCount = viewModel.totalCount
+        
+        if fromStart {
+            dataSource.rowCount = count
+            messagesView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        } else {
+            let newIndexPaths = dataSource.incrementCount(count)
+            messagesView.tableView.insertRows(at: newIndexPaths, with: .none)
+        }
+    }
+
+    public func didFailToFetchMessages(with error: MessageError) {
+        if dataSource.isEmpty {
+            dataSource.emptyViewDescription = EmptyViewDescription.noLoad
+            messagesView.tableView.reloadData()
+        } else {
+            showToast(Strings.error.couldNotConnect, severity: .urgent)
+        }
+    }
+    
+    public func didReportMessage(at indexPath: IndexPath) {
         showToast(Strings.message.reported, severity: .success)
     }
     
-    public func didDeleteMessage(message: MessageViewModel, at indexPath: IndexPath) {
-        message.delete { [weak self] result in
-            switch result {
-            case .success:
-                self?.dataSource.data.remove(at: indexPath.row)
-                self?.messagesView.tableView.deleteRows(at: [indexPath], with: .automatic)
-            case .failure:
-                self?.showToast(Strings.error.couldNotConnect, severity: .urgent)
-            }
+    public func didBeginFetchingMessages(fromStart: Bool) {
+        if fromStart && !refreshControl.isRefreshing {
+            messagesView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)  // fix refresh control tint bug.
+            refreshControl.beginRefreshing()
         }
     }
     
-    public func didUpdateMessage(_ message: MessageViewModel, at indexPath: IndexPath) {
-        self.dataSource.data[indexPath.row] = message
-        self.messagesView.tableView.reloadRows(at: [indexPath], with: .automatic)
-    }
-}
-
-// MARK: - Appreciation Event Handling
-
-extension MessagesViewController: AppreciationEventHandling {
-    public func didAppreciateMessage(at indexPath: IndexPath) {
-        let viewModel = self.dataSource.data[indexPath.row]
-        
-        viewModel.appreciateMessage { [weak self] result in
-            guard let self = self else { return }
-            
-            self.delegate?.messagesViewControllerAppreciation(self, didComplete: true)
-            
-            switch result {
-            case .success(let message):
-                self.didUpdateMessage(message, at: indexPath)
-            case .failure(let error):
-                self.showToast(error.message, severity: .urgent)
-                
-            }
+    public func didEndFetchingMessages() {
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
         }
     }
 }
 
-// MARK: - MessageTableViewCell Delegate
-
-extension MessagesViewController: MessageTableViewCellDelegate {
-    public func cellDidTapAppreciate(_ cell: MessageTableViewCell) {
-        guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
-            return
-        }
-
-        delegate?.messagesViewController(self, didAppreciate: dataSource.data[indexPath.row], at: indexPath)
-    }
-    
-    public func cellDidTapSave(_ cell: MessageTableViewCell) {
-        guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
-            return
-        }
-
-        dataSource.data[indexPath.row].saveMessage { [weak self] result in
-            self?.handleMessageAction(at: indexPath, result: result)
-        }
-    }
-    
-    public func cellDidTapContext(_ cell: MessageTableViewCell) {
-        guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
-            return
-        }
-
-        delegate?.messagesViewController(self, moreContextFor: dataSource.data[indexPath.row], at: indexPath)
-    }
-    
-    public func cellDidTapLove(_ cell: MessageTableViewCell) {
-        guard let indexPath = messagesView.tableView.indexPath(for: cell) else {
-            return
-        }
-        
-        dataSource.data[indexPath.row].loveMessage { [weak self] result in
-            self?.handleMessageAction(at: indexPath, result: result)
-        }
-    }
-    
-    private func handleMessageAction(at indexPath: IndexPath, result: Result<MessageViewModel, MessageError>) {
-        switch result {
-        case .success(let message):
-            self.dataSource.data[indexPath.row] = message
-        case .failure:
-            self.showToast("Could not connect to Nightlight.", severity: .urgent)
-        }
-        
-        self.messagesView.tableView.reloadRows(at: [indexPath], with: .none)
-    }
-    
-}
-
-// MARK: - UITableViewDelegate
+// MARK: - UITableView Delegate
 
 extension MessagesViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.messagesViewController(self, didSelect: dataSource.data[indexPath.row], at: indexPath)
+        viewModel.selectMessage(at: indexPath)
     }
     
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if refreshControl.isRefreshing {
-            refresh()
+            viewModel.fetchMessages(fromStart: true)
         }
     }
 }

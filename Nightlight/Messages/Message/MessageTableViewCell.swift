@@ -1,17 +1,19 @@
 import UIKit
 
 /// A table view cell for displaying a message.
-public class MessageTableViewCell: ConfigurableCell, Delegating {
-    public typealias Delegate = MessageTableViewCellDelegate
-    public typealias ViewModel = MessageViewModel
-    
-    /// The delegate for managing UI actions.
-    public weak var delegate: MessageTableViewCellDelegate?
+public class MessageTableViewCell: UITableViewCell {    
+    /// The view model for handling state.
+    private var viewModel: MessageViewModel?
     
     /// The content of the table view cell.
     private let messageContentView = MessageContentView()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    public var loveAction: (() -> Void)?
+    public var appreciateAction: (() -> Void)?
+    public var saveAction: (() -> Void)?
+    public var contextAction: (() -> Void)?
+    
+    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         /// limit the number of lines when displaying a message in a cell.
@@ -30,23 +32,41 @@ public class MessageTableViewCell: ConfigurableCell, Delegating {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        loveAction = nil
+        appreciateAction = nil
+        saveAction = nil
+        contextAction = nil
+    }
+    
     public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        
-        if highlighted {
-            switch theme {
-            case .dark:
-                backgroundColor = UIColor.background(for: theme).lighter(amount: 0.05)
-            case .light:
-                backgroundColor = UIColor.background(for: theme).darker(amount: 0.05)
-            case .system: break
+
+        UIView.animate(withDuration: 0.25) {
+            if highlighted {
+                switch self.theme {
+                case .dark:
+                    self.backgroundColor = UIColor.background(for: self.theme).lighter(amount: 0.05)
+                case .light:
+                    self.backgroundColor = UIColor.background(for: self.theme).darker(amount: 0.05)
+                case .system: break
+                }
+            } else {
+                self.backgroundColor = UIColor.background(for: self.theme)
             }
-        } else {
-            backgroundColor = UIColor.background(for: theme)
         }
     }
     
+    /**
+     Configure the cell with a viewModel.
+     
+     - parameter viewModel: The view model to configure the cell.
+     */
     public func configure(with viewModel: MessageViewModel) {
+        self.viewModel = viewModel
+
         messageContentView.titleLabel.text = viewModel.title
         messageContentView.usernameLabel.text = viewModel.displayName
         messageContentView.timeAgoLabel.text = viewModel.timeAgo
@@ -58,7 +78,6 @@ public class MessageTableViewCell: ConfigurableCell, Delegating {
         messageContentView.saveAction.isSelected = viewModel.isSaved
         
         updateColors(for: theme)
-        
     }
     
     private func prepareSubviews() {
@@ -75,19 +94,19 @@ public class MessageTableViewCell: ConfigurableCell, Delegating {
     // MARK: - Gesture Recognizer  Handlers
     
     @objc private func loveTapped() {
-        delegate?.cellDidTapLove(self)
+        loveAction?()
     }
     
     @objc private func appreciateTapped() {
-        delegate?.cellDidTapAppreciate(self)
+        appreciateAction?()
     }
     
     @objc private func saveTapped() {
-        delegate?.cellDidTapSave(self)
+        saveAction?()
     }
     
     @objc private func contextTapped() {
-        delegate?.cellDidTapContext(self)
+        contextAction?()
     }
 
 }

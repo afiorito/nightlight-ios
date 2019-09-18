@@ -51,7 +51,7 @@ public class UserNotificationViewModel {
         return bodyString
     }
     
-    init(userNotification: AnyUserNotification) {
+    public init(userNotification: AnyUserNotification) {
         self.userNotification = userNotification
     }
     

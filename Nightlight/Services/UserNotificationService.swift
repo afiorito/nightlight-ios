@@ -8,7 +8,7 @@ public protocol UserNotificationServiced {
 public class UserNotificationService {
     private let httpClient: HttpClient
     
-    init(httpClient: HttpClient) {
+    public init(httpClient: HttpClient) {
         self.httpClient = httpClient
     }
     

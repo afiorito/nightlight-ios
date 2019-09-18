@@ -65,5 +65,9 @@ extension UIViewController {
     public func updateTitleView(size: CGSize) {
         navigationItem.titleView?.frame.size.width = size.width - 30
     }
+
+    var isBeingRemoved: Bool {
+        return self.isBeingDismissed || self.isMovingFromParent || self.navigationController?.isBeingDismissed ?? false
+    }
     
 }

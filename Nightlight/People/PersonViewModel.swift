@@ -2,6 +2,13 @@ import Foundation
 
 /// A view model for handling a person.
 public class PersonViewModel {
+    /// A formatter for the creation date of a user.
+    static var formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM YYYY"
+        
+        return formatter
+    }()
     
     /// The backing user model.
     private let user: User
@@ -17,9 +24,7 @@ public class PersonViewModel {
     
     /// The date the person joined.
     var helpingSince: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM YYYY"
-        return "Helping since \(formatter.string(from: user.createdAt))"
+        return "Helping since \(Self.formatter.string(from: user.createdAt))"
     }
     
     /// The total amount of love a person obtained.

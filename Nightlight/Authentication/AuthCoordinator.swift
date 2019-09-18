@@ -14,7 +14,7 @@ public class AuthCoordinator: Coordinator {
     /// The required dependencies.
     private let dependencies: Dependencies
 
-    /// The starting authentication method.
+    /// The starting authentication method. Dictates which auth view controller is displayed first.
     public let authMethod: AuthMethod
     
     public init(rootViewController: UIViewController?, dependencies: Dependencies, authMethod: AuthMethod) {
@@ -27,22 +27,26 @@ public class AuthCoordinator: Coordinator {
     private(set) var rootViewController: UIViewController?
     
     /// The view controller used to sign in a user.
-    private var signInViewController: SignInViewController {
+    private lazy var signInViewController: SignInViewController = {
         let viewModel = SignInViewModel(dependencies: dependencies as! SignInViewModel.Dependencies)
-        let signInViewController = SignInViewController(viewModel: viewModel)
-        signInViewController.delegate = self
+        let viewController = SignInViewController(viewModel: viewModel)
         
-        return signInViewController
-    }
+        viewModel.uiDelegate = viewController
+        viewModel.navigationDelegate = self
+        
+        return viewController
+    }()
     
     /// The view controller used to sign up a user.
-    private var signUpViewController: SignUpViewController {
+    private lazy var signUpViewController: SignUpViewController = {
         let viewModel = SignUpViewModel(dependencies: dependencies as! SignUpViewModel.Dependencies)
-        let signUpViewController = SignUpViewController(viewModel: viewModel)
-        signUpViewController.delegate = self
+        let viewController = SignUpViewController(viewModel: viewModel)
         
-        return signUpViewController
-    }
+        viewModel.uiDelegate = viewController
+        viewModel.navigationDelegate = self
+        
+        return viewController
+    }()
 
     public func start() {
         let authViewController: UIViewController
@@ -92,10 +96,22 @@ public class AuthCoordinator: Coordinator {
     }
 }
 
-// MARK: Auth ViewController Delegates
+// MARK: Auth Navigation Delegate
 
-extension AuthCoordinator: SignUpViewControllerDelegate, SignInViewControllerDelegate {
-    public func signUpViewController(_ signUpViewController: SignUpViewController, didTapPolicyWith url: URL) {        
+extension AuthCoordinator: AuthNavigationDelegate {
+    public func didAuthenticate() {
+        parent?.childDidFinish(self)
+    }
+    
+    public func goToSignUp() {
+        showOtherViewController(currentViewController: signInViewController)
+    }
+    
+    public func goToSignIn() {
+        showOtherViewController(currentViewController: signUpViewController)
+    }
+    
+    public func showPolicy(with url: URL) {
         let viewController = MainNavigationController(rootViewController: WebContentViewController(url: url))
         
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -103,22 +119,6 @@ extension AuthCoordinator: SignUpViewControllerDelegate, SignInViewControllerDel
         }
         
         signUpViewController.present(viewController, animated: true)
-    }
-    
-    public func signInViewControllerDidSignIn(_ signInViewController: SignInViewController) {
-        parent?.childDidFinish(self)
-    }
-    
-    public func signUpViewControllerDidSignUp(_ signUpViewController: SignUpViewController) {
-        parent?.childDidFinish(self)
-    }
-    
-    public func signInViewControllerDidTapSignUp(_ signInViewController: SignInViewController) {
-        showOtherViewController(currentViewController: signInViewController)
-    }
-    
-    public func signUpViewControllerDidTapSignIn(_ signUpViewController: SignUpViewController) {
-        showOtherViewController(currentViewController: signUpViewController)
     }
     
 }

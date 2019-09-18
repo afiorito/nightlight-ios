@@ -7,6 +7,12 @@ public class PeopleViewModel {
     /// The required dependencies.
     private let dependencies: Dependencies
     
+    /// The delegate object that handles user interface updates.
+    public weak var uiDelegate: PeopleViewModelUIDelegate?
+    
+    /// The fetched people.
+    private var people = [User]()
+    
     /// The active theme.
     public var theme: Theme {
         return dependencies.styleManager.theme
@@ -32,36 +38,24 @@ public class PeopleViewModel {
     }
     
     /**
-     Retrieve helpful people.
-     
-     - parameter result: the result of retrieving the helpful people.
-     */
-    public func getHelpfulPeople(result: @escaping (Result<[PersonViewModel], PersonError>) -> Void) {
-        dependencies.peopleService.getHelpfulPeople { peopleResult in
-            switch peopleResult {
-            case .success(let people):
-                let personViewModels = people.map { PersonViewModel(user: $0) }
-                
-                DispatchQueue.main.async { result(.success(personViewModels)) }
-            case .failure(let error):
-                DispatchQueue.main.async { result(.failure(error)) }
-            }
-        }
-    }
-    
-    /**
      Retrieve people.
      
-     - parameter result: the result of retrieving the people.
+     - parameter fromStart: A boolean denoting if the data is being fetched from the beginning of a paginated list.
      */
-    public func getPeople(result: @escaping (Result<[PersonViewModel], PersonError>) -> Void) {
+    public func fetchPeople(fromStart: Bool) {
+        if fromStart { resetPaging() }
+
         guard !isFetchInProgress && (endPage != nil || startPage == nil)
             else { return }
         
         isFetchInProgress = true
+        uiDelegate?.didBeginFetchingPeople(fromStart: fromStart)
         
-        dependencies.peopleService.getPeople(filter: filter, start: startPage, end: endPage) { peopleResult in
+        dependencies.peopleService.getPeople(filter: filter, start: startPage, end: endPage) { [weak self] peopleResult in
+            guard let self = self else { return }
+
             self.isFetchInProgress = false
+            DispatchQueue.main.async { self.uiDelegate?.didEndFetchingPeople() }
 
             switch peopleResult {
             case .success(let peopleResponse):
@@ -69,13 +63,22 @@ public class PeopleViewModel {
                 self.endPage = peopleResponse.metadata.end
                 self.totalCount = peopleResponse.metadata.total
                 
-                let personViewModels = peopleResponse.data.map { PersonViewModel(user: $0) }
+                self.people = fromStart ? peopleResponse.data : self.people + peopleResponse.data
                 
-                DispatchQueue.main.async { result(.success(personViewModels)) }
+                DispatchQueue.main.async { self.uiDelegate?.didFetchPeople(with: peopleResponse.data.count, fromStart: fromStart) }
             case .failure(let error):
-                DispatchQueue.main.async { result(.failure(error)) }
+                DispatchQueue.main.async { self.uiDelegate?.didFailToFetchPeople(with: error) }
             }
         }
+    }
+    
+    /**
+     Returns a person as a `PersonViewModel` at a specified indexPath.
+     
+     - parameter indexPath: The index path for the person.
+     */
+    public func personViewModel(at indexPath: IndexPath) -> PersonViewModel {
+        return PersonViewModel(user: people[indexPath.row])
     }
     
     /**

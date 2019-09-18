@@ -32,7 +32,7 @@ open class BaseButton: UIButton {
         }
     }
     
-    public override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         self.titleLabel?.font = UIFont.primary16ptBold

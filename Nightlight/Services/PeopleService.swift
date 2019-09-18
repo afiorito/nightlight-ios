@@ -12,7 +12,7 @@ public class PeopleService {
     /// The active task for filtering users.
     private var filterTask: URLSessionDataTask?
     
-    init(httpClient: HttpClient, keychainManager: KeychainManager) {
+    public init(httpClient: HttpClient, keychainManager: KeychainManager) {
         self.httpClient = httpClient
         self.keychainManager = keychainManager
     }
@@ -73,25 +73,31 @@ public class PeopleService {
 
      - parameter result: the result of retrieving a person.
      */
-    public func getPerson(result: @escaping (Result<User, PersonError>) -> Void) {
+    public func getPerson(result: ((Result<User, PersonError>) -> Void)? = nil) {
         guard let accessToken = try? keychainManager.string(for: KeychainKey.accessToken.rawValue),
             let jwt = try? JWTDecoder().decode(accessToken),
             let username = jwt["username"] as? String
             else {
-                return result(.failure(.unknown))
+                result?(.failure(.unknown))
+                return
             }
         
-        httpClient.get(endpoint: Endpoint.user(username: username)) { networkResult in
+        httpClient.get(endpoint: Endpoint.user(username: username)) { [weak self] networkResult in
             switch networkResult {
             case .success(_, let data):
                 guard let person: User = try? data.decodeJSON() else {
-                    return result(.failure(.unknown))
+                    result?(.failure(.unknown))
+                    return
                 }
                 
-                result(.success(person))
+                try? self?.keychainManager.set(person.tokens, forKey: KeychainKey.tokens.rawValue)
+                try? self?.keychainManager.set(person.username, forKey: KeychainKey.username.rawValue)
+                try? self?.keychainManager.set(person.createdAt.timeIntervalSince1970, forKey: KeychainKey.userCreatedAt.rawValue)
+                
+                result?(.success(person))
                 
             case .failure:
-                result(.failure(.unknown))
+                result?(.failure(.unknown))
             }
         }
     }

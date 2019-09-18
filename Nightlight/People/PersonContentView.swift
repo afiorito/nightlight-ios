@@ -59,7 +59,7 @@ public class PersonContentView: UIView {
         return stackView
     }()
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         prepareSubviews()

@@ -12,4 +12,9 @@ public extension String {
     mutating func capitalizeFirstLetter() {
       self = self.capitalizingFirstLetter()
     }
+    
+    /// A boolean indicating if the string is uppercased.
+    var isUppercase: Bool {
+        return self == self.uppercased()
+    }
 }

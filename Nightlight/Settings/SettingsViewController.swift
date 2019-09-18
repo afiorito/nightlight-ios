@@ -4,7 +4,7 @@ import UIKit
 public class SettingsViewController: UIViewController {
     /// A constant for denoting the section of the settings.
     private enum Section: Int, CaseIterable {
-        case appreciation = 0
+        case tokens = 0
         case general
         case feedback
         case about
@@ -13,12 +13,6 @@ public class SettingsViewController: UIViewController {
     
     /// The viewModel for handling state.
     private let viewModel: SettingsViewModel
-    
-    /// The delegate for managing UI actions.
-    public weak var delegate: SettingsViewControllerDelegate?
-    
-    /// The number of ratings the app has received for this version.
-    private var ratingCount: Int = 0
     
     /// A table view for displaying a list of settings.
     private let tableView: UITableView = {
@@ -34,9 +28,8 @@ public class SettingsViewController: UIViewController {
         return tableView
     }()
     
-    init(viewModel: SettingsViewModel) {
+    public init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,14 +48,7 @@ public class SettingsViewController: UIViewController {
         prepareSubviews()
         updateColors(for: theme)
         
-        viewModel.loadRatings { (result) in
-            switch result {
-            case .success(let ratingCount):
-                self.ratingCount = ratingCount
-                self.tableView.reloadRows(at: [IndexPath(row: 1, section: Section.feedback.rawValue)], with: .automatic)
-            case .failure: break
-            }
-        }
+        viewModel.loadRatings()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +58,14 @@ public class SettingsViewController: UIViewController {
             tableView.deselectRow(at: selectedIndexPath, animated: true)
         }
      }
+
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if isBeingRemoved {
+            viewModel.finish()
+        }
+    }
     
     private func prepareSubviews() {
         view.addSubviews(tableView)
@@ -107,6 +101,29 @@ public class SettingsViewController: UIViewController {
 
 }
 
+// MARK: - SettingsViewModel UI Delegate
+
+extension SettingsViewController: SettingsViewModelUIDelegate {
+    public func updateTokens() {
+        tableView.reloadRows(at: [IndexPath(row: 0, section: Section.tokens.rawValue)], with: .none)
+    }
+    
+    public func didFetchRatings() {
+        tableView.reloadRows(at: [IndexPath(row: 1, section: Section.feedback.rawValue)], with: .none)
+    }
+    
+    public func didCompletePurchase() {
+        tableView.reloadRows(at: [IndexPath(row: 0, section: Section.tokens.rawValue)], with: .none)
+    }
+    
+    public func didFailPurchase() {
+        showToast(Strings.error.somethingWrong, severity: .urgent)
+    }
+    
+    public func didFailToFetchRatings(with error: Error) {}
+    
+}
+
 // MARK: - UITableView DataSource
 
 extension SettingsViewController: UITableViewDataSource {
@@ -115,7 +132,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue: section) {
-        case .appreciation: return 1
+        case .tokens: return 1
         case .general: return 2
         case .feedback: return 2
         case .about: return 3
@@ -128,8 +145,8 @@ extension SettingsViewController: UITableViewDataSource {
         let settingsCell: UITableViewCell
 
         switch Section(rawValue: indexPath.section) {
-        case .appreciation:
-            settingsCell = appreciationCell(for: indexPath)
+        case .tokens:
+            settingsCell = tokensCell(for: indexPath)
         case .general:
             settingsCell = generalCell(for: indexPath)
         case .feedback:
@@ -169,11 +186,12 @@ extension SettingsViewController: UITableViewDataSource {
 // MARK: - Cell Preparation
 
 extension SettingsViewController {
-    private func appreciationCell(for indexPath: IndexPath) -> UITableViewCell {
+    private func tokensCell(for indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: InformationRightDetailTableViewCell.className,
                                                  for: indexPath) as! InformationRightDetailTableViewCell
         
         cell.title = Strings.nightlightTokens
+        cell.isLoading = viewModel.isTokensLoading
         cell.detailTextLabel?.attributedText = formatTokens(for: cell.detailTextLabel?.font)
         cell.updateColors(for: theme)
         
@@ -219,7 +237,7 @@ extension SettingsViewController {
                                                                      for: indexPath) as! InformationSubDetailTableViewCell
             
             cell.title = Strings.setting.rateNightlight
-            cell.subtitle = Strings.setting.ratingCount(ratingCount)
+            cell.subtitle = Strings.setting.ratingCount(viewModel.userRatingCountForCurrentVersion)
             cell.updateColors(for: theme)
 
             return cell
@@ -261,8 +279,8 @@ extension SettingsViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         switch Section(rawValue: indexPath.section) {
-        case .appreciation:
-            appreciationTapAction(for: indexPath)
+        case .tokens:
+            tokensTapAction(for: indexPath)
         case .general:
             generalTapAction(for: indexPath)
         case .feedback:
@@ -271,7 +289,7 @@ extension SettingsViewController: UITableViewDelegate {
         case .about:
             aboutTapAction(for: indexPath)
         case .account:
-            delegate?.settingsViewControllerDidSelectSignout(self)
+            viewModel.signOut()
         default: break
         }
     }
@@ -280,49 +298,33 @@ extension SettingsViewController: UITableViewDelegate {
 // MARK: - Cell Selection Actions
 
 extension SettingsViewController {
-    private func appreciationTapAction(for indexPath: IndexPath) {
-        delegate?.settingsViewControllerDidSelectAppreciation(self)
+    private func tokensTapAction(for indexPath: IndexPath) {
+        viewModel.buyTokens()
     }
 
     private func generalTapAction(for indexPath: IndexPath) {
         switch indexPath.row {
-        case 0: delegate?.settingsViewControllerDidSelectTheme(self, for: viewModel.theme)
-        case 1: delegate?.settingsViewControllerDidSelectDefaultMessage(self, for: viewModel.messageDefault)
+        case 0: viewModel.changeTheme()
+        case 1: viewModel.changeMessageDefault()
         default: break
         }
     }
     
     private func feedbackTapAction(for indexPath: IndexPath) {
         switch indexPath.row {
-        case 0: delegate?.settingsViewControllerDidSelectFeedback(self)
-        case 1: delegate?.settingsViewControllerDidSelectRate(self)
+        case 0: viewModel.selectFeedback()
+        case 1: viewModel.selectRating()
         default: break
         }
     }
     
     private func aboutTapAction(for indexPath: IndexPath) {
         switch indexPath.row {
-        case 0: delegate?.settingsViewControllerDidSelectAbout(self)
-        case 1: delegate?.settingsViewControllerDidSelectPrivacyPolicy(self)
-        case 2: delegate?.settingsViewControllerDidSelectTermsOfUse(self)
+        case 0: viewModel.selectAbout()
+        case 1: viewModel.selectPrivacyPolicy()
+        case 2: viewModel.selectTermsOfUse()
         default: break
         }
-    }
-}
-
-// MARK: - Purchase Events
-
-extension SettingsViewController {
-    func didFailLoadingProducts() {
-        showToast(Strings.couldNotLoadProducts, severity: .urgent)
-    }
-    
-    public func didCompletePurchase() {
-        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-    }
-    
-    public func didFailPurchase() {
-        showToast(Strings.error.somethingWrong, severity: .urgent)
     }
 }
 

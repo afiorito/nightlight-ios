@@ -15,7 +15,7 @@ public class LabelTitleView: UIView {
         set { titleLabel.text = newValue }
     }
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         prepareSubviews()

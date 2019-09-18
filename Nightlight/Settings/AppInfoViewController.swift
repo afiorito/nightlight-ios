@@ -78,7 +78,7 @@ public class AppInfoViewController: UIViewController {
         return stackView
     }()
     
-    init(viewModel: AppInfoViewModel) {
+    public init(viewModel: AppInfoViewModel) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)

@@ -13,7 +13,7 @@ extension BottomSheetPresentable where Self: UIViewController {
     
     /// The target y position of the bottom sheet.
     var yPos: CGFloat {
-        return max(topMargin(from: height), topMargin(from: .maxHeight)) + topOffset
+        return max(topMargin(from: bottomSheetHeight), topMargin(from: .maxHeight)) + topOffset
     }
     
     /// Computes the bottom y position to adjust for offsets.

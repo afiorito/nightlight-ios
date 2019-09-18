@@ -55,6 +55,7 @@ public class UserDefaultsManager {
         }
     }
     
+    /// The device token for notifications.
     public var deviceToken: String? {
         get {
             return userDefaults.string(forKey: UserDefaultsKey.deviceToken.rawValue)

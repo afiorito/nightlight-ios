@@ -7,6 +7,12 @@ public class SendMessageViewModel {
     /// The required dependencies.
     private let dependencies: Dependencies
     
+    /// The delegate object that handles user interface updates.
+    public weak var uiDelegate: SendMessageViewModelUIDelegate?
+    
+    /// The delegate object that handles navigation events.
+    public weak var navigationDelegate: SendMessageNavigationDelegate?
+    
     /// The active theme.
     public var theme: Theme {
         return dependencies.styleManager.theme
@@ -29,29 +35,42 @@ public class SendMessageViewModel {
      - parameter numPeople: the number of people to send the message to.
      - parameter isAnonymous: a value representing if the message is sent anonymously
      */
-    public func sendMessage(title: String?, body: String?, numPeople: String?, isAnonymous: Bool, result: @escaping (Result<MessageViewModel, MessageError>) -> Void) {
+    public func sendMessage(title: String?, body: String?, numPeople: String?, isAnonymous: Bool) {
+        uiDelegate?.didBeginSending()
+
         guard let title = title, !title.isEmpty else {
-            return result(.failure(.invalidTitle))
+            uiDelegate?.didFailToSend(with: .invalidTitle)
+            return
         }
         
         guard let body = body, !body.isEmpty else {
-            return result(.failure(.invalidBody))
+            uiDelegate?.didFailToSend(with: .invalidBody)
+            return
         }
         
         guard let numPeopleString = numPeople, let numPeople = Int(numPeopleString) else {
-            return result(.failure(.invalidNumPeople))
+            uiDelegate?.didFailToSend(with: .invalidNumPeople)
+            return
         }
         
         let message = NewMessageData(title: title, body: body, numPeople: numPeople, isAnonymous: isAnonymous)
-        dependencies.messageService.sendMessage(message) { messageResult in
+        dependencies.messageService.sendMessage(message) { [weak self] messageResult in
+            DispatchQueue.main.async { self?.uiDelegate?.didEndSending() }
+            
             switch messageResult {
             case .success(let message):
-                let viewModel = MessageViewModel(dependencies: self.dependencies as! MessageViewModel.Dependencies, message: message, type: .sent)
-                DispatchQueue.main.async { result(.success(viewModel)) }
+                DispatchQueue.main.async { self?.navigationDelegate?.didSend(message: message) }
             case .failure(let error):
-                DispatchQueue.main.async { result(.failure(error)) }
+                DispatchQueue.main.async { self?.uiDelegate?.didFailToSend(with: error) }
             }
             
         }
+    }
+    
+    /**
+     Stop sending the message.
+     */
+    func finish() {
+        navigationDelegate?.didFinishSendingMessage()
     }
 }

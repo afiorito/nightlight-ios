@@ -1,9 +1,7 @@
 import UIKit
 
 /// A table view cell for displaying a person.
-public class PersonTableViewCell: UITableViewCell, Configurable, Delegating {
-    public typealias ViewModel = PersonViewModel
-    
+public class PersonTableViewCell: UITableViewCell, Configurable, Delegating {    
     /// The delegate for managing UI actions.
     public weak var delegate: AnyObject?
     
@@ -13,7 +11,7 @@ public class PersonTableViewCell: UITableViewCell, Configurable, Delegating {
     /// The content of the table view cell.
     private let personContentView = PersonContentView()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none

@@ -1,11 +1,16 @@
 import Foundation
-import StoreKit
 
 /// A view model for handling a message.
 public class MessageViewModel {
     public typealias MessageResultCompletion = (Result<MessageViewModel, MessageError>) -> Void
-    public typealias Dependencies = KeychainManaging & MessageServiced & IAPManaging
-    public typealias MessageAppreciateResult = Result<MessageAppreciateResponse, MessageError>
+    public typealias Dependencies = StyleManaging & MessageServiced
+    private typealias ActionResult<T> = Result<T, MessageError>
+    
+    /// The delegate object that handles user interface updates.
+    public weak var uiDelegate: MessageViewModelUIDelegate?
+    
+    /// The delegate object that handles navigation events.
+    public weak var navigationDelegate: MessageNavigationDelegate?
     
     /// The required dependencies.
     private let dependencies: Dependencies
@@ -69,99 +74,109 @@ public class MessageViewModel {
         return message.isSaved
     }
     
-    public init(dependencies: Dependencies, message: Message, type: MessageType) {
-        self.dependencies = dependencies
+    public init(message: Message, type: MessageType, dependencies: Dependencies) {
         self.message = message
         self.type = type
+        self.dependencies = dependencies
     }
     
     /**
      Loves a message.
-     
-     - parameter result: The result of loving a message.
      */
-    public func loveMessage(result: @escaping MessageResultCompletion) {
-        dependencies.messageService.actionMessage(with: message.id, type: .love) { (loveResult: Result<MessageLoveResponse, MessageError>) in
+    public func loveMessage() {
+        dependencies.messageService.love(message: message) { [weak self] loveResult in
+            guard let self = self else { return }
             switch loveResult {
-            case .success(let loveResponse):
-                
-                self.message.isLoved = loveResponse.isLoved
-                self.message.loveCount = max(0, self.message.loveCount + (loveResponse.isLoved ? 1 : -1))
-                
+            case .success(let message):
+                self.message = message
                 DispatchQueue.main.async {
-                    result(.success(self))
-                    
+                    self.navigationDelegate?.didUpdate(message: message)
+                    self.uiDelegate?.didUpdateMessage()
                 }
-                
-            case .failure:
-                DispatchQueue.main.async { result(.failure(.unknown)) }
+            case .failure(let error):
+                DispatchQueue.main.async { self.uiDelegate?.didFailToPerformMessage(action: .love, with: error) }
             }
         }
     }
     
     /**
      Saves a message.
-     
-     - parameter result: The result of saving a message.
      */
-    public func saveMessage(result: @escaping MessageResultCompletion) {
-        dependencies.messageService.actionMessage(with: message.id, type: .save) { (saveResult: Result<MessageSaveResponse, MessageError>) in
+    public func saveMessage() {
+        dependencies.messageService.save(message: message) { [weak self] saveResult in
+            guard let self = self else { return }
+            
             switch saveResult {
-            case .success(let saveResponse):
-                
-                self.message.isSaved = saveResponse.isSaved
-
+            case .success(let message):
+                self.message = message
                 DispatchQueue.main.async {
-                    result(.success(self))
+                    self.navigationDelegate?.didUpdate(message: message)
+                    self.uiDelegate?.didUpdateMessage()
                 }
-                
-            case .failure:
-                DispatchQueue.main.async { result(.failure(.unknown)) }
+            case .failure(let error):
+                DispatchQueue.main.async { self.uiDelegate?.didFailToPerformMessage(action: .save, with: error) }
             }
         }
     }
     
     /**
      Appreciates a message.
-     
-     - parameter result: The result of appreciating a message.
      */
-    public func appreciateMessage(result: @escaping MessageResultCompletion) {
-        dependencies.messageService.actionMessage(with: message.id, type: .appreciate) { [weak self] (appreciateResult: MessageAppreciateResult) in
-            guard let self = self else { return }
-
-            switch appreciateResult {
-            case .success(let appreciateResponse):
-                if appreciateResponse.isAppreciated {
-                    self.message.appreciationCount += 1
-                    self.message.isAppreciated = true
-                    let tokens = (try? self.dependencies.keychainManager.integer(for: KeychainKey.tokens.rawValue)) ?? 0
-                    try? self.dependencies.keychainManager.set(tokens - 100, forKey: KeychainKey.tokens.rawValue)
-                }
-                
-                DispatchQueue.main.async { result(.success(self)) }
-            case .failure(let error):
-                DispatchQueue.main.async { result(.failure(error)) }
-                
-            }
+    public func appreciateMessage() {
+        if !message.isAppreciated {
+            navigationDelegate?.showAppreciationSheet(for: message)
         }
     }
     
     /**
-     Deletes a message.
-     
-     - parameter result: The result of deleting a message.
+     Shows a context menu for the message.
      */
-    public func delete(result: @escaping (Result<MessageViewModel, MessageError>) -> Void) {
-        dependencies.messageService.deleteMessage(with: message.id) { deleteResult in
+    public func contextForMessage() {
+        var actions: [MessageContextAction] = [.report]
+        
+        if dependencies.messageService.isDeleteable(message: message, type: type) {
+            actions.append(.delete)
+        }
+
+        navigationDelegate?.showContextMenu(for: message, with: actions)
+    }
+    
+    /**
+     Deletes a message.
+     */
+    public func delete() {
+        dependencies.messageService.deleteMessage(with: message.id) { [weak self] deleteResult in
+            guard let self = self else { return }
             switch deleteResult {
             case .success:
                 DispatchQueue.main.async {
-                    result(.success(MessageViewModel(dependencies: self.dependencies, message: self.message, type: self.type)))
+                    self.navigationDelegate?.didDelete(message: self.message)
                 }
-            case .failure:
-                DispatchQueue.main.async { result(.failure(.unknown)) }
+            case .failure(let error):
+                DispatchQueue.main.async { self.uiDelegate?.didFailToDeleteMessage(with: error) }
             }
         }
+    }
+}
+
+// MARK: - Navigation Events
+
+extension MessageViewModel {
+    public func didFinishPresentingContextMenu(with action: MessageContextAction) {
+        switch action {
+        case .report:
+            uiDelegate?.didReportMessage()
+        case .delete:
+            delete()
+        }
+    }
+    
+    public func didUpdate(message: Message) {
+        self.message = message
+        uiDelegate?.didUpdateMessage()
+    }
+    
+    public func didFailToAppreciate(with error: MessageError) {
+        uiDelegate?.didFailToPerformMessage(action: .appreciate, with: error)
     }
 }

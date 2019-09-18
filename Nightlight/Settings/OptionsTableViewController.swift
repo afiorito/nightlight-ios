@@ -15,7 +15,7 @@ public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UIT
         tableView.register(BasicOptionTableViewCell.self, forCellReuseIdentifier: BasicOptionTableViewCell.className)
     }
     
-    init(currentOption: E) {
+    public init(currentOption: E) {
         self.currentOption = currentOption
         super.init(style: .grouped)
         

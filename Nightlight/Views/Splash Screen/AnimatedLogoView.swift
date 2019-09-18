@@ -11,7 +11,7 @@ public class AnimatedLogoView: UIView {
         return imageView
     }()
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         updateColors(for: theme)

@@ -6,7 +6,7 @@ public protocol UserNotificationManaging {
 }
 
 /// A dependency container to inject into other objects.
-public struct DependencyContainer: StyleManaging,
+public class DependencyContainer: StyleManaging,
     UserDefaultsManaging, KeychainManaging, NotificationObserving, UserNotificationManaging, KeyboardManaging, IAPManaging, AuthServiced,
     MessageServiced, PeopleServiced, UserNotificationServiced {
     public var userDefaultsManager = UserDefaultsManager()
@@ -21,7 +21,7 @@ public struct DependencyContainer: StyleManaging,
     public var notificationService: UserNotificationService
     public var iapManager: IAPManager
     
-    init() {
+    public init() {
         let keychainManager = KeychainManager()
         self.keychainManager = keychainManager
 
@@ -29,7 +29,7 @@ public struct DependencyContainer: StyleManaging,
         let authorizedHttpClient = AuthorizedHttpClient(keychainManager: keychainManager)
 
         self.authService = AuthService(httpClient: httpClient, keychainManager: keychainManager)
-        self.messageService = MessageService(httpClient: authorizedHttpClient)
+        self.messageService = MessageService(httpClient: authorizedHttpClient, keychainManager: keychainManager)
         self.notificationService = UserNotificationService(httpClient: authorizedHttpClient)
         
         let peopleService = PeopleService(httpClient: authorizedHttpClient, keychainManager: keychainManager)

@@ -6,9 +6,6 @@ public class SendAppreciationViewController: UIViewController {
     /// The viewModel for handling state.
     private let viewModel: SendAppreciationViewModel
     
-    /// The delegate for managing UI actions.
-    public weak var delegate: SendAppreciationViewControllerDelegate?
-    
     /// The view of the view controller.
     private var sendAppreciationView = SendAppreciationView()
     
@@ -17,9 +14,8 @@ public class SendAppreciationViewController: UIViewController {
         return viewModel.tokens > 0
     }
     
-    init(viewModel: SendAppreciationViewModel) {
+    public init(viewModel: SendAppreciationViewModel) {
         self.viewModel = viewModel
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,11 +31,18 @@ public class SendAppreciationViewController: UIViewController {
         }
         
         sendAppreciationView.actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
-        sendAppreciationView.numTokens = viewModel.tokens
         
-        sendAppreciationView.actionButton.setTitle(hasTokens ? Strings.sendAppreciation : Strings.getTokens, for: .normal)
         prepareSubviews()
+        updateView()
         updateColors(for: theme)
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if isBeingRemoved {
+            viewModel.finish()
+        }
     }
     
     private func prepareSubviews() {
@@ -62,22 +65,27 @@ public class SendAppreciationViewController: UIViewController {
     @objc private func actionButtonTapped() {
         sendAppreciationView.actionButton.isEnabled = false
         sendAppreciationView.actionButton.isLoading = true
-        delegate?.sendAppreciationViewControllerDidTapActionButton(self)
+        viewModel.appreciateMessage()
     }
 }
 
-// MARK: - Purchase Events
+// MARK: - SendAppreciationViewModel UI Delegate
 
-extension SendAppreciationViewController {
-    public func didCompletePurchase() {
+extension SendAppreciationViewController: SendAppreciationViewModelUIDelegate {
+    public func updateView() {
+        sendAppreciationView.actionButton.setTitle(hasTokens ? Strings.sendAppreciation : Strings.getTokens, for: .normal)
         sendAppreciationView.numTokens = viewModel.tokens
-        sendAppreciationView.actionButton.isEnabled = true
-        sendAppreciationView.actionButton.setTitle(Strings.sendAppreciation, for: .normal)
-        sendAppreciationView.actionButton.isLoading = false
     }
     
     public func didCancelPurchase() {
         sendAppreciationView.actionButton.isEnabled = true
+        sendAppreciationView.actionButton.isLoading = false
+    }
+
+    public func didCompletePurchase() {
+        sendAppreciationView.numTokens = viewModel.tokens
+        sendAppreciationView.actionButton.isEnabled = true
+        sendAppreciationView.actionButton.setTitle(Strings.sendAppreciation, for: .normal)
         sendAppreciationView.actionButton.isLoading = false
     }
     
@@ -86,10 +94,6 @@ extension SendAppreciationViewController {
         sendAppreciationView.actionButton.isEnabled = true
         sendAppreciationView.actionButton.isLoading = false
         showToast(Strings.error.somethingWrong, severity: .urgent)
-    }
-    
-    public func didFailLoadingProducts() {
-        showToast(Strings.couldNotLoadProducts, severity: .urgent)
     }
 }
 
@@ -100,7 +104,7 @@ extension SendAppreciationViewController: BottomSheetPresentable {
         return nil
     }
     
-    public var height: BottomSheetHeight {
+    public var bottomSheetHeight: BottomSheetHeight {
         return .intrinsicHeight
     }
 }

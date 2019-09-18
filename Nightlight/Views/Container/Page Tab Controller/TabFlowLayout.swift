@@ -2,7 +2,7 @@ import UIKit
 
 /// A collection view flow layout for tabs with separators.
 public class TabFlowLayout: UICollectionViewFlowLayout {
-    public override init() {
+    override public init() {
         super.init()
         register(TabSeparatorView.self, forDecorationViewOfKind: TabSeparatorView.className)
     }

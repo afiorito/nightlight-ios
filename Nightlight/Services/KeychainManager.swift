@@ -13,6 +13,7 @@ public class KeychainManager {
         case unexpectedData
         case unhandledError(status: OSStatus)
     }
+    
     private let serviceName: String
     private let accessGroup: String?
     

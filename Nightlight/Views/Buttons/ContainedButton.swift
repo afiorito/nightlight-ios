@@ -2,7 +2,7 @@ import UIKit
 
 /// A button that has a background color.
 public class ContainedButton: BaseButton {
-    public override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         self.layer.cornerRadius = 4

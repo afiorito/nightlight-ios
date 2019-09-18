@@ -19,7 +19,7 @@ public class SelectOptionTableViewCell<E: RawRepresentable>: BaseStaticTableView
     /// An image view for displaying a disclosure indicator.
     private let disclosureIndicator = UIImageView(image: UIImage.glyph.disclosure)
     
-    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         
         accessoryView = disclosureIndicator

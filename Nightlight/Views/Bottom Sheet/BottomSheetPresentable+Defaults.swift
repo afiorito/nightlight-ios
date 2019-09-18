@@ -9,7 +9,7 @@ public extension BottomSheetPresentable where Self: UIViewController {
         return layoutInsets.top + 15
     }
     
-    var height: BottomSheetHeight {
+    var bottomSheetHeight: BottomSheetHeight {
         guard let scrollView = panScrollable
             else { return .maxHeight }
         

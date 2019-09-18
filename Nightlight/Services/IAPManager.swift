@@ -31,7 +31,7 @@ public class IAPManager: NSObject {
     /// The payment queue for handling purchases.
     private let paymentQueue: SKPaymentQueue
     
-    init(productIdentifiers: [String], skPaymentQueue: SKPaymentQueue = SKPaymentQueue.default(), dependencies: Dependencies) {
+    public init(productIdentifiers: [String], skPaymentQueue: SKPaymentQueue = SKPaymentQueue.default(), dependencies: Dependencies) {
         self.paymentQueue = skPaymentQueue
         self.productIdentifiers = productIdentifiers
         self.dependencies = dependencies

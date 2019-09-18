@@ -123,8 +123,10 @@ public struct Strings {
         static let weakPassword = "The password is too weak."
         static let emailExists = "A user with that email already exists."
         static let invalidEmail = "The email is invalid."
+        static let failedSignIn = "Username or password are incorrect."
     }
     
+    static let noProductsFound = "No Products Found."
     static let agreeToTerms = "By signing up you agree to the\nTerms of Use and Privacy Policy"
     static let unavailableButtonText = "Unavailable"
     static let tokenPacksTitle = "Token Packs"

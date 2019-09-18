@@ -12,7 +12,7 @@ public class HelpfulPeopleHeader: UITableViewHeaderFooterView {
         return label
     }()
     
-    override init(reuseIdentifier: String?) {
+    override public init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
         prepareSubviews()
