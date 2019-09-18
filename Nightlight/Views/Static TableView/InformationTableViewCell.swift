@@ -34,6 +34,7 @@ public class InformationTableViewCell: BaseStaticTableViewCell {
                 let activityIndicator = UIActivityIndicatorView()
                 activityIndicator.startAnimating()
                 accessoryView = activityIndicator
+                activityIndicator.sizeToFit()
             } else {
                 accessoryView = disclosureIndicator
             }
