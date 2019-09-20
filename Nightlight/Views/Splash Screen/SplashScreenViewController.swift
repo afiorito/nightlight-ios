@@ -20,6 +20,7 @@ public class SplashScreenViewController: UIViewController {
             
             addChild(viewController)
             viewController.view.frame = view.frame
+            viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             view.insertSubview(viewController.view, at: 0)
             viewController.didMove(toParent: self)
         }

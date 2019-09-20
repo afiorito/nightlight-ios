@@ -83,10 +83,15 @@ public class MessagesViewController: UIViewController {
     public func configureCell(_ cell: MessageTableViewCell, at indexPath: IndexPath) {
         cell.configure(with: viewModel.messageViewModel(at: indexPath))
         
-        cell.loveAction = { [weak self] in self?.viewModel.loveMessage(at: indexPath) }
-        cell.appreciateAction = { [weak self] in self?.viewModel.appreciateMessage(at: indexPath) }
-        cell.saveAction = { [weak self] in self?.viewModel.saveMessage(at: indexPath) }
-        cell.contextAction = { [weak self] in self?.viewModel.contextForMessage(at: indexPath) }
+        let handler: (UITableViewCell, ((IndexPath) -> Void)?) -> Void = { [weak self] (c, callback) in
+            guard let indexPath = self?.messagesView.tableView.indexPath(for: c) else { return }
+            callback?(indexPath)
+        }
+        
+        cell.loveAction = { [weak self] c in handler(c, self?.viewModel.loveMessage) }
+        cell.appreciateAction = { [weak self] c in handler(c, self?.viewModel.appreciateMessage) }
+        cell.saveAction = { [weak self] c in handler(c, self?.viewModel.saveMessage) }
+        cell.contextAction = { [weak self] c in handler(c, self?.viewModel.contextForMessage) }
     }
     
     deinit {

@@ -8,10 +8,10 @@ public class MessageTableViewCell: UITableViewCell {
     /// The content of the table view cell.
     private let messageContentView = MessageContentView()
     
-    public var loveAction: (() -> Void)?
-    public var appreciateAction: (() -> Void)?
-    public var saveAction: (() -> Void)?
-    public var contextAction: (() -> Void)?
+    public var loveAction: ((UITableViewCell) -> Void)?
+    public var appreciateAction: ((UITableViewCell) -> Void)?
+    public var saveAction: ((UITableViewCell) -> Void)?
+    public var contextAction: ((UITableViewCell) -> Void)?
     
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -94,19 +94,19 @@ public class MessageTableViewCell: UITableViewCell {
     // MARK: - Gesture Recognizer  Handlers
     
     @objc private func loveTapped() {
-        loveAction?()
+        loveAction?(self)
     }
     
     @objc private func appreciateTapped() {
-        appreciateAction?()
+        appreciateAction?(self)
     }
     
     @objc private func saveTapped() {
-        saveAction?()
+        saveAction?(self)
     }
     
     @objc private func contextTapped() {
-        contextAction?()
+        contextAction?(self)
     }
 
 }
