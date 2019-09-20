@@ -5,7 +5,7 @@ public class TokenImageAttachment: NSTextAttachment {
     /// The font of the text for attachment.
     public let font: UIFont?
     
-    init(font: UIFont?) {
+    public init(font: UIFont?) {
         self.font = font
         
         super.init(data: nil, ofType: nil)

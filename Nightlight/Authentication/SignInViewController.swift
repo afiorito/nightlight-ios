@@ -5,16 +5,13 @@ public class SignInViewController: UIViewController {
     /// The viewModel for handling state.
     private let viewModel: SignInViewModel
     
+    /// The view that the `SignInViewController` manages.
     private var signInView: SignInView {
         return view as! SignInView
     }
     
-    /// The delegate for managing UI actions.
-    public weak var delegate: SignInViewControllerDelegate?
-    
-    init(viewModel: SignInViewModel) {
+    public init(viewModel: SignInViewModel) {
         self.viewModel = viewModel
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -52,36 +49,43 @@ public class SignInViewController: UIViewController {
      Handle a sign in tap event.
      */
     @objc private func signInTapped() {
-        let credentials = SignInCredentials(
-            username: signInView.username,
-            password: signInView.password
-        )
-        
-        signInView.authButton.isLoading = true
-        
-        viewModel.signIn(with: credentials) { [unowned self] (result) in
-            
-            switch result {
-            case .success:
-                self.delegate?.signInViewControllerDidSignIn(self)
-            case .failure(let error):
-                self.signInView.authButton.isLoading = false
-                switch error {
-                case .validation(let reasons):
-                    self.showToast("Username or password are incorrect.", severity: .urgent)
-                    self.signInView.showFieldErrors(reasons: reasons)
-                default:
-                    self.showToast("Could not connect to Nightlight.", severity: .urgent)
-                }
-            }
-        }
+        viewModel.signIn(with: SignInCredentials(username: signInView.username, password: signInView.password))
     }
     
     /**
      Handle a sign up tap event.
      */
     @objc private func signUpTapped(gesture: UITapGestureRecognizer) {
-        delegate?.signInViewControllerDidTapSignUp(self)
+        viewModel.signUp()
+    }
+}
+
+// MARK: - SignInViewModel UI Delegate
+
+extension SignInViewController: AuthViewModelUIDelegate {
+    public func didBeginAuthenticating() {
+        signInView.authButton.isLoading = true
+    }
+    
+    public func didEndAuthenticating() {
+        signInView.authButton.isLoading = false
+    }
+    
+    public func didFailToAuthenticate(with error: AuthError) {
+        switch error {
+        case .validation(let reasons):
+            self.showToast(Strings.auth.failedSignIn, severity: .urgent)
+            self.signInView.showFieldErrors(reasons: reasons)
+        default:
+            self.showToast(Strings.error.couldNotConnect, severity: .urgent)
+        }
+    }
+    
+    public func clearFields() {
+        [signInView.usernameField, signInView.passwordField].forEach {
+            $0.input.text = ""
+            $0.error = nil
+        }
     }
 }
 

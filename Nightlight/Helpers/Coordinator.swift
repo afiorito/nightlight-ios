@@ -39,6 +39,10 @@ public extension Coordinator {
         children.removeAll { $0 === child }
     }
     
+    func removeChild<T>(with type: T.Type) {
+        children.removeAll { $0 is T }
+    }
+    
     func addChild(_ child: Coordinator) {
         child.parent = self
         children.append(child)

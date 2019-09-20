@@ -2,13 +2,24 @@ import StoreKit
 
 /// A view model for handling purchasing tokens state.
 public class BuyTokensViewModel {
-    typealias Dependencies = IAPManaging & StyleManaging
+    public typealias Dependencies = IAPManaging & StyleManaging
     
     /// The required dependencies.
     private let dependencies: Dependencies
     
-    init(dependencies: Dependencies) {
+    /// The delegate object that handles user interface updates.
+    public weak var uiDelegate: BuyTokensViewModelUIDelegate?
+    
+    /// The fetched products.
+    private var products = [SKProduct]()
+    
+    public init(dependencies: Dependencies) {
         self.dependencies = dependencies
+    }
+    
+    /// The count for fetched products.
+    public var productsCount: Int {
+        return products.count
     }
     
     /// The active theme.
@@ -22,17 +33,62 @@ public class BuyTokensViewModel {
     }
     
     /**
-     Retrieve a list of available products.
-     - parameter result: The products result.
+     Returns a product as a `ProductViewModel` at a specified indexPath.
+     
+     - parameter indexPath: The index path for the product.
      */
-    public func getProducts(result: @escaping (Result<[ProductViewModel], Error>) -> Void) {
-        dependencies.iapManager.requestProducts { productResult in
+    public func productViewModel(at indexPath: IndexPath) -> ProductViewModel {
+        return ProductViewModel(product: products[indexPath.row], dependencies: dependencies)
+    }
+    
+    /**
+     Retrieve a list of available products.
+     - parameter completion: A block that is called when products are finished being fetched.
+     */
+    public func fetchProducts(completion: (() -> Void)? = nil) {
+        uiDelegate?.didBeginFetchingProducts()
+        
+        dependencies.iapManager.requestProducts { [weak self] productResult in
+            guard let self = self else { return }
+
+            DispatchQueue.main.async {
+                self.uiDelegate?.didEndFetchingProducts()
+            }
+
             switch productResult {
             case .success(let products):
-                result(.success(products.map { ProductViewModel(dependencies: self.dependencies, product: $0) }))
+                if products.isEmpty {
+                    DispatchQueue.main.async {
+                        self.uiDelegate?.didFailToFetchProducts(with: ProductError.noProductsFound)
+                        completion?()
+                    }
+                    return
+                }
+                
+                self.products = products
+                DispatchQueue.main.async { self.uiDelegate?.didFetchProducts() }
             case .failure(let error):
-                result(.failure(error))
+                DispatchQueue.main.async { self.uiDelegate?.didFailToFetchProducts(with: error) }
             }
+            
+            DispatchQueue.main.async { completion?() }
         }
+    }
+    
+    /**
+     Start a purchase for a product at a specified indexPath.
+     
+     - parameter indexPath: The index path of the product.
+     */
+    public func purchaseProduct(at indexPath: IndexPath) {
+        dependencies.iapManager.purchase(product: products[indexPath.row])
+    }
+}
+
+// MARK: - Navigation Events
+
+extension BuyTokensViewModel {
+    public func didCancelTransaction() {
+        uiDelegate?.didCancelTransaction()
     }
 }

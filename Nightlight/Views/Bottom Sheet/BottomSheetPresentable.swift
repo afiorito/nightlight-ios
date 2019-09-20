@@ -9,7 +9,7 @@ public protocol BottomSheetPresentable: class {
     var topOffset: CGFloat { get }
     
     /// The height of the bottom sheet.
-    var height: BottomSheetHeight { get }
+    var bottomSheetHeight: BottomSheetHeight { get }
     
     /// The corner radius for the top corners of the bottom sheet.
     var cornerRadius: CGFloat { get }

@@ -7,6 +7,12 @@ public class UserNotificationsViewModel {
     /// The required dependencies.
     private let dependencies: Dependencies
     
+    /// The delegate object that handles user interface updates.
+    public weak var uiDelegate: UserNotificationsViewModelUIDelegate?
+    
+    /// The fetched user notifications.
+    private var userNotifications = [AnyUserNotification]()
+    
     /// The active theme.
     public var theme: Theme {
         return dependencies.styleManager.theme
@@ -31,17 +37,23 @@ public class UserNotificationsViewModel {
     /**
      Retrieve notifications.
      
-     - parameter result: The result of retrieving the notifications.
+     - parameter fromStart: A boolean denoting if the data is being fetched from the beginning of a paginated list.
      */
-    public func getNotifications(result: @escaping (Result<[UserNotificationViewModel], UserNotificationError>) -> Void) {
+    public func fetchUserNotifications(fromStart: Bool) {
+        if fromStart { resetPaging() }
+
         guard !isFetchInProgress && (endPage != nil || startPage == nil) else {
             return
         }
         
         isFetchInProgress = true
+        uiDelegate?.didBeginFetchingUserNotifications(fromStart: fromStart)
         
-        dependencies.notificationService.getNotifications(start: startPage, end: endPage) { [unowned self] notificationResult in
+        dependencies.notificationService.getNotifications(start: startPage, end: endPage) { [weak self] notificationResult in
+            guard let self = self else { return }
             self.isFetchInProgress = false
+            
+            DispatchQueue.main.async { self.uiDelegate?.didEndFetchingUserNotifications() }
             
             switch notificationResult {
             case .success(let notificationResponse):
@@ -49,13 +61,22 @@ public class UserNotificationsViewModel {
                 self.endPage = notificationResponse.metadata.end
                 self.totalCount = notificationResponse.metadata.total
                 
-                let notifications = notificationResponse.data.map { UserNotificationViewModel(userNotification: $0) }
+                self.userNotifications = fromStart ? notificationResponse.data : self.userNotifications + notificationResponse.data
                 
-                DispatchQueue.main.async { result(.success(notifications)) }
+                DispatchQueue.main.async { self.uiDelegate?.fetchUserNotificationsDidSucceed(with: notificationResponse.data.count, fromStart: fromStart) }
             case .failure(let error):
-                DispatchQueue.main.async { result(.failure(error)) }
+                DispatchQueue.main.async { self.uiDelegate?.didFailToFetchUserNotifications(with: error) }
             }
         }
+    }
+    
+    /**
+     Returns a user notification as a `UserNotificationViewModel` at a specified indexPath.
+     
+     - parameter indexPath: The index path for the user notification.
+     */
+    public func userNotificationViewModel(at indexPath: IndexPath) -> UserNotificationViewModel {
+        return UserNotificationViewModel(userNotification: userNotifications[indexPath.row])
     }
     
     /**

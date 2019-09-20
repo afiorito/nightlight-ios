@@ -12,18 +12,23 @@ public class SendMessageCoordinator: TabBarCoordinator {
     /// The root view controller of the sent message view controller.
     public var rootViewController: UINavigationController
     
-    /// a view controller for sending a message.
+    /// The view model for managing the state of the view.
+    private lazy var viewModel: SendMessageViewModel = {
+        SendMessageViewModel(dependencies: dependencies as! SendMessageViewModel.Dependencies)
+    }()
+    
+    /// A view controller for sending a message.
     public lazy var sendMessageViewController: SendMessageViewController = {
-        let viewModel = SendMessageViewModel(dependencies: dependencies as! SendMessageViewModel.Dependencies)
-        
         let viewController = SendMessageViewController(viewModel: viewModel)
-        viewController.delegate = self
         viewController.title = Strings.message.sendMessageTitle
+        
+        viewModel.uiDelegate = viewController
+        viewModel.navigationDelegate = self
         
         return viewController
     }()
     
-    init(rootViewController: UINavigationController, dependencies: Dependencies) {
+    public init(rootViewController: UINavigationController, dependencies: Dependencies) {
         self.dependencies = dependencies
         self.rootViewController = rootViewController
     }
@@ -34,18 +39,20 @@ public class SendMessageCoordinator: TabBarCoordinator {
         }
         
         rootViewController.pushViewController(sendMessageViewController, animated: true)
-    }    
+    }
 }
 
-// MARK: - SendMessageViewController Delegate
+// MARK: - SendMessage Navigation Delegate
 
-extension SendMessageCoordinator: SendMessageViewControllerDelegate {
-    public func sendMessageViewController(_ sendMessageViewController: SendMessageViewController, didSend message: MessageViewModel) {
+extension SendMessageCoordinator: SendMessageNavigationDelegate {
+    public func didSend(message: Message) {
         sendMessageViewController.dismiss(animated: true)
+        parent?.childDidFinish(self)
     }
     
-    public func sendMessageViewControllerDidCancel(_ sendMessageViewController: SendMessageViewController) {
+    public func didFinishSendingMessage() {
         sendMessageViewController.dismiss(animated: true)
+        parent?.childDidFinish(self)
     }
     
 }

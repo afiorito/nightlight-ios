@@ -12,19 +12,25 @@ public class NotificationsCoordinator: TabBarCoordinator {
     /// The root view controller of the notifications view controller.
     public let rootViewController: UINavigationController
     
-    /// a view controller for displaying notifications.
+    /// The view model for managing the state of the view.
+    private lazy var viewModel: UserNotificationsViewModel = {
+        UserNotificationsViewModel(dependencies: dependencies as! UserNotificationsViewModel.Dependencies)
+    }()
+    
+    /// A view controller for displaying notifications.
     lazy var notificationsViewController: NotificationsViewController = {
-        let viewModel = UserNotificationsViewModel(dependencies: dependencies as! UserNotificationsViewModel.Dependencies)
         let viewController = NotificationsViewController(viewModel: viewModel)
         
         viewController.title = Strings.notification.notificationsTitle
         viewController.tabBarItem = UITabBarItem(title: Strings.notification.notificationsTitle, image: UIImage.tab.notification, tag: 0)
         viewController.emptyViewDescription = EmptyViewDescription.noNotifications
         
+        viewModel.uiDelegate = viewController
+        
         return viewController
     }()
     
-    init(rootViewController: UINavigationController, dependencies: Dependencies) {
+    public init(rootViewController: UINavigationController, dependencies: Dependencies) {
         self.rootViewController = rootViewController
         self.dependencies = dependencies
     }

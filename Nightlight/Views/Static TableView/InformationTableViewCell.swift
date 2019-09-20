@@ -18,7 +18,7 @@ public class InformationTableViewCell: BaseStaticTableViewCell {
     /// An image view for displaying a disclosure indicator.
     private let disclosureIndicator = UIImageView(image: UIImage.glyph.disclosure)
     
-    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         accessoryView = disclosureIndicator
@@ -26,6 +26,21 @@ public class InformationTableViewCell: BaseStaticTableViewCell {
         updateColors(for: theme)
     }
 
+    public var isLoading: Bool {
+        get { return accessoryView is UIActivityIndicatorView }
+        
+        set {
+            if newValue {
+                let activityIndicator = UIActivityIndicatorView()
+                activityIndicator.startAnimating()
+                accessoryView = activityIndicator
+                activityIndicator.sizeToFit()
+            } else {
+                accessoryView = disclosureIndicator
+            }
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -1,13 +1,29 @@
 import Foundation
 
-/// An error for message events.
+/// An error that indicates problems with messages.
 public enum MessageError: Error {
+    /// The message title is invalid.
     case invalidTitle
+    
+    /// The message body is invalid.
     case invalidBody
+    
+    /// The number of people the message is sent to is invalid.
     case invalidNumPeople
+    
+    /// The user does not have sufficient tokens to appreciate a message.
     case insufficientTokens
+    
+    /// The message is already appreciated.
     case alreadyAppreciated
+    
+    /// The message action could not be performed.
+    case failedAction(MessageActionType)
+    
+    /// The sent message could not be validated.
     case validation([ErrorReason])
+    
+    /// An unexpected error.
     case unknown
     
     var message: String {
@@ -17,6 +33,7 @@ public enum MessageError: Error {
         case .invalidNumPeople: return Strings.message.invalidNumPeople
         case .insufficientTokens: return Strings.message.insufficientTokens
         case .alreadyAppreciated: return Strings.message.alreadyAppreciated
+        case .failedAction: return Strings.error.couldNotConnect
         case .validation(let reasons):
             var message = Strings.error.unknown
 

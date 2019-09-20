@@ -15,7 +15,7 @@ public class SearchCoordinator: TabBarCoordinator {
     /// A view controller for displaying search results.
     public lazy var searchViewController: SearchViewController = {
         let peopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
-        let helpfulPeopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
+        let helpfulPeopleViewModel = HelpfulPeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
         
         let helpfulPeopleViewController = HelpfulPeopleViewController(viewModel: helpfulPeopleViewModel)
         let peopleViewController = PeopleViewController(viewModel: peopleViewModel)
@@ -25,10 +25,13 @@ public class SearchCoordinator: TabBarCoordinator {
         
         viewController.tabBarItem = UITabBarItem(title: Strings.search.searchTitle, image: UIImage.tab.search, tag: 0)
         
+        peopleViewModel.uiDelegate = peopleViewController
+        helpfulPeopleViewModel.uiDelegate = helpfulPeopleViewController
+        
         return viewController
     }()
 
-    init(rootViewController: UINavigationController, dependencies: Dependencies) {
+    public init(rootViewController: UINavigationController, dependencies: Dependencies) {
         self.rootViewController = rootViewController
         self.dependencies = dependencies
     }

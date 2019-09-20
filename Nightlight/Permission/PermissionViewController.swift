@@ -1,13 +1,23 @@
 import UIKit
 
-public class PermissionViewController: UIViewController {
+open class PermissionViewController: UIViewController {
+    /// The viewModel for handling state.
+    internal let viewModel: PermissionViewModel
     
+    /// The view that the `PermissionViewController` manages.
     var permissionView: PermissionView {
         return view as! PermissionView
     }
     
-    /// The delegate for managing UI actions.
-    public weak var delegate: PermissionViewControllerDelegate?
+    public init(viewModel: PermissionViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +39,12 @@ public class PermissionViewController: UIViewController {
     /**
      Confirm the permission.
      */
-    func didConfirm() {
-        delegate?.permissionViewController(self, didFinish: true)
-    }
+    func didConfirm() {}
     
     /**
      Deny the permission.
      */
-    func didCancel() {
-        delegate?.permissionViewController(self, didFinish: false)
-    }
+    func didCancel() {}
     
     deinit {
         removeDidChangeThemeObserver()

@@ -20,6 +20,7 @@ public class BuyTokensView: UIView {
         confirmPurchaseButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
         
         prepareSubviews()
+        updateColors(for: theme)
     }
     
     required init?(coder: NSCoder) {
@@ -41,6 +42,9 @@ public class BuyTokensView: UIView {
         return label
     }()
     
+    /// A view for displaying a bottom header separator.
+    public let separatorLineView = UIView()
+    
     /// A button for confirming the purchase.
     public let confirmPurchaseButton: ContainedButton = {
         let button = ContainedButton()
@@ -49,11 +53,21 @@ public class BuyTokensView: UIView {
         return button
     }()
     
+    /// A label displayed when no products are in the list.
+    public let noProductsFoundLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.font = UIFont.secondary16ptNormal
+        label.text = Strings.noProductsFound
+        label.isHidden = true
+        return label
+    }()
+    
     /// A collection view for displaying products.
     public let productsCollectionView: CompactCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 15
-        layout.minimumInteritemSpacing = 15
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         let collectionView = CompactCollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.className)
         collectionView.contentInset = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
@@ -62,20 +76,27 @@ public class BuyTokensView: UIView {
     }()
     
     private func prepareSubviews() {
-        addSubviews([cancelButton, titleLabel, productsCollectionView, confirmPurchaseButton])
+        addSubviews([cancelButton, titleLabel, productsCollectionView, confirmPurchaseButton, noProductsFoundLabel, separatorLineView])
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             cancelButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             cancelButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            productsCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            separatorLineView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            separatorLineView.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale),
+            separatorLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            separatorLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            noProductsFoundLabel.topAnchor.constraint(greaterThanOrEqualTo: separatorLineView.bottomAnchor, constant: 15),
+            noProductsFoundLabel.bottomAnchor.constraint(lessThanOrEqualTo: confirmPurchaseButton.topAnchor, constant: -15),
+            noProductsFoundLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            productsCollectionView.topAnchor.constraint(equalTo: separatorLineView.bottomAnchor),
             productsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             productsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             confirmPurchaseButton.topAnchor.constraint(equalTo: productsCollectionView.bottomAnchor),
             confirmPurchaseButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             confirmPurchaseButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            confirmPurchaseButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -15)
+            confirmPurchaseButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
         ])
     }
     
@@ -102,5 +123,7 @@ extension BuyTokensView: Themeable {
         cancelButton.tintColor = .gray(for: theme)
         backgroundColor = .background(for: theme)
         productsCollectionView.backgroundColor = .background(for: theme)
+        noProductsFoundLabel.textColor = .secondaryText(for: theme)
+        separatorLineView.backgroundColor = .border(for: theme)
     }
 }

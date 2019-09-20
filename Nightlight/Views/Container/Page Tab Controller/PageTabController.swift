@@ -167,6 +167,7 @@ extension PageTabController: PageTabsViewDataSource {
 
 extension PageTabController: PageTabsViewDelegate {
     public func pageTabsView(_ pageTabsView: PageTabsView, didSelectTabAt index: Int) {
+        guard activeTab != index else { return }
         childrenCollectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
 }

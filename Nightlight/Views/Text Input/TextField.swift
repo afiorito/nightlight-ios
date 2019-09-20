@@ -33,7 +33,7 @@ public class TextField: UITextField {
         }
     }
     
-    public override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         font = .secondary16ptNormal

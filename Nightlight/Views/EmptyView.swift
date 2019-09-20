@@ -20,7 +20,7 @@ public class EmptyView: UIView {
         set { subtitleLabel.text = newValue }
     }
 
-    required init(description: EmptyViewDescription) {
+    required public init(description: EmptyViewDescription) {
         super.init(frame: .zero)
         self.image = UIImage(named: description.imageName)
         self.title = description.title

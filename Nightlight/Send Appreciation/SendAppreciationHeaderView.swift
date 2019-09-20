@@ -37,7 +37,7 @@ public class SendAppreciationHeaderView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
 
         prepareSubviews()

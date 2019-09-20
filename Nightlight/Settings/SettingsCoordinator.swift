@@ -21,81 +21,39 @@ public class SettingsCoordinator: NSObject, Coordinator {
         return UIBarButtonItem(image: UIImage.icon.back, style: .plain, target: self, action: #selector(pop))
     }
     
+    /// The view model for managing the state of the view.
+    private lazy var viewModel: SettingsViewModel = {
+        SettingsViewModel(dependencies: dependencies as! SettingsViewModel.Dependencies)
+    }()
+    
     /// A view controller for managing settings.
     public lazy var settingsViewController: SettingsViewController = {
-        let viewModel = SettingsViewModel(dependencies: dependencies as! SettingsViewModel.Dependencies)
-        
         let viewController = SettingsViewController(viewModel: viewModel)
         viewController.navigationItem.leftBarButtonItem = simulatedBackButton
         viewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        viewController.delegate = self
         viewController.title = Strings.setting.settingTitle
-        rootViewController.interactivePopGestureRecognizer?.delegate = self
+        
+        viewModel.uiDelegate = viewController
+        viewModel.navigationDelegate = self
         
         return viewController
     }()
     
-    init(rootViewController: UINavigationController, dependencies: Dependencies) {
+    public init(rootViewController: UINavigationController, dependencies: Dependencies) {
         self.rootViewController = rootViewController
         self.dependencies = dependencies
     }
     
-    public func start() {
-        NLNotification.didFinishTransaction.observe(target: self, selector: #selector(handleFinishedTransaction))
-        
+    public func start() {        
         if UIDevice.current.userInterfaceIdiom != .pad {
             settingsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
+            rootViewController.interactivePopGestureRecognizer?.delegate = self
             rootViewController.pushViewController(settingsViewController, animated: true)
         } else {
-            settingsViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.icon.cancel,
-                                                                                      style: .plain,
-                                                                                      target: self, action: #selector(goBack))
+            settingsViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.icon.cancel, style: .plain, target: self, action: #selector(goBack))
             let viewController = MainNavigationController(rootViewController: settingsViewController)
             viewController.modalPresentationStyle = .formSheet
             rootViewController.present(viewController, animated: true)
-        }
-    }
-    
-    /**
-     Present a view controller to display web content such as a privacy \ policy page.
-     
-     - parameter path: the page to load web content for.
-     */
-    private func presentWebContentViewController(page: ExternalPage) {
-        let webContentViewController = WebContentViewController(url: page.url)
-        webContentViewController.title = page.title
-        webContentViewController.delegate = self
-        webContentViewController.navigationItem.leftBarButtonItem = simulatedBackButton
-        
-        if page == .about {
-            webContentViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.icon.info, style: .plain,
-                                                                                         target: self, action: #selector(showAppInfo))
-        }
-        
-        settingsViewController.navigationController?.pushViewController(webContentViewController, animated: true)
-    }
-    
-    /**
-     Handle the finished transaction notification.
-     
-     - parameter notification: an instance of a finish transaction notification.
-     */
-    @objc private func handleFinishedTransaction(_ notification: Notification) {
-        guard buyTokensViewController != nil,
-            let outcome = notification.userInfo?[NLNotification.didFinishTransaction.rawValue] as? IAPManager.TransactionOutcome
-            else { return }
-        
-        switch outcome {
-        case .success:
-            buyTokensViewController = nil
-            settingsViewController.dismiss(animated: true)
-            settingsViewController.didCompletePurchase()
-        case .cancelled:
-            buyTokensViewController?.didCancelTransaction()
-        case .failed:
-            buyTokensViewController = nil
-            settingsViewController.dismiss(animated: true)
-            settingsViewController.didFailPurchase()
         }
     }
     
@@ -119,89 +77,67 @@ public class SettingsCoordinator: NSObject, Coordinator {
     @objc private func pop() {
         settingsViewController.navigationController?.popViewController(animated: true)
     }
+}
+
+// MARK: - Settings Navigation Delegate
+
+extension SettingsCoordinator: SettingsNavigationDelegate {
+    public func showBuyTokensModal() {
+        let coordinator = BuyTokensCoordinator(rootViewController: settingsViewController, dependencies: dependencies)
+        coordinator.navigationDelegate = self
+        addChild(coordinator)
+        coordinator.start()
+    }
     
-    deinit {
-        let nc = dependencies.notificationCenter
-        nc.removeObserver(self, name: Notification.Name(rawValue: NLNotification.didFinishTransaction.rawValue), object: nil)
+    public func changeSetting<E: RawRepresentable & CaseIterable>(_ type: E.Type, currentOption: E) where E.RawValue == String {
+        let optionsViewController = OptionsTableViewController<E>(currentOption: currentOption)
+        // split settings option by uppercase letters.
+        optionsViewController.title = "\(type)".splitBefore(separator: { $0.isUppercase }).map { String($0) }.joined(separator: " ")
+        optionsViewController.delegate = self
+        optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
+        
+        settingsViewController.navigationController?.pushViewController(optionsViewController, animated: true)
+    }
+    
+    public func showPage(_ page: ExternalPage) {
+        let webContentViewController = WebContentViewController(url: page.url)
+        webContentViewController.title = page.title
+        webContentViewController.delegate = self
+        webContentViewController.navigationItem.leftBarButtonItem = simulatedBackButton
+        
+        if page == .about {
+            webContentViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.icon.info, style: .plain, target: self, action: #selector(showAppInfo))
+        }
+        
+        settingsViewController.navigationController?.pushViewController(webContentViewController, animated: true)
+    }
+    
+    public func rateApplication() {
+        guard let url = URL(string: "itms-apps://itunes.apple.com/app/id1474711114") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    public func signOut() {
+        UIApplication.shared.unregisterForRemoteNotifications()
+        NLNotification.unauthorized.post()
+    }
+    
+    public func didFinishViewingSettings() {
+        settingsViewController.dismiss(animated: true)
+        parent?.childDidFinish(self)
     }
     
 }
 
-// MARK: - SettingsViewController Delegate
+// MARK: - BuyTokensCoordinator Navigation Delegate
 
-extension SettingsCoordinator: SettingsViewControllerDelegate {
-    public func settingsViewControllerDidSelectAppreciation(_ settingsViewController: SettingsViewController) {
-        let viewModel = BuyTokensViewModel(dependencies: dependencies as! BuyTokensViewModel.Dependencies)
-        
-        // need to fetch products before presenting so that collectionView has intrinsic size.
-        viewModel.getProducts { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let products):
-                if products.isEmpty {
-                    DispatchQueue.main.async { settingsViewController.didFailLoadingProducts() }
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    let buyTokensViewController = BuyTokensViewController(viewModel: viewModel, products: products)
-                    
-                    buyTokensViewController.modalPresentationStyle = .custom
-                    buyTokensViewController.modalPresentationCapturesStatusBarAppearance = true
-                    buyTokensViewController.transitioningDelegate = ModalTransitioningDelegate.default
-                    
-                    self.buyTokensViewController = buyTokensViewController
-                    settingsViewController.present(buyTokensViewController, animated: true)
-                }
-            case .failure:
-                DispatchQueue.main.async {
-                    settingsViewController.didFailLoadingProducts()
-                }
-            }
+extension SettingsCoordinator: BuyTokensCoordinatorNavigationDelegate {
+    public func buyTokensCoordinatorDismiss(with outcome: IAPManager.TransactionOutcome) {
+        switch outcome {
+        case .success: viewModel.didCompletePurchase()
+        case .failed: viewModel.didFailPurchase()
+        case .cancelled: viewModel.didCancelPurchase()
         }
-    }
-    
-    public func settingsViewControllerDidSelectTheme(_ settingsViewController: SettingsViewController, for currentTheme: Theme) {
-        let optionsViewController = OptionsTableViewController<Theme>(currentOption: currentTheme)
-        optionsViewController.title = Strings.setting.theme
-        optionsViewController.delegate = self
-        optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
-        
-        settingsViewController.navigationController?.pushViewController(optionsViewController, animated: true)
-    }
-    
-    public func settingsViewControllerDidSelectDefaultMessage(_ settingsViewController: SettingsViewController, for currentMessageDefault: MessageDefault) {
-        let optionsViewController = OptionsTableViewController<MessageDefault>(currentOption: currentMessageDefault)
-        optionsViewController.title = Strings.setting.sendMessage
-        optionsViewController.delegate = self
-        optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
-        
-        settingsViewController.navigationController?.pushViewController(optionsViewController, animated: true)
-    }
-    
-    public func settingsViewControllerDidSelectFeedback(_ settingsViewController: SettingsViewController) {
-        presentWebContentViewController(page: .feedback)
-    }
-    
-    public func settingsViewControllerDidSelectRate(_ settingsViewController: SettingsViewController) {
-        UIApplication.shared.open(URL(string: "itms-apps://itunes.apple.com/app/id1474711114")!)
-    }
-    
-    public func settingsViewControllerDidSelectAbout(_ settingsViewController: SettingsViewController) {
-        presentWebContentViewController(page: .about)
-    }
-    
-    public func settingsViewControllerDidSelectPrivacyPolicy(_ settingsViewController: SettingsViewController) {
-        presentWebContentViewController(page: .privacy)
-    }
-    
-    public func settingsViewControllerDidSelectTermsOfUse(_ settingsViewController: SettingsViewController) {
-        presentWebContentViewController(page: .terms)
-    }
-    
-    public func settingsViewControllerDidSelectSignout(_ settingsViewController: SettingsViewController) {
-        UIApplication.shared.unregisterForRemoteNotifications()
-        NLNotification.unauthorized.post()
     }
 }
 
@@ -242,8 +178,9 @@ extension SettingsCoordinator: WebContentViewControllerDelegate {
             webContentViewController.present(SFSafariViewController(url: url, configuration: config), animated: true)
         }
     }
-    
 }
+
+// MARK: - MFMailComposeViewController Delegate
 
 extension SettingsCoordinator: MFMailComposeViewControllerDelegate {
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

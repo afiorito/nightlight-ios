@@ -8,7 +8,7 @@ public enum HttpError: Error {
     case internalError
     case unknown
     
-    init(value: Int, reason: Data) {
+    public init(value: Int, reason: Data) {
         switch value {
         case 400: self = .badRequest(reason)
         case 401: self = .unauthorized
@@ -18,7 +18,7 @@ public enum HttpError: Error {
         }
     }
     
-    var data: Data? {
+    public var data: Data? {
         switch self {
         case .badRequest(let data):
             return data

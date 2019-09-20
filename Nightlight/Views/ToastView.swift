@@ -46,7 +46,7 @@ public class ToastView: UIView {
         }
     }
     
-    public override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         layer.cornerRadius = 4.0

@@ -2,6 +2,9 @@ import UIKit
 
 /// An object for coordinating between the presenting & presented view controllers.
 public class BottomSheetPresentationController: UIPresentationController {
+    /// The delegate for receiving transition events.
+    public weak var presentationDelegate: BottomSheetPresentationControllerDelegate?
+
     /**
      The configuration object.
      */
@@ -28,6 +31,7 @@ public class BottomSheetPresentationController: UIPresentationController {
     // MARK: - Presentation Lifecycle
     
     public override func presentationTransitionWillBegin() {
+        presentationDelegate?.bottomSheetPresentationControllerWillPresent?(self)
         guard let containerView = containerView else { return }
         
         layoutBackgroundView(in: containerView)
@@ -44,7 +48,13 @@ public class BottomSheetPresentationController: UIPresentationController {
         })
     }
     
+    public override func presentationTransitionDidEnd(_ completed: Bool) {
+        presentationDelegate?.bottomSheetPresentationController?(self, didPresent: completed)
+    }
+    
     public override func dismissalTransitionWillBegin() {
+        presentationDelegate?.bottomSheetPresentationControllerWillDimiss?(self)
+
         guard let coordinator = presentedViewController.transitionCoordinator else {
             backgroundView.dimState = .off
             return
@@ -63,6 +73,10 @@ public class BottomSheetPresentationController: UIPresentationController {
         if presentedViewController.view.layer.mask == .none {
             addRoundedCorners(to: presentedViewController.view)
         }
+    }
+    
+    public override func dismissalTransitionDidEnd(_ completed: Bool) {
+        presentationDelegate?.bottomSheetPresentationController?(self, didDismiss: true)
     }
         
     func dismissPresentedViewController() {

@@ -5,16 +5,18 @@ public class BaseStaticTableViewCell: UITableViewCell, Themeable {
     public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         
-        if highlighted {
-            switch theme {
-            case .dark:
-               backgroundColor = UIColor.background(for: theme).lighter(amount: 0.05)
-            case .light:
-                backgroundColor = UIColor.background(for: theme).darker(amount: 0.05)
-            case .system: break
+        UIView.animate(withDuration: 0.25) {
+            if highlighted {
+                switch self.theme {
+                case .dark:
+                    self.backgroundColor = UIColor.background(for: self.theme).lighter(amount: 0.05)
+                case .light:
+                    self.backgroundColor = UIColor.background(for: self.theme).darker(amount: 0.05)
+                case .system: break
+                }
+            } else {
+                self.backgroundColor = UIColor.background(for: self.theme)
             }
-        } else {
-            backgroundColor = UIColor.background(for: theme)
         }
     }
 
@@ -24,5 +26,7 @@ public class BaseStaticTableViewCell: UITableViewCell, Themeable {
         } else {
             selectionStyle = .none
         }
+        
+        (accessoryView as? UIActivityIndicatorView)?.color = .gray(for: theme)
     }
 }

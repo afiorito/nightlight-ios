@@ -7,6 +7,12 @@ extension UINavigationController {
         case hidden
     }
     
+    /**
+     Set the style of the navigation bar for a specified theme.
+     
+     - parameter style: The style of the navigation bar.
+     - parameter theme: The theme for the style.
+     */
     public func setStyle(_ style: Style, for theme: Theme = .system) {
         switch theme {
         case .dark:

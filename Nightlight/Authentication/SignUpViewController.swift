@@ -5,14 +5,12 @@ public class SignUpViewController: UIViewController {
     /// The viewModel for handling state.
     private let viewModel: SignUpViewModel
     
-    /// The delegate for managing UI actions.
-    public weak var delegate: SignUpViewControllerDelegate?
-    
+    /// The view that the `SignUpViewController` manages.
     public var signUpView: SignUpView {
         return view as! SignUpView
     }
     
-    init(viewModel: SignUpViewModel) {
+    public init(viewModel: SignUpViewModel) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -40,8 +38,7 @@ public class SignUpViewController: UIViewController {
     public override func loadView() {
         let signUpView = SignUpView()
         signUpView.policyAction = { [weak self] url in
-            guard let self = self else { return }
-            self.delegate?.signUpViewController(self, didTapPolicyWith: url)
+            self?.viewModel.selectPolicy(with: url)
         }
         view = signUpView
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -58,35 +55,41 @@ public class SignUpViewController: UIViewController {
     Handle a sign up tap event.
     */
     @objc private func signUpTapped() {
-        let credentials = SignUpCredentials(
-            username: signUpView.username,
-            email: signUpView.email,
-            password: signUpView.password
-        )
-        
-        signUpView.authButton.isLoading = true
-        
-        viewModel.signUp(with: credentials) { [unowned self] (result) in
-            
-            switch result {
-            case .success:
-                self.delegate?.signUpViewControllerDidSignUp(self)
-            case .failure(let error):
-                self.signUpView.authButton.isLoading = false
-                switch error {
-                case .validation(let reasons):
-                    self.signUpView.showFieldErrors(reasons: reasons)
-                default:
-                    self.showToast("Could not connect to Nightlight.", severity: .urgent)
-                }
-            }
-        }
+        viewModel.signUp(with: SignUpCredentials(username: signUpView.username, email: signUpView.email, password: signUpView.password))
     }
     
     @objc private func signInTapped() {
-        delegate?.signUpViewControllerDidTapSignIn(self)
+        viewModel.signIn()
     }
     
+}
+
+// MARK: - SignUpViewModel UI Delegate
+
+extension SignUpViewController: AuthViewModelUIDelegate {
+    public func didBeginAuthenticating() {
+        signUpView.authButton.isLoading = true
+    }
+    
+    public func didEndAuthenticating() {
+        signUpView.authButton.isLoading = false
+    }
+    
+    public func didFailToAuthenticate(with error: AuthError) {
+        switch error {
+        case .validation(let reasons):
+            self.signUpView.showFieldErrors(reasons: reasons)
+        default:
+            self.showToast(Strings.error.couldNotConnect, severity: .urgent)
+        }
+    }
+    
+    public func clearFields() {
+        [signUpView.usernameField, signUpView.emailField, signUpView.passwordField].forEach {
+            $0.input.text = ""
+            $0.error = nil
+        }
+    }
 }
 
 // MARK: - Themeable

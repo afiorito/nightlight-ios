@@ -12,26 +12,23 @@ public class SendMessageViewController: UITableViewController {
     /// The viewModel for handling state.
     private let viewModel: SendMessageViewModel
     
-    /// The delegate for managing UI actions.
-    public weak var delegate: SendMessageViewControllerDelegate?
-    
     /// The cell for displaying the title of a message.
-    let titleCell = MessageTitleCell()
+    private let titleCell = MessageTitleCell()
     
     /// The cell for displaying the body of a message.
-    let bodyCell = MessageBodyCell()
+    private let bodyCell = MessageBodyCell()
     
     /// The cell for selecting the number of people.
-    let numberOfPeopleCell = NumPeopleCell()
+    private let numberOfPeopleCell = NumPeopleCell()
     
     /// The cell for selecting if the message is sent anonymously.
-    let anonymousCell: SwitchTableViewCell = {
+    private let anonymousCell: SwitchTableViewCell = {
         let cell = SwitchTableViewCell()
         cell.textLabel?.text = Strings.message.sendAnonymously
         return cell
     }()
     
-    init(viewModel: SendMessageViewModel) {
+    public init(viewModel: SendMessageViewModel) {
         self.viewModel = viewModel
         
         super.init(style: .grouped)
@@ -46,10 +43,8 @@ public class SendMessageViewController: UITableViewController {
         
         addDidChangeThemeObserver()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.icon.send, style: .plain, target: self,
-                                                            action: #selector(sendTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.icon.cancel, style: .plain,
-                                                           target: self, action: #selector(cancelTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.icon.send, style: .plain, target: self, action: #selector(sendTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.icon.cancel, style: .plain, target: self, action: #selector(cancelTapped))
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -65,33 +60,42 @@ public class SendMessageViewController: UITableViewController {
         updateColors(for: theme)
     }
     
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if isBeingRemoved {
+            viewModel.finish()
+        }
+    }
+    
     // MARK: - Gesture Recognizer Handlers.
     
     @objc private func cancelTapped() {
-        delegate?.sendMessageViewControllerDidCancel(self)
+        viewModel.finish()
     }
     
     @objc private func sendTapped() {
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        viewModel.sendMessage(
-            title: titleCell.textField.text,
-            body: bodyCell.textView.text,
-            numPeople: numberOfPeopleCell.textField.text,
-            isAnonymous: anonymousCell.switchControl.isOn) { [weak self] result in
-                guard let self = self else { return }
-                self.navigationItem.rightBarButtonItem?.isEnabled = true
-
-                switch result {
-                case .success(let message):
-                    self.delegate?.sendMessageViewController(self, didSend: message)
-                case .failure(let error):
-                    self.showToast(error.message, severity: .urgent)
-                }
-        }
+        viewModel.sendMessage(title: titleCell.textField.text, body: bodyCell.textView.text, numPeople: numberOfPeopleCell.textField.text, isAnonymous: anonymousCell.switchControl.isOn)
     }
     
     deinit {
         removeDidChangeThemeObserver()
+    }
+}
+
+// MARK: - SendMessageViewModel UI Delegate
+
+extension SendMessageViewController: SendMessageViewModelUIDelegate {
+    public func didFailToSend(with error: MessageError) {
+        showToast(error.message, severity: .urgent)
+    }
+    
+    public func didBeginSending() {
+        navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
+    public func didEndSending() {
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
 }
 
@@ -133,7 +137,7 @@ extension SendMessageViewController {
     
 }
 
-// MARK: UITableView Delegate
+// MARK: - UITableView Delegate
 
 extension SendMessageViewController {
     public override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

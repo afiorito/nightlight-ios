@@ -34,7 +34,7 @@ public class WebContentViewController: UIViewController {
         return indicator
     }()
     
-    init(url: URL) {
+    public init(url: URL) {
         self.url = url
         
         super.init(nibName: nil, bundle: nil)
@@ -176,6 +176,6 @@ extension WebContentViewController: Themeable {
         view.backgroundColor = .background(for: theme)
         webView.backgroundColor = .background(for: theme)
         navigationController?.setStyle(.secondary, for: theme)
-        activityIndicator.tintColor = .gray(for: theme)
+        activityIndicator.color = .gray(for: theme)
     }
 }

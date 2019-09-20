@@ -5,6 +5,7 @@ public class NotificationsViewController: UIViewController {
     /// The viewModel for handling state.
     private let viewModel: UserNotificationsViewModel
     
+    /// The view that the `NotificationsViewController` manages.
     private var notificationsView: NotificationsView {
         return view as! NotificationsView
     }
@@ -14,17 +15,16 @@ public class NotificationsViewController: UIViewController {
     
     /// A view displayed when the notifications list is empty.
     public var emptyViewDescription: EmptyViewDescription?
+
+    /// The object that acts as the data source of the table view.
+    private lazy var dataSource: SimpleTableViewPaginatedDataSource<NotificationTableViewCell> = {
+        SimpleTableViewPaginatedDataSource(reuseIdentifier: NotificationTableViewCell.className, cellConfigurator: configureCell)
+    }()
     
-    // The object that acts as the data source of the table view.
-    private let dataSource: TableViewArrayPaginatedDataSource<NotificationTableViewCell>
-    
-    init(viewModel: UserNotificationsViewModel) {
+    public init(viewModel: UserNotificationsViewModel) {
         self.viewModel = viewModel
-        self.dataSource = TableViewArrayPaginatedDataSource(reuseIdentifier: NotificationTableViewCell.className)
         
         super.init(nibName: nil, bundle: nil)
-        
-        self.dataSource.cellDelegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -45,70 +45,24 @@ public class NotificationsViewController: UIViewController {
         notificationsView.tableView.refreshControl = refreshControl
         
         dataSource.prefetchCallback = { [weak self] in
-            self?.loadMoreNotifications()
+            self?.viewModel.fetchUserNotifications(fromStart: false)
         }
 
-        notificationsView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
-        refreshControl.beginRefreshing()
-        refresh()
+        viewModel.fetchUserNotifications(fromStart: true)
     }
     
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if UIApplication.shared.applicationIconBadgeNumber > 0 || tabBarController?.tabBar.subview(ofType: BadgeView.self) != nil {
-            refresh()
             UIApplication.shared.applicationIconBadgeNumber = 0
+            viewModel.fetchUserNotifications(fromStart: true)
         }
     }
     
     public override func loadView() {
         view = NotificationsView()
-    }
-    
-    deinit {
-        removeDidChangeThemeObserver()
-    }
-    
-    /**
-    Requests more notifications to be displayed.
-    
-    - parameter fromStart: A boolean that determines if notifications are loaded from the beginning of the list or appended to the current list.
-    */
-    private func loadMoreNotifications(fromStart: Bool = false) {
-        if fromStart { viewModel.resetPaging() }
-        
-        viewModel.getNotifications { [weak self] result in
-            guard let self = self else { return }
-            
-            if self.refreshControl.isRefreshing {
-                self.refreshControl.endRefreshing()
-            }
-            
-            switch result {
-            case .success(let notifications):
-                self.dataSource.emptyViewDescription = self.emptyViewDescription
-                self.dataSource.totalCount = self.viewModel.totalCount
-                
-                if fromStart {
-                    self.dataSource.data = notifications
-                    self.notificationsView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-                } else {
-                    let newIndexPaths = self.dataSource.updateData(with: notifications)
-                    self.notificationsView.tableView.insertRows(at: newIndexPaths, with: .none)
-                }
-                
-                (self.tabBarController as? NLTabBarController)?.removeBadge()
-                
-            case .failure:
-                // ensure empty view is updated properly.
-                if self.dataSource.data.isEmpty {
-                    self.dataSource.emptyViewDescription = EmptyViewDescription.noLoad
-                    self.notificationsView.tableView.reloadData()
-                }
-                self.showToast(Strings.error.couldNotConnect, severity: .urgent)
-            }
-        }
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -118,11 +72,61 @@ public class NotificationsViewController: UIViewController {
     }
     
     /**
-     Refresh the table view.
+     Configure a notification cell at an index path.
+     
+     - parameter cell: The cell to configure.
+     - parameter indexPath: The index path of the cell.
      */
-    @objc private func refresh() {
-        loadMoreNotifications(fromStart: true)
+    public func configureCell(_ cell: NotificationTableViewCell, at indexPath: IndexPath) {
+        cell.configure(with: viewModel.userNotificationViewModel(at: indexPath))
     }
+    
+    deinit {
+        removeDidChangeThemeObserver()
+    }
+    
+}
+
+// MARK: - UserNotificationsViewModel UI Delegate
+
+extension NotificationsViewController: UserNotificationsViewModelUIDelegate {
+    public func didFailToFetchUserNotifications(with error: UserNotificationError) {
+        if dataSource.isEmpty {
+            dataSource.emptyViewDescription = EmptyViewDescription.noLoad
+            notificationsView.tableView.reloadData()
+        } else {
+            showToast(Strings.error.couldNotConnect, severity: .urgent)
+        }
+    }
+    
+    public func fetchUserNotificationsDidSucceed(with count: Int, fromStart: Bool) {
+        dataSource.emptyViewDescription = emptyViewDescription
+        dataSource.totalCount = viewModel.totalCount
+        
+        if fromStart {
+            dataSource.rowCount = count
+            notificationsView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        } else {
+            let newIndexPaths = dataSource.incrementCount(count)
+            notificationsView.tableView.insertRows(at: newIndexPaths, with: .none)
+        }
+        
+        (self.tabBarController as? NLTabBarController)?.removeBadge()
+    }
+
+    public func didBeginFetchingUserNotifications(fromStart: Bool) {
+        if fromStart && !refreshControl.isRefreshing && dataSource.isEmpty {
+            notificationsView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)  // fix refresh control tint bug.
+            refreshControl.beginRefreshing()
+        }
+    }
+    
+    public func didEndFetchingUserNotifications() {
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+    }
+    
 }
 
 // MARK: - UITableView Delegate
@@ -130,7 +134,7 @@ public class NotificationsViewController: UIViewController {
 extension NotificationsViewController: UITableViewDelegate {
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if refreshControl.isRefreshing {
-            refresh()
+            viewModel.fetchUserNotifications(fromStart: true)
         }
     }
 }

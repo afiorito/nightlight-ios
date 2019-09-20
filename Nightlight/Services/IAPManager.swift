@@ -17,7 +17,7 @@ public class IAPManager: NSObject {
     }
     
     /// The required dependencies.
-    public var dependencies: Dependencies?
+    private let dependencies: Dependencies
     
     /// The list of product identifiers to load.
     private let productIdentifiers: [String]
@@ -31,9 +31,10 @@ public class IAPManager: NSObject {
     /// The payment queue for handling purchases.
     private let paymentQueue: SKPaymentQueue
     
-    init(productIdentifiers: [String], skPaymentQueue: SKPaymentQueue = SKPaymentQueue.default()) {
+    public init(productIdentifiers: [String], skPaymentQueue: SKPaymentQueue = SKPaymentQueue.default(), dependencies: Dependencies) {
         self.paymentQueue = skPaymentQueue
         self.productIdentifiers = productIdentifiers
+        self.dependencies = dependencies
         
         super.init()
         
@@ -113,10 +114,10 @@ extension IAPManager: SKPaymentTransactionObserver {
             return
         }
 
-        dependencies?.peopleService.addTokens(tokens: tokens) { [weak self] result in
+        dependencies.peopleService.addTokens(tokens: tokens) { [weak self] result in
             switch result {
             case .success(let tokens):
-                try? self?.dependencies?.keychainManager.set(tokens, forKey: KeychainKey.tokens.rawValue)
+                try? self?.dependencies.keychainManager.set(tokens, forKey: KeychainKey.tokens.rawValue)
                 NLNotification.didFinishTransaction.post(object: transaction, userInfo: TransactionOutcome.success)
                 self?.paymentQueue.finishTransaction(transaction)
             case .failure:

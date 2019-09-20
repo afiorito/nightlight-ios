@@ -30,7 +30,7 @@ public class FormTextField: UIView {
         return stackView
     }()
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         prepareSubviews()
@@ -83,6 +83,9 @@ public class FormTextField: UIView {
      */
     private func animateError(isHidden: Bool, completion: ((Bool) -> Void)? = nil) {
         let finalValue: CGFloat = isHidden ? 0.0 : 1.0
+        let initialValue: CGFloat = isHidden ? 1.0 : 0.0
+        
+        self.errorLabel.alpha = initialValue
         
         UIView.animateKeyframes(withDuration: 0.25, delay: 0.0, options: .beginFromCurrentState, animations: {
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0 / 3.0) {

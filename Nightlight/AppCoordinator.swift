@@ -113,13 +113,13 @@ public class AppCoordinator: NSObject, Coordinator {
      */
     private func prepareMainApplication() -> UIViewController {
         application.registerForRemoteNotifications()
-        fetchUserInfo {}
+        fetchUserInfo()
         
         let placeholderViewController = UIViewController()
         placeholderViewController.tabBarItem = UITabBarItem(title: Strings.message.postMessageTabTitle, image: UIImage.tab.post, tag: 0)
         
         let coordinators: [TabBarCoordinator] = [
-            RecentMessagesCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
+            MessagesCoordinator(type: .recent, rootViewController: MainNavigationController(), dependencies: self.dependencies),
             SearchCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
             NotificationsCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
             ProfileCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies)
@@ -132,6 +132,7 @@ public class AppCoordinator: NSObject, Coordinator {
         
         let tabBarController = NLTabBarController()
         tabBarController.delegate = self
+        
         tabBarController.viewControllers = [
             coordinators[0].rootViewController,
             coordinators[1].rootViewController,
@@ -165,7 +166,9 @@ public class AppCoordinator: NSObject, Coordinator {
                         let viewModel = PermissionViewModel(dependencies: self.dependencies)
                         
                         let notificationPermissionViewController = NotificationPermissionViewController(viewModel: viewModel)
-                        notificationPermissionViewController.delegate = self
+                        
+                        viewModel.uiDelegate = notificationPermissionViewController
+                        viewModel.navigationDelegate = self
                         
                         self.animateRootViewController(notificationPermissionViewController)
                     }
@@ -186,19 +189,11 @@ public class AppCoordinator: NSObject, Coordinator {
     /**
      Cache user info for offline use.
      
-     - parameter completion: A block called when after completion of retrieving the user info.
+     - parameter completion: A block called after retrieving the user info.
      */
-    private func fetchUserInfo(completion: @escaping () -> Void) {
-        dependencies.peopleService.getPerson { [weak self] result in
-            switch result {
-            case .success(let person):
-                try? self?.dependencies.keychainManager.set(person.tokens, forKey: KeychainKey.tokens.rawValue)
-                try? self?.dependencies.keychainManager.set(person.username, forKey: KeychainKey.username.rawValue)
-                try? self?.dependencies.keychainManager.set(person.createdAt.timeIntervalSince1970, forKey: KeychainKey.userCreatedAt.rawValue)
-            case .failure: break
-            }
-            
-            DispatchQueue.main.async { completion() }
+    private func fetchUserInfo(completion: (() -> Void)? = nil) {
+        dependencies.peopleService.getPerson { _ in
+            DispatchQueue.main.async { completion?() }
         }
     }
     
@@ -220,11 +215,10 @@ public class AppCoordinator: NSObject, Coordinator {
 
 // MARK: - PermissionViewController Delegate
 
-extension AppCoordinator: PermissionViewControllerDelegate {
-    public func permissionViewController(_ permissionViewController: PermissionViewController, didFinish success: Bool) {
+extension AppCoordinator: PermissionNavigationDelegate {
+    public func didFinishRequestingPermission() {
         animateRootViewController(prepareMainApplication())
     }
-    
 }
 
 // MARK: - UITabBarController Delegate

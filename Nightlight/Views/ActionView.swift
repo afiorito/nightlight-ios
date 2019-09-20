@@ -31,7 +31,7 @@ public class ActionView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         button.addTarget(self, action: #selector(minimize), for: .touchDown)

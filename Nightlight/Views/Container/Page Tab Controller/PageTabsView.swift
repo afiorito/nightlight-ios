@@ -27,7 +27,7 @@ public class PageTabsView: UIView {
         set { tabIndicatorLeadingAnchor?.constant = newValue * frame.width }
     }
     
-    public override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         collectionView.delegate = self

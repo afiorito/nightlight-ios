@@ -17,16 +17,13 @@ public class ProfileViewController: UIViewController {
     /// A page controller for handling message view controllers.
     private let pageTabController = PageTabController()
     
-    /// The delegate for managing UI actions.
-    public weak var delegate: ProfileViewControllerDelegate?
-    
     /// An array of view controllers for displaying messages.
     public var messageViewControllers: [UIViewController] {
         get { return pageTabController.viewControllers }
         set { pageTabController.viewControllers = newValue }
     }
     
-    init(viewModel: ProfileViewModel) {
+    public init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -50,31 +47,24 @@ public class ProfileViewController: UIViewController {
         
         prepareSubviews()
         updateColors(for: theme)
-        
-        self.personView.usernameLabel.text = viewModel.username
-        self.personView.dateLabel.text = viewModel.dateSince
+        updateView()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         navigationController?.setStyle(.hidden, for: theme)
         super.viewWillAppear(animated)
+
+        viewModel.fetchProfile()
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        viewModel.getProfile { [weak self] result in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let viewModel):
-                self.personView.usernameLabel.text = viewModel.username
-                self.personView.dateLabel.text = viewModel.helpingSince
-                self.personView.loveAccolade.actionView.count = viewModel.totalLove
-                self.personView.appreciateAccolade.actionView.count = viewModel.totalAppreciation
-            case .failure: break
-            }
-        }
+    /**
+     Update the view with the view model.
+     */
+    private func updateView() {
+        personView.usernameLabel.text = viewModel.username
+        personView.dateLabel.text = viewModel.helpingSince
+        personView.loveAccolade.actionView.count = viewModel.totalLove
+        personView.appreciateAccolade.actionView.count = viewModel.totalAppreciation
     }
     
     private func prepareSubviews() {
@@ -105,13 +95,25 @@ public class ProfileViewController: UIViewController {
     // MARK: - Gesture Recognizer Handlers
     
     @objc private func didTapSettings() {
-        delegate?.profileViewControllerDidTapSettings(self)
+        viewModel.showSettings()
     }
     
     deinit {
         removeDidChangeThemeObserver()
     }
 
+}
+
+// MARK: - ProfileViewModel UI Delegate
+
+extension ProfileViewController: ProfileViewModelUIDelegate {
+    public func didFetchProfile() {
+        updateView()
+    }
+    
+    public func didFailToFetchProfile(with error: PersonError) {}
+    public func didBeginFetchingProfile() {}
+    public func didEndFetchingProfile() {}
 }
 
 // MARK: - PageTabController DataSource

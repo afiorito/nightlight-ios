@@ -1,4 +1,4 @@
-/// A constant for representing a settings option.
+/// A constant for representing the message default setting.
 public enum MessageDefault: String, CaseIterable {
     case anonymous
     case username

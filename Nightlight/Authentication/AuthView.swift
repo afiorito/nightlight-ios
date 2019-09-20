@@ -120,7 +120,7 @@ open class AuthView: UIView {
         return passwordField.input.text ?? ""
     }
     
-    /// A noolean value indicating whether the auth button is enabled.
+    /// A boolean value indicating whether the auth button is enabled.
     public var isAuthButtonEnabled: Bool {
         return !username.isEmpty && !password.isEmpty
     }
@@ -229,6 +229,8 @@ extension AuthView: UITextFieldDelegate {
             return
         }
         
-        formTextField.error = nil
+        if formTextField.error != nil {
+            formTextField.error = nil
+        }
     }
 }
