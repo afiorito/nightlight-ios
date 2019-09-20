@@ -110,10 +110,12 @@ extension NotificationsViewController: UserNotificationsViewModelUIDelegate {
             let newIndexPaths = dataSource.incrementCount(count)
             notificationsView.tableView.insertRows(at: newIndexPaths, with: .none)
         }
+        
+        (self.tabBarController as? NLTabBarController)?.removeBadge()
     }
 
     public func didBeginFetchingUserNotifications(fromStart: Bool) {
-        if fromStart && !refreshControl.isRefreshing {
+        if fromStart && !refreshControl.isRefreshing && dataSource.isEmpty {
             notificationsView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)  // fix refresh control tint bug.
             refreshControl.beginRefreshing()
         }
