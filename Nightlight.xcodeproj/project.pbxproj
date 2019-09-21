@@ -121,6 +121,7 @@
 		92631045232AEA29009AB5F2 /* Delegating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631044232AEA29009AB5F2 /* Delegating.swift */; };
 		9269EDE722F7B5000061D0DB /* notification.aif in Resources */ = {isa = PBXBuildFile; fileRef = 9269EDE622F7B5000061D0DB /* notification.aif */; };
 		9269EDE922F7BBA20061D0DB /* iTunesSearchBobdy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269EDE822F7BBA20061D0DB /* iTunesSearchBobdy.swift */; };
+		9273375023365F8200FC6798 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9273374F23365F8200FC6798 /* AuthenticationServices.framework */; };
 		92745236232BFF1C00D0576D /* MessagesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92745235232BFF1C00D0576D /* MessagesCoordinator.swift */; };
 		92745238232C020400D0576D /* MessagesViewModelUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92745237232C020400D0576D /* MessagesViewModelUIDelegate.swift */; };
 		9274523A232C03F900D0576D /* MessagesNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92745239232C03F900D0576D /* MessagesNavigationDelegate.swift */; };
@@ -402,6 +403,7 @@
 		92631044232AEA29009AB5F2 /* Delegating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegating.swift; sourceTree = "<group>"; };
 		9269EDE622F7B5000061D0DB /* notification.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = notification.aif; sourceTree = "<group>"; };
 		9269EDE822F7BBA20061D0DB /* iTunesSearchBobdy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesSearchBobdy.swift; sourceTree = "<group>"; };
+		9273374F23365F8200FC6798 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		92745235232BFF1C00D0576D /* MessagesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesCoordinator.swift; sourceTree = "<group>"; };
 		92745237232C020400D0576D /* MessagesViewModelUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModelUIDelegate.swift; sourceTree = "<group>"; };
 		92745239232C03F900D0576D /* MessagesNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesNavigationDelegate.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9273375023365F8200FC6798 /* AuthenticationServices.framework in Frameworks */,
 				9205E6D022EFCD3D00AFE16B /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -574,6 +577,7 @@
 		9205E6CE22EFCD3D00AFE16B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9273374F23365F8200FC6798 /* AuthenticationServices.framework */,
 				9205E6CF22EFCD3D00AFE16B /* StoreKit.framework */,
 			);
 			name = Frameworks;
@@ -2052,7 +2056,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2076,7 +2080,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2244,7 +2248,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2365,7 +2369,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

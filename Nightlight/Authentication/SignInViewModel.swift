@@ -45,6 +45,5 @@ public class SignInViewModel {
      */
     public func signUp() {
         navigationDelegate?.goToSignUp()
-        uiDelegate?.clearFields()
     }
 }

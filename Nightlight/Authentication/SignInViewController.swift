@@ -34,6 +34,13 @@ public class SignInViewController: UIViewController {
         updateColors(for: self.theme)
     }
     
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        view.endEditing(true)
+        clearFields()
+    }
+    
     public override func loadView() {
         view = SignInView()
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -83,7 +90,7 @@ extension SignInViewController: AuthViewModelUIDelegate {
     
     public func clearFields() {
         [signInView.usernameField, signInView.passwordField].forEach {
-            $0.input.text = ""
+            $0.input.text = nil
             $0.error = nil
         }
     }

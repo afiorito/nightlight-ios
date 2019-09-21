@@ -35,6 +35,13 @@ public class SignUpViewController: UIViewController {
         updateColors(for: theme)
     }
     
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        view.endEditing(true)
+        clearFields()
+    }
+    
     public override func loadView() {
         let signUpView = SignUpView()
         signUpView.policyAction = { [weak self] url in

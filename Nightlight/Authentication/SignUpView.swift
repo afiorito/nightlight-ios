@@ -17,6 +17,10 @@ public class SignUpView: AuthView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        if #available(iOS 12.0, *) {
+            passwordField.input.textContentType = .newPassword
+        }
 
         emailField.input.delegate = self
         emailField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -57,8 +61,10 @@ public class SignUpView: AuthView {
         let textField = FormTextField()
         textField.input.icon = UIImage.icon.mail
         textField.input.placeholder = Strings.placeholder.email
+        textField.input.keyboardType = .emailAddress
         textField.input.autocapitalizationType = .none
         textField.input.autocorrectionType = .no
+        textField.input.textContentType = .emailAddress
         return textField
     }()
     
@@ -94,7 +100,7 @@ public class SignUpView: AuthView {
         actionButton.setTitle(Strings.auth.signInButtonText, for: .normal)
         authButton.setTitle(Strings.auth.signUpButtonText, for: .normal)
         
-        fieldContainer.addArrangedSubviews([usernameField, emailField, passwordField])
+        fieldContainer.addArrangedSubviews([emailField, usernameField, passwordField])
         addSubviews(policiesTextView)
         
         NSLayoutConstraint.activate([

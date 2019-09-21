@@ -33,6 +33,7 @@ open class AuthView: UIView {
         textField.input.placeholder = Strings.placeholder.username
         textField.input.autocapitalizationType = .none
         textField.input.autocorrectionType = .no
+        textField.input.textContentType = .username
         
         return textField
     }()
@@ -45,6 +46,8 @@ open class AuthView: UIView {
         textField.input.isSecureTextEntry = true
         textField.input.autocapitalizationType = .none
         textField.input.autocorrectionType = .no
+        textField.input.textContentType = .password
+        
         return textField
     }()
     
