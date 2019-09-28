@@ -119,7 +119,7 @@ public class SignUpView: AuthView {
         usernameField.updateColors(for: theme)
         emailField.updateColors(for: theme)
         passwordField.updateColors(for: theme)
-        policiesTextView.textColor = .primaryText(for: theme)
+        policiesTextView.textColor = .label(for: theme)
     }
 }
 

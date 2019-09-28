@@ -8,9 +8,16 @@ public class NLTabBarController: UITabBarController {
         addDidChangeThemeObserver()
         
         tabBar.isTranslucent = false
-        tabBar.clipsToBounds = true
         
         updateColors(for: theme)
+    }
+    
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if #available(iOS 13, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateColors(for: theme)
+        }
     }
     
     /**
@@ -54,14 +61,18 @@ public class NLTabBarController: UITabBarController {
 
 extension NLTabBarController: Themeable {
     public func updateColors(for theme: Theme) {
-        if theme != .system {
-            tabBar.barTintColor = .secondaryBackground(for: theme)
-            tabBar.unselectedItemTintColor = .accent(for: theme)
+        tabBar.barTintColor = .background(for: theme)
+        tabBar.unselectedItemTintColor = .gray(for: theme)
+        if #available(iOS 13, *) {
+           let appearance = self.tabBar.standardAppearance.copy()
+           appearance.backgroundImage = UIColor.background(for: theme).asImage()
+           appearance.shadowImage = UIColor.secondaryLabel(for: theme).withAlphaComponent(0.3).asImage(with: CGSize(width: 1, height: 1 / UIScreen.main.scale))
+           self.tabBar.standardAppearance = appearance
         } else {
-            tabBar.barTintColor = nil
-            tabBar.unselectedItemTintColor = nil
+            tabBar.backgroundImage = UIColor.background(for: theme).asImage()
+            tabBar.shadowImage = UIColor.secondaryLabel(for: theme).withAlphaComponent(0.3).asImage(with: CGSize(width: 1, height: 1 / UIScreen.main.scale))
         }
-        tabBar.tintColor = .invertedBackground(for: theme)
+        tabBar.tintColor = .label(for: theme)
         tabBar.layoutIfNeeded()
     }
 }

@@ -24,7 +24,7 @@ public class SwitchTableViewCell: BaseStaticTableViewCell {
     
     public override func updateColors(for theme: Theme) {
         super.updateColors(for: theme)
-        textLabel?.textColor = .primaryText(for: theme)
+        textLabel?.textColor = .label(for: theme)
         backgroundColor = .background(for: theme)
         accessoryView?.backgroundColor = .background(for: theme)
         switchControl.updateColors(for: theme)

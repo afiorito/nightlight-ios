@@ -75,7 +75,7 @@ extension OptionsTableViewController: Themeable {
         if theme == .system {
             tableView.separatorColor = nil
         } else {
-            tableView.separatorColor = .border(for: theme)
+            tableView.separatorColor = .separator(for: theme)
         }
 
         navigationController?.navigationBar.layoutIfNeeded()

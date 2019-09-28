@@ -80,7 +80,6 @@ public class AppInfoViewController: UIViewController {
     
     public init(viewModel: AppInfoViewModel) {
         self.viewModel = viewModel
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -128,17 +127,22 @@ extension AppInfoViewController: Themeable {
     func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
         cancelButton.tintColor = .gray(for: theme)
-        versionLabel.textColor = .primaryText(for: theme)
-        infoLabel.textColor = .primaryText(for: theme)
-        thanksLabel.textColor = .primaryText(for: theme)
+        versionLabel.textColor = .label(for: theme)
+        infoLabel.textColor = .label(for: theme)
+        thanksLabel.textColor = .label(for: theme)
     }
 }
 
-// MARK: - Modal Presentable
+// MARK: - Custom Presentable
 
-extension AppInfoViewController: ModalPresentable {
-    public var height: ModalHeight {
-        return .intrinsicHeight
+extension AppInfoViewController: CustomPresentable {
+    public var frame: CustomPresentableFrame {
+        let width: CustomPresentableSize.Dimension = UIDevice.current.userInterfaceIdiom == .pad ? .content(500) : .max
+        return CustomPresentableFrame(x: .center, y: .center, width: width, height: .intrinsic)
     }
     
+    public var insets: UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
+
 }

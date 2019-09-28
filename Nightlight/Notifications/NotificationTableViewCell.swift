@@ -59,7 +59,7 @@ public class NotificationTableViewCell: UITableViewCell {
 
 extension NotificationTableViewCell: Themeable {
     func updateColors(for theme: Theme) {
-        contentView.backgroundColor = .background(for: theme)
-        bodyLabel.textColor = .primaryText(for: theme)
+        backgroundColor = .background(for: theme)
+        bodyLabel.textColor = .label(for: theme)
     }
 }

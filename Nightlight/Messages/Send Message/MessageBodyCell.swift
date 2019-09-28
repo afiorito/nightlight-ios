@@ -33,7 +33,7 @@ public class MessageBodyCell: UITableViewCell {
             textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
             textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-            textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200)
+            textView.heightAnchor.constraint(greaterThanOrEqualToConstant: min(UIScreen.main.bounds.height / 3, 400))
         ])
     }
 
@@ -43,10 +43,10 @@ public class MessageBodyCell: UITableViewCell {
 
 extension MessageBodyCell: Themeable {
     func updateColors(for theme: Theme) {
-        contentView.backgroundColor = .background(for: theme)
+        backgroundColor = .background(for: theme)
         textView.backgroundColor = .clear
-        textView.tintColor = .accent(for: theme)
-        textView.textColor = .primaryText(for: theme)
-        textView.attributedPlaceholder = NSAttributedString(string: "Body", attributes: [.foregroundColor: UIColor.accent(for: theme)])
+        textView.tintColor = .label(for: theme)
+        textView.textColor = .label(for: theme)
+        textView.attributedPlaceholder = NSAttributedString(string: "Body", attributes: [.foregroundColor: UIColor.placeholder(for: theme)])
     }
 }

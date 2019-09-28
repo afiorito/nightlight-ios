@@ -94,10 +94,10 @@ public class WebContentViewController: UIViewController {
     private var styleScript: WKUserScript {
         let script = """
                     document.body.style.backgroundColor = "\(UIColor.background(for: theme).hexString)";
-                    document.querySelectorAll('h2').forEach(h => h.style.color = "\(UIColor.primaryText(for: theme).hexString)");
-                    document.querySelectorAll('h3').forEach(h => h.style.color = "\(UIColor.primaryText(for: theme).hexString)");
-                    document.querySelectorAll('h3').forEach(h => h.style.color = "\(UIColor.primaryText(for: theme).hexString)");
-                    document.body.style.color = "\(UIColor.primaryText(for: theme).hexString)";
+                    document.querySelectorAll('h2').forEach(h => h.style.color = "\(UIColor.label(for: theme).hexString)");
+                    document.querySelectorAll('h3').forEach(h => h.style.color = "\(UIColor.label(for: theme).hexString)");
+                    document.querySelectorAll('h3').forEach(h => h.style.color = "\(UIColor.label(for: theme).hexString)");
+                    document.body.style.color = "\(UIColor.label(for: theme).hexString)";
                     """
         
         return WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true)

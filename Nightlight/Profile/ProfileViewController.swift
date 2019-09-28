@@ -141,6 +141,6 @@ extension ProfileViewController: Themeable {
         personView.updateColors(for: theme)
         navigationController?.setStyle(.hidden, for: theme)
         headerBackground.backgroundColor = .background(for: theme)
-        separatorLineView.backgroundColor = .border(for: theme)
+        separatorLineView.backgroundColor = .separator(for: theme)
     }
 }

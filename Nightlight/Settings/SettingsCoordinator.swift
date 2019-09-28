@@ -64,8 +64,7 @@ public class SettingsCoordinator: NSObject, Coordinator {
         let appInfoViewController = AppInfoViewController(viewModel: AppInfoViewModel())
         
         appInfoViewController.modalPresentationStyle = .custom
-        appInfoViewController.modalPresentationCapturesStatusBarAppearance = true
-        appInfoViewController.transitioningDelegate = ModalTransitioningDelegate.default
+        appInfoViewController.transitioningDelegate = FromBelowTransitioningDelegate.default
         
         settingsViewController.present(appInfoViewController, animated: true)
     }

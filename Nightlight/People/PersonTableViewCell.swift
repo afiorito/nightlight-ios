@@ -16,6 +16,7 @@ public class PersonTableViewCell: UITableViewCell, Configurable, Delegating {
         
         selectionStyle = .none
         
+        backgroundCardView.layer.cornerRadius = 4
         prepareSubviews()
         
     }
@@ -32,12 +33,6 @@ public class PersonTableViewCell: UITableViewCell, Configurable, Delegating {
         personContentView.appreciateAccolade.actionView.count = viewModel.totalAppreciation
         
         updateColors(for: theme)
-    }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        backgroundCardView.layer.cornerRadius = 4
-        backgroundCardView.addShadow(forTheme: theme)
     }
     
     private func prepareSubviews() {
@@ -61,8 +56,8 @@ public class PersonTableViewCell: UITableViewCell, Configurable, Delegating {
 
 extension PersonTableViewCell: Themeable {
     func updateColors(for theme: Theme) {
-        contentView.backgroundColor = .background(for: theme)
-        backgroundCardView.backgroundColor = .cellBackground(for: theme)
+        backgroundColor = nil
+        backgroundCardView.backgroundColor = .secondaryGroupedBackground(for: theme)
         personContentView.updateColors(for: theme)
     }
 }

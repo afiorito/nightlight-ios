@@ -99,9 +99,21 @@ extension MessageDetailCoordinator: MessageNavigationDelegate {
             }
         }
         
-        contextMenuViewController.modalPresentationStyle = .custom
-        contextMenuViewController.modalPresentationCapturesStatusBarAppearance = true
-        contextMenuViewController.transitioningDelegate = BottomSheetTransitioningDelegate.default
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            contextMenuViewController.modalPresentationStyle = .custom
+            contextMenuViewController.transitioningDelegate = FromBelowTransitioningDelegate.default
+        } else {
+            contextMenuViewController.modalPresentationStyle = .popover
+            
+            let sourceView = messageDetailViewController.messageContentView.contextButton
+            
+            contextMenuViewController.view.layoutIfNeeded()
+            let size = contextMenuViewController.view.systemLayoutSizeFitting(CGSize(width: 320, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+            
+            contextMenuViewController.preferredContentSize = size
+            contextMenuViewController.popoverPresentationController?.sourceView = sourceView
+            contextMenuViewController.popoverPresentationController?.permittedArrowDirections = [.right]
+        }
         
         messageDetailViewController.present(contextMenuViewController, animated: true)
     }

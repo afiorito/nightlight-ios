@@ -28,9 +28,11 @@ public class ToastView: UIView {
     /// An image view for displaying the severity icon.
     private let iconImageView = UIImageView()
 
-    private let toastMessageLabel: UILabel = {
+    private let messageLabel: UILabel = {
         let label = UILabel()
         label.font = .secondary14ptNormal
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
         
         return label
     }()
@@ -38,11 +40,11 @@ public class ToastView: UIView {
     /// The message of the toast.
     public var message: String? {
         get {
-            return toastMessageLabel.text
+            return messageLabel.text
         }
         
         set {
-            toastMessageLabel.text = newValue
+            messageLabel.text = newValue
         }
     }
     
@@ -51,13 +53,6 @@ public class ToastView: UIView {
         
         layer.cornerRadius = 4.0
         prepareSubviews()
-        updateColors(for: theme)
-    }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        addShadow(forTheme: theme)
     }
     
     required init?(coder: NSCoder) {
@@ -82,19 +77,24 @@ public class ToastView: UIView {
     }
     
     private func prepareSubviews() {
-        addSubviews([colorView, iconImageView, toastMessageLabel])
+        addSubviews([colorView, iconImageView, messageLabel])
+        
+        let colorViewAspectConstraint = colorView.widthAnchor.constraint(equalTo: colorView.heightAnchor)
+        colorViewAspectConstraint.priority = .required - 1
         
         NSLayoutConstraint.activate([
+            colorView.topAnchor.constraint(equalTo: messageLabel.topAnchor, constant: -10),
+            colorView.bottomAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 10),
             colorView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            colorView.heightAnchor.constraint(equalTo: heightAnchor),
-            colorView.widthAnchor.constraint(equalTo: colorView.heightAnchor),
+            colorView.widthAnchor.constraint(equalToConstant: 35),
             iconImageView.centerXAnchor.constraint(equalTo: colorView.centerXAnchor),
             iconImageView.centerYAnchor.constraint(equalTo: colorView.centerYAnchor),
             iconImageView.widthAnchor.constraint(equalTo: colorView.widthAnchor, multiplier: 0.65),
             iconImageView.heightAnchor.constraint(equalTo: iconImageView.widthAnchor),
-            toastMessageLabel.leadingAnchor.constraint(equalTo: colorView.trailingAnchor, constant: 10),
-            toastMessageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            toastMessageLabel.centerYAnchor.constraint(equalTo: colorView.centerYAnchor)
+            messageLabel.leadingAnchor.constraint(equalTo: colorView.trailingAnchor, constant: 10),
+            messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            messageLabel.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -10)
         ])
     }
 }
@@ -104,9 +104,8 @@ public class ToastView: UIView {
 extension ToastView: Themeable {
     public func updateColors(for theme: Theme) {
         iconImageView.tintColor = .secondaryBackground(for: theme)
-        
-        layer.shadowColor = UIColor.shadow(for: theme).cgColor
-        backgroundColor = .secondaryBackground(for: theme)
-        toastMessageLabel.textColor = .primaryText(for: theme)
+        backgroundColor = .tertiaryBackground(for: theme)
+        messageLabel.textColor = .label(for: theme)
+        addShadow(forTheme: theme)
     }
 }

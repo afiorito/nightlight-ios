@@ -6,7 +6,7 @@ public class MessageTableViewCell: UITableViewCell {
     private var viewModel: MessageViewModel?
     
     /// The content of the table view cell.
-    private let messageContentView = MessageContentView()
+    public let messageContentView = MessageContentView()
     
     public var loveAction: ((UITableViewCell) -> Void)?
     public var appreciateAction: ((UITableViewCell) -> Void)?
@@ -39,24 +39,6 @@ public class MessageTableViewCell: UITableViewCell {
         appreciateAction = nil
         saveAction = nil
         contextAction = nil
-    }
-    
-    public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-
-        UIView.animate(withDuration: 0.25) {
-            if highlighted {
-                switch self.theme {
-                case .dark:
-                    self.backgroundColor = UIColor.background(for: self.theme).lighter(amount: 0.05)
-                case .light:
-                    self.backgroundColor = UIColor.background(for: self.theme).darker(amount: 0.05)
-                case .system: break
-                }
-            } else {
-                self.backgroundColor = UIColor.background(for: self.theme)
-            }
-        }
     }
     
     /**
@@ -115,11 +97,11 @@ public class MessageTableViewCell: UITableViewCell {
 
 extension MessageTableViewCell: Themeable {
     public func updateColors(for theme: Theme) {
-        if theme == .system {
-            selectionStyle = .default
-        } else {
-            selectionStyle = .none
-        }
+        selectedBackgroundView = {
+            let view = UIView()
+            view.backgroundColor = UIColor.gray3(for: theme).withAlphaComponent(0.3)
+            return view
+        }()
         
         backgroundColor = .background(for: theme)
         messageContentView.updateColors(for: theme)

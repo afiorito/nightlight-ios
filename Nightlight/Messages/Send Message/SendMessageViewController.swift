@@ -165,11 +165,10 @@ extension SendMessageViewController: Themeable {
         if theme == .system {
             tableView.separatorColor = nil
         } else {
-            tableView.separatorColor = .border(for: theme)
+            tableView.separatorColor = .separator(for: theme)
         }
 
         navigationController?.setStyle(.secondary, for: theme)
-        view.backgroundColor = .background(for: theme)
         tableView.backgroundColor = .background(for: theme)
     }
 }

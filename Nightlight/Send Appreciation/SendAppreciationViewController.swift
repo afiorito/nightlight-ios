@@ -97,15 +97,15 @@ extension SendAppreciationViewController: SendAppreciationViewModelUIDelegate {
     }
 }
 
-// MARK: - Bottom Sheet Presentable
+// MARK: - Custom Presentable
 
-extension SendAppreciationViewController: BottomSheetPresentable {
-    public var panScrollable: UIScrollView? {
-        return nil
+extension SendAppreciationViewController: CustomPresentable {
+    public var frame: CustomPresentableFrame {
+        return CustomPresentableFrame(x: .center, y: .bottom, width: .max, height: .intrinsic)
     }
     
-    public var bottomSheetHeight: BottomSheetHeight {
-        return .intrinsicHeight
+    public var insets: UIEdgeInsets {
+        return UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
     }
 }
 

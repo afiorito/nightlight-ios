@@ -52,8 +52,8 @@ public class AccoladeView: UIView {
 
 extension AccoladeView: Themeable {
     func updateColors(for theme: Theme) {
-        descriptionLabel.textColor = .secondaryText(for: theme)
-        actionView.countLabel.textColor = .primaryText(for: theme)
+        descriptionLabel.textColor = .secondaryLabel(for: theme)
+        actionView.countLabel.textColor = .label(for: theme)
         actionView.updateColors(for: theme)
     }
 }

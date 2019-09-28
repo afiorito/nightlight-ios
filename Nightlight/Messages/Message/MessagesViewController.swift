@@ -188,10 +188,7 @@ extension MessagesViewController: Themeable {
 
         view.backgroundColor = .background(for: theme)
         messagesView.updateColors(for: theme)
-        toastView?.updateColors(for: theme)
-        messagesView.tableView.emptyView?.updateColors(for: theme)
         refreshControl.tintColor = .gray(for: theme)
-        messagesView.tableView.emptyView?.image = UIImage.empty.message
         
         (navigationItem.titleView as? Themeable)?.updateColors(for: theme)
     }

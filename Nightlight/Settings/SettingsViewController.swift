@@ -52,6 +52,7 @@ public class SettingsViewController: UIViewController {
     }
     
     public override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setStyle(.secondary, for: theme)
         super.viewWillAppear(animated)
 
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
@@ -335,7 +336,7 @@ extension SettingsViewController: Themeable {
         if theme == .system {
             tableView.separatorColor = nil
         } else {
-            tableView.separatorColor = .border(for: theme)
+            tableView.separatorColor = .separator(for: theme)
         }
 
         navigationController?.setStyle(.secondary, for: theme)

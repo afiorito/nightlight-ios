@@ -5,7 +5,7 @@ public class PageControl: UIPageControl {}
 
 extension PageControl: Themeable {
     public func updateColors(for theme: Theme) {
-        pageIndicatorTintColor = .accent(for: theme)
-        currentPageIndicatorTintColor = .invertedBackground(for: theme)
+        pageIndicatorTintColor = UIColor.label(for: theme).withAlphaComponent(0.3)
+        currentPageIndicatorTintColor = .label(for: theme)
     }
 }

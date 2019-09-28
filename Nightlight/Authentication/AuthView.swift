@@ -219,7 +219,7 @@ open class AuthView: UIView {
         backgroundColor = .background(for: theme)
         logoImageView.tintColor = .invertedPrimaryText(for: theme)
         headerTitleLabel.textColor = .invertedPrimaryText(for: theme)
-        accountStatusLabel.textColor = .primaryText(for: theme)
+        accountStatusLabel.textColor = .label(for: theme)
         actionButton.updateColors(for: theme)
     }
 }

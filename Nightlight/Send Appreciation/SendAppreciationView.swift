@@ -109,8 +109,8 @@ public class SendAppreciationView: UIView {
 
 extension SendAppreciationView: Themeable {
     func updateColors(for theme: Theme) {
-        titleLabel.textColor = .primaryText(for: theme)
-        descriptionLabel.textColor = .secondaryText(for: theme)
+        titleLabel.textColor = .label(for: theme)
+        descriptionLabel.textColor = .secondaryLabel(for: theme)
         backgroundColor = .background(for: theme)
         headerView.updateColors(for: theme)
     }

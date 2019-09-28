@@ -41,7 +41,8 @@ public class PeopleView: UIView {
 
 extension PeopleView: Themeable {
     func updateColors(for theme: Theme) {
-        tableView.backgroundColor = .background(for: theme)
+        tableView.emptyView?.updateColors(for: theme)
+        tableView.backgroundColor = .groupedBackground(for: theme)
         tableView.reloadData()
     }
 }

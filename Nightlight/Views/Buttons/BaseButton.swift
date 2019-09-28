@@ -9,7 +9,7 @@ open class BaseButton: UIButton {
     private let activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.color = UIColor.Palette.white
+        activityIndicator.color = UIColor.white
         return activityIndicator
     }()
     

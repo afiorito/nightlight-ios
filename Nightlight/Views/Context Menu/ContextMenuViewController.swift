@@ -49,17 +49,25 @@ public class ContextMenuViewController: UIViewController {
     }
     
     private func prepareSubviews() {
-        view.addSubviews([tableView, cancelButton])
+        view.addSubviews([tableView])
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            cancelButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 10),
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+        
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            view.addSubviews(cancelButton)
+            NSLayoutConstraint.activate([
+                cancelButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 10),
+                cancelButton.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+                cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+                cancelButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
+            ])
+        } else {
+            tableView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        }
     }
     
     @objc private func dismissMenu() {
@@ -98,19 +106,15 @@ extension ContextMenuViewController: UITableViewDelegate {
     
 }
 
-// MARK: - BottomSheet Presentable
+// MARK: - Custom Presentable
 
-extension ContextMenuViewController: BottomSheetPresentable {
-    public var panScrollable: UIScrollView? {
-        return nil
+extension ContextMenuViewController: CustomPresentable {
+    public var frame: CustomPresentableFrame {
+        return CustomPresentableFrame(x: .center, y: .bottom, width: .max, height: .intrinsic)
     }
     
-    public var bottomSheetHeight: BottomSheetHeight {
-        return .intrinsicHeight
-    }
-    
-    public var topOffset: CGFloat {
-        return 200
+    public var insets: UIEdgeInsets {
+        return UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
     }
 }
 
@@ -120,7 +124,7 @@ extension ContextMenuViewController: Themeable {
     public func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
         tableView.backgroundColor = .background(for: theme)
-        cancelButton.backgroundColor = .buttonNeutral(for: theme)
-        cancelButton.setTitleColor(.primaryText(for: theme), for: .normal)
+        cancelButton.backgroundColor = .secondaryBackground(for: theme)
+        cancelButton.setTitleColor(.label(for: theme), for: .normal)
     }
 }

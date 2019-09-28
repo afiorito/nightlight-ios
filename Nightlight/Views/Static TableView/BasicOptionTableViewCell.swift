@@ -39,7 +39,7 @@ public class BasicOptionTableViewCell: BaseStaticTableViewCell {
     
     public override func updateColors(for theme: Theme) {
             super.updateColors(for: theme)
-            textLabel?.textColor = .primaryText(for: theme)
+            textLabel?.textColor = .label(for: theme)
             backgroundColor = .background(for: theme)
         }
 }

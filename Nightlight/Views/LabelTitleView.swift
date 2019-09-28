@@ -40,6 +40,6 @@ public class LabelTitleView: UIView {
 
 extension LabelTitleView: Themeable {
     func updateColors(for theme: Theme) {
-        titleLabel.textColor = .primaryText(for: theme)
+        titleLabel.textColor = .label(for: theme)
     }
 }

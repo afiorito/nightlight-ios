@@ -41,6 +41,6 @@ public class TabCollectionViewCell: UICollectionViewCell {
 extension TabCollectionViewCell: Themeable {
     func updateColors(for theme: Theme) {
         backgroundColor = .clear
-        titleLabel.textColor = .secondaryText(for: theme)
+        titleLabel.textColor = .secondaryLabel(for: theme)
     }
 }

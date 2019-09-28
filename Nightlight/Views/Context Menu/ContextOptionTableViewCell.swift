@@ -34,29 +34,11 @@ public class ContextOptionTableViewCell: UITableViewCell {
             optionButton.setTitleColor(.urgent, for: .normal)
             optionButton.tintColor = .urgent
         default:
-            optionButton.setTitleColor(.primaryText(for: theme), for: .normal)
-            optionButton.tintColor = .invertedBackground(for: theme)
+            optionButton.setTitleColor(.label(for: theme), for: .normal)
+            optionButton.tintColor = .label(for: theme)
         }
         
         updateColors(for: theme)
-    }
-    
-    public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        
-        UIView.animate(withDuration: 0.25) {
-            if highlighted {
-                switch self.theme {
-                case .dark:
-                    self.backgroundColor = UIColor.background(for: self.theme).lighter(amount: 0.05)
-                case .light:
-                    self.backgroundColor = UIColor.background(for: self.theme).darker(amount: 0.05)
-                case .system: break
-                }
-            } else {
-                self.backgroundColor = UIColor.background(for: self.theme)
-            }
-        }
     }
     
     private func prepareSubviews() {
@@ -75,11 +57,11 @@ public class ContextOptionTableViewCell: UITableViewCell {
 
 extension ContextOptionTableViewCell: Themeable {
     public func updateColors(for theme: Theme) {
-        if theme == .system {
-            selectionStyle = .default
-        } else {
-            selectionStyle = .none
-        }
+        selectedBackgroundView = {
+            let view = UIView()
+            view.backgroundColor = UIColor.gray3(for: theme).withAlphaComponent(0.3)
+            return view
+        }()
 
         backgroundColor = .background(for: theme)
     }

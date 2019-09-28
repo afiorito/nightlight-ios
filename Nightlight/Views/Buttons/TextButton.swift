@@ -7,7 +7,7 @@ public class TextButton: BaseButton {}
 
 extension TextButton: Themeable {
     public func updateColors(for theme: Theme) {
-        setTitleColor(.primaryText(for: theme), for: .normal)
-        setTitleColor(UIColor.primaryText(for: theme).darker(), for: .highlighted)
+        setTitleColor(.label(for: theme), for: .normal)
+        setTitleColor(UIColor.label(for: theme).darker(), for: .highlighted)
     }
 }

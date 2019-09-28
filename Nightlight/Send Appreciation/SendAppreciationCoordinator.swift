@@ -37,11 +37,7 @@ public class SendAppreciationCoordinator: Coordinator {
     }
     
     public func start() {
-        if UIDevice.current.userInterfaceIdiom != .pad {
-            sendAppreciationViewController.modalPresentationStyle = .custom
-            sendAppreciationViewController.modalPresentationCapturesStatusBarAppearance = true
-            sendAppreciationViewController.transitioningDelegate = BottomSheetTransitioningDelegate.default
-        } else {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             let targetSize = CGSize(width: 500, height: UIView.layoutFittingCompressedSize.height)
             
             let intrinsicSize = sendAppreciationViewController
@@ -50,6 +46,9 @@ public class SendAppreciationCoordinator: Coordinator {
                                                                   verticalFittingPriority: .fittingSizeLevel)
             sendAppreciationViewController.preferredContentSize = intrinsicSize
             sendAppreciationViewController.modalPresentationStyle = .formSheet
+        } else {
+            sendAppreciationViewController.modalPresentationStyle = .custom
+            sendAppreciationViewController.transitioningDelegate = FromBelowTransitioningDelegate.default
         }
 
         rootViewController.present(sendAppreciationViewController, animated: true)

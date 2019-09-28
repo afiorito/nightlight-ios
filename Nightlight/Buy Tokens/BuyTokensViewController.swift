@@ -1,7 +1,7 @@
 import UIKit
 
 /// A view controller for handling the purchase of tokens.
-public class BuyTokensViewController: UIViewController, ModalPresentable {
+public class BuyTokensViewController: UIViewController {
     /// The view that the `BuyTokensViewController` manages.
     private var buyTokensView = BuyTokensView()
     
@@ -42,6 +42,14 @@ public class BuyTokensViewController: UIViewController, ModalPresentable {
         
         if viewModel.productsCount > 0 {
             buyTokensView.productsCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        }
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if isBeingRemoved {
+            viewModel.finish()
         }
     }
 
@@ -116,6 +124,20 @@ extension BuyTokensViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width - 30, height: 100.0)
     }
+}
+
+// MARK: - Custom Presentable
+
+extension BuyTokensViewController: CustomPresentable {
+    public var frame: CustomPresentableFrame {
+        let width: CustomPresentableSize.Dimension = UIDevice.current.userInterfaceIdiom == .pad ? .content(500) : .max
+        return CustomPresentableFrame(x: .center, y: .center, width: width, height: .intrinsic)
+    }
+    
+    public var insets: UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
+
 }
 
 // MARK: - Themeable

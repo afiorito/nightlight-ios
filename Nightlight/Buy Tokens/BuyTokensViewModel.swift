@@ -10,6 +10,9 @@ public class BuyTokensViewModel {
     /// The delegate object that handles user interface updates.
     public weak var uiDelegate: BuyTokensViewModelUIDelegate?
     
+    /// The delegate object that handles navigation events.
+    public weak var navigationDelegate: BuyTokensNavigationDelegate?
+    
     /// The fetched products.
     private var products = [SKProduct]()
     
@@ -82,6 +85,13 @@ public class BuyTokensViewModel {
      */
     public func purchaseProduct(at indexPath: IndexPath) {
         dependencies.iapManager.purchase(product: products[indexPath.row])
+    }
+    
+    /**
+     Stop buying tokens.
+     */
+    public func finish() {
+        navigationDelegate?.didFinishBuyingTokens()
     }
 }
 

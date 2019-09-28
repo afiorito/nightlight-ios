@@ -94,8 +94,8 @@ public class PersonContentView: UIView {
 
 extension PersonContentView: Themeable {
     func updateColors(for theme: Theme) {
-        usernameLabel.textColor = .primaryText(for: theme)
-        dateLabel.textColor = .secondaryText(for: theme)
+        usernameLabel.textColor = .label(for: theme)
+        dateLabel.textColor = .secondaryLabel(for: theme)
         loveAccolade.updateColors(for: theme)
         appreciateAccolade.updateColors(for: theme)
     }

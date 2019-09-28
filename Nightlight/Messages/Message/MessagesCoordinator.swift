@@ -106,15 +106,15 @@ extension MessagesCoordinator: MessagesNavigationDelegate {
         let contextMenuViewController = ContextMenuViewController()
         
         for action in actions {
-             let completion = { [weak self, weak contextMenuViewController] in
+            let completion = { [weak self, weak contextMenuViewController] in
                 contextMenuViewController?.dismiss(animated: true)
                 self?.viewModel.didFinishPresentingContextMenu(with: action, at: indexPath)
-             }
-             
-             switch action {
-             case .report:
+            }
+            
+            switch action {
+            case .report:
                 contextMenuViewController.addOption(ContextOption.reportOption({ _ in completion() }))
-             case .delete:
+            case .delete:
                 contextMenuViewController.addOption(ContextOption.deleteOption({ [weak contextMenuViewController] _ in
                     let alertController = UIAlertController(title: Strings.message.deleteMessage,
                                                             message: Strings.message.confirmDelete, preferredStyle: .alert)
@@ -128,13 +128,30 @@ extension MessagesCoordinator: MessagesNavigationDelegate {
                     
                     contextMenuViewController?.present(alertController, animated: true)
                 }))
-             }
-         }
+            }
+        }
         
-        contextMenuViewController.modalPresentationStyle = .custom
-        contextMenuViewController.modalPresentationCapturesStatusBarAppearance = true
-        contextMenuViewController.transitioningDelegate = BottomSheetTransitioningDelegate.default
-        
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            contextMenuViewController.modalPresentationStyle = .custom
+            contextMenuViewController.transitioningDelegate = FromBelowTransitioningDelegate.default
+        } else {
+            contextMenuViewController.modalPresentationStyle = .popover
+            
+            var sourceView = messagesViewController.view
+            
+            if let messagesView = messagesViewController.view as? MessagesView, let messageCell = messagesView.tableView.cellForRow(at: indexPath) as? MessageTableViewCell {
+                sourceView = messageCell.messageContentView.contextButton
+            }
+            
+            contextMenuViewController.view.layoutIfNeeded()
+            let size = contextMenuViewController.view.systemLayoutSizeFitting(CGSize(width: 320, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+            
+            print("SIZE: ", size)
+            contextMenuViewController.preferredContentSize = size
+            contextMenuViewController.popoverPresentationController?.sourceView = sourceView
+            contextMenuViewController.popoverPresentationController?.permittedArrowDirections = [.right]
+        }
+
         messagesViewController.present(contextMenuViewController, animated: true)
     }
     

@@ -24,6 +24,7 @@ public class BuyTokensCoordinator: Coordinator {
     private lazy var buyTokensViewController: BuyTokensViewController = {
         let buyTokensViewController = BuyTokensViewController(viewModel: viewModel)
         viewModel.uiDelegate = buyTokensViewController
+        viewModel.navigationDelegate = self
         
         return buyTokensViewController
     }()
@@ -38,8 +39,7 @@ public class BuyTokensCoordinator: Coordinator {
 
         buyTokensViewController.modalPresentationStyle = .custom
         buyTokensViewController.modalPresentationCapturesStatusBarAppearance = true
-        buyTokensViewController.transitioningDelegate = ModalTransitioningDelegate.default
-        (buyTokensViewController.presentationController as? ModalPresentationController)?.presentationDelegate = self
+        buyTokensViewController.transitioningDelegate = FromBelowTransitioningDelegate.default
         
         viewModel.fetchProducts { [weak self] in
             guard let self = self else { return }
@@ -73,10 +73,10 @@ public class BuyTokensCoordinator: Coordinator {
     }
 }
 
-// MARK: - ModalPresentationController Delegate
+// MARK: - BuyTokensNavigation Delegate
 
-extension BuyTokensCoordinator: ModalPresentationControllerDelegate {
-    public func modalPresentationController(_ modalPresentationController: ModalPresentationController, didDismiss completed: Bool) {
+extension BuyTokensCoordinator: BuyTokensNavigationDelegate {
+    public func didFinishBuyingTokens() {
         navigationDelegate?.buyTokensCoordinatorDismiss(with: .cancelled)
         parent?.childDidFinish(self)
     }

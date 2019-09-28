@@ -12,19 +12,13 @@ public class ProductCollectionViewCell: UICollectionViewCell {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         
+        contentView.layer.cornerRadius = 4
         contentView.layer.borderColor = UIColor.brand.cgColor
         prepareSubviews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.layer.cornerRadius = 4
-        contentView.addShadow(forTheme: theme)
     }
     
     public func configure(with viewModel: ProductViewModel) {
@@ -102,10 +96,10 @@ public class ProductCollectionViewCell: UICollectionViewCell {
 
 extension ProductCollectionViewCell: Themeable {
     func updateColors(for theme: Theme) {
-        contentView.backgroundColor = .cellBackground(for: theme)
-        tokenLabel.textColor = .primaryText(for: theme)
+        contentView.backgroundColor = .secondaryGroupedBackground(for: theme)
+        tokenLabel.textColor = .label(for: theme)
         priceTextView.backgroundColor = .brand
-        subtitleLabel.textColor = .secondaryText(for: theme)
-        priceTextView.textColor = UIColor.Palette.white
+        subtitleLabel.textColor = .secondaryLabel(for: theme)
+        priceTextView.textColor = UIColor.white
     }
 }

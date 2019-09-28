@@ -119,11 +119,11 @@ public class BuyTokensView: UIView {
 
 extension BuyTokensView: Themeable {
     func updateColors(for theme: Theme) {
-        titleLabel.textColor = .primaryText(for: theme)
+        titleLabel.textColor = .label(for: theme)
         cancelButton.tintColor = .gray(for: theme)
-        backgroundColor = .background(for: theme)
-        productsCollectionView.backgroundColor = .background(for: theme)
-        noProductsFoundLabel.textColor = .secondaryText(for: theme)
-        separatorLineView.backgroundColor = .border(for: theme)
+        backgroundColor = .groupedBackground(for: theme)
+        productsCollectionView.backgroundColor = .groupedBackground(for: theme)
+        noProductsFoundLabel.textColor = .secondaryLabel(for: theme)
+        separatorLineView.backgroundColor = .separator(for: theme)
     }
 }

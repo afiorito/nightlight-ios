@@ -6,17 +6,10 @@ extension UISearchBar: Themeable {
     }
     
     func updateColors(for theme: Theme) {
-        if theme != .system {
-            textField?.attributedPlaceholder = NSAttributedString(string: textField?.placeholder ?? "",
-                                                                  attributes: [.foregroundColor: UIColor.gray(for: theme)])
-        } else {
-            textField?.backgroundColor = nil
-            textField?.placeholder = "Search"
-        }
-
-        textField?.textColor = .primaryText(for: theme)
-        textField?.backgroundColor = .gray6(for: theme)
-        textField?.leftView?.tintColor = .gray(for: theme)
-        textField?.tintColor = .gray(for: theme)
+        textField?.attributedPlaceholder = NSAttributedString(string: textField?.placeholder ?? "", attributes: [.foregroundColor: UIColor.placeholder(for: theme)])
+        textField?.textColor = .label(for: theme)
+        textField?.backgroundColor = .secondaryBackground(for: theme)
+        textField?.leftView?.tintColor = .placeholder(for: theme)
+        textField?.tintColor = .label(for: theme)
     }
 }

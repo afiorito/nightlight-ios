@@ -12,7 +12,7 @@ public class MessageDetailViewController: UIViewController {
     private let contentView = UIView()
     
     /// The view that the `MessageDetailViewController` manages.
-    private let messageContentView = MessageContentView()
+    public let messageContentView = MessageContentView()
     
     public init(viewModel: MessageViewModel) {
         self.viewModel = viewModel

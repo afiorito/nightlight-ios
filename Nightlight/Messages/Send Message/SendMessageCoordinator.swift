@@ -35,7 +35,7 @@ public class SendMessageCoordinator: TabBarCoordinator {
     
     public func start() {
         if UIDevice.current.userInterfaceIdiom == .pad {
-            rootViewController.modalPresentationStyle = .formSheet
+            rootViewController.modalPresentationStyle = .pageSheet
         }
         
         rootViewController.pushViewController(sendMessageViewController, animated: true)

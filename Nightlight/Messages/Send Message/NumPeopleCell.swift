@@ -65,9 +65,9 @@ extension NumPeopleCell: UITextFieldDelegate {
 
 extension NumPeopleCell: Themeable {
     func updateColors(for theme: Theme) {
-        textLabel?.textColor = .primaryText(for: theme)
+        textLabel?.textColor = .label(for: theme)
         backgroundColor = .background(for: theme)
         accessoryView?.backgroundColor = .background(for: theme)
-        textField.textColor = .secondaryText(for: theme)
+        textField.textColor = .secondaryLabel(for: theme)
     }
 }

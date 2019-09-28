@@ -22,6 +22,6 @@ public class TabSeparatorView: UICollectionReusableView {
 
 extension TabSeparatorView: Themeable {
     func updateColors(for theme: Theme) {
-        backgroundColor = .border(for: theme)
+        backgroundColor = .separator(for: theme)
     }
 }

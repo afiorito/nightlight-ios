@@ -134,9 +134,11 @@ public class PermissionView: UIView {
         NSLayoutConstraint.activate([
             container.topAnchor.constraint(equalTo: topAnchor),
             container.bottomAnchor.constraint(equalTo: bottomAnchor),
+            container.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 15),
+            container.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -15),
             container.widthAnchor.constraint(lessThanOrEqualToConstant: 375),
             container.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.75),
+            imageView.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.70),
             imageView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
         ])
     }
@@ -158,8 +160,8 @@ public class PermissionView: UIView {
 extension PermissionView: Themeable {
     public func updateColors(for theme: Theme) {
         backgroundColor = .background(for: theme)
-        titleLabel.textColor = .primaryText(for: theme)
-        subtitleLabel.textColor = .secondaryText(for: theme)
-        cancelButton.setTitleColor(.secondaryText(for: theme), for: .normal)
+        titleLabel.textColor = .label(for: theme)
+        subtitleLabel.textColor = .secondaryLabel(for: theme)
+        cancelButton.setTitleColor(.secondaryLabel(for: theme), for: .normal)
     }
 }

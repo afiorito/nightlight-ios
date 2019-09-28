@@ -48,7 +48,7 @@ public class MessagesView: UIView {
 extension MessagesView: Themeable {
     public func updateColors(for theme: Theme) {
         if theme != .system {
-            tableView.separatorColor = .border(for: theme)
+            tableView.separatorColor = .separator(for: theme)
         } else {
             tableView.separatorColor = nil
         }
@@ -60,6 +60,7 @@ extension MessagesView: Themeable {
         backgroundColor = .background(for: theme)
         tableView.backgroundColor = .background(for: theme)
         (tableView.backgroundView as? Themeable)?.updateColors(for: theme)
+        tableView.emptyView?.updateColors(for: theme)
         tableView.reloadData()
     }
 }

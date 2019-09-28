@@ -9,7 +9,7 @@ public struct EmptyViewDescription {
 
 public extension EmptyViewDescription {
     static var noRecentMessages: EmptyViewDescription {
-        return EmptyViewDescription(title: "No Recent Messages", subtitle: "Tap the + to send one", imageName: "empty_message")
+        return EmptyViewDescription(title: "No Recent Messages", subtitle: "Send a new message by tapping the + button.", imageName: "empty_message")
     }
     
     static var noReceivedMessages: EmptyViewDescription {
@@ -19,7 +19,7 @@ public extension EmptyViewDescription {
     }
     
     static var noSentMessages: EmptyViewDescription {
-        return EmptyViewDescription(title: "No Sent Messages", subtitle: "Tap the + to send one", imageName: "empty_message")
+        return EmptyViewDescription(title: "No Sent Messages", subtitle: "Send a new message by tapping the + button.", imageName: "empty_message")
     }
     
     static var noSavedMessages: EmptyViewDescription {

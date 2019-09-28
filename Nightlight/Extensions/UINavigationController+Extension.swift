@@ -16,7 +16,7 @@ extension UINavigationController {
     public func setStyle(_ style: Style, for theme: Theme = .system) {
         switch theme {
         case .dark:
-            navigationBar.barStyle = .blackTranslucent
+            navigationBar.barStyle = .blackOpaque
         default:
             navigationBar.barStyle = .default
         }
@@ -26,22 +26,22 @@ extension UINavigationController {
             navigationBar.isTranslucent = false
             navigationBar.barTintColor = .background(for: theme)
             view.backgroundColor = .background(for: theme)
-            navigationBar.shadowImage = nil
+            navigationBar.shadowImage = UIColor.secondaryLabel(for: theme).withAlphaComponent(0.3).asImage(with: CGSize(width: 1, height: 1 / UIScreen.main.scale))
             navigationBar.setBackgroundImage(nil, for: .default)
         case .secondary:
             navigationBar.isTranslucent = false
             navigationBar.barTintColor = .secondaryBackground(for: theme)
             view.backgroundColor = .secondaryBackground(for: theme)
-            navigationBar.shadowImage = nil
+            navigationBar.shadowImage = UIColor.secondaryLabel(for: theme).withAlphaComponent(0.3).asImage(with: CGSize(width: 1, height: 1 / UIScreen.main.scale))
             navigationBar.setBackgroundImage(nil, for: .default)
         case .hidden:
             navigationBar.isTranslucent = true
             navigationBar.setBackgroundImage(UIImage(), for: .default)
             navigationBar.barTintColor = nil
-            navigationBar.shadowImage = UIImage()
+            navigationBar.shadowImage = UIColor.clear.asImage()
         }
         
-        navigationBar.tintColor = .invertedBackground(for: theme)
-        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.primaryText(for: theme)]
+        navigationBar.tintColor = .label(for: theme)
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label(for: theme)]
     }
 }

@@ -40,9 +40,9 @@ public class MessageTitleCell: UITableViewCell {
 
 extension MessageTitleCell: Themeable {
     func updateColors(for theme: Theme) {
-        contentView.backgroundColor = .background(for: theme)
-        textField.tintColor = .accent(for: theme)
-        textField.attributedPlaceholder = NSAttributedString(string: "Title", attributes: [.foregroundColor: UIColor.accent(for: theme)])
-        textField.textColor = .primaryText(for: theme)
+        backgroundColor = .background(for: theme)
+        textField.tintColor = .label(for: theme)
+        textField.attributedPlaceholder = NSAttributedString(string: "Title", attributes: [.foregroundColor: UIColor.placeholder(for: theme)])
+        textField.textColor = .label(for: theme)
     }
 }

@@ -115,7 +115,7 @@ extension PageTabsView: Themeable {
     func updateColors(for theme: Theme) {
         backgroundColor = .background(for: theme)
         collectionView.backgroundColor = .background(for: theme)
-        tabIndicatorView.backgroundColor = .accent(for: theme)
+        tabIndicatorView.backgroundColor = .gray3(for: theme)
         collectionView.reloadData()
     }
 }

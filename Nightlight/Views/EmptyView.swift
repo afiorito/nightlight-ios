@@ -65,7 +65,7 @@ public class EmptyView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.spacing = 40
+        stackView.spacing = 32
         
         return stackView
     }()
@@ -84,12 +84,16 @@ public class EmptyView: UIView {
         container.addArrangedSubviews([imageView, textContainer])
         addSubviews(container)
         
+        let widthConstraint = imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5)
+        widthConstraint.priority = .required - 1
+        
         NSLayoutConstraint.activate([
             container.centerYAnchor.constraint(equalTo: centerYAnchor),
             container.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             container.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
-            imageView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
+            imageView.widthAnchor.constraint(lessThanOrEqualToConstant: 250),
+            widthConstraint,
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor)
         ])
     }
 }
@@ -98,7 +102,7 @@ public class EmptyView: UIView {
 
 extension EmptyView: Themeable {
     public func updateColors(for theme: Theme) {
-        titleLabel.textColor = .primaryText(for: theme)
-        subtitleLabel.textColor = .secondaryText(for: theme)
+        titleLabel.textColor = .label(for: theme)
+        subtitleLabel.textColor = .secondaryLabel(for: theme)
     }
 }

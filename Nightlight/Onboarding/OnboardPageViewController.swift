@@ -93,7 +93,7 @@ public class OnboardPageViewController: UIViewController {
 
 extension OnboardPageViewController: Themeable {
     public func updateColors(for theme: Theme) {
-        titleLabel.textColor = .primaryText(for: theme)
-        subtitleLabel.textColor = .secondaryText(for: theme)
+        titleLabel.textColor = .label(for: theme)
+        subtitleLabel.textColor = .secondaryLabel(for: theme)
     }
 }

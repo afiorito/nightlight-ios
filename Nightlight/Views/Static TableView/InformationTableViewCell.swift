@@ -49,9 +49,9 @@ public class InformationTableViewCell: BaseStaticTableViewCell {
     
     public override func updateColors(for theme: Theme) {
         super.updateColors(for: theme)
-        detailTextLabel?.textColor = .secondaryText(for: theme)
-        textLabel?.textColor = .primaryText(for: theme)
+        detailTextLabel?.textColor = .secondaryLabel(for: theme)
+        textLabel?.textColor = .label(for: theme)
         backgroundColor = .background(for: theme)
-        disclosureIndicator.tintColor = .invertedBackground(for: theme)
+        disclosureIndicator.tintColor = .label(for: theme)
     }
 }
