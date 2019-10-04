@@ -19,59 +19,65 @@ public class MessageViewModel {
     private var purchaseCompletionHandler: MessageResultCompletion?
     
     /// The backing message model.
-    private(set) var message: Message
+    private(set) var message: Message?
     
     /// The type of message being handled.
     public let type: MessageType
     
     /// The title of the message.
     public var title: String {
-        return message.title
+        return message?.title ?? ""
     }
     
     /// The username of the message.
     public var username: String {
-        return message.user.username
+        return message?.user.username ?? ""
     }
     
     /// The display name of the sender.
     public var displayName: String {
-        return message.isAnonymous ? "anonymous" : message.user.username
+        return message?.isAnonymous == true ? "anonymous" : message?.user.username ?? ""
     }
     
     /// The time since the message is posted.
     public var timeAgo: String {
+        guard let message = message else { return "" }
+        
         return " · \(message.createdAt.ago())"
     }
     
     /// The body of the message.
     public var body: String {
-        return "\(message.body)"
+        return message?.body ?? ""
     }
     
     /// The total love a message has received.
     public var loveCount: Int {
-        return message.loveCount
+        return message?.loveCount ?? 0
     }
     
     /// The total appreciation a message has received.
     public var appreciationCount: Int {
-        return message.appreciationCount
+        return message?.appreciationCount ?? 0
     }
     
     /// A boolean representing if the message is already loved.
     public var isLoved: Bool {
-        return message.isLoved
+        return message?.isLoved ?? false
     }
     
     /// A boolean representing if the message is already appreciated.
     public var isAppreciated: Bool {
-        return message.isAppreciated
+        return message?.isAppreciated ?? false
     }
     
     /// A boolean representing if the message is already saved.
     public var isSaved: Bool {
-        return message.isSaved
+        return message?.isSaved ?? false
+    }
+    
+    public var isLoading: Bool {
+        return message == nil
     }
     
     public init(message: Message, type: MessageType, dependencies: Dependencies) {
@@ -80,10 +86,46 @@ public class MessageViewModel {
         self.dependencies = dependencies
     }
     
+    public init(messageId: Int, dependencies: Dependencies) {
+        self.message = nil
+        self.type = .recent
+        self.dependencies = dependencies
+        
+        fetchMessage(with: messageId)
+    }
+    
+    /**
+     Retrieve a message with a specified id.
+     
+     - parameter id: the unique id of the message.
+     */
+    private func fetchMessage(with id: Int) {
+        uiDelegate?.didBeginFetchingMessage()
+    
+        dependencies.messageService.getMessage(with: id) { [weak self] messageResult in
+            DispatchQueue.main.async { self?.uiDelegate?.didEndFetchingMessage() }
+            
+            switch messageResult {
+            case .success(let message):
+                self?.message = message
+                DispatchQueue.main.async { self?.uiDelegate?.didFetchMessage() }
+            case .failure(let error):
+                switch error {
+                case .notFound:
+                    DispatchQueue.main.async { self?.uiDelegate?.didFailToFindMessage() }
+                default:
+                    DispatchQueue.main.async { self?.uiDelegate?.didFailToFetchMessage() }
+                }
+            }
+        }
+    }
+    
     /**
      Loves a message.
      */
     public func loveMessage() {
+        guard let message = message else { return }
+
         dependencies.messageService.love(message: message) { [weak self] loveResult in
             guard let self = self else { return }
             switch loveResult {
@@ -103,6 +145,8 @@ public class MessageViewModel {
      Saves a message.
      */
     public func saveMessage() {
+        guard let message = message else { return }
+
         dependencies.messageService.save(message: message) { [weak self] saveResult in
             guard let self = self else { return }
             
@@ -123,6 +167,8 @@ public class MessageViewModel {
      Appreciates a message.
      */
     public func appreciateMessage() {
+        guard let message = message else { return }
+
         if !message.isAppreciated {
             navigationDelegate?.showAppreciationSheet(for: message)
         }
@@ -132,6 +178,8 @@ public class MessageViewModel {
      Shows a context menu for the message.
      */
     public func contextForMessage() {
+        guard let message = message else { return }
+
         var actions: [MessageContextAction] = [.report]
         
         if dependencies.messageService.isDeleteable(message: message, type: type) {
@@ -145,12 +193,14 @@ public class MessageViewModel {
      Deletes a message.
      */
     public func delete() {
+        guard let message = message else { return }
+
         dependencies.messageService.deleteMessage(with: message.id) { [weak self] deleteResult in
             guard let self = self else { return }
             switch deleteResult {
             case .success:
                 DispatchQueue.main.async {
-                    self.navigationDelegate?.didDelete(message: self.message)
+                    self.navigationDelegate?.didDelete(message: message)
                 }
             case .failure(let error):
                 DispatchQueue.main.async { self.uiDelegate?.didFailToDeleteMessage(with: error) }

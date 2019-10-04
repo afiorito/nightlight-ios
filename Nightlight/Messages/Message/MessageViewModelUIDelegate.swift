@@ -3,6 +3,31 @@ import Foundation
 /// Methods for updating the user interface from a `MessageViewModel`.
 public protocol MessageViewModelUIDelegate: class {
     /**
+    Tells the delegate that fetching the message began.
+    */
+    func didBeginFetchingMessage()
+    
+    /**
+     Tells the delegate that fetching the message stopped.
+     */
+    func didEndFetchingMessage()
+    
+    /**
+     Tells the delegate that the message fetched successfully.
+     */
+    func didFetchMessage()
+    
+    /**
+     Tells the delegate that the message could not be found.
+     */
+    func didFailToFindMessage()
+    
+    /**
+     Tells the delegate that fetching the message failed.
+     */
+    func didFailToFetchMessage()
+    
+    /**
      Tells the delegate that the message got reported.
      */
     func didReportMessage()

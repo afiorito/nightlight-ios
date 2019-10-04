@@ -14,6 +14,15 @@ public class MessageDetailViewController: UIViewController {
     /// The view that the `MessageDetailViewController` manages.
     public let messageContentView = MessageContentView()
     
+    /// An activity indicator while the message is loading.
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        indicator.style = .gray
+        
+        return indicator
+    }()
+    
     public init(viewModel: MessageViewModel) {
         self.viewModel = viewModel
         
@@ -46,10 +55,12 @@ public class MessageDetailViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    /**
-     Refresh the view with values from the view model.
-     */
-    private func updateView() {
+    public func updateView() {
+        if viewModel.isLoading {
+            activityIndicator.startAnimating()
+        }
+        
+        messageContentView.isHidden = viewModel.isLoading
         messageContentView.titleLabel.text = viewModel.title
         messageContentView.usernameLabel.text = viewModel.displayName
         messageContentView.timeAgoLabel.text = viewModel.timeAgo
@@ -60,10 +71,11 @@ public class MessageDetailViewController: UIViewController {
         messageContentView.appreciateAction.count = viewModel.appreciationCount
         messageContentView.saveAction.isSelected = viewModel.isSaved
     }
-    
+
     private func prepareSubviews() {
         view.addSubviews(scrollView)
         contentView.addSubviews([messageContentView])
+        contentView.addSubviews(activityIndicator)
         scrollView.addSubviews(contentView)
         
         NSLayoutConstraint.activate([
@@ -76,6 +88,8 @@ public class MessageDetailViewController: UIViewController {
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            activityIndicator.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 32),
+            activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             messageContentView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             messageContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             messageContentView.leadingAnchor.constraint(equalTo: contentView.readableContentGuide.leadingAnchor, constant: 15),
@@ -109,6 +123,26 @@ public class MessageDetailViewController: UIViewController {
 // MARK: - MessageViewModel UI Delegate
 
 extension MessageDetailViewController: MessageViewModelUIDelegate {
+    public func didFetchMessage() {
+        updateView()
+    }
+
+    public func didBeginFetchingMessage() {
+        activityIndicator.startAnimating()
+    }
+    
+    public func didEndFetchingMessage() {
+        activityIndicator.stopAnimating()
+    }
+    
+    public func didFailToFindMessage() {
+        showEmptyView(description: .messageNotFound)
+    }
+    
+    public func didFailToFetchMessage() {
+        showEmptyView(description: .noLoad)
+    }
+    
     public func didFailToDeleteMessage(with error: MessageError) {
         showToast(Strings.error.couldNotConnect, severity: .urgent)
     }
@@ -128,11 +162,38 @@ extension MessageDetailViewController: MessageViewModelUIDelegate {
 
 }
 
+// MARK: EmptyViewable
+
+extension MessageDetailViewController: EmptyViewable {
+    public var emptyView: EmptyView? {
+        return view.subview(ofType: EmptyView.self)
+    }
+
+    public func showEmptyView(description: EmptyViewDescription) {
+        emptyView?.removeFromSuperview()
+        
+        let emptyView = EmptyView(description: description)
+        view.addSubviews(emptyView)
+        
+        NSLayoutConstraint.activate([
+            emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            emptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
+        ])
+    }
+    
+    public func hideEmptyView() {
+        emptyView?.removeFromSuperview()
+    }
+
+}
+
 // MARK: - Themeable
 
 extension MessageDetailViewController: Themeable {
     public func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
         messageContentView.updateColors(for: theme)
+        activityIndicator.color = .gray(for: theme)
     }
 }

@@ -89,6 +89,10 @@ extension Endpoint {
         return Endpoint(path: "/message", queryItems: queryItems)
     }
     
+    static func message(with id: Int) -> Endpoint {
+        return Endpoint(path: "/message/\(id)")
+    }
+    
     static var message: Endpoint {
         return Endpoint(path: "/message")
     }

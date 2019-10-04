@@ -26,6 +26,10 @@ public extension EmptyViewDescription {
         return EmptyViewDescription(title: "No Saved Messages", subtitle: "Your saved messages will show up here.", imageName: "empty_message")
     }
     
+    static var messageNotFound: EmptyViewDescription {
+        return EmptyViewDescription(title: "Message Not Found", subtitle: "The message does not exist or is deleted.", imageName: "empty_message")
+    }
+    
     static var noResults: EmptyViewDescription {
         return EmptyViewDescription(title: "No Users Found", subtitle: "Try searching for someone else", imageName: "empty_results")
     }

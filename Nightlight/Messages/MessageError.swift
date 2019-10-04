@@ -23,6 +23,9 @@ public enum MessageError: Error {
     /// The sent message could not be validated.
     case validation([ErrorReason])
     
+    /// A retrieved message does not exist or is deleted.
+    case notFound
+    
     /// An unexpected error.
     case unknown
     
@@ -34,6 +37,7 @@ public enum MessageError: Error {
         case .insufficientTokens: return Strings.message.insufficientTokens
         case .alreadyAppreciated: return Strings.message.alreadyAppreciated
         case .failedAction: return Strings.error.couldNotConnect
+        case .notFound: return Strings.message.notFound
         case .validation(let reasons):
             var message = Strings.error.unknown
 

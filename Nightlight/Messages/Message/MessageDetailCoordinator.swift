@@ -9,12 +9,6 @@ public class MessageDetailCoordinator: NSObject, Coordinator {
     /// The required dependencies.
     private let dependencies: Dependencies
     
-    /// The type of message being shown.
-    private let type: MessageType
-    
-    /// The message to show the detail for.
-    private let message: Message
-    
     /// The root view controller of for messages view controller.
     public let rootViewController: UINavigationController
     
@@ -22,9 +16,7 @@ public class MessageDetailCoordinator: NSObject, Coordinator {
     public weak var navigationDelegate: MessageDetailCoordinatorNavigationDelegate?
     
     /// The view model for managing the state of the view.
-    private lazy var viewModel: MessageViewModel = {
-        MessageViewModel(message: message, type: .recent, dependencies: dependencies as! MessageViewModel.Dependencies)
-    }()
+    private let viewModel: MessageViewModel
     
     /// A view controller for showing a message.
     private lazy var messageDetailViewController: MessageDetailViewController = {
@@ -38,8 +30,13 @@ public class MessageDetailCoordinator: NSObject, Coordinator {
     }()
     
     public init(message: Message, type: MessageType, rootViewController: UINavigationController, dependencies: Dependencies) {
-        self.message = message
-        self.type = type
+        self.viewModel = MessageViewModel(message: message, type: type, dependencies: dependencies as! MessageViewModel.Dependencies)
+        self.rootViewController = rootViewController
+        self.dependencies = dependencies
+    }
+    
+    public init(messageId: Int, rootViewController: UINavigationController, dependencies: Dependencies) {
+        self.viewModel = MessageViewModel(messageId: messageId, dependencies: dependencies as! MessageViewModel.Dependencies)
         self.rootViewController = rootViewController
         self.dependencies = dependencies
     }

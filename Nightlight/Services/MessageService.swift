@@ -39,6 +39,33 @@ public class MessageService {
     }
     
     /**
+     Retrieve a message with a specified id.
+     
+     - parameter id: the unique id of the message to retrieve.
+     - parameter result: the result of retrieving the message.
+     */
+    public func getMessage(with id: Int, result: @escaping (Result<Message, MessageError>) -> Void) {
+        httpClient.get(endpoint: Endpoint.message(with: id)) { networkResult in
+            switch networkResult {
+            case .success(_, let data):
+                guard let messageResponse: Message = try? data.decodeJSON() else {
+                    return result(.failure(.unknown))
+                }
+                
+                result(.success(messageResponse))
+                
+            case .failure(let error):
+                switch error {
+                case HttpError.badRequest:
+                    result(.failure(MessageError.notFound))
+                default:
+                    result(.failure(.unknown))
+                }
+            }
+        }
+    }
+    
+    /**
      Send a message
      
      - parameter message: the message data used to send a message.

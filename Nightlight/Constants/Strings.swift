@@ -63,6 +63,7 @@ public struct Strings {
         static let numPeople = "People to send to (1-5)"
         static let deleteMessage = "Delete Message"
         static let confirmDelete = "Are you sure you want to delete this message? This action is irreversible."
+        static let notFound = "The message could not be found."
     }
     
     struct profile {

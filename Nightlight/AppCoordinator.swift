@@ -267,6 +267,13 @@ extension AppCoordinator: UNUserNotificationCenterDelegate {
     public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         selectViewController(at: 3)
         
+        if let id = response.notification.request.content.userInfo["entityId"] as? Int,
+            let navigationController = tabBarController?.viewControllers?[3] as? UINavigationController {
+            let coordinator = MessageDetailCoordinator(messageId: id, rootViewController: navigationController, dependencies: dependencies)
+            addChild(coordinator)
+            coordinator.start()
+        }
+
         completionHandler()
     }
 }

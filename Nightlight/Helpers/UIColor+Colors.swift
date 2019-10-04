@@ -299,7 +299,7 @@ extension UIColor {
             static let tertiaryLabel = UIColor(red: 206, green: 219, blue: 230, alpha: 30)
             static let quarternaryLabel = UIColor(red: 206, green: 219, blue: 230, alpha: 18)
             
-            static let background = UIColor(red: 40, green: 43, blue: 46, alpha: 100)
+            static let background = UIColor(red: 43, green: 46, blue: 51, alpha: 100)
             static let secondaryBackground = UIColor(red: 58, green: 63, blue: 66, alpha: 100)
             static let tertiaryBackground = UIColor(red: 69, green: 76, blue: 82, alpha: 100)
             static let quarternaryBackground = UIColor(red: 86, green: 95, blue: 102, alpha: 100)
