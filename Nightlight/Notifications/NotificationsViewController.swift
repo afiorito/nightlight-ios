@@ -111,7 +111,7 @@ extension NotificationsViewController: UserNotificationsViewModelUIDelegate {
             notificationsView.tableView.insertRows(at: newIndexPaths, with: .none)
         }
         
-        (self.tabBarController as? NLTabBarController)?.removeBadge()
+        (self.tabBarController as? NLTabBarController)?.removeBadge(at: 3)
     }
 
     public func didBeginFetchingUserNotifications(fromStart: Bool) {

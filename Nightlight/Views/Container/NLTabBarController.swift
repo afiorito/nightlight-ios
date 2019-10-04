@@ -26,30 +26,31 @@ public class NLTabBarController: UITabBarController {
      - parameter index: the index of the tab bar item.
      */
     func addBadge(at index: Int) {
-        removeBadge()
-        
-        let radius: CGFloat = 5
-        let topMargin: CGFloat = 8
+        removeBadge(at: index)
 
-        guard let itemCount = self.tabBar.items?.count else {
+        guard let itemCount = self.tabBar.items?.count, index < itemCount else {
             return
         }
 
-        let itemWidth = self.view.bounds.width / CGFloat(itemCount)
-        let xPos = (itemWidth / 2) * CGFloat(index * 2 + 1)
+        let item = tabBar.subviews[index + 1].subviews.first
 
-        let redDot = BadgeView(frame: CGRect(x: xPos + 4, y: topMargin, width: radius * 2, height: radius * 2))
+        let radius: CGFloat = 5
+        let redDot = BadgeView(frame: CGRect(x: (item?.frame.width ?? 48) - 8, y: 8, width: radius * 2, height: radius * 2))
         redDot.backgroundColor = .urgent
         redDot.layer.cornerRadius = radius
 
-        tabBar.addSubview(redDot)
+        item?.addSubview(redDot)
     }
     
     /**
      Remove an existing badge for the tab bar.
      */
-    func removeBadge() {
-        tabBar.subview(ofType: BadgeView.self)?.removeFromSuperview()
+    func removeBadge(at index: Int) {
+        guard let itemCount = self.tabBar.items?.count, index < itemCount else {
+            return
+        }
+
+        tabBar.subviews[index + 1].subviews.first?.subview(ofType: BadgeView.self)?.removeFromSuperview()
     }
     
     deinit {
