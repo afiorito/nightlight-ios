@@ -22,10 +22,10 @@ extension Date {
             return fullDate
         }
         
-        if day > 1 {
+        if day > 6 {
             return fullDate
         } else if day > 0 {
-            return "1d"
+            return "\(day)d"
         } else if hour > 0 {
             return "\(hour)h"
         } else if minute > 0 {
