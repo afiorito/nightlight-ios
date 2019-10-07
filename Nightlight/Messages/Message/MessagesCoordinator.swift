@@ -26,6 +26,9 @@ public class MessagesCoordinator: NSObject, TabBarCoordinator {
         MessagesViewModel(dependencies: dependencies as! MessagesViewModel.Dependencies, type: type)
     }()
     
+    // A transition for presenting view controllers from below.
+    private let bottomTransition = BottomTransition()
+    
     /// A view controller for displaying a list of messages.
     public lazy var messagesViewController: MessagesViewController = {
         let viewController = MessagesViewController(viewModel: viewModel)
@@ -133,7 +136,7 @@ extension MessagesCoordinator: MessagesNavigationDelegate {
         
         if UIDevice.current.userInterfaceIdiom != .pad {
             contextMenuViewController.modalPresentationStyle = .custom
-            contextMenuViewController.transitioningDelegate = FromBelowTransitioningDelegate.default
+            contextMenuViewController.transitioningDelegate = bottomTransition
         } else {
             contextMenuViewController.modalPresentationStyle = .popover
             
@@ -145,8 +148,7 @@ extension MessagesCoordinator: MessagesNavigationDelegate {
             
             contextMenuViewController.view.layoutIfNeeded()
             let size = contextMenuViewController.view.systemLayoutSizeFitting(CGSize(width: 320, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-            
-            print("SIZE: ", size)
+
             contextMenuViewController.preferredContentSize = size
             contextMenuViewController.popoverPresentationController?.sourceView = sourceView
             contextMenuViewController.popoverPresentationController?.permittedArrowDirections = [.right]

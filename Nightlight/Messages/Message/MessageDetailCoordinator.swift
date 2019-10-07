@@ -18,6 +18,9 @@ public class MessageDetailCoordinator: NSObject, Coordinator {
     /// The view model for managing the state of the view.
     private let viewModel: MessageViewModel
     
+    // A transition for presenting view controllers from below.
+    private let bottomTransition = BottomTransition()
+    
     /// A view controller for showing a message.
     private lazy var messageDetailViewController: MessageDetailViewController = {
         let viewController = MessageDetailViewController(viewModel: viewModel)
@@ -98,7 +101,7 @@ extension MessageDetailCoordinator: MessageNavigationDelegate {
         
         if UIDevice.current.userInterfaceIdiom != .pad {
             contextMenuViewController.modalPresentationStyle = .custom
-            contextMenuViewController.transitioningDelegate = FromBelowTransitioningDelegate.default
+            contextMenuViewController.transitioningDelegate = bottomTransition
         } else {
             contextMenuViewController.modalPresentationStyle = .popover
             

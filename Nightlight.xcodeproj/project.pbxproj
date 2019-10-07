@@ -11,7 +11,6 @@
 		9200EA92233A62D200A0E097 /* CustomPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200EA91233A62D200A0E097 /* CustomPresentable.swift */; };
 		9200EA96233A6AF000A0E097 /* CustomPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200EA95233A6AF000A0E097 /* CustomPresentable+Defaults.swift */; };
 		9200EA98233A6F3800A0E097 /* CustomPresentable+LayoutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200EA97233A6F3800A0E097 /* CustomPresentable+LayoutHelpers.swift */; };
-		9200EA9A233A847B00A0E097 /* DirectionalAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200EA99233A847B00A0E097 /* DirectionalAnimationController.swift */; };
 		9200EA9C233A87D300A0E097 /* CustomPresentation+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200EA9B233A87D300A0E097 /* CustomPresentation+UIViewController.swift */; };
 		9200EAA0233AB0FB00A0E097 /* CustomPresentableFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200EA9F233AB0FB00A0E097 /* CustomPresentableFrame.swift */; };
 		9205E6D022EFCD3D00AFE16B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9205E6CF22EFCD3D00AFE16B /* StoreKit.framework */; };
@@ -251,7 +250,13 @@
 		92F1766222DD4777008AEB82 /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1766122DD4777008AEB82 /* DimmedView.swift */; };
 		92F3F13F2331C2B500177208 /* AuthViewModelUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F3F13E2331C2B500177208 /* AuthViewModelUIDelegate.swift */; };
 		92F3F1432331C31400177208 /* AuthNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F3F1422331C31400177208 /* AuthNavigationDelegate.swift */; };
-		92FD25A3233EB53700A8CEF9 /* FromBelowTransitioniningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FD25A2233EB53700A8CEF9 /* FromBelowTransitioniningDelegate.swift */; };
+		92F7E31E234B64320076D705 /* BottomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E31D234B64320076D705 /* BottomTransition.swift */; };
+		92F7E320234B64450076D705 /* EdgeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E31F234B64450076D705 /* EdgeAnimation.swift */; };
+		92F7E322234B689D0076D705 /* UIViewController+Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E321234B689D0076D705 /* UIViewController+Operation.swift */; };
+		92F7E324234B8E540076D705 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E323234B8E540076D705 /* Math.swift */; };
+		92F7E326234B8F280076D705 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E325234B8F280076D705 /* CGPoint+Extension.swift */; };
+		92F7E328234B8F8E0076D705 /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E327234B8F8E0076D705 /* CGVector+Extension.swift */; };
+		92F7E32A234BAB9E0076D705 /* UIPanGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E329234BAB9E0076D705 /* UIPanGestureRecognizer+Extension.swift */; };
 		92FD25A5233EBA9B00A8CEF9 /* BuyTokensNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FD25A4233EBA9B00A8CEF9 /* BuyTokensNavigationDelegate.swift */; };
 		92FEE425231AAA150089F410 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE424231AAA150089F410 /* UINavigationController+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -278,7 +283,6 @@
 		9200EA91233A62D200A0E097 /* CustomPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentable.swift; sourceTree = "<group>"; };
 		9200EA95233A6AF000A0E097 /* CustomPresentable+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomPresentable+Defaults.swift"; sourceTree = "<group>"; };
 		9200EA97233A6F3800A0E097 /* CustomPresentable+LayoutHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomPresentable+LayoutHelpers.swift"; sourceTree = "<group>"; };
-		9200EA99233A847B00A0E097 /* DirectionalAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalAnimationController.swift; sourceTree = "<group>"; };
 		9200EA9B233A87D300A0E097 /* CustomPresentation+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomPresentation+UIViewController.swift"; sourceTree = "<group>"; };
 		9200EA9F233AB0FB00A0E097 /* CustomPresentableFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentableFrame.swift; sourceTree = "<group>"; };
 		9205E6CF22EFCD3D00AFE16B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -527,7 +531,13 @@
 		92F1766122DD4777008AEB82 /* DimmedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmedView.swift; sourceTree = "<group>"; };
 		92F3F13E2331C2B500177208 /* AuthViewModelUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelUIDelegate.swift; sourceTree = "<group>"; };
 		92F3F1422331C31400177208 /* AuthNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationDelegate.swift; sourceTree = "<group>"; };
-		92FD25A2233EB53700A8CEF9 /* FromBelowTransitioniningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromBelowTransitioniningDelegate.swift; sourceTree = "<group>"; };
+		92F7E31D234B64320076D705 /* BottomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTransition.swift; sourceTree = "<group>"; };
+		92F7E31F234B64450076D705 /* EdgeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeAnimation.swift; sourceTree = "<group>"; };
+		92F7E321234B689D0076D705 /* UIViewController+Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Operation.swift"; sourceTree = "<group>"; };
+		92F7E323234B8E540076D705 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		92F7E325234B8F280076D705 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
+		92F7E327234B8F8E0076D705 /* CGVector+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
+		92F7E329234BAB9E0076D705 /* UIPanGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPanGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
 		92FD25A4233EBA9B00A8CEF9 /* BuyTokensNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyTokensNavigationDelegate.swift; sourceTree = "<group>"; };
 		92FEE424231AAA150089F410 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -562,14 +572,15 @@
 		9200EA8C233A547600A0E097 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				92F7E31C234B63920076D705 /* Animations */,
 				92FD25A1233EB4F600A8CEF9 /* Transitioning Delegates */,
+				92F7E321234B689D0076D705 /* UIViewController+Operation.swift */,
 				9200EA8F233A611E00A0E097 /* BasicPresentationController.swift */,
 				9200EA91233A62D200A0E097 /* CustomPresentable.swift */,
 				9200EA95233A6AF000A0E097 /* CustomPresentable+Defaults.swift */,
 				9200EA97233A6F3800A0E097 /* CustomPresentable+LayoutHelpers.swift */,
 				9200EA9B233A87D300A0E097 /* CustomPresentation+UIViewController.swift */,
 				9200EA9F233AB0FB00A0E097 /* CustomPresentableFrame.swift */,
-				9200EA99233A847B00A0E097 /* DirectionalAnimationController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -773,6 +784,8 @@
 		925763DA22CAD6E30031D616 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				92F7E325234B8F280076D705 /* CGPoint+Extension.swift */,
+				92F7E327234B8F8E0076D705 /* CGVector+Extension.swift */,
 				9276314822D4B07B000D4B8F /* Data+Extension.swift */,
 				9228D6C022D798AB003B03DB /* Date+Extension.swift */,
 				92418D4822D7D422001B6DFB /* DateFormatter+Extension.swift */,
@@ -789,6 +802,7 @@
 				928A10A522D3CDF000FF78FB /* URLSession+Extension.swift */,
 				92748B1722E0B4C500C2957E /* NSRegularExpression+Extension.swift */,
 				925BCA4022F1C81400277D00 /* NSMutableAttributedString+Extension.swift */,
+				92F7E329234BAB9E0076D705 /* UIPanGestureRecognizer+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -805,6 +819,7 @@
 				9269EDE822F7BBA20061D0DB /* iTunesSearchBobdy.swift */,
 				9279AC7E22E6091C0098C4C2 /* JWTDecoder.swift */,
 				9276314C22D4C6FA000D4B8F /* KeychainAccessibility.swift */,
+				92F7E323234B8E540076D705 /* Math.swift */,
 				9237A1DE22CA859600FC9331 /* NLNotification.swift */,
 				925DD4AC22DDEA1800D50A89 /* Toastable.swift */,
 				925BCA3E22F1C53C00277D00 /* TokenImageAttachment.swift */,
@@ -1437,10 +1452,18 @@
 			path = "Context Menu";
 			sourceTree = "<group>";
 		};
+		92F7E31C234B63920076D705 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				92F7E31F234B64450076D705 /* EdgeAnimation.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		92FD25A1233EB4F600A8CEF9 /* Transitioning Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				92FD25A2233EB53700A8CEF9 /* FromBelowTransitioniningDelegate.swift */,
+				92F7E31D234B64320076D705 /* BottomTransition.swift */,
 			);
 			path = "Transitioning Delegates";
 			sourceTree = "<group>";
@@ -1635,6 +1658,7 @@
 				92E960D322F65358005DF33D /* PermissionViewController.swift in Sources */,
 				92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */,
 				92E960D722F70A66005DF33D /* UserDeviceTokenBody.swift in Sources */,
+				92F7E326234B8F280076D705 /* CGPoint+Extension.swift in Sources */,
 				92B302ED22D6292C00CE5668 /* MessagesViewModel.swift in Sources */,
 				928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */,
 				928A10AA22D3D19200FF78FB /* HttpError.swift in Sources */,
@@ -1642,7 +1666,6 @@
 				92B302F522D63E6E00CE5668 /* SearchCoordinator.swift in Sources */,
 				92E960C922F60CEB005DF33D /* SettingsCoordinator.swift in Sources */,
 				9247606F22D910FF001EF6BE /* SimpleTableViewPaginatedDataSource.swift in Sources */,
-				92FD25A3233EB53700A8CEF9 /* FromBelowTransitioniningDelegate.swift in Sources */,
 				92931C2122D2D4FB00C54EB8 /* HttpClient.swift in Sources */,
 				9233618D22C664C4002B7BBA /* Coordinator.swift in Sources */,
 				9228D6C322D7A0D6003B03DB /* MessageService.swift in Sources */,
@@ -1653,6 +1676,7 @@
 				92DC9DEE22F9A54A008A91BC /* UserNotificationViewModel.swift in Sources */,
 				92631045232AEA29009AB5F2 /* Delegating.swift in Sources */,
 				92E9606F22F3BF99005DF33D /* SendAppreciationViewController.swift in Sources */,
+				92F7E324234B8E540076D705 /* Math.swift in Sources */,
 				9237A1EF22CA99E000FC9331 /* Strings.swift in Sources */,
 				92E9608022F46758005DF33D /* BuyTokensViewModel.swift in Sources */,
 				9237A1F422CAA79500FC9331 /* ContainedButton.swift in Sources */,
@@ -1662,10 +1686,10 @@
 				9237A1D522CA74E100FC9331 /* UIColor+Extension.swift in Sources */,
 				9237A1D922CA7DFE00FC9331 /* UIColor+Colors.swift in Sources */,
 				925217E7232FD78800581E80 /* BuyTokensViewModelUIDelegate.swift in Sources */,
+				92F7E31E234B64320076D705 /* BottomTransition.swift in Sources */,
 				925BCA3F22F1C53C00277D00 /* TokenImageAttachment.swift in Sources */,
 				9276314F22D4DDAE000D4B8F /* KeychainKey.swift in Sources */,
 				9237A1DB22CA7EFB00FC9331 /* Themeable.swift in Sources */,
-				9200EA9A233A847B00A0E097 /* DirectionalAnimationController.swift in Sources */,
 				925763D222CABFBB0031D616 /* BaseButton.swift in Sources */,
 				9282180B22D20CB50007FF9B /* KeyboardManager.swift in Sources */,
 				925763ED22CBB4F80031D616 /* FormTextField.swift in Sources */,
@@ -1680,6 +1704,7 @@
 				9213185122D6068200C91D90 /* MessagesViewController.swift in Sources */,
 				9237A1E122CA890D00FC9331 /* UIViewController+ThemeObserving.swift in Sources */,
 				925BE1CE22DE796D0000BEC9 /* PersonContentView.swift in Sources */,
+				92F7E322234B689D0076D705 /* UIViewController+Operation.swift in Sources */,
 				92C7534622DF6A5200A84BD0 /* PersonError.swift in Sources */,
 				92B302F922D6435200CE5668 /* SendMessageViewController.swift in Sources */,
 				92A760EF2331493600007A2F /* Sequence+Extension.swift in Sources */,
@@ -1779,6 +1804,7 @@
 				92F1762022DBC42C008AEB82 /* MessageResponse.swift in Sources */,
 				928EC46422F75B3E0044E235 /* BadgeView.swift in Sources */,
 				92A760EB23313D3300007A2F /* SettingsViewModelUIDelegate.swift in Sources */,
+				92F7E320234B64450076D705 /* EdgeAnimation.swift in Sources */,
 				92E960A922F6085F005DF33D /* NotificationTableViewCell.swift in Sources */,
 				92A760E72331288300007A2F /* ProfileNavigationDelegate.swift in Sources */,
 				9274523A232C03F900D0576D /* MessagesNavigationDelegate.swift in Sources */,
@@ -1796,6 +1822,7 @@
 				92F3F1432331C31400177208 /* AuthNavigationDelegate.swift in Sources */,
 				925BE1C322DE48A20000BEC9 /* LabelTitleView.swift in Sources */,
 				925DD4B522DE04C300D50A89 /* CompactScrollView.swift in Sources */,
+				92F7E32A234BAB9E0076D705 /* UIPanGestureRecognizer+Extension.swift in Sources */,
 				9200EA90233A611E00A0E097 /* BasicPresentationController.swift in Sources */,
 				92A760D9233104A200007A2F /* SendMessageViewModelUIDelegate.swift in Sources */,
 				92DF5D2322D5224B00207D4D /* UserDefaultsKey.swift in Sources */,
@@ -1832,6 +1859,7 @@
 				92DC9DFF22FA3172008A91BC /* UIBarButton+Instances.swift in Sources */,
 				9237A1D322CA559500FC9331 /* UIViewController+Extension.swift in Sources */,
 				92DC9DE422F8EFF7008A91BC /* AppInfoViewModel.swift in Sources */,
+				92F7E328234B8F8E0076D705 /* CGVector+Extension.swift in Sources */,
 				925DD4A922DDE5EA00D50A89 /* EmptyViewable.swift in Sources */,
 				925763E722CB95900031D616 /* AuthView.swift in Sources */,
 				9229DFA222D2BDF200827A03 /* AuthService.swift in Sources */,
@@ -2026,7 +2054,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2050,7 +2078,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2218,7 +2246,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2339,7 +2367,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

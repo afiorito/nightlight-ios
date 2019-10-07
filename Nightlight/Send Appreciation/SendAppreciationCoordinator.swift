@@ -21,6 +21,9 @@ public class SendAppreciationCoordinator: Coordinator {
     /// The view model for managing the state of the view.
     private let viewModel: SendAppreciationViewModel
     
+    // A transition for presenting view controllers from below.
+    private let bottomTransition = BottomTransition()
+    
     /// A view controller for buying tokens.
     private weak var buyTokensViewController: BuyTokensViewController?
     
@@ -48,7 +51,7 @@ public class SendAppreciationCoordinator: Coordinator {
             sendAppreciationViewController.modalPresentationStyle = .formSheet
         } else {
             sendAppreciationViewController.modalPresentationStyle = .custom
-            sendAppreciationViewController.transitioningDelegate = FromBelowTransitioningDelegate.default
+            sendAppreciationViewController.transitioningDelegate = bottomTransition
         }
 
         rootViewController.present(sendAppreciationViewController, animated: true)

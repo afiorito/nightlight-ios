@@ -39,7 +39,7 @@ public class BasicPresentationController: UIPresentationController {
         
         guard presentable?.backgroundAlpha != 0 else { return }
         
-        guard let coordinator = presentedViewController.transitionCoordinator else {
+        guard let coordinator = presentingViewController.transitionCoordinator else {
             backgroundView.dimState = .percent(presentable?.backgroundAlpha ?? 1.0)
             return
         }

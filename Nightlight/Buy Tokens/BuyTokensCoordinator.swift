@@ -20,6 +20,9 @@ public class BuyTokensCoordinator: Coordinator {
         BuyTokensViewModel(dependencies: dependencies as! BuyTokensViewModel.Dependencies)
     }()
     
+    // A transition for presenting view controllers from below.
+    private let bottomTransition = BottomTransition()
+    
     /// A view controller for sending appreciation.
     private lazy var buyTokensViewController: BuyTokensViewController = {
         let buyTokensViewController = BuyTokensViewController(viewModel: viewModel)
@@ -38,8 +41,7 @@ public class BuyTokensCoordinator: Coordinator {
         NLNotification.didFinishTransaction.observe(target: self, selector: #selector(handleFinishedTransaction))
 
         buyTokensViewController.modalPresentationStyle = .custom
-        buyTokensViewController.modalPresentationCapturesStatusBarAppearance = true
-        buyTokensViewController.transitioningDelegate = FromBelowTransitioningDelegate.default
+        buyTokensViewController.transitioningDelegate = bottomTransition
         
         viewModel.fetchProducts { [weak self] in
             guard let self = self else { return }

@@ -26,6 +26,9 @@ public class SettingsCoordinator: NSObject, Coordinator {
         SettingsViewModel(dependencies: dependencies as! SettingsViewModel.Dependencies)
     }()
     
+    // A transition for presenting view controllers from below.
+    private let bottomTransition = BottomTransition()
+    
     /// A view controller for managing settings.
     public lazy var settingsViewController: SettingsViewController = {
         let viewController = SettingsViewController(viewModel: viewModel)
@@ -64,7 +67,7 @@ public class SettingsCoordinator: NSObject, Coordinator {
         let appInfoViewController = AppInfoViewController(viewModel: AppInfoViewModel())
         
         appInfoViewController.modalPresentationStyle = .custom
-        appInfoViewController.transitioningDelegate = FromBelowTransitioningDelegate.default
+        appInfoViewController.transitioningDelegate = bottomTransition
         
         settingsViewController.present(appInfoViewController, animated: true)
     }
