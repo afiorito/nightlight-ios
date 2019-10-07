@@ -68,6 +68,14 @@ public class SendMessageViewController: UITableViewController {
         }
     }
     
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let centerX = anonymousCell.accessoryView?.center.x {
+            numberOfPeopleCell.accessoryView?.center.x = centerX
+        }
+    }
+    
     // MARK: - Gesture Recognizer Handlers.
     
     @objc private func cancelTapped() {

@@ -42,7 +42,7 @@ extension MessageTitleCell: Themeable {
     func updateColors(for theme: Theme) {
         backgroundColor = .background(for: theme)
         textField.tintColor = .label(for: theme)
-        textField.attributedPlaceholder = NSAttributedString(string: "Title", attributes: [.foregroundColor: UIColor.placeholder(for: theme)])
+        textField.attributedPlaceholder = NSAttributedString(string: "Your title goes here.", attributes: [.foregroundColor: UIColor.placeholder(for: theme)])
         textField.textColor = .label(for: theme)
     }
 }

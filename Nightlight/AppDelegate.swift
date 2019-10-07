@@ -10,6 +10,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         coordinator = AppCoordinator(application: application, dependencies: dependencies)
         coordinator?.start()
+        
+        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            coordinator?.handleShortcutItem(shortcutItem)
+            return false
+        }
 
         return true
     }
@@ -27,6 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         coordinator?.addNotificationBadge()
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        completionHandler(coordinator?.handleShortcutItem(shortcutItem) ?? false)
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

@@ -257,6 +257,7 @@
 		92F7E326234B8F280076D705 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E325234B8F280076D705 /* CGPoint+Extension.swift */; };
 		92F7E328234B8F8E0076D705 /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E327234B8F8E0076D705 /* CGVector+Extension.swift */; };
 		92F7E32A234BAB9E0076D705 /* UIPanGestureRecognizer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E329234BAB9E0076D705 /* UIPanGestureRecognizer+Extension.swift */; };
+		92F7E32C234BC05A0076D705 /* ShortcutIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E32B234BC05A0076D705 /* ShortcutIdentifier.swift */; };
 		92FD25A5233EBA9B00A8CEF9 /* BuyTokensNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FD25A4233EBA9B00A8CEF9 /* BuyTokensNavigationDelegate.swift */; };
 		92FEE425231AAA150089F410 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE424231AAA150089F410 /* UINavigationController+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -538,6 +539,7 @@
 		92F7E325234B8F280076D705 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		92F7E327234B8F8E0076D705 /* CGVector+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
 		92F7E329234BAB9E0076D705 /* UIPanGestureRecognizer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPanGestureRecognizer+Extension.swift"; sourceTree = "<group>"; };
+		92F7E32B234BC05A0076D705 /* ShortcutIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutIdentifier.swift; sourceTree = "<group>"; };
 		92FD25A4233EBA9B00A8CEF9 /* BuyTokensNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyTokensNavigationDelegate.swift; sourceTree = "<group>"; };
 		92FEE424231AAA150089F410 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1009,6 +1011,7 @@
 				92E960C622F60C90005DF33D /* ExternalPage.swift */,
 				9205E6D122F0690200AFE16B /* IAPIdentifier.swift */,
 				9276314E22D4DDAE000D4B8F /* KeychainKey.swift */,
+				92F7E32B234BC05A0076D705 /* ShortcutIdentifier.swift */,
 				9237A1EE22CA99E000FC9331 /* Strings.swift */,
 				92DF5D2222D5224B00207D4D /* UserDefaultsKey.swift */,
 			);
@@ -1871,6 +1874,7 @@
 				928A10A822D3CFBF00FF78FB /* NetworkError.swift in Sources */,
 				9228D6B422D763A2003B03DB /* MessageTableViewCell.swift in Sources */,
 				9279ACCB22E7DB3E0098C4C2 /* OptionsTableViewControllerDelegate.swift in Sources */,
+				92F7E32C234BC05A0076D705 /* ShortcutIdentifier.swift in Sources */,
 				928A10B122D3E3EA00FF78FB /* SignUpViewModel.swift in Sources */,
 				925217EF23301A4A00581E80 /* SendAppreciationCoordinatorNavigationDelegate.swift in Sources */,
 				9279ACBF22E7CA060098C4C2 /* BasicOptionTableViewCell.swift in Sources */,

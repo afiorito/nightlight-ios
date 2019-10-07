@@ -9,7 +9,7 @@ public class NumPeopleCell: UITableViewCell {
     /// A text field for inputting the number of people.
     public let textField: UITextField = {
         let textField = UITextField()
-        textField.text = "100"
+        textField.text = "10"
         textField.sizeToFit()
         textField.keyboardType = .numberPad
         textField.font = .primary17ptMedium
@@ -18,17 +18,16 @@ public class NumPeopleCell: UITableViewCell {
     }()
     
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
         
         self.textLabel?.text = Strings.message.numPeople
         textLabel?.font = .primary17ptNormal
-        textField.text = "1"
         self.accessoryView = textField
         textField.delegate = self
         textField.frame.size.height = contentView.frame.height
-        textField.frame.size.width = UISwitch().intrinsicContentSize.width
+        detailTextLabel?.text = "Number of random message recipients."
         
         updateColors(for: theme)
     }

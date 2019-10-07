@@ -60,6 +60,24 @@ public class AppCoordinator: NSObject, Coordinator {
         tabBarController?.addBadge(at: 3)
     }
     
+    /**
+     Handles a shortcut item from the application.
+     
+     - parameter shortcutItem: The shortcut item to handle.
+     */
+    @discardableResult
+    public func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
+        guard let shortcutIdentifier = ShortcutIdentifier(identifier: shortcutItem.type) else { return false }
+        
+        switch shortcutIdentifier {
+        case .RecentMessages: tabBarController?.selectedIndex = 0
+        case .HelpfulPeople: tabBarController?.selectedIndex = 1
+        case .NewMessage: showSendMessageViewController(animated: false)
+        }
+        
+        return true
+    }
+    
     public func start() {
         dependencies.styleManager.theme = dependencies.userDefaultsManager.theme
         
@@ -210,6 +228,19 @@ public class AppCoordinator: NSObject, Coordinator {
             UIView.setAnimationsEnabled(true)
         })
     }
+    
+    /**
+     Present the send message view controller.
+     
+     - parameter animated: A boolean denoting if the send message view controller is presented with animation.
+     */
+    private func showSendMessageViewController(animated: Bool) {
+        let coordinator = SendMessageCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies)
+        addChild(coordinator)
+        coordinator.start()
+        
+        tabBarController?.present(coordinator.rootViewController, animated: animated)
+    }
 
 }
 
@@ -227,12 +258,7 @@ extension AppCoordinator: UITabBarControllerDelegate {
     public func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
         if viewController.tabBarItem.title == Strings.message.postMessageTabTitle {
-            let coordinator = SendMessageCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies)
-            addChild(coordinator)
-            coordinator.start()
-            
-            tabBarController.present(coordinator.rootViewController, animated: true)
-            
+            showSendMessageViewController(animated: true)
             return false
         }
         

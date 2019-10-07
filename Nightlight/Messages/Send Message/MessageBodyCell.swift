@@ -2,6 +2,26 @@ import UIKit
 
 /// The table view cell for entering the body of a message.
 public class MessageBodyCell: UITableViewCell {
+    /// Random adjectives for the placeholder text.
+    private let adjectives = [
+        "kind",
+        "motivational",
+        "helpful",
+        "wonderful",
+        "inspiring",
+        "powerful",
+        "important",
+        "insightful",
+        "impactful",
+        "beautiful",
+        "great"
+    ]
+    
+    /// The adjective displayed by the placeholder text.
+    private var adjective: String {
+        return adjectives[Int.random(in: 0..<adjectives.count)]
+    }
+    
     /// A text view for inputting the message body.
     public let textView: TextView = {
         let textView = TextView()
@@ -47,6 +67,6 @@ extension MessageBodyCell: Themeable {
         textView.backgroundColor = .clear
         textView.tintColor = .label(for: theme)
         textView.textColor = .label(for: theme)
-        textView.attributedPlaceholder = NSAttributedString(string: "Body", attributes: [.foregroundColor: UIColor.placeholder(for: theme)])
+        textView.attributedPlaceholder = NSAttributedString(string: "Say something \(adjective)...", attributes: [.foregroundColor: UIColor.placeholder(for: theme)])
     }
 }
