@@ -15,7 +15,7 @@ public struct Strings {
     struct onboard {
         static let pages = [
             (title: "Spread positivity", subtitle: "The world could use more of it.", image: "onboard_spread"),
-            (title: "Make a difference", subtitle: "Send helpful, kind or motivational messages to others.", image: "onboard_difference"),
+            (title: "Make a difference", subtitle: "Every message you send is received by up to 5 random people. You can make someone's day better by sending a message.", image: "onboard_difference"),
             (title: "Show love and appreciation", subtitle: "Celebrate people who are trying to make an impact.", image: "onboard_send")
         ]
         
@@ -101,11 +101,11 @@ public struct Strings {
             let prefix: String
             
             if count == 1 {
-                prefix = "Only \(count) person has"
+                prefix = "Only \(count) person"
             } else if (2...50) ~= count {
-                prefix = "Only \(count) people have"
+                prefix = "Only \(count) people"
             } else {
-                prefix = "\(count) people have"
+                prefix = "\(count) people"
             }
             
             return "\(prefix) rated this version."

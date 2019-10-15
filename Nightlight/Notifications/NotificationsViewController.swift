@@ -42,7 +42,7 @@ public class NotificationsViewController: UIViewController {
         notificationsView.tableView.dataSource = dataSource
         notificationsView.tableView.delegate = self
         notificationsView.tableView.prefetchDataSource = dataSource
-        notificationsView.tableView.refreshControl = refreshControl
+        notificationsView.tableView.addSubview(refreshControl)
         
         dataSource.prefetchCallback = { [weak self] in
             self?.viewModel.fetchUserNotifications(fromStart: false)
@@ -105,7 +105,7 @@ extension NotificationsViewController: UserNotificationsViewModelUIDelegate {
         
         if fromStart {
             dataSource.rowCount = count
-            notificationsView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            notificationsView.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
         } else {
             let newIndexPaths = dataSource.incrementCount(count)
             notificationsView.tableView.insertRows(at: newIndexPaths, with: .none)
@@ -115,13 +115,13 @@ extension NotificationsViewController: UserNotificationsViewModelUIDelegate {
     }
 
     public func didBeginFetchingUserNotifications(fromStart: Bool) {
-        if fromStart && !refreshControl.isRefreshing && dataSource.isEmpty {
-            notificationsView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)  // fix refresh control tint bug.
-            refreshControl.beginRefreshing()
+        if !refreshControl.isRefreshing {
+            notificationsView.tableView.isLoading = true
         }
     }
     
     public func didEndFetchingUserNotifications() {
+        notificationsView.tableView.isLoading = false
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }

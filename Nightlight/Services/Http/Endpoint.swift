@@ -47,8 +47,7 @@ public struct Endpoint {
             preconditionFailure("Api version needs to be specified.")
         }
 
-        let prefix = "/api/v\(apiVersion)"
-        return "\(isAuthorized ? prefix : "")\(path)"
+        return "/v\(apiVersion)\(path)"
     }
 }
 
@@ -168,7 +167,7 @@ extension Endpoint {
 
 extension Endpoint {
     static var itunesRatingCount: Endpoint {
-        return Endpoint(path: "https://itunes.apple.com/lookup", queryItems: [URLQueryItem(name: "id", value: "1474711114")],
+        return Endpoint(path: "https://itunes.apple.com/ca/lookup", queryItems: [URLQueryItem(name: "id", value: "1474711114")],
                         isAuthorized: false, isExternal: true)
     }
 }

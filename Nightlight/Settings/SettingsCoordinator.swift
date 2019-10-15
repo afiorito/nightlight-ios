@@ -30,8 +30,8 @@ public class SettingsCoordinator: NSObject, Coordinator {
     private let bottomTransition = BottomTransition()
     
     /// A view controller for managing settings.
-    public lazy var settingsViewController: SettingsViewController = {
-        let viewController = SettingsViewController(viewModel: viewModel)
+    public lazy var settingsViewController: MainSettingsViewController = {
+        let viewController = MainSettingsViewController(viewModel: viewModel)
         viewController.navigationItem.leftBarButtonItem = simulatedBackButton
         viewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         viewController.title = Strings.setting.settingTitle
@@ -92,13 +92,21 @@ extension SettingsCoordinator: SettingsNavigationDelegate {
     }
     
     public func changeSetting<E: RawRepresentable & CaseIterable>(_ type: E.Type, currentOption: E) where E.RawValue == String {
-        let optionsViewController = OptionsTableViewController<E>(currentOption: currentOption)
-        // split settings option by uppercase letters.
-        optionsViewController.title = "\(type)".splitBefore(separator: { $0.isUppercase }).map { String($0) }.joined(separator: " ")
-        optionsViewController.delegate = self
+        let viewModel = OptionsViewModel<E>(currentOption: currentOption)
+        let optionsViewController = OptionsTableViewController<E>(viewModel: viewModel)
+
+        viewModel.navigationDelegate = self
         optionsViewController.navigationItem.leftBarButtonItem = simulatedBackButton
         
         settingsViewController.navigationController?.pushViewController(optionsViewController, animated: true)
+    }
+    
+    public func didChangeTheme(to theme: Theme) {
+        viewModel.updateTheme(theme)
+    }
+    
+    public func didChangeMessageDefault(to default: MessageDefault) {
+        viewModel.updateMessageDefault(`default`)
     }
     
     public func showPage(_ page: ExternalPage) {
@@ -141,21 +149,6 @@ extension SettingsCoordinator: BuyTokensCoordinatorNavigationDelegate {
         case .cancelled: viewModel.didCancelPurchase()
         }
     }
-}
-
-// MARK: - OptionsTableViewController Delegate
-
-extension SettingsCoordinator: OptionsTableViewControllerDelegate {
-    public func optionsTableViewController<E: CaseIterable & RawRepresentable>(_ optionsTableViewController: OptionsTableViewController<E>, didSelect option: E) where E.RawValue == String {
-        switch E.self {
-        case is Theme.Type:
-            settingsViewController.didChangeTheme(to: option as! Theme)
-        case is MessageDefault.Type:
-            settingsViewController.didChangeMessageDefault(to: option as! MessageDefault)
-        default: break
-        }
-    }
-    
 }
 
 // MARK: - WebContentViewController Delegate

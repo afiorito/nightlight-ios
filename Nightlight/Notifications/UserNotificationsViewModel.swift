@@ -53,8 +53,6 @@ public class UserNotificationsViewModel {
             guard let self = self else { return }
             self.isFetchInProgress = false
             
-            DispatchQueue.main.async { self.uiDelegate?.didEndFetchingUserNotifications() }
-            
             switch notificationResult {
             case .success(let notificationResponse):
                 self.startPage = notificationResponse.metadata.start
@@ -67,6 +65,8 @@ public class UserNotificationsViewModel {
             case .failure(let error):
                 DispatchQueue.main.async { self.uiDelegate?.didFailToFetchUserNotifications(with: error) }
             }
+            
+            DispatchQueue.main.async { self.uiDelegate?.didEndFetchingUserNotifications() }
         }
     }
     

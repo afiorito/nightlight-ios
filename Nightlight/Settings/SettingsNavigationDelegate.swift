@@ -19,6 +19,20 @@ public protocol SettingsNavigationDelegate: class {
     func changeSetting<E: RawRepresentable & CaseIterable>(_ type: E.Type, currentOption: E) where E.RawValue == String
     
     /**
+     Tells the delegate the theme changed.
+     
+     - parameter theme: The updated theme.
+     */
+    func didChangeTheme(to theme: Theme)
+    
+    /**
+     Tells the delegate the message default changed.
+     
+     - parameter default: The updated message default.
+     */
+    func didChangeMessageDefault(to default: MessageDefault)
+    
+    /**
      Tells the delegate to navigate to rate the application.
      */
     func rateApplication()

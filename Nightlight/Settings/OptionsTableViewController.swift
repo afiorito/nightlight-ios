@@ -2,11 +2,9 @@ import UIKit
 
 /// A view controller for managing a list of setting options.
 public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UITableViewController where E.RawValue == String {
-    /// The delegate for managing UI actions.
-    public weak var delegate: OptionsTableViewControllerDelegate?
     
-    /// The actively selected option.
-    public var currentOption: E
+    /// The viewModel for handling state.
+    private let viewModel: OptionsViewModel<E>
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -15,9 +13,11 @@ public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UIT
         tableView.register(BasicOptionTableViewCell.self, forCellReuseIdentifier: BasicOptionTableViewCell.className)
     }
     
-    public init(currentOption: E) {
-        self.currentOption = currentOption
+    public init(viewModel: OptionsViewModel<E>) {
+        self.viewModel = viewModel
         super.init(style: .grouped)
+        
+        title = viewModel.title
         
         updateColors(for: theme)
     }
@@ -33,28 +33,23 @@ public class OptionsTableViewController<E: RawRepresentable & CaseIterable>: UIT
     }
 
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return E.allCases.count
+        return viewModel.optionCount
     }
 
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BasicOptionTableViewCell.className, for: indexPath) as! BasicOptionTableViewCell
 
-        let option = E.allCases[E.allCases.index(E.allCases.startIndex, offsetBy: indexPath.row)]
+        let option = viewModel.option(at: indexPath)
         
         cell.title = option.rawValue.capitalizingFirstLetter()
-        cell.isCurrentOption = option == currentOption
+        cell.isCurrentOption = option == viewModel.currentOption
         cell.updateColors(for: theme)
 
         return cell
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let option = E.allCases[E.allCases.index(E.allCases.startIndex, offsetBy: indexPath.row)]
-
-        currentOption = option
-        
-        delegate?.optionsTableViewController(self, didSelect: option)
-
+        viewModel.selectOption(at: indexPath)
         tableView.reloadSections(IndexSet(integer: 0), with: .fade)
     }
     

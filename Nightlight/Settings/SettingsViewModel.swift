@@ -56,6 +56,7 @@ public class SettingsViewModel {
      */
     public func updateMessageDefault(_ default: MessageDefault) {
         dependencies.userDefaultsManager.messageDefault = `default`
+        uiDelegate?.updateView()
     }
     
     /**
@@ -69,7 +70,7 @@ public class SettingsViewModel {
             case .success(_, let data):
                 do {
                     let itunesSearchBody: iTunesSearchBody = try data.decodeJSON()
-                    self?.userRatingCountForCurrentVersion = itunesSearchBody.userRatingCountForCurrentVersion ?? 0
+                    self?.userRatingCountForCurrentVersion = itunesSearchBody.results.first?.userRatingCountForCurrentVersion ?? 0
                     DispatchQueue.main.async { self?.uiDelegate?.didFetchRatings() }
                 } catch let error {
                     DispatchQueue.main.async { self?.uiDelegate?.didFailToFetchRatings(with: error) }

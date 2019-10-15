@@ -26,4 +26,9 @@ public protocol SettingsViewModelUIDelegate: class {
      Tells the delegate to update its tokens count.
      */
     func updateTokens()
+    
+    /**
+     Tells the delegate to update its view.
+     */
+    func updateView()
 }

@@ -59,8 +59,6 @@ public class MessagesViewModel {
         dependencies.messageService.getMessages(type: self.type, start: startPage, end: endPage) { [weak self] messageResult in
             guard let self = self else { return }
             self.isFetchInProgress = false
-           
-            DispatchQueue.main.async { self.uiDelegate?.didEndFetchingMessages() }
             
             switch messageResult {
             case .success(let messageResponse):
@@ -74,6 +72,8 @@ public class MessagesViewModel {
             case .failure(let error):
                 DispatchQueue.main.async { self.uiDelegate?.didFailToFetchMessages(with: error) }
             }
+            
+            DispatchQueue.main.async { self.uiDelegate?.didEndFetchingMessages() }
         }
     }
     

@@ -95,6 +95,7 @@ public class SendMessageViewController: UITableViewController {
 
 extension SendMessageViewController: SendMessageViewModelUIDelegate {
     public func didFailToSend(with error: MessageError) {
+        navigationItem.rightBarButtonItem?.isEnabled = true
         showToast(error.message, severity: .urgent)
     }
     

@@ -34,7 +34,7 @@ public class HelpfulPeopleViewController: UIViewController {
         
         peopleView.tableView.delegate = self
         peopleView.tableView.dataSource = dataSource
-        peopleView.tableView.refreshControl = refreshControl
+        peopleView.tableView.addSubview(refreshControl) // assigning tableView.refreshControl causes jitterying
         peopleView.tableView.register(HelpfulPeopleHeader.self, forHeaderFooterViewReuseIdentifier: HelpfulPeopleHeader.className)
         
         updateColors(for: theme)
@@ -62,12 +62,12 @@ public class HelpfulPeopleViewController: UIViewController {
 extension HelpfulPeopleViewController: HelpfulPeopleViewModelUIDelegate {
     public func didBeginFetchingHelpfulPeople() {
         if !refreshControl.isRefreshing {
-            peopleView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)  // fix refresh control tint bug.
-            refreshControl.beginRefreshing()
+            peopleView.tableView.isLoading = true
         }
     }
     
     public func didEndFetchingHelpfulPeople() {
+        peopleView.tableView.isLoading = false
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }
@@ -85,7 +85,7 @@ extension HelpfulPeopleViewController: HelpfulPeopleViewModelUIDelegate {
         dataSource.emptyViewDescription = .none
 
         dataSource.rowCount = count
-        peopleView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        peopleView.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
     }
 
 }

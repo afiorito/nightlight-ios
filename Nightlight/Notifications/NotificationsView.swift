@@ -8,7 +8,7 @@ public class NotificationsView: UIView {
         tableView.tableFooterView = UIView()
         tableView.register(NotificationTableViewCell.self, forCellReuseIdentifier: NotificationTableViewCell.className)
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 50
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             tableView.cellLayoutMarginsFollowReadableWidth = true

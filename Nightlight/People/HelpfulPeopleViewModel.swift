@@ -29,8 +29,6 @@ public class HelpfulPeopleViewModel {
         uiDelegate?.didBeginFetchingHelpfulPeople()
 
         dependencies.peopleService.getHelpfulPeople { [weak self] peopleResult in
-            DispatchQueue.main.async { self?.uiDelegate?.didEndFetchingHelpfulPeople() }
-
             switch peopleResult {
             case .success(let people):
                 self?.people = people
@@ -39,6 +37,8 @@ public class HelpfulPeopleViewModel {
             case .failure(let error):
                 DispatchQueue.main.async { self?.uiDelegate?.didFailToFetchHelpfulPeople(with: error) }
             }
+            
+            DispatchQueue.main.async { self?.uiDelegate?.didEndFetchingHelpfulPeople() }
         }
     }
     

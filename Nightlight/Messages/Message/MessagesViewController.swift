@@ -44,7 +44,7 @@ public class MessagesViewController: UIViewController {
         messagesView.tableView.delegate = self
         messagesView.tableView.dataSource = dataSource
         messagesView.tableView.prefetchDataSource = dataSource
-        messagesView.tableView.refreshControl = refreshControl
+        messagesView.tableView.addSubview(refreshControl)
         
         dataSource.prefetchCallback = { [weak self] in
             self?.viewModel.fetchMessages(fromStart: false)
@@ -128,7 +128,7 @@ extension MessagesViewController: MessagesViewModelUIDelegate {
         
         if fromStart {
             dataSource.rowCount = count
-            messagesView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            messagesView.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
         } else {
             let newIndexPaths = dataSource.incrementCount(count)
             messagesView.tableView.insertRows(at: newIndexPaths, with: .none)
@@ -149,13 +149,13 @@ extension MessagesViewController: MessagesViewModelUIDelegate {
     }
     
     public func didBeginFetchingMessages(fromStart: Bool) {
-        if fromStart && !refreshControl.isRefreshing {
-            messagesView.tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)  // fix refresh control tint bug.
-            refreshControl.beginRefreshing()
+        if !refreshControl.isRefreshing {
+            messagesView.tableView.isLoading = true
         }
     }
     
     public func didEndFetchingMessages() {
+        messagesView.tableView.isLoading = false
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }

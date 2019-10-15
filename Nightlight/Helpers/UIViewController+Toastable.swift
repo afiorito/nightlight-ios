@@ -2,11 +2,12 @@ import UIKit
 
 extension UIViewController: Toastable {    
     public var toastView: ToastView? {
+        let view: UIView = nextParent()?.view ?? self.view
         return view.subview(ofType: ToastView.self)
     }
     
     @discardableResult
-    public func showToast(_ message: String, severity: ToastView.Severity, duration: TimeInterval = 6.0) -> ToastView {
+    public func showToast(_ message: String, severity: ToastView.Severity, duration: TimeInterval = 5.0) -> ToastView {
         if let toast = toastView {
             toast.removeFromSuperview()
         }
