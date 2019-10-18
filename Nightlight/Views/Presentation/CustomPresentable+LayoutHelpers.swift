@@ -20,7 +20,7 @@ extension CustomPresentable where Self: UIViewController {
     
     /// The target frame of the presented view.
     var targetFrame: CGRect {
-        let targetSize = CGSize(width: width, height: height)
+        var targetSize = CGSize(width: width, height: height)
         
         let targetX: CGFloat
         switch frame.origin.x {
@@ -32,7 +32,10 @@ extension CustomPresentable where Self: UIViewController {
         let targetY: CGFloat
         switch frame.origin.y {
         case .top: targetY = insets.top + (ignoresSafeAreaInsets ? 0 : safeAreaInsets.top)
-        case .bottom: targetY = containerSize.height - targetSize.height - insets.bottom - (ignoresSafeAreaInsets ? 0 : safeAreaInsets.bottom)
+            targetSize.height += safeAreaInsets.top
+        case .bottom:
+            targetY = containerSize.height - targetSize.height - insets.bottom - (ignoresSafeAreaInsets ? 0 : safeAreaInsets.bottom)
+            targetSize.height += safeAreaInsets.bottom
         case .center: targetY = (containerSize.height - targetSize.height) / 2
         }
 

@@ -90,7 +90,7 @@ public class SendAppreciationView: UIView {
             container.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
             container.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             container.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            container.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
+            container.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30),
             appreciationImageView.widthAnchor.constraint(equalToConstant: 50),
             appreciationImageView.heightAnchor.constraint(equalToConstant: 50),
             actionButton.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 1.0)

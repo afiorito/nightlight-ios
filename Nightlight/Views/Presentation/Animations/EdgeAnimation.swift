@@ -356,7 +356,7 @@ extension EdgeAnimation: UIViewControllerAnimatedTransitioning {
         transitionContext.containerView.addSubview(dummyView)
         
         let animator = UIViewPropertyAnimator(duration: propertyAnimator().duration, curve: .easeOut, animations: {
-            dummyView.alpha = 0.5
+            dummyView.alpha = 0.0
         })
         
         animator.addCompletion { position in

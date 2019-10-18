@@ -38,12 +38,12 @@ public class SendMessageViewModel {
     public func sendMessage(title: String?, body: String?, numPeople: String?, isAnonymous: Bool) {
         uiDelegate?.didBeginSending()
 
-        guard let title = title, !title.isEmpty else {
+        guard let title = title?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), !title.isEmpty else {
             uiDelegate?.didFailToSend(with: .invalidTitle)
             return
         }
         
-        guard let body = body, !body.isEmpty else {
+        guard let body = body?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), !body.isEmpty else {
             uiDelegate?.didFailToSend(with: .invalidBody)
             return
         }
