@@ -45,6 +45,11 @@ public protocol SettingsNavigationDelegate: class {
     func showPage(_ page: ExternalPage)
     
     /**
+     Tells the delegate to show the account settings.
+     */
+    func showAccountSettings()
+    
+    /**
      Tells the delegate to sign out the user.
      */
     func signOut()

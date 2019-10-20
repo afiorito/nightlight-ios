@@ -10,6 +10,7 @@ public struct Strings {
     static let couldNotLoadProducts = "Could not load products."
     static let signOut = "Sign Out"
     static let nightlightTokens = "Nightlight Tokens"
+    static let emailChangedSuccessfully = "Email changed successfully."
     
     /// information for describing initial onboarding screens.
     struct onboard {
@@ -41,6 +42,7 @@ public struct Strings {
         static let unknown = "An unknown error occured."
         static let somethingWrong = "Something Went Wrong."
         static let mailNotConfigured = "Mail is not configured on this device."
+        static let couldNotLoadAccount = "Could not load account information."
     }
 
     struct message {
@@ -89,7 +91,8 @@ public struct Strings {
     }
     
     struct setting {
-        static let settingTitle = "Settings"
+        static let settingsTitle = "Settings"
+        static let accountSettingsTitle = "Account Settings"
         static let theme = "Theme"
         static let sendMessage = "Send Message As"
         static let sendFeedback = "Send Feedback"
@@ -97,6 +100,11 @@ public struct Strings {
         static let about = "About"
         static let privacyPolicy = "Privacy Policy"
         static let termsOfUse = "Terms of Use"
+        static let account = "Account"
+        static let email = "Email"
+        static let changePassword = "Change Password"
+        static let changeEmail = "Change Email"
+        static let confirmNewEmail = "Confirm New Email"
         static func ratingCount(_ count: Int) -> String {
             let prefix: String
             

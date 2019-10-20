@@ -54,20 +54,19 @@ public struct Endpoint {
 // MARK: - Authentication Endpoints
 
 extension Endpoint {
-    /// An endpoint for signing up a user
+
     static var signUp: Endpoint {
-        return Endpoint(path: "/signup", isAuthorized: false)
+        return Endpoint(path: "/auth/signup", isAuthorized: false)
     }
     
-    /// An endpoint for signing in a user
     static var signIn: Endpoint {
-        return Endpoint(path: "/signin", isAuthorized: false)
+        return Endpoint(path: "/auth/signin", isAuthorized: false)
     }
     
     static func refresh(token: String) -> Endpoint {
         let queryItems = [URLQueryItem(name: "refresh_token", value: token)]
         
-        return Endpoint(path: "/refresh", queryItems: queryItems, isAuthorized: false)
+        return Endpoint(path: "/auth/refresh", queryItems: queryItems, isAuthorized: false)
     }
 }
 
@@ -142,6 +141,10 @@ extension Endpoint {
     
     static var userNotificationDeviceToken: Endpoint {
         return Endpoint(path: "/user/notification/deviceToken")
+    }
+    
+    static var changeEmail: Endpoint {
+        return Endpoint(path: "/user/email")
     }
 }
 

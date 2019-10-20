@@ -1,6 +1,7 @@
 import UIKit
 
-public class SettingsViewController: UIViewController, Themeable {
+/// A base class for view controllers displaying settings.
+open class SettingsViewController: UIViewController, Themeable {
     
     public var sections = [SettingsSection]()
     
@@ -14,6 +15,7 @@ public class SettingsViewController: UIViewController, Themeable {
         super.viewDidLoad()
         
         addDidChangeThemeObserver()
+        registerCellClasses()
         
         tableView.dataSource = self
         tableView.delegate = self

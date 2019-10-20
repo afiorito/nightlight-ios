@@ -56,12 +56,20 @@ public class ProfileViewModel {
     
     /// The total love a person has received.
     var totalLove: Int {
-        return personViewModel?.totalLove ?? 0
+        if let totalLove = personViewModel?.totalLove {
+            return totalLove
+        }
+        
+        return (try? dependencies.keychainManager.integer(for: KeychainKey.totalLove.rawValue)) ?? 0
     }
     
     /// The total appreciation a person has received.
     var totalAppreciation: Int {
-        return personViewModel?.totalAppreciation ?? 0
+        if let totalAppreciation = personViewModel?.totalAppreciation {
+            return totalAppreciation
+        }
+        
+        return (try? dependencies.keychainManager.integer(for: KeychainKey.totalAppreciation.rawValue)) ?? 0
     }
     
     /**

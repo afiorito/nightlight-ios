@@ -4,4 +4,7 @@ public enum KeychainKey: String {
     case tokens
     case username
     case userCreatedAt
+    case totalLove
+    case totalAppreciation
+    case email
 }

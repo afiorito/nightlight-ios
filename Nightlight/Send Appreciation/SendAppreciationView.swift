@@ -4,16 +4,26 @@ import UIKit
 public class SendAppreciationView: UIView {
 
     /// A callback for when sending appreciation is cancelled.
-    public var cancelAction: (() -> Void)?
+    public var cancelAction: (() -> Void)? {
+        didSet {
+            headerView.cancelAction = cancelAction
+        }
+    }
     
     /// The number of tokens a person has.
-    public var numTokens: Int {
-        get { return headerView.numTokens }
-        set { headerView.numTokens = newValue }
+    public var numTokens: Int = 0 {
+        didSet {
+            updateSubtitleLabel()
+        }
     }
     
     /// A view for displaying send appreciation header.
-    public let headerView = SendAppreciationHeaderView()
+    public let headerView: HeaderBarView = {
+        let headerView = HeaderBarView()
+        headerView.titleLabel.text = Strings.sendAppreciation
+        
+        return headerView
+    }()
     
     /// A view for displaying the appreciation icon.
     private let appreciationImageView: UIImageView = {
@@ -69,9 +79,8 @@ public class SendAppreciationView: UIView {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         
-        headerView.cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
-        
         prepareSubviews()
+        updateSubtitleLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -84,7 +93,7 @@ public class SendAppreciationView: UIView {
         addSubviews([headerView, container])
         
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            headerView.topAnchor.constraint(equalTo: topAnchor),
             headerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             container.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
@@ -96,11 +105,22 @@ public class SendAppreciationView: UIView {
             actionButton.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 1.0)
         ])
     }
-
-    // MARK: - Gesture Recognizer Handlers
     
-    @objc private func cancelTapped() {
-        cancelAction?()
+    /**
+     Update the subtitle label to display the number of tokens with proper formatting.
+     */
+    private func updateSubtitleLabel() {
+        let string = NSMutableAttributedString(string: "\(Strings.tokenCount): ")
+        let font = UIFont.secondary14ptNormal
+        
+        let imageAttachment = TokenImageAttachment(font: font)
+        imageAttachment.image = UIImage.glyph.token
+        
+        string.appendTokenAttachment(imageAttachment)
+        string.append(NSAttributedString(string: "\(numTokens)"))
+        
+        headerView.subtitleLabel.font = font
+        headerView.subtitleLabel.attributedText = string
     }
     
 }

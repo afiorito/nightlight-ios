@@ -93,6 +93,12 @@ public class PeopleService {
                 try? self?.keychainManager.set(person.tokens, forKey: KeychainKey.tokens.rawValue)
                 try? self?.keychainManager.set(person.username, forKey: KeychainKey.username.rawValue)
                 try? self?.keychainManager.set(person.createdAt.timeIntervalSince1970, forKey: KeychainKey.userCreatedAt.rawValue)
+                try? self?.keychainManager.set(person.totalLove, forKey: KeychainKey.totalLove.rawValue)
+                try? self?.keychainManager.set(person.totalAppreciation, forKey: KeychainKey.totalAppreciation.rawValue)
+                
+                if let email = person.email {
+                    try? self?.keychainManager.set(email, forKey: KeychainKey.email.rawValue)
+                }
                 
                 result?(.success(person))
                 
@@ -103,7 +109,7 @@ public class PeopleService {
     }
     
     /**
-     Add tokens for a person.
+     Add tokens for a user.
 
      - parameter tokens: the number of tokens to add.
      - parameter result: the result of adding tokens to a user.
@@ -132,7 +138,7 @@ public class PeopleService {
     }
     
     /**
-     Update a person's device token.
+     Update a user's device token.
 
      - parameter deviceToken: the new device token of the user.
      - parameter result: the result of updating the device token.
@@ -144,6 +150,36 @@ public class PeopleService {
             switch networkResult {
             case .success: result(.success(true))
             case .failure: result(.failure(.unknown))
+            }
+        }
+    }
+    
+    /**
+     Change a user's email.
+
+     - parameter email: the new email of the user.
+     - parameter result: the result of changing the email.
+     */
+    public func changeEmail(_ email: String, result: @escaping (Result<Bool, PersonError>) -> Void) {
+        let body = try? Data.encodeJSON(value: ChangeEmailBody(email: email))
+        
+        httpClient.put(endpoint: Endpoint.changeEmail, body: body) { [weak self] networkResult in
+            switch networkResult {
+            case .success:
+                try? self?.keychainManager.set(email, forKey: KeychainKey.email.rawValue)
+                result(.success(true))
+            case .failure(let error):
+                switch error {
+                case HttpError.badRequest(let data):
+                    guard let errorDescription: ValidationErrorDescription = try? data.decodeJSON() else {
+                        return result(.failure(.unknown))
+                    }
+                    
+                    result(.failure(PersonError.emailExists(errorDescription.reason)))
+                default:
+                    result(.failure(.unknown))
+                }
+                
             }
         }
     }

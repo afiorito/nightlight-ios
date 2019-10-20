@@ -4,7 +4,11 @@ import UIKit
 public class BuyTokensView: UIView {
     
     /// A handler for notifying when a purchasing is cancelled.
-    public var cancelAction: (() -> Void)?
+    public var cancelAction: (() -> Void)? {
+        didSet {
+            headerView.cancelAction = cancelAction
+        }
+    }
     
     /// A handler for notifying when a purchase is confirmed.
     public var confirmAction: (() -> Void)?
@@ -16,7 +20,6 @@ public class BuyTokensView: UIView {
             layout.estimatedItemSize = CGSize(width: productsCollectionView.frame.width, height: UICollectionViewFlowLayout.automaticSize.height)
         }
         
-        cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
         confirmPurchaseButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
         
         prepareSubviews()
@@ -27,23 +30,12 @@ public class BuyTokensView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// A button for cancelling the purchase.
-    private let cancelButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage.icon.cancel, for: .normal)
-        return button
+    // A view for displaying the header information.
+    private let headerView: HeaderBarView = {
+        let headerView = HeaderBarView()
+        headerView.titleLabel.text = Strings.tokenPacksTitle
+        return headerView
     }()
-    
-    /// A label for displaying the title.
-    public let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = Strings.tokenPacksTitle
-        label.font = .primary16ptMedium
-        return label
-    }()
-    
-    /// A view for displaying a bottom header separator.
-    public let separatorLineView = UIView()
     
     /// A button for confirming the purchase.
     public let confirmPurchaseButton: ContainedButton = {
@@ -76,21 +68,15 @@ public class BuyTokensView: UIView {
     }()
     
     private func prepareSubviews() {
-        addSubviews([cancelButton, titleLabel, productsCollectionView, confirmPurchaseButton, noProductsFoundLabel, separatorLineView])
+        addSubviews([headerView, productsCollectionView, confirmPurchaseButton, noProductsFoundLabel])
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            cancelButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            cancelButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            separatorLineView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            separatorLineView.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale),
-            separatorLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            separatorLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            noProductsFoundLabel.topAnchor.constraint(greaterThanOrEqualTo: separatorLineView.bottomAnchor, constant: 15),
+            headerView.topAnchor.constraint(equalTo: topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             noProductsFoundLabel.bottomAnchor.constraint(lessThanOrEqualTo: confirmPurchaseButton.topAnchor, constant: -15),
             noProductsFoundLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            productsCollectionView.topAnchor.constraint(equalTo: separatorLineView.bottomAnchor),
+            productsCollectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             productsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             productsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             confirmPurchaseButton.topAnchor.constraint(equalTo: productsCollectionView.bottomAnchor),
@@ -101,15 +87,8 @@ public class BuyTokensView: UIView {
     }
     
     /**
-     Handle a cancel button tap event.
+     Handle a confirm button tap event.
      */
-    @objc private func cancelTapped() {
-        cancelAction?()
-    }
-    
-    /**
-    Handle a confirm button tap event.
-    */
     @objc private func confirmTapped() {
         confirmAction?()
     }
@@ -119,11 +98,9 @@ public class BuyTokensView: UIView {
 
 extension BuyTokensView: Themeable {
     func updateColors(for theme: Theme) {
-        titleLabel.textColor = .label(for: theme)
-        cancelButton.tintColor = .gray(for: theme)
+        headerView.updateColors(for: theme)
         backgroundColor = .groupedBackground(for: theme)
         productsCollectionView.backgroundColor = .groupedBackground(for: theme)
         noProductsFoundLabel.textColor = .secondaryLabel(for: theme)
-        separatorLineView.backgroundColor = .separator(for: theme)
     }
 }

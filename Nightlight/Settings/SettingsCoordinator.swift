@@ -34,7 +34,7 @@ public class SettingsCoordinator: NSObject, Coordinator {
         let viewController = MainSettingsViewController(viewModel: viewModel)
         viewController.navigationItem.leftBarButtonItem = simulatedBackButton
         viewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        viewController.title = Strings.setting.settingTitle
+        viewController.title = Strings.setting.settingsTitle
         
         viewModel.uiDelegate = viewController
         viewModel.navigationDelegate = self
@@ -125,6 +125,12 @@ extension SettingsCoordinator: SettingsNavigationDelegate {
     public func rateApplication() {
         guard let url = URL(string: "itms-apps://itunes.apple.com/app/id1474711114") else { return }
         UIApplication.shared.open(url)
+    }
+    
+    public func showAccountSettings() {
+        let coordinator = AccountSettingsCoordinator(rootViewController: rootViewController, dependencies: dependencies)
+        addChild(coordinator)
+        coordinator.start()
     }
     
     public func signOut() {

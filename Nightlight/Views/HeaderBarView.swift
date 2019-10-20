@@ -1,7 +1,11 @@
 import UIKit
 
-/// A view for displaying send appreciation header information.
-public class SendAppreciationHeaderView: UIView {
+/// A header view for modally presented view controllers without a navigation controller.
+public class HeaderBarView: UIView {
+    
+    /// A callback for the cancel action.
+    public var cancelAction: (() -> Void)?
+    
     /// A button for cancelling sending appreciation.
     public let cancelButton: UIButton = {
         let button = UIButton()
@@ -12,7 +16,6 @@ public class SendAppreciationHeaderView: UIView {
     /// A label for displaying the header title.
     public let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = Strings.sendAppreciation
         label.font = .primary16ptMedium
         return label
     }()
@@ -30,17 +33,11 @@ public class SendAppreciationHeaderView: UIView {
         return stackView
     }()
     
-    /// The number of tokens a person has.
-    public var numTokens: Int = 0 {
-        didSet {
-            updateSubtitleLabel()
-        }
-    }
-    
     override public init(frame: CGRect) {
         super.init(frame: frame)
 
         prepareSubviews()
+        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -48,17 +45,15 @@ public class SendAppreciationHeaderView: UIView {
     }
     
     private func prepareSubviews() {
-        updateSubtitleLabel()
-        
         textContainer.addArrangedSubviews([titleLabel, subtitleLabel])
         addSubviews([cancelButton, textContainer, separatorLineView])
         
         NSLayoutConstraint.activate([
             cancelButton.centerYAnchor.constraint(equalTo: textContainer.centerYAnchor),
-            cancelButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            textContainer.topAnchor.constraint(equalTo: topAnchor),
+            cancelButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            textContainer.topAnchor.constraint(equalTo: topAnchor, constant: 12),
             textContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            separatorLineView.topAnchor.constraint(equalTo: textContainer.bottomAnchor, constant: 10),
+            separatorLineView.topAnchor.constraint(equalTo: textContainer.bottomAnchor, constant: 12),
             separatorLineView.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale),
             separatorLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
             separatorLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -66,27 +61,14 @@ public class SendAppreciationHeaderView: UIView {
         ])
     }
     
-    /**
-     Update the subtitle label to display the number of tokens with proper formatting.
-     */
-    private func updateSubtitleLabel() {
-        let string = NSMutableAttributedString(string: "\(Strings.tokenCount): ")
-        let font = UIFont.secondary14ptNormal
-        
-        let imageAttachment = TokenImageAttachment(font: font)
-        imageAttachment.image = UIImage.glyph.token
-        
-        string.appendTokenAttachment(imageAttachment)
-        string.append(NSAttributedString(string: "\(numTokens)"))
-        
-        subtitleLabel.font = font
-        subtitleLabel.attributedText = string
+    @objc private func cancel() {
+        cancelAction?()
     }
 }
 
 // MARK: - Themeable
 
-extension SendAppreciationHeaderView: Themeable {
+extension HeaderBarView: Themeable {
     func updateColors(for theme: Theme) {
         titleLabel.textColor = .label(for: theme)
         subtitleLabel.textColor = .secondaryLabel(for: theme)

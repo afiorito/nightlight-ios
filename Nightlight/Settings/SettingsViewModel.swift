@@ -18,10 +18,15 @@ public class SettingsViewModel {
         return dependencies.styleManager.theme
     }
 
-    /// The number of tokens a person has.
+    /// The number of tokens a user has.
     public var tokens: Int {
         let tokens = try? dependencies.keychainManager.integer(for: KeychainKey.tokens.rawValue)
         return tokens ?? 0
+    }
+    
+    /// The username of the user
+    public var username: String? {
+        return try? dependencies.keychainManager.string(for: KeychainKey.username.rawValue)
     }
     
     /// The current value of the send message default setting.
@@ -137,6 +142,13 @@ public class SettingsViewModel {
      */
     public func selectTermsOfUse() {
         navigationDelegate?.showPage(.terms)
+    }
+    
+    /**
+     Show account settings.
+     */
+    public func selectAccountSettings() {
+        navigationDelegate?.showAccountSettings()
     }
     
     /**

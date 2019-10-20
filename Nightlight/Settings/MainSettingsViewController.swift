@@ -1,5 +1,6 @@
 import UIKit
 
+/// A view controller for the main settings of the app.
 public class MainSettingsViewController: SettingsViewController {
     /// A constant for denoting the section of the settings.
     private enum Section: Int {
@@ -143,7 +144,24 @@ public class MainSettingsViewController: SettingsViewController {
                     }
                 )
             ]),
+            
+            // MARK: - Account Section
+            
             SettingsSection(settings: [
+                Setting(
+                    cellType: InformationRightDetailTableViewCell.self,
+                    configureCell: { [weak self] cell in
+                        guard let self = self, let cell = cell as? InformationRightDetailTableViewCell
+                        else { return }
+                        
+                        cell.title = Strings.setting.account
+                        cell.detailTextLabel?.text = viewModel.username
+                        cell.updateColors(for: self.theme)
+                    },
+                    selectionAction: { _ in
+                        viewModel.selectAccountSettings()
+                    }
+                ),
                 Setting(
                     cellType: BasicOptionTableViewCell.self,
                     configureCell: { [weak self] cell in
@@ -159,8 +177,6 @@ public class MainSettingsViewController: SettingsViewController {
                 )
             ])
         ]
-        
-        registerCellClasses()
     }
     
     public override func viewDidLoad() {

@@ -50,6 +50,15 @@
 		9228D6C522D7BD02003B03DB /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228D6C422D7BD02003B03DB /* MessageType.swift */; };
 		9229482122CCC3ED0080B328 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229482022CCC3ED0080B328 /* TextField.swift */; };
 		9229DFA222D2BDF200827A03 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229DFA122D2BDF200827A03 /* AuthService.swift */; };
+		922BFDA7235B5CDA00D2535F /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDA6235B5CDA00D2535F /* AccountSettingsViewController.swift */; };
+		922BFDA9235B5D3800D2535F /* AccountSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDA8235B5D3800D2535F /* AccountSettingsViewModel.swift */; };
+		922BFDAB235B618E00D2535F /* AccountSettingsViewModelUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDAA235B618E00D2535F /* AccountSettingsViewModelUIDelegate.swift */; };
+		922BFDAD235B642400D2535F /* AccountSettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDAC235B642400D2535F /* AccountSettingsCoordinator.swift */; };
+		922BFDAF235B649900D2535F /* AccountSettingsNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDAE235B649900D2535F /* AccountSettingsNavigationDelegate.swift */; };
+		922BFDB1235B6A1D00D2535F /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB0235B6A1D00D2535F /* ChangeEmailViewController.swift */; };
+		922BFDB3235B7A4C00D2535F /* HeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB2235B7A4C00D2535F /* HeaderBarView.swift */; };
+		922BFDB5235B908900D2535F /* ChangeEmailBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB4235B908900D2535F /* ChangeEmailBody.swift */; };
+		922BFDB7235B933100D2535F /* ChangeAccountDetailEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB6235B933100D2535F /* ChangeAccountDetailEventDelegate.swift */; };
 		9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233615922C643F5002B7BBA /* AppDelegate.swift */; };
 		9233616322C643F7002B7BBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9233616222C643F7002B7BBA /* Assets.xcassets */; };
 		9233616622C643F7002B7BBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9233616422C643F7002B7BBA /* LaunchScreen.storyboard */; };
@@ -219,7 +228,6 @@
 		92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF5D2622D52B9A00207D4D /* ToastView.swift */; };
 		92E9606F22F3BF99005DF33D /* SendAppreciationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */; };
 		92E9607122F3BF99005DF33D /* SendAppreciationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606B22F3BF8B005DF33D /* SendAppreciationView.swift */; };
-		92E9607222F3BF99005DF33D /* SendAppreciationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9606D22F3BF8F005DF33D /* SendAppreciationHeaderView.swift */; };
 		92E9607622F3C0DA005DF33D /* BuyTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9607522F3C0DA005DF33D /* BuyTokensViewController.swift */; };
 		92E9607822F3C1BD005DF33D /* BuyTokensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9607722F3C1BD005DF33D /* BuyTokensView.swift */; };
 		92E9607922F45DCF005DF33D /* SendAppreciationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9607422F3C077005DF33D /* SendAppreciationCoordinator.swift */; };
@@ -326,6 +334,15 @@
 		9228D6C422D7BD02003B03DB /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
 		9229482022CCC3ED0080B328 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		9229DFA122D2BDF200827A03 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		922BFDA6235B5CDA00D2535F /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
+		922BFDA8235B5D3800D2535F /* AccountSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewModel.swift; sourceTree = "<group>"; };
+		922BFDAA235B618E00D2535F /* AccountSettingsViewModelUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewModelUIDelegate.swift; sourceTree = "<group>"; };
+		922BFDAC235B642400D2535F /* AccountSettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsCoordinator.swift; sourceTree = "<group>"; };
+		922BFDAE235B649900D2535F /* AccountSettingsNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsNavigationDelegate.swift; sourceTree = "<group>"; };
+		922BFDB0235B6A1D00D2535F /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
+		922BFDB2235B7A4C00D2535F /* HeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBarView.swift; sourceTree = "<group>"; };
+		922BFDB4235B908900D2535F /* ChangeEmailBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailBody.swift; sourceTree = "<group>"; };
+		922BFDB6235B933100D2535F /* ChangeAccountDetailEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAccountDetailEventDelegate.swift; sourceTree = "<group>"; };
 		9233615622C643F5002B7BBA /* Nightlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9233615922C643F5002B7BBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9233616222C643F7002B7BBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -503,7 +520,6 @@
 		92DF5D2622D52B9A00207D4D /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationViewController.swift; sourceTree = "<group>"; };
 		92E9606B22F3BF8B005DF33D /* SendAppreciationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationView.swift; sourceTree = "<group>"; };
-		92E9606D22F3BF8F005DF33D /* SendAppreciationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationHeaderView.swift; sourceTree = "<group>"; };
 		92E9607422F3C077005DF33D /* SendAppreciationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAppreciationCoordinator.swift; sourceTree = "<group>"; };
 		92E9607522F3C0DA005DF33D /* BuyTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyTokensViewController.swift; sourceTree = "<group>"; };
 		92E9607722F3C1BD005DF33D /* BuyTokensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyTokensView.swift; sourceTree = "<group>"; };
@@ -772,6 +788,7 @@
 				92F1766122DD4777008AEB82 /* DimmedView.swift */,
 				9228D6AB22D65A4D003B03DB /* EmptyView.swift */,
 				925BE1C222DE48A20000BEC9 /* LabelTitleView.swift */,
+				922BFDB2235B7A4C00D2535F /* HeaderBarView.swift */,
 				925763D522CAD0160031D616 /* PageControl.swift */,
 				92748B1322E0A9BD00C2957E /* Switch.swift */,
 				92DF5D2622D52B9A00207D4D /* ToastView.swift */,
@@ -927,6 +944,7 @@
 		925BE1CA22DE72260000BEC9 /* People */ = {
 			isa = PBXGroup;
 			children = (
+				922BFDB4235B908900D2535F /* ChangeEmailBody.swift */,
 				92C7534522DF6A5200A84BD0 /* PersonError.swift */,
 				92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */,
 				92E9608E22F4AFA5005DF33D /* UserTokensBody.swift */,
@@ -1125,6 +1143,7 @@
 			isa = PBXGroup;
 			children = (
 				92DC9DE322F8EFF7008A91BC /* AppInfoViewModel.swift */,
+				922BFDA8235B5D3800D2535F /* AccountSettingsViewModel.swift */,
 				92DC9DF422F9A5F3008A91BC /* SettingsViewModel.swift */,
 				9256EBCB2355EB4200A1FE52 /* OptionsViewModel.swift */,
 			);
@@ -1155,7 +1174,6 @@
 			children = (
 				92E9606622F3BF69005DF33D /* SendAppreciationViewController.swift */,
 				92E9606B22F3BF8B005DF33D /* SendAppreciationView.swift */,
-				92E9606D22F3BF8F005DF33D /* SendAppreciationHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1358,6 +1376,8 @@
 			isa = PBXGroup;
 			children = (
 				92DC9DE122F8E1DF008A91BC /* AppInfoViewController.swift */,
+				922BFDA6235B5CDA00D2535F /* AccountSettingsViewController.swift */,
+				922BFDB0235B6A1D00D2535F /* ChangeEmailViewController.swift */,
 				92050D54234F72B000A008A9 /* SettingsViewController.swift */,
 				92050D5A234F7E1B00A008A9 /* MainSettingsViewController.swift */,
 				9279ACC822E7D6450098C4C2 /* OptionsTableViewController.swift */,
@@ -1370,8 +1390,11 @@
 		92E960B222F60942005DF33D /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
+				922BFDAA235B618E00D2535F /* AccountSettingsViewModelUIDelegate.swift */,
+				922BFDAE235B649900D2535F /* AccountSettingsNavigationDelegate.swift */,
 				92A760EA23313D3300007A2F /* SettingsViewModelUIDelegate.swift */,
 				92A760EC23313D9100007A2F /* SettingsNavigationDelegate.swift */,
+				922BFDB6235B933100D2535F /* ChangeAccountDetailEventDelegate.swift */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -1379,6 +1402,7 @@
 		92E960B322F60950005DF33D /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				922BFDAC235B642400D2535F /* AccountSettingsCoordinator.swift */,
 				92E960C822F60CEB005DF33D /* SettingsCoordinator.swift */,
 			);
 			name = Coordinators;
@@ -1658,8 +1682,8 @@
 				92E9607922F45DCF005DF33D /* SendAppreciationCoordinator.swift in Sources */,
 				9279ACA222E692EB0098C4C2 /* ContainerCollectionViewCell.swift in Sources */,
 				925763E322CB7BE00031D616 /* AuthViewBackground.swift in Sources */,
-				92E9607222F3BF99005DF33D /* SendAppreciationHeaderView.swift in Sources */,
 				925763D022CABF6A0031D616 /* TextButton.swift in Sources */,
+				922BFDAF235B649900D2535F /* AccountSettingsNavigationDelegate.swift in Sources */,
 				920E495D22DFD12A00AA1EDB /* MessageBodyCell.swift in Sources */,
 				92AE911122CD68DD002C75B6 /* UserDefaultsManager.swift in Sources */,
 				92748B1422E0A9BD00C2957E /* Switch.swift in Sources */,
@@ -1668,6 +1692,7 @@
 				9228D6B622D77029003B03DB /* ActionView.swift in Sources */,
 				92CA9C8222D647C0009900E6 /* NotificationsViewController.swift in Sources */,
 				92E960D322F65358005DF33D /* PermissionViewController.swift in Sources */,
+				922BFDB3235B7A4C00D2535F /* HeaderBarView.swift in Sources */,
 				92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */,
 				92E960D722F70A66005DF33D /* UserDeviceTokenBody.swift in Sources */,
 				92F7E326234B8F280076D705 /* CGPoint+Extension.swift in Sources */,
@@ -1757,6 +1782,7 @@
 				92E9607122F3BF99005DF33D /* SendAppreciationView.swift in Sources */,
 				92418D4722D7C1D0001B6DFB /* MessageError.swift in Sources */,
 				9279AC8D22E671E70098C4C2 /* PageTabsViewDataSource.swift in Sources */,
+				922BFDA7235B5CDA00D2535F /* AccountSettingsViewController.swift in Sources */,
 				92CA9C8622D6484B009900E6 /* ProfileCoordinator.swift in Sources */,
 				928A10B322D3EBF400FF78FB /* SignUpCredentials.swift in Sources */,
 				92DC9DE222F8E1DF008A91BC /* AppInfoViewController.swift in Sources */,
@@ -1771,6 +1797,7 @@
 				925DD4B122DDEDF200D50A89 /* EmptyViewDescription.swift in Sources */,
 				928A75CF22C92E7600BC607A /* UIStackView+Extension.swift in Sources */,
 				92B302F322D63B7000CE5668 /* SearchViewController.swift in Sources */,
+				922BFDA9235B5D3800D2535F /* AccountSettingsViewModel.swift in Sources */,
 				92A760E52331189F00007A2F /* PeopleViewModelUIDelegate.swift in Sources */,
 				92E960CD22F632DA005DF33D /* NotificationPermissionViewController.swift in Sources */,
 				9200EA96233A6AF000A0E097 /* CustomPresentable+Defaults.swift in Sources */,
@@ -1805,6 +1832,7 @@
 				928A10A622D3CDF000FF78FB /* URLSession+Extension.swift in Sources */,
 				920E495022DF966C00AA1EDB /* Searchable.swift in Sources */,
 				925217EB233012C000581E80 /* ProductError.swift in Sources */,
+				922BFDB1235B6A1D00D2535F /* ChangeEmailViewController.swift in Sources */,
 				92E9609722F5F97A005DF33D /* UITableView+Extension.swift in Sources */,
 				92B9008A22CE94A7009E619B /* SplashScreenViewController.swift in Sources */,
 				92DC9DF522F9A5F3008A91BC /* SettingsViewModel.swift in Sources */,
@@ -1817,6 +1845,7 @@
 				928EC46422F75B3E0044E235 /* BadgeView.swift in Sources */,
 				92A760EB23313D3300007A2F /* SettingsViewModelUIDelegate.swift in Sources */,
 				92F7E320234B64450076D705 /* EdgeAnimation.swift in Sources */,
+				922BFDAB235B618E00D2535F /* AccountSettingsViewModelUIDelegate.swift in Sources */,
 				92E960A922F6085F005DF33D /* NotificationTableViewCell.swift in Sources */,
 				92A760E72331288300007A2F /* ProfileNavigationDelegate.swift in Sources */,
 				9274523A232C03F900D0576D /* MessagesNavigationDelegate.swift in Sources */,
@@ -1831,6 +1860,7 @@
 				9279ACBB22E7BDF70098C4C2 /* String+Extension.swift in Sources */,
 				9221066D232BEA8200944FB9 /* UIView+Themeable.swift in Sources */,
 				92A760E32331188500007A2F /* HelpfulPeopleViewModel.swift in Sources */,
+				922BFDB5235B908900D2535F /* ChangeEmailBody.swift in Sources */,
 				92F3F1432331C31400177208 /* AuthNavigationDelegate.swift in Sources */,
 				925BE1C322DE48A20000BEC9 /* LabelTitleView.swift in Sources */,
 				925DD4B522DE04C300D50A89 /* CompactScrollView.swift in Sources */,
@@ -1846,6 +1876,7 @@
 				92E9608F22F4AFA5005DF33D /* UserTokensBody.swift in Sources */,
 				9274523E232C440900D0576D /* MessageContextAction.swift in Sources */,
 				9279ACC922E7D6450098C4C2 /* OptionsTableViewController.swift in Sources */,
+				922BFDAD235B642400D2535F /* AccountSettingsCoordinator.swift in Sources */,
 				92DC9DFB22F9E611008A91BC /* Int+Extension.swift in Sources */,
 				925763DF22CB768D0031D616 /* SignInViewController.swift in Sources */,
 				92B9008822CD8720009E619B /* AuthCoordinator.swift in Sources */,
@@ -1859,6 +1890,7 @@
 				925BE1D222DE83B20000BEC9 /* PeopleViewController.swift in Sources */,
 				920E495B22DFC9F900AA1EDB /* MessageTitleCell.swift in Sources */,
 				925BE1D622DE86CC0000BEC9 /* HelpfulPeopleViewController.swift in Sources */,
+				922BFDB7235B933100D2535F /* ChangeAccountDetailEventDelegate.swift in Sources */,
 				92050D5B234F7E1B00A008A9 /* MainSettingsViewController.swift in Sources */,
 				92E960CF22F63356005DF33D /* PermissionView.swift in Sources */,
 				92F1766222DD4777008AEB82 /* DimmedView.swift in Sources */,
@@ -2070,7 +2102,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2094,7 +2126,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2262,7 +2294,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2383,7 +2415,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

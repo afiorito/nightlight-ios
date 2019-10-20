@@ -8,6 +8,9 @@ public struct User: Codable {
     /// The unique username of the user.
     let username: String
     
+    /// The email of the user.
+    let email: String?
+    
     /// The number of tokens the user has.
     let tokens: Int
     

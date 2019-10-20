@@ -8,7 +8,7 @@ public protocol SettingsViewModelUIDelegate: class {
     /**
      Tells the delegate that fetching ratings failed.
      
-     - parameter error: The erro for the fetching failure.
+     - parameter error: The error for the fetching failure.
      */
     func didFailToFetchRatings(with error: Error)
     

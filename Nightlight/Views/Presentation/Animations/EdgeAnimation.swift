@@ -285,6 +285,9 @@ public class EdgeAnimation: UIPercentDrivenInteractiveTransition {
             feedbackGenerator = UISelectionFeedbackGenerator()
             feedbackGenerator?.prepare()
         }
+        
+        transitionContext.viewController(forKey: .from)?.beginAppearanceTransition(false, animated: true)
+        transitionContext.viewController(forKey: .to)?.beginAppearanceTransition(true, animated: true)
     }
     
     /**
@@ -360,6 +363,8 @@ extension EdgeAnimation: UIViewControllerAnimatedTransitioning {
         })
         
         animator.addCompletion { position in
+            transitionContext.viewController(forKey: .from)?.endAppearanceTransition()
+            transitionContext.viewController(forKey: .to)?.endAppearanceTransition()
             let completed = (position == .end)
             transitionContext.completeTransition(completed)
         }
