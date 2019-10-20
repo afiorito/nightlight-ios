@@ -63,6 +63,16 @@ extension AccountSettingsCoordinator: AccountSettingsNavigationDelegate {
         rootViewController.present(changeEmailViewController, animated: true)
     }
     
+    public func showChangePassword() {
+        let changePasswordViewController = ChangePasswordViewController(viewModel: viewModel)
+        
+        changePasswordViewController.modalPresentationStyle = .custom
+        changePasswordViewController.transitioningDelegate = bottomTransition
+        viewModel.eventDelegate = changePasswordViewController
+        
+        rootViewController.present(changePasswordViewController, animated: true)
+    }
+    
     public func didChangeEmail() {
         rootViewController.dismiss(animated: true)
     }
@@ -73,5 +83,13 @@ extension AccountSettingsCoordinator: AccountSettingsNavigationDelegate {
     
     public func didFinishViewingAccountSettings() {
         parent?.childDidFinish(self)
+    }
+    
+    public func didChangePassword() {
+        rootViewController.dismiss(animated: true)
+    }
+    
+    public func didFailChangePassword() {
+        rootViewController.dismiss(animated: true)
     }
 }

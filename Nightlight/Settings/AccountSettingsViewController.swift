@@ -36,7 +36,7 @@ public class AccountSettingsViewController: SettingsViewController {
                         
                     },
                     selectionAction: { _ in
-                        
+                        viewModel.selectPassword()
                     }
                 )
             ])
@@ -87,6 +87,15 @@ extension AccountSettingsViewController: AccountSettingsViewModelUIDelegate {
     }
     
     public func didFailChangeEmail(with error: PersonError) {
+        showToast(error.message, severity: .urgent)
+    }
+    
+    public func didChangePassword() {
+        tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        showToast(Strings.passwordChangedSuccessfully, severity: .success)
+    }
+    
+    public func didFailChangePassword(with error: PersonError) {
         showToast(error.message, severity: .urgent)
     }
 }

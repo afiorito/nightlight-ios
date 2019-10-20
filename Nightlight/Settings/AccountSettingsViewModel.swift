@@ -55,6 +55,13 @@ public class AccountSettingsViewModel {
     }
     
     /**
+     Show the change password view.
+     */
+    public func selectPassword() {
+        navigationDelegate?.showChangePassword()
+    }
+    
+    /**
      Change the user's email
      
      - parameter email: The new email of the user.
@@ -72,11 +79,43 @@ public class AccountSettingsViewModel {
                 }
             case .failure(let error):
                 DispatchQueue.main.async { [weak self] in
-                    if case .emailExists = error {
+                    if case .validation = error {
                         self?.eventDelegate?.didFailChange(with: error)
                     } else {
                         self?.uiDelegate?.didFailChangeEmail(with: error)
                         self?.navigationDelegate?.didFailChangeEmail()
+                    }
+                }
+            }
+            
+            DispatchQueue.main.async { [weak self] in self?.eventDelegate?.didEndChange() }
+        }
+    }
+    
+    /**
+     Change the user's password
+     
+     - parameter password: The current password of the user.
+     - parameter newPassword: The new password of the user.
+     */
+    public func changePassword(_ password: String, newPassword: String) {
+        eventDelegate?.didBeginChange()
+
+        dependencies.peopleService.changePassword(password, newPassword: newPassword) { (changePasswordResult) in
+            switch changePasswordResult {
+            case .success:
+                DispatchQueue.main.async { [weak self] in
+                    self?.eventDelegate?.didChange()
+                    self?.uiDelegate?.didChangePassword()
+                    self?.navigationDelegate?.didChangePassword()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async { [weak self] in
+                    if case .validation = error {
+                        self?.eventDelegate?.didFailChange(with: error)
+                    } else {
+                        self?.uiDelegate?.didFailChangePassword(with: error)
+                        self?.navigationDelegate?.didFailChangePassword()
                     }
                 }
             }

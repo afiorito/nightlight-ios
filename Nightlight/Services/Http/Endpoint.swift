@@ -146,6 +146,10 @@ extension Endpoint {
     static var changeEmail: Endpoint {
         return Endpoint(path: "/user/email")
     }
+    
+    static var changePassword: Endpoint {
+        return Endpoint(path: "/user/password")
+    }
 }
 
 // MARK: - Notification Endpoints

@@ -175,13 +175,55 @@ public class PeopleService {
                         return result(.failure(.unknown))
                     }
                     
-                    result(.failure(PersonError.emailExists(errorDescription.reason)))
+                    result(.failure(.validation(errorDescription.reason)))
                 default:
                     result(.failure(.unknown))
                 }
                 
             }
         }
+    }
+    
+    /**
+     Change a user's password.
+
+     - parameter email: the new email of the user.
+     - parameter result: the result of changing the email.
+     */
+    public func changePassword(_ password: String, newPassword: String, result: @escaping (Result<Bool, PersonError>) -> Void) {
+        let body = try? Data.encodeJSON(value: ChangePasswordBody(oldPassword: password, newPassword: newPassword))
+        
+        httpClient.put(endpoint: Endpoint.changePassword, body: body) { [weak self] networkResult in
+            switch networkResult {
+            case .success:
+                guard let accessToken = try? self?.keychainManager.string(for: KeychainKey.accessToken.rawValue),
+                let jwt = try? JWTDecoder().decode(accessToken),
+                let username = jwt["username"] as? String
+                else {
+                    result(.failure(.unknown))
+                    return
+                }
+
+                self?.updateWebCredential(username: username, password: newPassword)
+                result(.success(true))
+            case .failure(let error):
+                switch error {
+                case HttpError.badRequest(let data):
+                    guard let errorDescription: ValidationErrorDescription = try? data.decodeJSON() else {
+                        return result(.failure(.unknown))
+                    }
+                    
+                    result(.failure(.validation(errorDescription.reason)))
+                default:
+                    result(.failure(.unknown))
+                }
+                
+            }
+        }
+    }
+    
+    private func updateWebCredential(username: String, password: String) {
+        SecAddSharedWebCredential("nightlight.co" as CFString, username as CFString, password as CFString) { _ in }
     }
 
 }

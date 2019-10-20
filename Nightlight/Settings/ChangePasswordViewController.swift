@@ -1,7 +1,7 @@
 import UIKit
 
-/// A view controller for changing a user's email.
-public class ChangeEmailViewController: UIViewController {
+/// A view controller for changing a user's password.
+public class ChangePasswordViewController: UIViewController {
     /// The viewModel for handling state.
     private let viewModel: AccountSettingsViewModel
 
@@ -21,8 +21,10 @@ public class ChangeEmailViewController: UIViewController {
             self?.dismiss(animated: true)
         }
         
-        emailField.input.delegate = self
-        emailField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        currentPasswordField.input.delegate = self
+        newPasswordField.input.delegate = self
+        currentPasswordField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        newPasswordField.input.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
         
         prepareSubviews()
@@ -32,19 +34,37 @@ public class ChangeEmailViewController: UIViewController {
     /// A view for displaying header information.
     private let headerView: HeaderBarView = {
         let headerView = HeaderBarView()
-        headerView.titleLabel.text = Strings.setting.changeEmail
+        headerView.titleLabel.text = Strings.setting.changePassword
         return headerView
     }()
     
-    /// A field for entering an email.
-    private let emailField: FormTextField = {
+    /// A field for entering the current password.
+    private let currentPasswordField: FormTextField = {
         let textField = FormTextField()
-        textField.input.icon = UIImage.icon.mail
-        textField.input.placeholder = Strings.placeholder.email
-        textField.input.keyboardType = .emailAddress
+        textField.input.icon = UIImage.icon.lock
+        textField.input.placeholder = Strings.placeholder.currentPassword
+        textField.input.isSecureTextEntry = true
         textField.input.autocapitalizationType = .none
         textField.input.autocorrectionType = .no
-        textField.input.textContentType = .emailAddress
+        textField.input.textContentType = .password
+        return textField
+    }()
+    
+    /// A field for entering the new password.
+    private let newPasswordField: FormTextField = {
+        let textField = FormTextField()
+        textField.input.icon = UIImage.icon.mail
+        textField.input.icon = UIImage.icon.lock
+        textField.input.placeholder = Strings.placeholder.newPassword
+        textField.input.isSecureTextEntry = true
+        textField.input.autocapitalizationType = .none
+        textField.input.autocorrectionType = .no
+        if #available(iOS 12.0, *) {
+            textField.input.textContentType = .newPassword
+        } else {
+            textField.input.textContentType = .password
+        }
+
         return textField
     }()
     
@@ -53,7 +73,7 @@ public class ChangeEmailViewController: UIViewController {
         let button = ContainedButton()
         button.backgroundColor = .brand
         button.isEnabled = false
-        button.setTitle(Strings.setting.confirmNewEmail, for: .normal)
+        button.setTitle(Strings.setting.confirmNewPassword, for: .normal)
         return button
     }()
     
@@ -65,7 +85,7 @@ public class ChangeEmailViewController: UIViewController {
     }()
 
     private func prepareSubviews() {
-        container.addArrangedSubviews([emailField, confirmButton])
+        container.addArrangedSubviews([currentPasswordField, newPasswordField, confirmButton])
         view.addSubviews([headerView, container])
         
         // Use a layout guide since the height of the container can
@@ -74,8 +94,8 @@ public class ChangeEmailViewController: UIViewController {
         view.addLayoutGuide(centerGuide)
         
         NSLayoutConstraint.activate([
-            centerGuide.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 72),
-            centerGuide.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -72),
+            centerGuide.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 100),
+            centerGuide.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
             headerView.topAnchor.constraint(equalTo: view.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -86,21 +106,23 @@ public class ChangeEmailViewController: UIViewController {
     }
     
     @objc private func confirm() {
-        viewModel.changeEmail(emailField.input.text ?? "")
+        viewModel.changePassword(currentPasswordField.input.text ?? "", newPassword: newPasswordField.input.text ?? "")
     }
     
     /**
      Handle a text field change event.
      */
     @objc func textFieldDidChange() {
-        confirmButton.isEnabled = !(emailField.input.text?.isEmpty ?? true)
+        let isCurrentPasswordEmpty = currentPasswordField.input.text?.isEmpty ?? true
+        let isNewPasswordEmpty = newPasswordField.input.text?.isEmpty ?? true
+        confirmButton.isEnabled = !isCurrentPasswordEmpty && !isNewPasswordEmpty
     }
     
 }
 
 // MARK: - ChangeAccountDetail Event Delegate
 
-extension ChangeEmailViewController: ChangeAccountDetailEventDelegate {
+extension ChangePasswordViewController: ChangeAccountDetailEventDelegate {
     public func didChange() {}
     
     public func didBeginChange() {
@@ -112,13 +134,21 @@ extension ChangeEmailViewController: ChangeAccountDetailEventDelegate {
     }
     
     public func didFailChange(with error: PersonError) {
-        emailField.error = error.message
+        if case let .validation(reasons) = error {
+            if let passwordReason = reasons.first(where: { $0.property == "password" }) {
+                if passwordReason.constraints[ValidationConstraint.weakPassword.rawValue] != nil {
+                    newPasswordField.error = error.message
+                } else {
+                    currentPasswordField.error = error.message
+                }
+            }
+        }
     }
 }
 
 // MARK: - UITextField Delegate
 
-extension ChangeEmailViewController: UITextFieldDelegate {
+extension ChangePasswordViewController: UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let formTextField = textField.superview(ofType: FormTextField.self) else {
             return
@@ -132,17 +162,18 @@ extension ChangeEmailViewController: UITextFieldDelegate {
 
 // MARK: - Themeable
 
-extension ChangeEmailViewController: Themeable {
+extension ChangePasswordViewController: Themeable {
     func updateColors(for theme: Theme) {
         view.backgroundColor = .background(for: theme)
         headerView.updateColors(for: theme)
-        emailField.updateColors(for: theme)
+        currentPasswordField.updateColors(for: theme)
+        newPasswordField.updateColors(for: theme)
     }
 }
 
 // MARK: - Custom Presentable
 
-extension ChangeEmailViewController: CustomPresentable {
+extension ChangePasswordViewController: CustomPresentable {
     public var frame: CustomPresentableFrame {
         let width: CustomPresentableSize.Dimension = UIDevice.current.userInterfaceIdiom == .pad ? .content(500) : .max
         return CustomPresentableFrame(x: .center, y: .center, width: width, height: .intrinsic)

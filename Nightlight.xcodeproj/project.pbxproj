@@ -59,6 +59,7 @@
 		922BFDB3235B7A4C00D2535F /* HeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB2235B7A4C00D2535F /* HeaderBarView.swift */; };
 		922BFDB5235B908900D2535F /* ChangeEmailBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB4235B908900D2535F /* ChangeEmailBody.swift */; };
 		922BFDB7235B933100D2535F /* ChangeAccountDetailEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB6235B933100D2535F /* ChangeAccountDetailEventDelegate.swift */; };
+		922BFDB9235CAB4600D2535F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB8235CAB4500D2535F /* ChangePasswordViewController.swift */; };
 		9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233615922C643F5002B7BBA /* AppDelegate.swift */; };
 		9233616322C643F7002B7BBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9233616222C643F7002B7BBA /* Assets.xcassets */; };
 		9233616622C643F7002B7BBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9233616422C643F7002B7BBA /* LaunchScreen.storyboard */; };
@@ -134,6 +135,7 @@
 		92631045232AEA29009AB5F2 /* Delegating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631044232AEA29009AB5F2 /* Delegating.swift */; };
 		9269EDE722F7B5000061D0DB /* notification.aif in Resources */ = {isa = PBXBuildFile; fileRef = 9269EDE622F7B5000061D0DB /* notification.aif */; };
 		9269EDE922F7BBA20061D0DB /* iTunesLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269EDE822F7BBA20061D0DB /* iTunesLookup.swift */; };
+		926B638B235CB6300023C36D /* ChangePasswordBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B638A235CB62F0023C36D /* ChangePasswordBody.swift */; };
 		9273375023365F8200FC6798 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9273374F23365F8200FC6798 /* AuthenticationServices.framework */; };
 		92745236232BFF1C00D0576D /* MessagesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92745235232BFF1C00D0576D /* MessagesCoordinator.swift */; };
 		92745238232C020400D0576D /* MessagesViewModelUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92745237232C020400D0576D /* MessagesViewModelUIDelegate.swift */; };
@@ -343,6 +345,7 @@
 		922BFDB2235B7A4C00D2535F /* HeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBarView.swift; sourceTree = "<group>"; };
 		922BFDB4235B908900D2535F /* ChangeEmailBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailBody.swift; sourceTree = "<group>"; };
 		922BFDB6235B933100D2535F /* ChangeAccountDetailEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAccountDetailEventDelegate.swift; sourceTree = "<group>"; };
+		922BFDB8235CAB4500D2535F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		9233615622C643F5002B7BBA /* Nightlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9233615922C643F5002B7BBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9233616222C643F7002B7BBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -425,6 +428,7 @@
 		92631044232AEA29009AB5F2 /* Delegating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegating.swift; sourceTree = "<group>"; };
 		9269EDE622F7B5000061D0DB /* notification.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = notification.aif; sourceTree = "<group>"; };
 		9269EDE822F7BBA20061D0DB /* iTunesLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesLookup.swift; sourceTree = "<group>"; };
+		926B638A235CB62F0023C36D /* ChangePasswordBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordBody.swift; sourceTree = "<group>"; };
 		9273374F23365F8200FC6798 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		92745235232BFF1C00D0576D /* MessagesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesCoordinator.swift; sourceTree = "<group>"; };
 		92745237232C020400D0576D /* MessagesViewModelUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModelUIDelegate.swift; sourceTree = "<group>"; };
@@ -945,6 +949,7 @@
 			isa = PBXGroup;
 			children = (
 				922BFDB4235B908900D2535F /* ChangeEmailBody.swift */,
+				926B638A235CB62F0023C36D /* ChangePasswordBody.swift */,
 				92C7534522DF6A5200A84BD0 /* PersonError.swift */,
 				92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */,
 				92E9608E22F4AFA5005DF33D /* UserTokensBody.swift */,
@@ -1378,6 +1383,7 @@
 				92DC9DE122F8E1DF008A91BC /* AppInfoViewController.swift */,
 				922BFDA6235B5CDA00D2535F /* AccountSettingsViewController.swift */,
 				922BFDB0235B6A1D00D2535F /* ChangeEmailViewController.swift */,
+				922BFDB8235CAB4500D2535F /* ChangePasswordViewController.swift */,
 				92050D54234F72B000A008A9 /* SettingsViewController.swift */,
 				92050D5A234F7E1B00A008A9 /* MainSettingsViewController.swift */,
 				9279ACC822E7D6450098C4C2 /* OptionsTableViewController.swift */,
@@ -1689,6 +1695,7 @@
 				92748B1422E0A9BD00C2957E /* Switch.swift in Sources */,
 				9205E6D422F0743E00AFE16B /* IAPManager.swift in Sources */,
 				9276314322D3F673000D4B8F /* AuthToken.swift in Sources */,
+				926B638B235CB6300023C36D /* ChangePasswordBody.swift in Sources */,
 				9228D6B622D77029003B03DB /* ActionView.swift in Sources */,
 				92CA9C8222D647C0009900E6 /* NotificationsViewController.swift in Sources */,
 				92E960D322F65358005DF33D /* PermissionViewController.swift in Sources */,
@@ -1874,6 +1881,7 @@
 				92931C3622D3A09600C54EB8 /* Env.swift in Sources */,
 				9279AC9F22E692E30098C4C2 /* TabFlowLayout.swift in Sources */,
 				92E9608F22F4AFA5005DF33D /* UserTokensBody.swift in Sources */,
+				922BFDB9235CAB4600D2535F /* ChangePasswordViewController.swift in Sources */,
 				9274523E232C440900D0576D /* MessageContextAction.swift in Sources */,
 				9279ACC922E7D6450098C4C2 /* OptionsTableViewController.swift in Sources */,
 				922BFDAD235B642400D2535F /* AccountSettingsCoordinator.swift in Sources */,

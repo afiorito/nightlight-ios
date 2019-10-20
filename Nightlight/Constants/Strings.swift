@@ -11,6 +11,7 @@ public struct Strings {
     static let signOut = "Sign Out"
     static let nightlightTokens = "Nightlight Tokens"
     static let emailChangedSuccessfully = "Email changed successfully."
+    static let passwordChangedSuccessfully = "Password changed successfully."
     
     /// information for describing initial onboarding screens.
     struct onboard {
@@ -35,6 +36,8 @@ public struct Strings {
         static let username = "username"
         static let password = "password"
         static let email = "email"
+        static let currentPassword = "current password"
+        static let newPassword = "new password"
     }
     
     struct error {
@@ -105,6 +108,7 @@ public struct Strings {
         static let changePassword = "Change Password"
         static let changeEmail = "Change Email"
         static let confirmNewEmail = "Confirm New Email"
+        static let confirmNewPassword = "Confirm New Password"
         static func ratingCount(_ count: Int) -> String {
             let prefix: String
             
@@ -130,6 +134,7 @@ public struct Strings {
         static let usernameExists = "The username already exists."
         static let invalidUsername = "The username is invalid."
         static let weakPassword = "The password is too weak."
+        static let incorrectPassword = "The current password does not match."
         static let emailExists = "A user with that email already exists."
         static let invalidEmail = "The email is invalid."
         static let failedSignIn = "Username or password are incorrect."
