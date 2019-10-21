@@ -68,6 +68,16 @@ extension Endpoint {
         
         return Endpoint(path: "/auth/refresh", queryItems: queryItems, isAuthorized: false)
     }
+    
+    static var passwordResetEmail: Endpoint {
+        return Endpoint(path: "/auth/passwordreset/email", queryItems: nil, isAuthorized: false)
+    }
+    
+    static func passwordReset(token: String) -> Endpoint {
+        let queryItems = [URLQueryItem(name: "token", value: token)]
+        
+        return Endpoint(path: "/auth/passwordreset", queryItems: queryItems, isAuthorized: false)
+    }
 }
 
 // MARK: - Message Endpoints

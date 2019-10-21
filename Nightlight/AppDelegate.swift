@@ -3,7 +3,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private var coordinator: AppCoordinator?
+    private(set) var coordinator: AppCoordinator?
     private let dependencies = DependencyContainer()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -43,6 +43,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UIApplication.shared.applicationIconBadgeNumber > 0 {
             coordinator?.addNotificationBadge()
         }
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if let url = userActivity.webpageURL {
+            if url.pathComponents.count == 3 && url.pathComponents.contains("passwordreset") {
+                coordinator?.handlePasswordReset(token: url.lastPathComponent)
+                return true
+            }
+        }
+        
+        return false
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

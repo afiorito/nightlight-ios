@@ -21,7 +21,9 @@ public class AccountSettingsViewController: SettingsViewController {
                         cell.detailTextLabel?.text = viewModel.email
                         cell.updateColors(for: self.theme)
                     },
-                    selectionAction: { _ in
+                    selectionAction: { [weak self] _ in
+                        // without this, any code executed in this function is delayed.
+                        self?.tableView.deselectRow(at: IndexPath(item: 0, section: 0), animated: false)
                         viewModel.selectEmail()
                     }
                 ),
@@ -35,7 +37,9 @@ public class AccountSettingsViewController: SettingsViewController {
                         cell.updateColors(for: self.theme)
                         
                     },
-                    selectionAction: { _ in
+                    selectionAction: { [weak self] _ in
+                        // without this, any code executed in this function is delayed.
+                        self?.tableView.deselectRow(at: IndexPath(item: 1, section: 0), animated: false)
                         viewModel.selectPassword()
                     }
                 )

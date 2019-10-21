@@ -35,6 +35,69 @@ public class AuthService {
     }
     
     /**
+     Send a reset email to the specified email address.
+     
+     - parameter email: The destination email of the password reset email.
+     - parameter result: The result of sending the reset password email.
+     */
+    public func sendPasswordResetEmail(to email: String, result: @escaping (Result<Bool, AuthError>) -> Void) {
+        let body = try? Data.encodeJSON(value: EmailBody(email: email))
+
+        httpClient.post(endpoint: Endpoint.passwordResetEmail, body: body) { emailResult in
+            switch emailResult {
+            case .success:
+                result(.success(true))
+            case .failure(let error):
+                switch error {
+                case HttpError.badRequest(let data):
+                    guard let errorDescription: ValidationErrorDescription = try? data.decodeJSON() else {
+                        return result(.failure(.unknown))
+                    }
+                    
+                    result(.failure(AuthError.validation(errorDescription.reason)))
+                    
+                default:
+                    result(.failure(.unknown))
+                }
+            }
+        }
+    }
+    
+    /**
+     Reset a user's password.
+     
+     - parameter newPassword: The new password of the user.
+     - parameter token: The reset password token.
+     - parameter result: The result of resetting the password.
+     */
+    public func resetPassword(_ newPassword: String, token: String, result: @escaping (Result<Bool, AuthError>) -> Void) {
+        let body = try? Data.encodeJSON(value: PasswordBody(password: newPassword))
+        
+        httpClient.put(endpoint: Endpoint.passwordReset(token: token), body: body) { passwordResult in
+            switch passwordResult {
+            case .success:
+                result(.success(true))
+            case .failure(let error):
+                switch error {
+                case HttpError.badRequest(let data):
+                    guard let errorDescription: ValidationErrorDescription = try? data.decodeJSON() else {
+                        if let _: SimpleErrorBody = try? data.decodeJSON() {
+                            return result(.failure(.invalidResetToken))
+                        }
+
+                        return result(.failure(.unknown))
+                    }
+                    
+                    result(.failure(AuthError.validation(errorDescription.reason)))
+                    
+                default:
+                    result(.failure(.unknown))
+                }
+            }
+        }
+    }
+    
+    /**
      Send an authentication request for a user.
      
      - parameter endpoint: the endpoint for authentication.

@@ -57,7 +57,7 @@
 		922BFDAF235B649900D2535F /* AccountSettingsNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDAE235B649900D2535F /* AccountSettingsNavigationDelegate.swift */; };
 		922BFDB1235B6A1D00D2535F /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB0235B6A1D00D2535F /* ChangeEmailViewController.swift */; };
 		922BFDB3235B7A4C00D2535F /* HeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB2235B7A4C00D2535F /* HeaderBarView.swift */; };
-		922BFDB5235B908900D2535F /* ChangeEmailBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB4235B908900D2535F /* ChangeEmailBody.swift */; };
+		922BFDB5235B908900D2535F /* EmailBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB4235B908900D2535F /* EmailBody.swift */; };
 		922BFDB7235B933100D2535F /* ChangeAccountDetailEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB6235B933100D2535F /* ChangeAccountDetailEventDelegate.swift */; };
 		922BFDB9235CAB4600D2535F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDB8235CAB4500D2535F /* ChangePasswordViewController.swift */; };
 		9233615A22C643F5002B7BBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233615922C643F5002B7BBA /* AppDelegate.swift */; };
@@ -136,6 +136,12 @@
 		9269EDE722F7B5000061D0DB /* notification.aif in Resources */ = {isa = PBXBuildFile; fileRef = 9269EDE622F7B5000061D0DB /* notification.aif */; };
 		9269EDE922F7BBA20061D0DB /* iTunesLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269EDE822F7BBA20061D0DB /* iTunesLookup.swift */; };
 		926B638B235CB6300023C36D /* ChangePasswordBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B638A235CB62F0023C36D /* ChangePasswordBody.swift */; };
+		926B638D235CDF500023C36D /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B638C235CDF4F0023C36D /* PasswordResetViewController.swift */; };
+		926B638F235CE18E0023C36D /* RequestEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B638E235CE18E0023C36D /* RequestEmailView.swift */; };
+		926B6391235CE4C20023C36D /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B6390235CE4C20023C36D /* UIWindow+Extension.swift */; };
+		926B6393235D27070023C36D /* PasswordResetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B6392235D27070023C36D /* PasswordResetViewModel.swift */; };
+		926B6399235D38D40023C36D /* PasswordResetViewModelUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B6398235D38D40023C36D /* PasswordResetViewModelUIDelegate.swift */; };
+		926B639B235D39050023C36D /* PasswordResetNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B639A235D39050023C36D /* PasswordResetNavigationDelegate.swift */; };
 		9273375023365F8200FC6798 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9273374F23365F8200FC6798 /* AuthenticationServices.framework */; };
 		92745236232BFF1C00D0576D /* MessagesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92745235232BFF1C00D0576D /* MessagesCoordinator.swift */; };
 		92745238232C020400D0576D /* MessagesViewModelUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92745237232C020400D0576D /* MessagesViewModelUIDelegate.swift */; };
@@ -261,6 +267,9 @@
 		92F1763922DCD07E008AEB82 /* ContextOptionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1763822DCD07E008AEB82 /* ContextOptionStyle.swift */; };
 		92F1763B22DCD42D008AEB82 /* ContextOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1763A22DCD42D008AEB82 /* ContextOptionTableViewCell.swift */; };
 		92F1766222DD4777008AEB82 /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1766122DD4777008AEB82 /* DimmedView.swift */; };
+		92F28D4A235DE31B00A2EEC9 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F28D49235DE31B00A2EEC9 /* ResetPasswordView.swift */; };
+		92F28D4D235DE5E100A2EEC9 /* PasswordResetCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F28D4C235DE5E100A2EEC9 /* PasswordResetCoordinator.swift */; };
+		92F28D4F235DEC2200A2EEC9 /* PasswordBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F28D4E235DEC2200A2EEC9 /* PasswordBody.swift */; };
 		92F3F13F2331C2B500177208 /* AuthViewModelUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F3F13E2331C2B500177208 /* AuthViewModelUIDelegate.swift */; };
 		92F3F1432331C31400177208 /* AuthNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F3F1422331C31400177208 /* AuthNavigationDelegate.swift */; };
 		92F7E31E234B64320076D705 /* BottomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7E31D234B64320076D705 /* BottomTransition.swift */; };
@@ -343,7 +352,7 @@
 		922BFDAE235B649900D2535F /* AccountSettingsNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsNavigationDelegate.swift; sourceTree = "<group>"; };
 		922BFDB0235B6A1D00D2535F /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
 		922BFDB2235B7A4C00D2535F /* HeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBarView.swift; sourceTree = "<group>"; };
-		922BFDB4235B908900D2535F /* ChangeEmailBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailBody.swift; sourceTree = "<group>"; };
+		922BFDB4235B908900D2535F /* EmailBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailBody.swift; sourceTree = "<group>"; };
 		922BFDB6235B933100D2535F /* ChangeAccountDetailEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAccountDetailEventDelegate.swift; sourceTree = "<group>"; };
 		922BFDB8235CAB4500D2535F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		9233615622C643F5002B7BBA /* Nightlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -429,6 +438,12 @@
 		9269EDE622F7B5000061D0DB /* notification.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = notification.aif; sourceTree = "<group>"; };
 		9269EDE822F7BBA20061D0DB /* iTunesLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesLookup.swift; sourceTree = "<group>"; };
 		926B638A235CB62F0023C36D /* ChangePasswordBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordBody.swift; sourceTree = "<group>"; };
+		926B638C235CDF4F0023C36D /* PasswordResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
+		926B638E235CE18E0023C36D /* RequestEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEmailView.swift; sourceTree = "<group>"; };
+		926B6390235CE4C20023C36D /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
+		926B6392235D27070023C36D /* PasswordResetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewModel.swift; sourceTree = "<group>"; };
+		926B6398235D38D40023C36D /* PasswordResetViewModelUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewModelUIDelegate.swift; sourceTree = "<group>"; };
+		926B639A235D39050023C36D /* PasswordResetNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetNavigationDelegate.swift; sourceTree = "<group>"; };
 		9273374F23365F8200FC6798 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		92745235232BFF1C00D0576D /* MessagesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesCoordinator.swift; sourceTree = "<group>"; };
 		92745237232C020400D0576D /* MessagesViewModelUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModelUIDelegate.swift; sourceTree = "<group>"; };
@@ -556,6 +571,9 @@
 		92F1763822DCD07E008AEB82 /* ContextOptionStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextOptionStyle.swift; sourceTree = "<group>"; };
 		92F1763A22DCD42D008AEB82 /* ContextOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextOptionTableViewCell.swift; sourceTree = "<group>"; };
 		92F1766122DD4777008AEB82 /* DimmedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmedView.swift; sourceTree = "<group>"; };
+		92F28D49235DE31B00A2EEC9 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		92F28D4C235DE5E100A2EEC9 /* PasswordResetCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetCoordinator.swift; sourceTree = "<group>"; };
+		92F28D4E235DEC2200A2EEC9 /* PasswordBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordBody.swift; sourceTree = "<group>"; };
 		92F3F13E2331C2B500177208 /* AuthViewModelUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelUIDelegate.swift; sourceTree = "<group>"; };
 		92F3F1422331C31400177208 /* AuthNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationDelegate.swift; sourceTree = "<group>"; };
 		92F7E31D234B64320076D705 /* BottomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTransition.swift; sourceTree = "<group>"; };
@@ -693,6 +711,7 @@
 				92E9609822F605E6005DF33D /* Messages */,
 				92BB2F2F22E2040100AAF662 /* Notifications */,
 				925763DC22CAD7760031D616 /* Onboarding */,
+				926B6394235D38770023C36D /* Password Reset */,
 				92E960CB22F632BB005DF33D /* Permission */,
 				925BE1CA22DE72260000BEC9 /* People */,
 				9279ACB122E7B39A0098C4C2 /* Profile */,
@@ -828,6 +847,7 @@
 				92E9609622F5F97A005DF33D /* UITableView+Extension.swift */,
 				92D398A422C906A400AAC887 /* UIView+Extension.swift */,
 				9237A1D222CA559500FC9331 /* UIViewController+Extension.swift */,
+				926B6390235CE4C20023C36D /* UIWindow+Extension.swift */,
 				928A10A522D3CDF000FF78FB /* URLSession+Extension.swift */,
 				92748B1722E0B4C500C2957E /* NSRegularExpression+Extension.swift */,
 				925BCA4022F1C81400277D00 /* NSMutableAttributedString+Extension.swift */,
@@ -902,6 +922,7 @@
 				925BCA6A22F23F0C00277D00 /* Delegates */,
 				925BCA6922F23EEB00277D00 /* Views */,
 				925BCA6822F23EBE00277D00 /* View Models */,
+				92F28D4E235DEC2200A2EEC9 /* PasswordBody.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -948,7 +969,7 @@
 		925BE1CA22DE72260000BEC9 /* People */ = {
 			isa = PBXGroup;
 			children = (
-				922BFDB4235B908900D2535F /* ChangeEmailBody.swift */,
+				922BFDB4235B908900D2535F /* EmailBody.swift */,
 				926B638A235CB62F0023C36D /* ChangePasswordBody.swift */,
 				92C7534522DF6A5200A84BD0 /* PersonError.swift */,
 				92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */,
@@ -959,6 +980,44 @@
 				92A760DF233114A300007A2F /* View Models */,
 			);
 			path = People;
+			sourceTree = "<group>";
+		};
+		926B6394235D38770023C36D /* Password Reset */ = {
+			isa = PBXGroup;
+			children = (
+				92F28D4B235DE5D400A2EEC9 /* Coordinators */,
+				926B6397235D38A40023C36D /* Delegates */,
+				926B6395235D38910023C36D /* Views */,
+				926B6396235D38970023C36D /* View Models */,
+			);
+			path = "Password Reset";
+			sourceTree = "<group>";
+		};
+		926B6395235D38910023C36D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				926B638C235CDF4F0023C36D /* PasswordResetViewController.swift */,
+				926B638E235CE18E0023C36D /* RequestEmailView.swift */,
+				92F28D49235DE31B00A2EEC9 /* ResetPasswordView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		926B6396235D38970023C36D /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				926B6392235D27070023C36D /* PasswordResetViewModel.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
+		926B6397235D38A40023C36D /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				926B6398235D38D40023C36D /* PasswordResetViewModelUIDelegate.swift */,
+				926B639A235D39050023C36D /* PasswordResetNavigationDelegate.swift */,
+			);
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 		9279AC9222E692710098C4C2 /* Page Tab Controller */ = {
@@ -1494,6 +1553,14 @@
 			path = "Context Menu";
 			sourceTree = "<group>";
 		};
+		92F28D4B235DE5D400A2EEC9 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				92F28D4C235DE5E100A2EEC9 /* PasswordResetCoordinator.swift */,
+			);
+			name = Coordinators;
+			sourceTree = "<group>";
+		};
 		92F7E31C234B63920076D705 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1702,6 +1769,7 @@
 				922BFDB3235B7A4C00D2535F /* HeaderBarView.swift in Sources */,
 				92DF5D2722D52B9A00207D4D /* ToastView.swift in Sources */,
 				92E960D722F70A66005DF33D /* UserDeviceTokenBody.swift in Sources */,
+				92F28D4D235DE5E100A2EEC9 /* PasswordResetCoordinator.swift in Sources */,
 				92F7E326234B8F280076D705 /* CGPoint+Extension.swift in Sources */,
 				92B302ED22D6292C00CE5668 /* MessagesViewModel.swift in Sources */,
 				928A75D122C967BE00BC607A /* OnboardViewController.swift in Sources */,
@@ -1720,6 +1788,7 @@
 				92DC9DEE22F9A54A008A91BC /* UserNotificationViewModel.swift in Sources */,
 				92631045232AEA29009AB5F2 /* Delegating.swift in Sources */,
 				92E9606F22F3BF99005DF33D /* SendAppreciationViewController.swift in Sources */,
+				926B6391235CE4C20023C36D /* UIWindow+Extension.swift in Sources */,
 				92F7E324234B8E540076D705 /* Math.swift in Sources */,
 				9237A1EF22CA99E000FC9331 /* Strings.swift in Sources */,
 				92E9608022F46758005DF33D /* BuyTokensViewModel.swift in Sources */,
@@ -1733,6 +1802,7 @@
 				92F7E31E234B64320076D705 /* BottomTransition.swift in Sources */,
 				925BCA3F22F1C53C00277D00 /* TokenImageAttachment.swift in Sources */,
 				9276314F22D4DDAE000D4B8F /* KeychainKey.swift in Sources */,
+				926B638D235CDF500023C36D /* PasswordResetViewController.swift in Sources */,
 				9237A1DB22CA7EFB00FC9331 /* Themeable.swift in Sources */,
 				925763D222CABFBB0031D616 /* BaseButton.swift in Sources */,
 				9282180B22D20CB50007FF9B /* KeyboardManager.swift in Sources */,
@@ -1745,6 +1815,7 @@
 				9229482122CCC3ED0080B328 /* TextField.swift in Sources */,
 				92F1763522DCD037008AEB82 /* ContextMenuViewController.swift in Sources */,
 				9279ACC322E7D0BB0098C4C2 /* BaseStaticTableViewCell.swift in Sources */,
+				926B6399235D38D40023C36D /* PasswordResetViewModelUIDelegate.swift in Sources */,
 				9213185122D6068200C91D90 /* MessagesViewController.swift in Sources */,
 				9237A1E122CA890D00FC9331 /* UIViewController+ThemeObserving.swift in Sources */,
 				925BE1CE22DE796D0000BEC9 /* PersonContentView.swift in Sources */,
@@ -1766,6 +1837,7 @@
 				925763D422CAC9C00031D616 /* OnboardViewControllerDelegate.swift in Sources */,
 				9276314B22D4B41E000D4B8F /* KeychainManager.swift in Sources */,
 				9228D6C122D798AB003B03DB /* Date+Extension.swift in Sources */,
+				926B6393235D27070023C36D /* PasswordResetViewModel.swift in Sources */,
 				9200EA92233A62D200A0E097 /* CustomPresentable.swift in Sources */,
 				92F3F13F2331C2B500177208 /* AuthViewModelUIDelegate.swift in Sources */,
 				923B894D22EBAD0D003912EC /* WebContentViewControllerDelegate.swift in Sources */,
@@ -1810,10 +1882,12 @@
 				9200EA96233A6AF000A0E097 /* CustomPresentable+Defaults.swift in Sources */,
 				92F1762722DBF771008AEB82 /* MessageDetailViewController.swift in Sources */,
 				92418D4922D7D422001B6DFB /* DateFormatter+Extension.swift in Sources */,
+				926B639B235D39050023C36D /* PasswordResetNavigationDelegate.swift in Sources */,
 				9276314122D3F547000D4B8F /* AuthResponse.swift in Sources */,
 				92CA9C8A22D6494C009900E6 /* ProfileViewController.swift in Sources */,
 				9276314722D4AEC4000D4B8F /* ValidationErrorDescription.swift in Sources */,
 				925BE1D422DE855A0000BEC9 /* PersonViewModel.swift in Sources */,
+				92F28D4F235DEC2200A2EEC9 /* PasswordBody.swift in Sources */,
 				920E495222DFA23800AA1EDB /* PaginatedResponse.swift in Sources */,
 				9213185322D6142700C91D90 /* MainNavigationController.swift in Sources */,
 				92B5502B22E20E8D0057589E /* UserNotification.swift in Sources */,
@@ -1867,7 +1941,7 @@
 				9279ACBB22E7BDF70098C4C2 /* String+Extension.swift in Sources */,
 				9221066D232BEA8200944FB9 /* UIView+Themeable.swift in Sources */,
 				92A760E32331188500007A2F /* HelpfulPeopleViewModel.swift in Sources */,
-				922BFDB5235B908900D2535F /* ChangeEmailBody.swift in Sources */,
+				922BFDB5235B908900D2535F /* EmailBody.swift in Sources */,
 				92F3F1432331C31400177208 /* AuthNavigationDelegate.swift in Sources */,
 				925BE1C322DE48A20000BEC9 /* LabelTitleView.swift in Sources */,
 				925DD4B522DE04C300D50A89 /* CompactScrollView.swift in Sources */,
@@ -1897,6 +1971,7 @@
 				925763E922CBA7850031D616 /* SignUpViewController.swift in Sources */,
 				925BE1D222DE83B20000BEC9 /* PeopleViewController.swift in Sources */,
 				920E495B22DFC9F900AA1EDB /* MessageTitleCell.swift in Sources */,
+				92F28D4A235DE31B00A2EEC9 /* ResetPasswordView.swift in Sources */,
 				925BE1D622DE86CC0000BEC9 /* HelpfulPeopleViewController.swift in Sources */,
 				922BFDB7235B933100D2535F /* ChangeAccountDetailEventDelegate.swift in Sources */,
 				92050D5B234F7E1B00A008A9 /* MainSettingsViewController.swift in Sources */,
@@ -1927,6 +2002,7 @@
 				928A10A822D3CFBF00FF78FB /* NetworkError.swift in Sources */,
 				9228D6B422D763A2003B03DB /* MessageTableViewCell.swift in Sources */,
 				92F7E32C234BC05A0076D705 /* ShortcutIdentifier.swift in Sources */,
+				926B638F235CE18E0023C36D /* RequestEmailView.swift in Sources */,
 				928A10B122D3E3EA00FF78FB /* SignUpViewModel.swift in Sources */,
 				925217EF23301A4A00581E80 /* SendAppreciationCoordinatorNavigationDelegate.swift in Sources */,
 				9279ACBF22E7CA060098C4C2 /* BasicOptionTableViewCell.swift in Sources */,

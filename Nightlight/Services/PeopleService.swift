@@ -161,7 +161,7 @@ public class PeopleService {
      - parameter result: the result of changing the email.
      */
     public func changeEmail(_ email: String, result: @escaping (Result<Bool, PersonError>) -> Void) {
-        let body = try? Data.encodeJSON(value: ChangeEmailBody(email: email))
+        let body = try? Data.encodeJSON(value: EmailBody(email: email))
         
         httpClient.put(endpoint: Endpoint.changeEmail, body: body) { [weak self] networkResult in
             switch networkResult {

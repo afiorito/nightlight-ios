@@ -30,6 +30,7 @@ public class SignInViewController: UIViewController {
         
         signInView.actionButton.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
         signInView.authButton.addTarget(self, action: #selector(signInTapped), for: .touchUpInside)
+        signInView.forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordTapped), for: .touchUpInside)
         
         updateColors(for: self.theme)
     }
@@ -62,8 +63,15 @@ public class SignInViewController: UIViewController {
     /**
      Handle a sign up tap event.
      */
-    @objc private func signUpTapped(gesture: UITapGestureRecognizer) {
+    @objc private func signUpTapped() {
         viewModel.signUp()
+    }
+    
+    /**
+     Handle a forgot password event.
+     */
+    @objc private func forgotPasswordTapped() {
+        viewModel.forgotPassword()
     }
 }
 

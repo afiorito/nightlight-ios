@@ -12,6 +12,11 @@ public struct Strings {
     static let nightlightTokens = "Nightlight Tokens"
     static let emailChangedSuccessfully = "Email changed successfully."
     static let passwordChangedSuccessfully = "Password changed successfully."
+    static let passwordResetSuccessfully = "Password reset successfully."
+    static let sendResetEmail = "Send Reset Email"
+    static let forgotPassword = "Forgot your password?"
+    static let passwordReset = "Password Reset"
+    static let resetPassword = "Reset Password"
     
     /// information for describing initial onboarding screens.
     struct onboard {
@@ -36,6 +41,7 @@ public struct Strings {
         static let username = "username"
         static let password = "password"
         static let email = "email"
+        static let resetEmail = "reset email"
         static let currentPassword = "current password"
         static let newPassword = "new password"
     }
@@ -46,6 +52,7 @@ public struct Strings {
         static let somethingWrong = "Something Went Wrong."
         static let mailNotConfigured = "Mail is not configured on this device."
         static let couldNotLoadAccount = "Could not load account information."
+        static let invalidResetLink = "The reset link used is no longer valid."
     }
 
     struct message {

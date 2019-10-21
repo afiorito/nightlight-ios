@@ -46,4 +46,11 @@ public class SignInViewModel {
     public func signUp() {
         navigationDelegate?.goToSignUp()
     }
+    
+    /**
+     Show forgot password flow.
+     */
+    public func forgotPassword() {
+        navigationDelegate?.showForgotPassword()
+    }
 }

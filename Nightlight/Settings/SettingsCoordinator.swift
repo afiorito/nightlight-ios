@@ -128,6 +128,7 @@ extension SettingsCoordinator: SettingsNavigationDelegate {
     }
     
     public func showAccountSettings() {
+        let rootViewController = settingsViewController.navigationController ?? self.rootViewController
         let coordinator = AccountSettingsCoordinator(rootViewController: rootViewController, dependencies: dependencies)
         addChild(coordinator)
         coordinator.start()

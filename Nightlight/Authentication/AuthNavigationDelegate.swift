@@ -15,6 +15,11 @@ public protocol AuthNavigationDelegate: class {
     func showPolicy(with url: URL)
     
     /**
+     Tells the delegate to show the forgot password view.
+     */
+    func showForgotPassword()
+    
+    /**
      Tells the delegate to go to the sign up view.
      */
     func goToSignUp()

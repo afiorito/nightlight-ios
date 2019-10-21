@@ -78,6 +78,25 @@ public class AppCoordinator: NSObject, Coordinator {
         return true
     }
     
+    /**
+     Handle a password reset from a universal link.
+     
+     - parameter token: The password reset token.
+     */
+    public func handlePasswordReset(token: String) {        
+        guard let topViewController = window.topViewController else { return }
+        
+        if let passwordResetViewController = topViewController as? PasswordResetViewController {
+            passwordResetViewController.token = token
+        } else {
+            let coordinator = PasswordResetCoordinator(rootViewController: topViewController, dependencies: dependencies, token: token)
+            
+            addChild(coordinator)
+            
+            coordinator.start()
+        }
+    }
+    
     public func start() {
         dependencies.styleManager.theme = dependencies.userDefaultsManager.theme
         

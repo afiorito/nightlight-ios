@@ -121,4 +121,10 @@ extension AuthCoordinator: AuthNavigationDelegate {
         signUpViewController.present(viewController, animated: true)
     }
     
+    public func showForgotPassword() {
+        let coordinator = PasswordResetCoordinator(rootViewController: signInViewController, dependencies: dependencies as! PasswordResetCoordinator.Dependencies)
+        addChild(coordinator)
+        coordinator.start()
+    }
+    
 }

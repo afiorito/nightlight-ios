@@ -20,6 +20,15 @@ public class SignInView: AuthView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// A button for resetting a user's password.
+    public let forgotPasswordButton: TextButton = {
+        let button = TextButton()
+        button.setTitle(Strings.forgotPassword, for: .normal)
+        button.titleLabel?.font = UIFont.primary12ptBold
+        
+        return button
+    }()
+    
     internal override func prepareSubviews() {
         super.prepareSubviews()
         
@@ -30,6 +39,14 @@ public class SignInView: AuthView {
         authButton.setTitle(Strings.auth.signInButtonText, for: .normal)
         
         fieldContainer.addArrangedSubviews([usernameField, passwordField])
+        addSubviews(forgotPasswordButton)
+        
+        NSLayoutConstraint.activate([
+            forgotPasswordButton.topAnchor.constraint(equalTo: authButton.bottomAnchor, constant: 4),
+            forgotPasswordButton.leadingAnchor.constraint(equalTo: authButton.leadingAnchor, constant: 15),
+            forgotPasswordButton.trailingAnchor.constraint(equalTo: authButton.trailingAnchor, constant: -15),
+            forgotPasswordButton.bottomAnchor.constraint(lessThanOrEqualTo: bottomContainer.topAnchor, constant: -10)
+        ])
     }
     
     public override func showFieldErrors(reasons: [ErrorReason]) {
@@ -45,5 +62,7 @@ public class SignInView: AuthView {
         
         usernameField.updateColors(for: theme)
         passwordField.updateColors(for: theme)
+        forgotPasswordButton.setTitleColor(.secondaryLabel(for: theme), for: .normal)
+        forgotPasswordButton.setTitleColor(.tertiaryLabel(for: theme), for: .highlighted)
     }
 }

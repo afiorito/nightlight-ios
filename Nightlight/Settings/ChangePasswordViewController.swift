@@ -142,6 +142,8 @@ extension ChangePasswordViewController: ChangeAccountDetailEventDelegate {
                     currentPasswordField.error = error.message
                 }
             }
+        } else {
+            showToast(Strings.error.couldNotConnect, severity: .urgent)
         }
     }
 }

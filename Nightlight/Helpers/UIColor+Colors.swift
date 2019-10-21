@@ -206,6 +206,19 @@ extension UIColor {
 
         return select((light: Palette.light.secondaryLabel, dark: Palette.dark.secondaryLabel), for: theme)
     }
+    
+    /**
+     Returns the color for text labels that contain tertiary content..
+     
+     - parameter theme: the theme to determine the text color.
+     */
+    public class func tertiaryLabel(for theme: Theme) -> UIColor {
+        if theme == .system, #available(iOS 13.0, *) {
+            return .tertiaryLabel
+        }
+
+        return select((light: Palette.light.tertiaryLabel, dark: Palette.dark.tertiaryLabel), for: theme)
+    }
 
     /**
      Returns the color for placeholder text in controls or text views.
