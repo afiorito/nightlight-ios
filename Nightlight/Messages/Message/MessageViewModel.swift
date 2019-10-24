@@ -158,7 +158,9 @@ public class MessageViewModel {
                     self.uiDelegate?.didUpdateMessage()
                 }
             case .failure(let error):
-                DispatchQueue.main.async { self.uiDelegate?.didFailToPerformMessage(action: .save, with: error) }
+                DispatchQueue.main.async { [weak self] in
+                    self?.uiDelegate?.didFailToPerformMessage(action: .save, with: error)
+                }
             }
         }
     }
@@ -170,7 +172,22 @@ public class MessageViewModel {
         guard let message = message else { return }
 
         if !message.isAppreciated {
-            navigationDelegate?.showAppreciationSheet(for: message)
+//            navigationDelegate?.showAppreciationSheet(for: message)
+            dependencies.messageService.appreciate(message: message) { [weak self] (appreciateResult) in
+                guard let self = self else { return }
+                switch appreciateResult {
+                case .success(let message):
+                    self.message = message
+                    DispatchQueue.main.async {
+                        self.navigationDelegate?.didUpdate(message: message)
+                        self.uiDelegate?.didUpdateMessage()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async { [weak self] in
+                        self?.uiDelegate?.didFailToPerformMessage(action: .appreciate, with: error)
+                    }
+                }
+            }
         }
     }
     

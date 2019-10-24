@@ -21,23 +21,23 @@ public class MainSettingsViewController: SettingsViewController {
         sections = [
             // MARK: - Tokens Section.
             
-            SettingsSection(settings: [
-                Setting(
-                    cellType: InformationRightDetailTableViewCell.self,
-                    configureCell: { [weak self] cell in
-                        guard let self = self, let cell = cell as? InformationRightDetailTableViewCell
-                            else { return }
-                        
-                        cell.title = Strings.nightlightTokens
-                        cell.isLoading = viewModel.isTokensLoading
-                        cell.detailTextLabel?.attributedText = self.formatTokens(for: cell.detailTextLabel?.font)
-                        cell.updateColors(for: self.theme)
-                    },
-                    selectionAction: { _ in
-                        viewModel.buyTokens()
-                    }
-                )
-            ]),
+//            SettingsSection(settings: [
+//                Setting(
+//                    cellType: InformationRightDetailTableViewCell.self,
+//                    configureCell: { [weak self] cell in
+//                        guard let self = self, let cell = cell as? InformationRightDetailTableViewCell
+//                            else { return }
+//
+//                        cell.title = Strings.nightlightTokens
+//                        cell.isLoading = viewModel.isTokensLoading
+//                        cell.detailTextLabel?.attributedText = self.formatTokens(for: cell.detailTextLabel?.font)
+//                        cell.updateColors(for: self.theme)
+//                    },
+//                    selectionAction: { _ in
+//                        viewModel.buyTokens()
+//                    }
+//                )
+//            ]),
             
             // MARK: - Options Section
             
