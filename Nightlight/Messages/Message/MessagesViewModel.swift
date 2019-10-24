@@ -122,7 +122,20 @@ public class MessagesViewModel {
         let message = messages[indexPath.row]
         
         if !message.isAppreciated {
-            navigationDelegate?.showAppreciationSheet(for: messages[indexPath.row], at: indexPath)
+//            navigationDelegate?.showAppreciationSheet(for: messages[indexPath.row], at: indexPath)
+            dependencies.messageService.appreciate(message: message) { [weak self] (appreciateResult) in
+                guard let self = self else { return }
+                switch appreciateResult {
+                case .success(let message):
+                    DispatchQueue.main.async { [weak self] in
+                        self?.didUpdate(message: message, at: indexPath)
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async { [weak self] in
+                        self?.uiDelegate?.didFailToPerformMessage(action: .appreciate, with: error, at: indexPath)
+                    }
+                }
+            }
         }
     }
     
