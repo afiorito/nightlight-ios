@@ -73,8 +73,10 @@ public class SendAppreciationViewController: UIViewController {
 
 extension SendAppreciationViewController: SendAppreciationViewModelUIDelegate {
     public func updateView() {
-        sendAppreciationView.actionButton.setTitle(hasTokens ? Strings.sendAppreciation : Strings.getTokens, for: .normal)
+        sendAppreciationView.descriptionLabel.text = hasTokens ? Strings.appreciationDescriptionWithTokens : Strings.appreciationDescriptionWithoutTokens
+        sendAppreciationView.actionButton.setTitle(hasTokens ? Strings.sendAppreciation : Strings.notEnoughTokens, for: .normal)
         sendAppreciationView.numTokens = viewModel.tokens
+        sendAppreciationView.actionButton.isEnabled = hasTokens
     }
     
     public func didCancelPurchase() {

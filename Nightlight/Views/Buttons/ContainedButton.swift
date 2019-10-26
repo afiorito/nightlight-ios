@@ -11,7 +11,7 @@ public class ContainedButton: BaseButton {
     
     public override var isEnabled: Bool {
         didSet {
-            alpha = isEnabled ? 1.0 : 0.75
+            alpha = isEnabled ? 1.0 : 0.65
         }
     }
     

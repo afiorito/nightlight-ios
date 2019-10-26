@@ -41,12 +41,12 @@ public class SendAppreciationView: UIView {
     }()
     
     /// A label for displaying the description.
-    private let descriptionLabel: UILabel = {
+    public let descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
         label.font = .secondary16ptNormal
-        label.text = Strings.appreciationDescription
+        label.text = Strings.appreciationDescriptionWithoutTokens
         return label
     }()
     
