@@ -209,6 +209,13 @@ public class MessageViewModel {
             }
         }
     }
+    
+    /**
+     Stop viewing the message detail.
+     */
+    public func finish() {
+        navigationDelegate?.didFinishViewingDetail()
+    }
 }
 
 // MARK: - Navigation Events

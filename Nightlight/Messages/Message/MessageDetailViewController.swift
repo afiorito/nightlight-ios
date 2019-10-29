@@ -55,6 +55,14 @@ public class MessageDetailViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if isBeingRemoved {
+            viewModel.finish()
+        }
+    }
+    
     public func updateView() {
         if viewModel.isLoading {
             activityIndicator.startAnimating()

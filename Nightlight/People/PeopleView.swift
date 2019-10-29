@@ -8,7 +8,7 @@ public class PeopleView: UIView {
         tableView.register(PersonTableViewCell.self, forCellReuseIdentifier: PersonTableViewCell.className)
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 200
+        tableView.estimatedRowHeight = 300
         tableView.separatorInset = .zero
         tableView.separatorStyle = .none
 

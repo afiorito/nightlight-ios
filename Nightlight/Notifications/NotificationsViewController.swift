@@ -51,6 +51,15 @@ public class NotificationsViewController: UIViewController {
         viewModel.fetchUserNotifications(fromStart: true)
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // deselect row upon returning to the view controller.
+        if let selectedIndexPath = notificationsView.tableView.indexPathForSelectedRow {
+            notificationsView.tableView.deselectRow(at: selectedIndexPath, animated: true)
+        }
+    }
+    
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -132,6 +141,10 @@ extension NotificationsViewController: UserNotificationsViewModelUIDelegate {
 // MARK: - UITableView Delegate
 
 extension NotificationsViewController: UITableViewDelegate {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.selectNotification(at: indexPath)
+    }
+    
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if refreshControl.isRefreshing {
             viewModel.fetchUserNotifications(fromStart: true)

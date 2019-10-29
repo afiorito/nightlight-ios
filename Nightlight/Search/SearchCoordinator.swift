@@ -14,7 +14,7 @@ public class SearchCoordinator: TabBarCoordinator {
     
     /// A view controller for displaying search results.
     public lazy var searchViewController: SearchViewController = {
-        let peopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
+        let peopleViewModel = PeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies, type: .default)
         let helpfulPeopleViewModel = HelpfulPeopleViewModel(dependencies: dependencies as! PeopleViewModel.Dependencies)
         
         let helpfulPeopleViewController = HelpfulPeopleViewController(viewModel: helpfulPeopleViewModel)

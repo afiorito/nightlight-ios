@@ -61,14 +61,12 @@ public class MessagesCoordinator: NSObject, TabBarCoordinator {
     }
     
     public func start() {
-        rootViewController.delegate = self
         rootViewController.pushViewController(messagesViewController, animated: true)
     }
     
     public func childDidFinish(_ child: Coordinator) {
         removeChild(child)
         activeIndexPath = nil
-        rootViewController.delegate = self
     }
 }
 
@@ -182,17 +180,4 @@ extension MessagesCoordinator: MessageDetailCoordinatorNavigationDelegate {
         }
     }
 
-}
-
-// MARK: - UINavigationController Delegate
-
-extension MessagesCoordinator: UINavigationControllerDelegate {
-    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        
-        // reset coordinator state when navigating back to previous view controller.
-        if navigationController.transitionCoordinator?.viewController(forKey: .to) is MessagesViewController {
-            removeChild(with: MessageDetailCoordinator.self)
-            activeIndexPath = nil
-        }
-    }
 }

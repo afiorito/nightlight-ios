@@ -158,7 +158,7 @@ public class AppCoordinator: NSObject, Coordinator {
         let coordinators: [TabBarCoordinator] = [
             MessagesCoordinator(type: .recent, rootViewController: MainNavigationController(), dependencies: self.dependencies),
             SearchCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
-            NotificationsCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
+            UserNotificationsCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies),
             ProfileCoordinator(rootViewController: MainNavigationController(), dependencies: self.dependencies)
         ]
 

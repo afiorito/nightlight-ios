@@ -21,8 +21,6 @@ public class NotificationTableViewCell: UITableViewCell {
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        selectionStyle = .none
-        
         prepareSubviews()
         updateColors(for: theme)
     }
@@ -59,6 +57,12 @@ public class NotificationTableViewCell: UITableViewCell {
 
 extension NotificationTableViewCell: Themeable {
     func updateColors(for theme: Theme) {
+        selectedBackgroundView = {
+            let view = UIView()
+            view.backgroundColor = UIColor.gray3(for: theme).withAlphaComponent(0.3)
+            return view
+        }()
+        
         backgroundColor = .background(for: theme)
         bodyLabel.textColor = .label(for: theme)
     }

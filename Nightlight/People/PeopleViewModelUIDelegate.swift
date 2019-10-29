@@ -28,4 +28,9 @@ public protocol PeopleViewModelUIDelegate: class {
      - parameter fromStart: A boolean denoting if the data is being fetched from the beginning of a paginated list.
      */
     func didFetchPeople(with count: Int, fromStart: Bool)
+    
+    /**
+     Tells the delegate to update its title.
+     */
+    func updateTitle(_ title: String)
 }

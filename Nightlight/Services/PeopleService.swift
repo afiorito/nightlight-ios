@@ -41,17 +41,15 @@ public class PeopleService {
     /**
      Retrieve people.
      
-     - parameter filter: the filter string to narrow user search.
-     - parameter start: the starting cursor of the people request.
-     - parameter end: the ending cursor of the people request.
-     - parameter result: the result of retrieving people.
+     - parameter endpoint: The endpoint to retrieve people.
+     - parameter result: The result of retrieving people.
      */
-    public func getPeople(filter: String, start: String?, end: String?, result: @escaping (Result<PaginatedResponse<User>, PersonError>) -> Void) {
+    public func getPeople(endpoint: Endpoint, result: @escaping (Result<PaginatedResponse<User>, PersonError>) -> Void) {
         if let task = filterTask {
             task.cancel()
         }
         
-        filterTask = httpClient.get(endpoint: Endpoint.user(filter: filter, start: start, end: end), result: { [weak self] networkResult in
+        filterTask = httpClient.get(endpoint: endpoint, result: { [weak self] networkResult in
             self?.filterTask = nil
 
             switch networkResult {

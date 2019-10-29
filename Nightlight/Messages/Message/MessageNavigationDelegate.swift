@@ -26,4 +26,9 @@ public protocol MessageNavigationDelegate: class {
      - parameter message: The message to show the appreciation sheet for.
      */
     func showAppreciationSheet(for message: Message)
+    
+    /**
+     Tells the delegate to stop showing the message detail.
+     */
+    func didFinishViewingDetail()
 }

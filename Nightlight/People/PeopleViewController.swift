@@ -40,6 +40,15 @@ public class PeopleViewController: UIViewController {
         }
         
         updateColors(for: theme)
+        viewModel.fetchPeople(fromStart: true)
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if isBeingRemoved {
+            viewModel.finish()
+        }
     }
     
     public override func loadView() {
@@ -60,9 +69,15 @@ public class PeopleViewController: UIViewController {
 // MARK: - PeopleViewModel UI Delegate
 
 extension PeopleViewController: PeopleViewModelUIDelegate {
-    public func didBeginFetchingPeople(fromStart: Bool) {}
+    public func didBeginFetchingPeople(fromStart: Bool) {
+        if viewModel.totalCount <= 0 {
+            peopleView.tableView.isLoading = true
+        }
+    }
     
-    public func didEndFetchingPeople() {}
+    public func didEndFetchingPeople() {
+        peopleView.tableView.isLoading = false
+    }
     
     public func didFailToFetchPeople(with error: PersonError) {
         if dataSource.isEmpty {
@@ -79,11 +94,15 @@ extension PeopleViewController: PeopleViewModelUIDelegate {
         
         if fromStart {
             dataSource.rowCount = count
-            peopleView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            peopleView.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
         } else {
             let newIndexPaths = dataSource.incrementCount(count)
             peopleView.tableView.insertRows(at: newIndexPaths, with: .none)
         }
+    }
+    
+    public func updateTitle(_ title: String) {
+        self.title = title
     }
 }
 

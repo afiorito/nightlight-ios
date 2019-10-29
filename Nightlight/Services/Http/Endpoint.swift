@@ -114,6 +114,34 @@ extension Endpoint {
     static func deleteMessage(with id: Int) -> Endpoint {
         return Endpoint(path: "/message/\(id)")
     }
+    
+    static func love(for id: Int, start: String?, end: String?) -> Endpoint {
+        var queryItems: [URLQueryItem] = []
+        
+        if let start = start {
+            queryItems.append(URLQueryItem(name: "start", value: start))
+        }
+        
+        if let end = end {
+            queryItems.append(URLQueryItem(name: "end", value: end))
+        }
+        
+        return Endpoint(path: "/message/\(id)/love", queryItems: queryItems)
+    }
+    
+    static func appreciation(for id: Int, start: String?, end: String?) -> Endpoint {
+        var queryItems: [URLQueryItem] = []
+        
+        if let start = start {
+            queryItems.append(URLQueryItem(name: "start", value: start))
+        }
+        
+        if let end = end {
+            queryItems.append(URLQueryItem(name: "end", value: end))
+        }
+        
+        return Endpoint(path: "/message/\(id)/appreciation", queryItems: queryItems)
+    }
 }
 
 // MARK: - User Endpoints

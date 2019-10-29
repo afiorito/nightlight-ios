@@ -118,6 +118,10 @@ extension MessageDetailCoordinator: MessageNavigationDelegate {
         messageDetailViewController.present(contextMenuViewController, animated: true)
     }
     
+    public func didFinishViewingDetail() {
+        parent?.childDidFinish(self)
+    }
+    
 }
 
 // MARK: - SendAppreciationCoordinator Navigation Delegate

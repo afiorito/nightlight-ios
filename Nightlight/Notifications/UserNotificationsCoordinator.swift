@@ -1,7 +1,7 @@
 import UIKit
 
 /// A coordinator for notifications flow.
-public class NotificationsCoordinator: TabBarCoordinator {
+public class UserNotificationsCoordinator: TabBarCoordinator {
     public typealias Dependencies = StyleManaging
     public weak var parent: Coordinator?
     public var children = [Coordinator]()
@@ -26,6 +26,7 @@ public class NotificationsCoordinator: TabBarCoordinator {
         viewController.emptyViewDescription = EmptyViewDescription.noNotifications
         
         viewModel.uiDelegate = viewController
+        viewModel.navigationDelegate = self
         
         return viewController
     }()
@@ -37,6 +38,27 @@ public class NotificationsCoordinator: TabBarCoordinator {
     
     public func start() {
         rootViewController.show(notificationsViewController, sender: rootViewController)
+    }
+    
+}
+
+extension UserNotificationsCoordinator: UserNotificationsNavigationDelegate {
+    public func showMessageDetail(with id: Int) {
+        let coordinator = MessageDetailCoordinator(messageId: id, rootViewController: rootViewController, dependencies: dependencies)
+        addChild(coordinator)
+        coordinator.start()
+    }
+    
+    public func showMessageLove(for id: Int) {
+        let coordinator = PeopleCoordinator(type: .love(id), rootViewController: rootViewController, dependencies: dependencies)
+        addChild(coordinator)
+        coordinator.start()
+    }
+    
+    public func showMessageAppreciation(for id: Int) {
+        let coordinator = PeopleCoordinator(type: .appreciation(id), rootViewController: rootViewController, dependencies: dependencies)
+        addChild(coordinator)
+        coordinator.start()
     }
     
 }

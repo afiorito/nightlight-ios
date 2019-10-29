@@ -10,6 +10,9 @@ public class UserNotificationsViewModel {
     /// The delegate object that handles user interface updates.
     public weak var uiDelegate: UserNotificationsViewModelUIDelegate?
     
+    /// The delegate object that handles navigation events.
+    public weak var navigationDelegate: UserNotificationsNavigationDelegate?
+    
     /// The fetched user notifications.
     private var userNotifications = [AnyUserNotification]()
     
@@ -77,6 +80,25 @@ public class UserNotificationsViewModel {
      */
     public func userNotificationViewModel(at indexPath: IndexPath) -> UserNotificationViewModel {
         return UserNotificationViewModel(userNotification: userNotifications[indexPath.row])
+    }
+    
+    /**
+     Select a message notification at a specified indexPath.
+     
+     - parameter indexPath: The index path of the message notification.
+     */
+    public func selectNotification(at indexPath: IndexPath) {
+        let notification = userNotifications[indexPath.row]
+        
+        switch NotificationType(rawValue: notification.type) {
+        case .receiveMessage:
+            navigationDelegate?.showMessageDetail(with: notification.entityId)
+        case .loveMessage:
+            navigationDelegate?.showMessageLove(for: notification.entityId)
+        case .appreciateMessage:
+            navigationDelegate?.showMessageAppreciation(for: notification.entityId)
+        default: break
+        }
     }
     
     /**

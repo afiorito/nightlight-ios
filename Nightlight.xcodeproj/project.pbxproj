@@ -48,6 +48,9 @@
 		9228D6C122D798AB003B03DB /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228D6C022D798AB003B03DB /* Date+Extension.swift */; };
 		9228D6C322D7A0D6003B03DB /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228D6C222D7A0D6003B03DB /* MessageService.swift */; };
 		9228D6C522D7BD02003B03DB /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228D6C422D7BD02003B03DB /* MessageType.swift */; };
+		9228EAE223686C8C001D856A /* PeopleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228EAE123686C8C001D856A /* PeopleCoordinator.swift */; };
+		9228EAE423686D18001D856A /* PeopleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228EAE323686D18001D856A /* PeopleType.swift */; };
+		9228EAE623686DD1001D856A /* PeopleNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9228EAE523686DD1001D856A /* PeopleNavigationDelegate.swift */; };
 		9229482122CCC3ED0080B328 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229482022CCC3ED0080B328 /* TextField.swift */; };
 		9229DFA222D2BDF200827A03 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229DFA122D2BDF200827A03 /* AuthService.swift */; };
 		922BFDA7235B5CDA00D2535F /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BFDA6235B5CDA00D2535F /* AccountSettingsViewController.swift */; };
@@ -202,6 +205,7 @@
 		92A760EB23313D3300007A2F /* SettingsViewModelUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A760EA23313D3300007A2F /* SettingsViewModelUIDelegate.swift */; };
 		92A760ED23313D9100007A2F /* SettingsNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A760EC23313D9100007A2F /* SettingsNavigationDelegate.swift */; };
 		92A760EF2331493600007A2F /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A760EE2331493600007A2F /* Sequence+Extension.swift */; };
+		92AE4775236613800078C113 /* UserNotificationsNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AE4774236613800078C113 /* UserNotificationsNavigationDelegate.swift */; };
 		92AE911122CD68DD002C75B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AE911022CD68DD002C75B6 /* UserDefaultsManager.swift */; };
 		92B302ED22D6292C00CE5668 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B302EC22D6292C00CE5668 /* MessagesViewModel.swift */; };
 		92B302F322D63B7000CE5668 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B302F222D63B6F00CE5668 /* SearchViewController.swift */; };
@@ -215,7 +219,7 @@
 		92B9008A22CE94A7009E619B /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B9008922CE94A7009E619B /* SplashScreenViewController.swift */; };
 		92C7534622DF6A5200A84BD0 /* PersonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7534522DF6A5200A84BD0 /* PersonError.swift */; };
 		92C7534822DF6AA900A84BD0 /* PeopleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7534722DF6AA900A84BD0 /* PeopleService.swift */; };
-		92CA9C8022D6475C009900E6 /* NotificationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA9C7F22D6475C009900E6 /* NotificationsCoordinator.swift */; };
+		92CA9C8022D6475C009900E6 /* UserNotificationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA9C7F22D6475C009900E6 /* UserNotificationsCoordinator.swift */; };
 		92CA9C8222D647C0009900E6 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA9C8122D647BF009900E6 /* NotificationsViewController.swift */; };
 		92CA9C8422D647E5009900E6 /* UserNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA9C8322D647E4009900E6 /* UserNotificationsViewModel.swift */; };
 		92CA9C8622D6484B009900E6 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA9C8522D6484B009900E6 /* ProfileCoordinator.swift */; };
@@ -343,6 +347,9 @@
 		9228D6C022D798AB003B03DB /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		9228D6C222D7A0D6003B03DB /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		9228D6C422D7BD02003B03DB /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
+		9228EAE123686C8C001D856A /* PeopleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleCoordinator.swift; sourceTree = "<group>"; };
+		9228EAE323686D18001D856A /* PeopleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleType.swift; sourceTree = "<group>"; };
+		9228EAE523686DD1001D856A /* PeopleNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleNavigationDelegate.swift; sourceTree = "<group>"; };
 		9229482022CCC3ED0080B328 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		9229DFA122D2BDF200827A03 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		922BFDA6235B5CDA00D2535F /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
@@ -505,6 +512,7 @@
 		92A760EA23313D3300007A2F /* SettingsViewModelUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelUIDelegate.swift; sourceTree = "<group>"; };
 		92A760EC23313D9100007A2F /* SettingsNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationDelegate.swift; sourceTree = "<group>"; };
 		92A760EE2331493600007A2F /* Sequence+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extension.swift"; sourceTree = "<group>"; };
+		92AE4774236613800078C113 /* UserNotificationsNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsNavigationDelegate.swift; sourceTree = "<group>"; };
 		92AE911022CD68DD002C75B6 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		92B302EC22D6292C00CE5668 /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
 		92B302F222D63B6F00CE5668 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -518,7 +526,7 @@
 		92B9008922CE94A7009E619B /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		92C7534522DF6A5200A84BD0 /* PersonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonError.swift; sourceTree = "<group>"; };
 		92C7534722DF6AA900A84BD0 /* PeopleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleService.swift; sourceTree = "<group>"; };
-		92CA9C7F22D6475C009900E6 /* NotificationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCoordinator.swift; sourceTree = "<group>"; };
+		92CA9C7F22D6475C009900E6 /* UserNotificationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsCoordinator.swift; sourceTree = "<group>"; };
 		92CA9C8122D647BF009900E6 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		92CA9C8322D647E4009900E6 /* UserNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsViewModel.swift; sourceTree = "<group>"; };
 		92CA9C8522D6484B009900E6 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -669,6 +677,14 @@
 				9228D6BE22D79643003B03DB /* User.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		9228EAE023686C74001D856A /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				9228EAE123686C8C001D856A /* PeopleCoordinator.swift */,
+			);
+			name = Coordinators;
 			sourceTree = "<group>";
 		};
 		9229482322CCE0BD0080B328 /* Text Input */ = {
@@ -971,10 +987,12 @@
 			children = (
 				922BFDB4235B908900D2535F /* EmailBody.swift */,
 				926B638A235CB62F0023C36D /* ChangePasswordBody.swift */,
+				9228EAE323686D18001D856A /* PeopleType.swift */,
 				92C7534522DF6A5200A84BD0 /* PersonError.swift */,
 				92E960D622F70A66005DF33D /* UserDeviceTokenBody.swift */,
 				92E9608E22F4AFA5005DF33D /* UserTokensBody.swift */,
 				92E9608C22F4A705005DF33D /* UserTokensResponse.swift */,
+				9228EAE023686C74001D856A /* Coordinators */,
 				92A760DD2331146100007A2F /* Delegates */,
 				92A760DE2331148900007A2F /* Views */,
 				92A760DF233114A300007A2F /* View Models */,
@@ -1119,6 +1137,7 @@
 			isa = PBXGroup;
 			children = (
 				92A760DA23310C4D00007A2F /* UserNotificationsViewModelUIDelegate.swift */,
+				92AE4774236613800078C113 /* UserNotificationsNavigationDelegate.swift */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -1126,8 +1145,9 @@
 		92A760DD2331146100007A2F /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				92A760E42331189F00007A2F /* PeopleViewModelUIDelegate.swift */,
 				92A760E0233114C100007A2F /* HelpfulPeopleViewModelUIDelegate.swift */,
+				92A760E42331189F00007A2F /* PeopleViewModelUIDelegate.swift */,
+				9228EAE523686DD1001D856A /* PeopleNavigationDelegate.swift */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -1406,7 +1426,7 @@
 		92E960AC22F6088B005DF33D /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				92CA9C7F22D6475C009900E6 /* NotificationsCoordinator.swift */,
+				92CA9C7F22D6475C009900E6 /* UserNotificationsCoordinator.swift */,
 			);
 			name = Coordinators;
 			sourceTree = "<group>";
@@ -1783,6 +1803,7 @@
 				9228D6C322D7A0D6003B03DB /* MessageService.swift in Sources */,
 				920E495F22DFEE4000AA1EDB /* TextView.swift in Sources */,
 				92DC9DF922F9A645008A91BC /* SendAppreciationViewModel.swift in Sources */,
+				9228EAE223686C8C001D856A /* PeopleCoordinator.swift in Sources */,
 				92B5502922E20E490057589E /* UserNotificationService.swift in Sources */,
 				9279ACC122E7CDD60098C4C2 /* InformationTableViewCell.swift in Sources */,
 				92DC9DEE22F9A54A008A91BC /* UserNotificationViewModel.swift in Sources */,
@@ -1904,6 +1925,7 @@
 				92B302F722D6431800CE5668 /* SendMessageViewModel.swift in Sources */,
 				925BCA4122F1C81400277D00 /* NSMutableAttributedString+Extension.swift in Sources */,
 				92C7534822DF6AA900A84BD0 /* PeopleService.swift in Sources */,
+				9228EAE623686DD1001D856A /* PeopleNavigationDelegate.swift in Sources */,
 				92748B1222E0A61A00C2957E /* SwitchTableViewCell.swift in Sources */,
 				9206B7DA23305642001302E3 /* SendMessageNavigationDelegate.swift in Sources */,
 				925DD4AB22DDE61100D50A89 /* UITableView+EmptyViewable.swift in Sources */,
@@ -1980,6 +2002,7 @@
 				925BE1C922DE721A0000BEC9 /* PeopleView.swift in Sources */,
 				9279AC7F22E6091C0098C4C2 /* JWTDecoder.swift in Sources */,
 				92F1762922DBF7F0008AEB82 /* MessageContentView.swift in Sources */,
+				92AE4775236613800078C113 /* UserNotificationsNavigationDelegate.swift in Sources */,
 				925BE1D822DE87670000BEC9 /* PeopleViewModel.swift in Sources */,
 				92050D59234F767D00A008A9 /* Setting.swift in Sources */,
 				92050D55234F72B000A008A9 /* SettingsViewController.swift in Sources */,
@@ -1990,6 +2013,7 @@
 				92DC9DFF22FA3172008A91BC /* UIBarButton+Instances.swift in Sources */,
 				9237A1D322CA559500FC9331 /* UIViewController+Extension.swift in Sources */,
 				92DC9DE422F8EFF7008A91BC /* AppInfoViewModel.swift in Sources */,
+				9228EAE423686D18001D856A /* PeopleType.swift in Sources */,
 				92F7E328234B8F8E0076D705 /* CGVector+Extension.swift in Sources */,
 				925DD4A922DDE5EA00D50A89 /* EmptyViewable.swift in Sources */,
 				925763E722CB95900031D616 /* AuthView.swift in Sources */,
@@ -2011,7 +2035,7 @@
 				9237A1DD22CA829700FC9331 /* ThemeObserving.swift in Sources */,
 				9276314922D4B07B000D4B8F /* Data+Extension.swift in Sources */,
 				92E9609522F5F8FA005DF33D /* InformationRightDetailTableViewCell.swift in Sources */,
-				92CA9C8022D6475C009900E6 /* NotificationsCoordinator.swift in Sources */,
+				92CA9C8022D6475C009900E6 /* UserNotificationsCoordinator.swift in Sources */,
 				92E960D522F65592005DF33D /* PermissionViewModel.swift in Sources */,
 				92931C2722D3907E00C54EB8 /* Endpoint.swift in Sources */,
 				92D8EBC922CFA8BA0083D6C4 /* AnimatedLogoView.swift in Sources */,
@@ -2186,7 +2210,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2210,7 +2234,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2378,7 +2402,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2499,7 +2523,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nightlight/Nightlight.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = 5S3H55WE37;
 				INFOPLIST_FILE = Nightlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

@@ -10,6 +10,9 @@ public class PeopleViewModel {
     /// The delegate object that handles user interface updates.
     public weak var uiDelegate: PeopleViewModelUIDelegate?
     
+    /// The delegate object that handles navigation events.
+    public weak var navigationDelegate: PeopleNavigationDelegate?
+    
     /// The fetched people.
     private var people = [User]()
     
@@ -33,8 +36,11 @@ public class PeopleViewModel {
     /// A boolean for determing if messages are already being fetched.
     private var isFetchInProgress = false
     
-    public init(dependencies: Dependencies) {
+    private let type: PeopleType
+    
+    public init(dependencies: Dependencies, type: PeopleType) {
         self.dependencies = dependencies
+        self.type = type
     }
     
     /**
@@ -51,7 +57,7 @@ public class PeopleViewModel {
         isFetchInProgress = true
         uiDelegate?.didBeginFetchingPeople(fromStart: fromStart)
         
-        dependencies.peopleService.getPeople(filter: filter, start: startPage, end: endPage) { [weak self] peopleResult in
+        dependencies.peopleService.getPeople(endpoint: endpoint) { [weak self] peopleResult in
             guard let self = self else { return }
 
             self.isFetchInProgress = false
@@ -65,7 +71,15 @@ public class PeopleViewModel {
                 
                 self.people = fromStart ? peopleResponse.data : self.people + peopleResponse.data
                 
-                DispatchQueue.main.async { self.uiDelegate?.didFetchPeople(with: peopleResponse.data.count, fromStart: fromStart) }
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.uiDelegate?.didFetchPeople(with: peopleResponse.data.count, fromStart: fromStart)
+                    switch self.type {
+                    case .love: self.uiDelegate?.updateTitle("\(self.totalCount) love")
+                    case .appreciation: self.uiDelegate?.updateTitle("\(self.totalCount) appreciation")
+                    default: break
+                    }
+                }
             case .failure(let error):
                 DispatchQueue.main.async { self.uiDelegate?.didFailToFetchPeople(with: error) }
             }
@@ -82,6 +96,13 @@ public class PeopleViewModel {
     }
     
     /**
+     Stop viewing people.
+     */
+    public func finish() {
+        navigationDelegate?.didFinishViewingPeople()
+    }
+    
+    /**
      Resets the paging.
      
      Causes people to be fetched from the beginning.
@@ -89,6 +110,14 @@ public class PeopleViewModel {
     public func resetPaging() {
         startPage = nil
         endPage = nil
+    }
+    
+    private var endpoint: Endpoint {
+        switch type {
+        case .default: return Endpoint.user(filter: filter, start: startPage, end: endPage)
+        case .love(let id): return Endpoint.love(for: id, start: startPage, end: endPage)
+        case .appreciation(let id): return Endpoint.appreciation(for: id, start: startPage, end: endPage)
+        }
     }
     
 }
